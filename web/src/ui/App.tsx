@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
 import { setLang, useAppState } from '../store'
 import type { ChangesFile, CoursesFile, Lang } from '../types'
+import { pendingAlerts } from '../logic/alerts'
 import { CatalogView } from './catalog/CatalogView'
+import { ChangesView } from './changes/ChangesView'
+import { ScheduleView } from './schedule/ScheduleView'
 import { fmtDate } from './format'
 
 type Tab = 'catalog' | 'schedule' | 'changes'
@@ -35,6 +38,10 @@ export function App() {
   }, [])
   useEffect(() => { document.documentElement.lang = lang }, [lang])
 
+  const alerts = useMemo(
+    () => (load.status === 'ready' ? pendingAlerts(state, load.courses, load.changes) : []),
+    [load, state],
+  )
   const ageDays = load.status === 'ready' ? Math.floor((Date.now() - Date.parse(load.courses.meta.scrapedAt)) / 86400_000) : 0
 
   return (
@@ -45,6 +52,7 @@ export function App() {
           {TABS.map((id) => (
             <a key={id} href={`#/${id}`} class="tab" aria-current={tab === id ? 'page' : undefined}>
               {t(lang, `tab.${id}`)}
+              {id === 'changes' && alerts.length > 0 && <span class="tab-badge" data-testid="changes-badge">{alerts.length}</span>}
             </a>
           ))}
         </nav>
@@ -62,6 +70,10 @@ export function App() {
         {load.status === 'loading' && <p class="empty">{t(lang, 'data.loading')}</p>}
         {load.status === 'error' && <p class="banner banner-error">{t(lang, 'data.error', { error: load.error })}</p>}
         {load.status === 'ready' && tab === 'catalog' && <CatalogView data={load.courses} state={state} update={update} />}
+        {load.status === 'ready' && tab === 'schedule' && <ScheduleView data={load.courses} state={state} update={update} />}
+        {load.status === 'ready' && tab === 'changes' && (
+          <ChangesView data={load.courses} changes={load.changes} state={state} alerts={alerts} update={update} />
+        )}
       </main>
 
       {load.status === 'ready' && (
