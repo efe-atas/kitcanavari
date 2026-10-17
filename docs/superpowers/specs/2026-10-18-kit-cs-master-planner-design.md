@@ -37,7 +37,7 @@ GitHub Actions — scrape.yml (cron: her gün 04:00 UTC, + manuel tetikleme)
        4. data/courses.json yazar; önceki sürümle diff → data/changes.json
        5. Değişiklik varsa commit + push → deploy.yml tetiklenir
 GitHub Actions — deploy.yml (push to main) → web/ build → GitHub Pages
-Statik site (Vite + TypeScript, framework'süz ya da Preact — plan aşamasında kesinleşir)
+Statik site (Vite + TypeScript + Preact)
   data/*.json'u fetch eder; kullanıcı durumu localStorage'da
 ```
 
