@@ -6,10 +6,18 @@ import time
 
 from playwright.sync_api import Frame, Page, sync_playwright
 
-from .models import KIT_BASE
+from .models import KIT_BASE, TERM_GUID
 
+CASCAMPUS_BASE = "https://cascampus.studium.kit.edu/campus/all/"
 USER_AGENT_SUFFIX = "kitcanavari-scraper (+https://github.com/kitcanavari)"
 _ITEMS_RE = re.compile(r"Items\s+(\d+)\s*-\s*(\d+)\s+of\s+(\d+)")
+
+
+def _with_term(page: str) -> str:
+    """Pin the term explicitly; without tguid the site silently serves the 'current' term."""
+    if "tguid=" in page:
+        return page
+    return page + ("&" if "?" in page else "?") + f"tguid={TERM_GUID}&lang=en"
 
 
 class FetchError(RuntimeError):
@@ -55,17 +63,29 @@ class Fetcher:
         raise FetchError("cascampus frame did not load")
 
     def _open(self, page: str) -> Frame:
+        page = _with_term(page)
         last: Exception | None = None
-        for _ in range(self.retries):
+        for attempt in range(self.retries):
             time.sleep(self.delay)
             try:
-                # A fresh about:blank first: hash-only changes would not reload the outer frame.
-                self._page.goto("about:blank")
-                self._page.goto(KIT_BASE + page, wait_until="networkidle")
-                return self._frame()
+                frame = self._current_frame()
+                if frame is not None and attempt == 0:
+                    # Outer page already passed the bot check: only navigate the iframe.
+                    frame.goto(CASCAMPUS_BASE + page, wait_until="networkidle")
+                else:
+                    # A fresh about:blank first: hash-only changes would not reload the outer frame.
+                    self._page.goto("about:blank")
+                    self._page.goto(KIT_BASE + page, wait_until="networkidle")
+                frame = self._frame()
+                if "cascampus" not in frame.url or "Verifying your browser" in frame.content():
+                    raise FetchError("iframe did not show catalog content")
+                return frame
             except Exception as e:  # noqa: BLE001 - retry any navigation failure
                 last = e
         raise FetchError(f"failed to load {page}: {last}")
+
+    def _current_frame(self) -> Frame | None:
+        return next((f for f in self._page.frames if "cascampus" in f.url), None)
 
     def get(self, page: str) -> str:
         return self._open(page).content()
