@@ -1,0 +1,64 @@
+name: scrape
+
+on:
+  schedule:
+    - cron: '0 4 * * *'   # daily 04:00 UTC (05:00/06:00 in Karlsruhe)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scraper/pyproject.toml
+
+      - name: Install scraper
+        run: |
+          pip install -e 'scraper[dev]'
+          python -m playwright install --with-deps chromium
+
+      - name: Unit tests
+        run: pytest -q scraper/tests
+
+      - name: Scrape
+        run: python -m kit_scraper.run --out data
+
+      - name: Commit data
+        id: commit
+        run: |
+          if [ -n "$(git status --porcelain data)" ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data
+            git commit -m "chore(data): scrape $(date -u +%Y-%m-%d)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No data changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # Pushes made with GITHUB_TOKEN do not trigger other workflows, so deploy explicitly.
+  deploy:
+    needs: scrape
+    if: needs.scrape.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
