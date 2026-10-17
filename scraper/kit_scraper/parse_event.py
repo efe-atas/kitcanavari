@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, Tag
 
 from .models import KIT_BASE, SPO, Event, Lecturer
 from .parse_sessions import parse_appointments
-from .util import cascampus_path, clean
+from .util import cascampus_path, clean, label_fields, label_value, paragraphs
 
 _MODULE_RE = re.compile(r"\b(M-[A-Z]+-\d+)\b")
 _ROOT_HEADLINE = "KIT Department of Informatics"
@@ -22,30 +22,6 @@ class ParsedEvent:
     sessions_page: str | None
 
 
-def _fields(soup: BeautifulSoup) -> dict[str, Tag]:
-    out: dict[str, Tag] = {}
-    for f in soup.find_all("div", class_="field"):
-        label, element = f.find("div", class_="label"), f.find("div", class_="element")
-        if label and element:
-            out.setdefault(clean(label.get_text()).rstrip(":"), element)
-    return out
-
-
-def _value(fields: dict[str, Tag], *prefixes: str) -> str | None:
-    for key, el in fields.items():
-        if any(key.startswith(p) for p in prefixes):
-            return clean(el.get_text(" ")) or None
-    return None
-
-
-def _paragraphs(el: Tag | None) -> str:
-    if el is None:
-        return ""
-    blocks = [clean(p.get_text(" ")) for p in el.find_all(["p", "li", "h3", "h4"])]
-    blocks = [b for b in blocks if b]
-    return "\n\n".join(blocks) if blocks else clean(el.get_text(" "))
-
-
 def _table_rows(soup: BeautifulSoup, table_id: str) -> list[Tag]:
     table = soup.find("table", id=table_id)
     if table is None:
@@ -56,11 +32,11 @@ def _table_rows(soup: BeautifulSoup, table_id: str) -> list[Tag]:
 
 def parse_event(html: str, event_id: str) -> ParsedEvent:
     soup = BeautifulSoup(html, "lxml")
-    fields = _fields(soup)
+    fields = label_fields(soup)
 
-    type_ = _value(fields, "Event type") or ""
+    type_ = label_value(fields, "Event type") or ""
     code = re.search(r"\(([^()]+)\)\s*$", type_)
-    sws = _value(fields, "WTH", "SWS")
+    sws = label_value(fields, "WTH", "SWS")
     content_el = next((el for k, el in fields.items() if k.startswith("Content")), None)
     ilias = soup.find("a", class_="elearning-link")
 
@@ -96,14 +72,14 @@ def parse_event(html: str, event_id: str) -> ParsedEvent:
     slots, sessions = parse_appointments(soup)
     event = Event(
         id=event_id,
-        number=_value(fields, "Course number") or "",
-        title=_value(fields, "Title") or "",
+        number=label_value(fields, "Course number") or "",
+        title=label_value(fields, "Title") or "",
         type=type_,
         type_code=code.group(1) if code else "",
-        language=_value(fields, "Language"),
+        language=label_value(fields, "Language"),
         sws=float(sws.replace(",", ".")) if sws and re.fullmatch(r"[\d.,]+", sws) else None,
-        format=_value(fields, "Event format"),
-        content_text=_paragraphs(content_el),
+        format=label_value(fields, "Event format"),
+        content_text=paragraphs(content_el),
         ilias_url=ilias["href"] if ilias else None,
         kit_url=f"{KIT_BASE}event.asp?gguid={event_id}",
         catalog_paths=paths,
