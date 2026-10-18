@@ -15,7 +15,7 @@ from typing import Callable
 from .diff import diff, prune
 from .fetch import Fetcher, FetchError
 from .fingerprint import fingerprint
-from .models import KIT_BASE, SPO, TERM, TERM_GUID, Change, Event, FieldNode, Module
+from .models import SPO, TERM, TERM_GUID, Change, Event, FieldNode, Module, kit_link
 from .parse_event import parse_event
 from .parse_field import FieldRow, parse_field
 from .parse_module import module_description_page, parse_module
@@ -153,7 +153,7 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
                     desc = fetcher.get(desc_path)
                 except Exception as e:  # noqa: BLE001
                     res.warnings.append(f"module {mid}: description failed ({e})")
-            modules[mid] = parse_module(html, desc, KIT_BASE + path)
+            modules[mid] = parse_module(html, desc, kit_link(path))
         except Exception as e:  # noqa: BLE001
             if mid in prev_modules:
                 modules[mid] = Module.from_json_dict(prev_modules[mid])
@@ -209,6 +209,9 @@ def main(argv: list[str] | None = None, fetcher_factory: Callable = Fetcher, now
     now = now or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     previous = _read(out / "courses.json")
+    if args.limit is not None and previous is not None:
+        print(f"refusing: --limit runs skip the safety checks; use an --out without courses.json (not {out})", file=sys.stderr)
+        return 3
     fetcher = fetcher_factory()
     with fetcher if hasattr(fetcher, "__enter__") else _null(fetcher) as f:
         res = crawl(f, args.root or [DEPARTMENT_ROOT], previous, now, args.limit)
@@ -223,12 +226,22 @@ def main(argv: list[str] | None = None, fetcher_factory: Callable = Fetcher, now
     old = {k: Event.from_json_dict(v) for k, v in (previous or {}).get("events", {}).items()}
     new = {k: Event.from_json_dict(v) for k, v in res.data["events"].items()}
     old_changes = [Change.from_json_dict(c) for c in (_read(out / "changes.json") or {}).get("entries", [])]
-    changes = prune(diff(old, new, now) + old_changes, now) if previous else prune(diff({}, new, now), now)
+    # First run: there is nothing to compare against, so the feed starts empty.
+    changes = prune(diff(old, new, now) + old_changes, now) if previous else []
+    changes_doc = {"entries": [c.to_json_dict() for c in changes]}
 
-    _write(out / "courses.json", res.data)
-    _write(out / "changes.json", {"entries": [c.to_json_dict() for c in changes]})
+    # Rewrite the big files only when their content changed; status.json records every successful check.
+    if previous is None or _content(res.data) != _content(previous):
+        _write(out / "courses.json", res.data)
+    if changes_doc != _read(out / "changes.json"):
+        _write(out / "changes.json", changes_doc)
+    _write(out / "status.json", {"checkedAt": now, "events": len(new), "warnings": len(res.warnings)})
     print(f"ok: {len(new)} events, {len(res.data['modules'])} modules, {len(changes)} change entries")
     return 0
+
+
+def _content(data: dict) -> dict:
+    return {**data, "meta": {k: v for k, v in data.get("meta", {}).items() if k != "scrapedAt"}}
 
 
 class _null:

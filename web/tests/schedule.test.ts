@@ -98,6 +98,23 @@ describe('buildIcs', () => {
     expect(ics.startsWith('BEGIN:VCALENDAR\r\n')).toBe(true)
     expect(ics.split('\r\n').every((l) => new TextEncoder().encode(l).length <= 75)).toBe(true)
   })
+  test('includes a Europe/Berlin VTIMEZONE definition', () => {
+    const a = ev('a', [slot('Tue', '14:00', '15:30')], { sessions: [session('2026-10-27', '14:00', '15:30')] })
+    const ics = buildIcs(sel('a'), { a }, '2026-10-20T04:00:00Z')
+    expect(ics).toContain('BEGIN:VTIMEZONE\r\nTZID:Europe/Berlin')
+    expect(ics).toContain('RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU')
+    expect(ics).toContain('RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU')
+    expect(ics.indexOf('END:VTIMEZONE')).toBeLessThan(ics.indexOf('BEGIN:VEVENT'))
+  })
+  test('weekly slots without session rows become recurring events', () => {
+    const a = ev('a', [{ ...slot('Tue', '14:00', '15:30'), firstDate: '2026-10-27', count: 15 },
+      { ...slot('Thu', '10:00', '11:30', 'biweekly'), firstDate: '2026-10-29', count: 7 }], { sessions: [] })
+    const ics = buildIcs(sel('a'), { a }, '2026-10-20T04:00:00Z')
+    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(2)
+    expect(ics).toContain('DTSTART;TZID=Europe/Berlin:20261027T140000')
+    expect(ics).toContain('RRULE:FREQ=WEEKLY;COUNT=15')
+    expect(ics).toContain('RRULE:FREQ=WEEKLY;INTERVAL=2;COUNT=7')
+  })
   test('escapes commas and semicolons in text', () => {
     const a = ev('a', [slot('Tue', '14:00', '15:30')], { title: 'A, B; C', sessions: [session('2026-10-27', '14:00', '15:30')] })
     expect(buildIcs(sel('a'), { a }, '2026-10-20T04:00:00Z')).toContain(String.raw`A\, B\; C`)

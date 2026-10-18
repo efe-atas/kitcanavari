@@ -49,15 +49,20 @@ def _session_changes(old: Event, new: Event, at: str) -> list[Change]:
 
 
 def _event_changes(old: Event, new: Event, at: str) -> list[Change]:
-    out = _slot_changes(old, new, at) + _session_changes(old, new, at)
+    slot_changes = _slot_changes(old, new, at)
+    sessions = _session_changes(old, new, at)
+    if any(c.kind == "slot_changed" for c in slot_changes):
+        # A moved time slot re-dates every session; the slot entry already says it all.
+        sessions = [c for c in sessions if c.kind == "session_cancelled"]
+    out = slot_changes + sessions
     if old.content_text != new.content_text:
         out.append(Change(at, new.id, new.title, "content_changed", "Description updated"))
-    old_names, new_names = [l.name for l in old.lecturers], [l.name for l in new.lecturers]
+    old_names, new_names = sorted(l.name for l in old.lecturers), sorted(l.name for l in new.lecturers)
     if old_names != new_names:
         out.append(Change(at, new.id, new.title, "lecturers_changed",
                           f"Lecturers: {', '.join(old_names) or '—'} → {', '.join(new_names) or '—'}",
                           before=old_names, after=new_names))
-    if old.module_ids != new.module_ids:
+    if sorted(old.module_ids) != sorted(new.module_ids):
         out.append(Change(at, new.id, new.title, "modules_changed",
                           f"Modules: {', '.join(old.module_ids) or '—'} → {', '.join(new.module_ids) or '—'}",
                           before=old.module_ids, after=new.module_ids))

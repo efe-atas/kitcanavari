@@ -1,14 +1,14 @@
 import { t } from '../../i18n'
 import type { Conflict } from '../../logic/conflicts'
 import { toMinutes } from '../../logic/time'
-import type { CoursesFile, Day, Lang, UserState } from '../../types'
+import type { CoursesFile, Day, Event, Lang, UserState } from '../../types'
 import { typeClass } from '../format'
 
 const START_H = 8
 const END_H = 20
 const WEEKDAYS: Day[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 
-interface Block {
+export interface Block {
   eventId: string
   slotIdx: number
   day: Day
@@ -31,9 +31,14 @@ export function weeklyBlocks(data: CoursesFile, state: UserState): Block[] {
   return out
 }
 
-const overlaps = (b: Block, c: Conflict) =>
-  (c.a === b.eventId || c.b === b.eventId) && c.day === b.day
-  && toMinutes(c.start) < toMinutes(b.end) && toMinutes(b.start) < toMinutes(c.end)
+/** True when conflict `c` actually hits this weekly block (a clash on a one-off date does not). */
+export function blockHasConflict(b: Block, c: Conflict, ev: Event): boolean {
+  const hits = (c.a === b.eventId || c.b === b.eventId) && c.day === b.day
+    && toMinutes(c.start) < toMinutes(b.end) && toMinutes(b.start) < toMinutes(c.end)
+  if (!hits || !c.date) return hits
+  return ev.sessions.some((s) => s.date === c.date && !s.cancelled
+    && (typeof s.slot === 'number' ? s.slot === b.slotIdx : s.start === b.start))
+}
 
 interface Props {
   lang: Lang
@@ -63,7 +68,7 @@ export function WeekGrid({ lang, data, state, conflicts, onOpen }: Props) {
         <div key={d} class="week-day" style={{ gridColumn: i + 2, height }}>
           {blocks.filter((b) => b.day === d).map((b) => {
             const ev = data.events[b.eventId]
-            const bad = conflicts.some((c) => overlaps(b, c))
+            const bad = conflicts.some((c) => blockHasConflict(b, c, ev))
             return (
               <button
                 key={`${b.eventId}-${b.slotIdx}`}

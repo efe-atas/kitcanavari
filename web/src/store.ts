@@ -30,12 +30,22 @@ export function loadState(storage: Storage | null): { state: UserState; persiste
   } catch {
     return { state: defaultState(), persistent: false }
   }
+  let parsed: unknown = null
   try {
-    const parsed: unknown = raw ? JSON.parse(raw) : null
-    return { state: isState(parsed) ? parsed : defaultState(), persistent: true }
+    parsed = raw ? JSON.parse(raw) : null
   } catch {
-    return { state: defaultState(), persistent: true }
+    parsed = undefined
   }
+  if (isState(parsed)) return { state: parsed, persistent: true }
+  if (raw) {
+    // Keep what we could not read (corrupt, or written by a newer version) instead of silently overwriting it.
+    try {
+      storage.setItem(`${STORAGE_KEY}:backup`, raw)
+    } catch {
+      /* best effort */
+    }
+  }
+  return { state: defaultState(), persistent: true }
 }
 
 export function saveState(storage: Storage | null, s: UserState): boolean {

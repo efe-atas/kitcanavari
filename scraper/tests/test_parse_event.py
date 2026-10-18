@@ -19,7 +19,7 @@ def test_gpu_computing_event():
     assert e.content_text.startswith("Beim GPU-Computing")
     assert "\n\n" in e.content_text
     assert e.ilias_url.startswith("https://ilias.studium.kit.edu/")
-    assert e.kit_url.endswith("event.asp?gguid=" + GPU)
+    assert e.kit_url.endswith("event.asp?gguid=" + GPU + "&tguid=0xD25DBD9C86874091993315DA11571AAF")
     assert pe.in_spo and e.module_ids == ["M-INFO-101567"]
     assert pe.module_pages["M-INFO-101567"].startswith("abstractModuleView.asp?gguid=0x14CC2798E558E54E9011EF8375B7567B")
     assert pe.sessions_page is None

@@ -27,6 +27,12 @@ describe('store', () => {
     expect(r.state.selected).toEqual({})
     expect(r.persistent).toBe(true)
   })
+  test('unreadable saved state is backed up before being replaced', () => {
+    const raw = JSON.stringify({ version: 2, selected: { a: { future: true } } })
+    const s = memStorage({ [STORAGE_KEY]: raw })
+    expect(loadState(s).state.selected).toEqual({})
+    expect(s.getItem(`${STORAGE_KEY}:backup`)).toBe(raw)
+  })
   test('loadState returns default on wrong version', () => {
     expect(loadState(memStorage({ [STORAGE_KEY]: JSON.stringify({ version: 9, selected: { a: 1 } }) })).state.selected).toEqual({})
   })

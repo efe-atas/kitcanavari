@@ -13,6 +13,11 @@ USER_AGENT_SUFFIX = "kitcanavari-scraper (+https://github.com/kitcanavari)"
 _ITEMS_RE = re.compile(r"Items\s+(\d+)\s*-\s*(\d+)\s+of\s+(\d+)")
 
 
+def retry_delay(base: float, attempt: int) -> float:
+    """Wait before attempt n (0-based): base, 3×base, 9×base — gives bot checks and hiccups time to clear."""
+    return base * 3 ** attempt
+
+
 def _with_term(page: str) -> str:
     """Pin the term explicitly; without tguid the site silently serves the 'current' term."""
     if "tguid=" in page:
@@ -66,7 +71,7 @@ class Fetcher:
         page = _with_term(page)
         last: Exception | None = None
         for attempt in range(self.retries):
-            time.sleep(self.delay)
+            time.sleep(retry_delay(self.delay, attempt))
             try:
                 frame = self._current_frame()
                 if frame is not None and attempt == 0:

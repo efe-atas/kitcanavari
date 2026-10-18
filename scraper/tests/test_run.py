@@ -169,13 +169,38 @@ def test_main_writes_files_and_appends_changes(tmp_path):
     assert main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: fake, now=NOW) == 0
     courses = json.loads((tmp_path / "courses.json").read_text())
     assert list(courses["events"]) == [GPU]
-    assert [c["kind"] for c in json.loads((tmp_path / "changes.json").read_text())["entries"]] == ["added"]
+    # first run: nothing to compare against, so no "added" flood in the feed
+    assert json.loads((tmp_path / "changes.json").read_text())["entries"] == []
 
     fake.pages[f"event.asp?gguid={GPU}"] = fake.pages[f"event.asp?gguid={GPU}"].replace("50.34 Raum 148", "50.34 Raum 131")
     assert main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: fake,
                 now="2026-10-21T04:00:00Z") == 0
     entries = json.loads((tmp_path / "changes.json").read_text())["entries"]
-    assert [e["kind"] for e in entries] == ["room_changed", "added"]
+    assert [e["kind"] for e in entries] == ["room_changed"]
+    assert json.loads((tmp_path / "status.json").read_text())["checkedAt"] == "2026-10-21T04:00:00Z"
+
+
+def test_unchanged_run_only_touches_status(tmp_path):
+    fake = FakeFetcher(pages(**{"0xF2": field_html("0xF2", [GPU])}))
+    main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: fake, now=NOW)
+    before = (tmp_path / "courses.json").read_bytes(), (tmp_path / "changes.json").read_bytes()
+    assert main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: fake, now="2026-10-22T04:00:00Z") == 0
+    assert ((tmp_path / "courses.json").read_bytes(), (tmp_path / "changes.json").read_bytes()) == before
+    assert json.loads((tmp_path / "status.json").read_text())["checkedAt"] == "2026-10-22T04:00:00Z"
+
+
+def test_limit_refuses_to_overwrite_real_data(tmp_path):
+    fake = FakeFetcher(pages(**{"0xF2": field_html("0xF2", [GPU])}))
+    main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: fake, now=NOW)
+    before = (tmp_path / "courses.json").read_bytes()
+    assert main(["--out", str(tmp_path), "--root", ROOT, "--limit", "1"], fetcher_factory=lambda: fake, now=NOW) == 3
+    assert (tmp_path / "courses.json").read_bytes() == before
+
+
+def test_kit_urls_pin_the_term():
+    r = crawl(FakeFetcher(pages(**{"0xF2": field_html("0xF2", [GPU])})), [ROOT], None, NOW)
+    assert "tguid=0xD25DBD9C86874091993315DA11571AAF" in r.data["modules"]["M-INFO-101567"]["kitUrl"]
+    assert "tguid=0xD25DBD9C86874091993315DA11571AAF" in r.data["events"][GPU]["kitUrl"]
 
 
 def test_main_threshold_leaves_files_untouched(tmp_path):

@@ -22,7 +22,8 @@ export function fmtSlot(lang: Lang, s: Slot): string {
   if (s.rhythm === 'single' && s.firstDate) return `${fmtDate(lang, s.firstDate)} ${s.start ?? ''}–${s.end ?? ''}`
   if (!s.day) return s.rhythm
   const rhythm = s.rhythm === 'weekly' ? '' : ` (${s.rhythm})`
-  return `${t(lang, `day.${s.day}`)} ${s.start}–${s.end}${rhythm}`
+  const time = s.start && s.end ? ` ${s.start}–${s.end}` : ''
+  return `${t(lang, `day.${s.day}`)}${time}${rhythm}`
 }
 
 /** Single-letter-ish type class used for colour coding: V, Ü, P, S or other. */

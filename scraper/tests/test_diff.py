@@ -83,6 +83,20 @@ def test_fingerprint_ignores_content_but_not_room():
     assert len(fingerprint(make_event())) == 16
 
 
+def test_time_change_does_not_flood_session_entries():
+    s_old = [Session(f"2026-11-{d:02d}", "14:00", "15:30", None, False, 0) for d in (3, 10, 17)]
+    s_new = [Session(f"2026-11-{d:02d}", "10:00", "11:30", None, False, 0) for d in (4, 11, 18)]
+    new_slot = replace(BASE_SLOT, day="Wed", start="10:00", end="11:30")
+    assert kinds({"a": make_event(sessions=s_old)}, {"a": make_event(slots=[new_slot], sessions=s_new)}) == ["slot_changed"]
+
+
+def test_reordered_lecturers_and_modules_are_not_changes():
+    old = make_event(lecturers=[Lecturer("A", ""), Lecturer("B", "")], module_ids=["M1", "M2"])
+    new = make_event(lecturers=[Lecturer("B", ""), Lecturer("A", "")], module_ids=["M2", "M1"])
+    assert diff({"a": old}, {"a": new}, AT) == []
+    assert fingerprint(old) == fingerprint(new)
+
+
 def test_prune_drops_old_entries():
     old = Change("2026-07-21T04:00:00Z", "a", "GPU", "added", "Added")   # 91 days before
     keep = Change("2026-07-23T04:00:00Z", "a", "GPU", "added", "Added")  # 89 days before

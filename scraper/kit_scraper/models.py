@@ -11,6 +11,11 @@ TERM = "WS 26/27"
 SPO = "88-979-H-2025"
 
 
+def kit_link(page: str) -> str:
+    """Public deeplink to a catalog page, pinned to the scraped term."""
+    return f"{KIT_BASE}{page}{'&' if '?' in page else '?'}tguid={TERM_GUID}"
+
+
 def _camel(name: str) -> str:
     head, *rest = name.split("_")
     return head + "".join(p.capitalize() for p in rest)

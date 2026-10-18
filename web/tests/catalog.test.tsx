@@ -71,6 +71,13 @@ describe('catalog', () => {
     await screen.findByText(/has not been updated for 4 days/)
   })
 
+  test('fresh status.json wins over an old scrapedAt (content unchanged for days)', async () => {
+    loadData.mockResolvedValue({ courses: makeCourses(daysAgo(10)), changes: makeChanges(), status: { checkedAt: daysAgo(0) } })
+    render(<App />)
+    await screen.findByText('IT Security')
+    expect(screen.queryByText(/has not been updated/)).toBeNull()
+  })
+
   test('shows load error', async () => {
     loadData.mockRejectedValue(new Error('courses.json: HTTP 404'))
     render(<App />)

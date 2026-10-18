@@ -7,7 +7,7 @@ import { addEvent, exportState, importState, removeEvent, setModule, toggleSlot 
 import type { CoursesFile, UserState } from '../../types'
 import { EventDetail } from '../catalog/EventDetail'
 import { download } from '../download'
-import { fmtSlot, typeClass } from '../format'
+import { fmtDate, fmtSlot, typeClass } from '../format'
 import { EctsPanel } from './EctsPanel'
 import { UnscheduledList } from './UnscheduledList'
 import { WeekGrid } from './WeekGrid'
@@ -78,6 +78,7 @@ export function ScheduleView({ data, state, update }: Props) {
               {conflicts.map((c) => (
                 <li key={`${c.a}-${c.b}-${c.day}-${c.start}`}>
                   {title(c.a)} ↔ {title(c.b)}: {t(lang, `day.${c.day}`)} {c.start}–{c.end}
+                  {c.date && ` (${t(lang, 'schedule.firstOn', { date: fmtDate(lang, c.date) })})`}
                 </li>
               ))}
             </ul>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
 import { defaultState, setLang, useAppState } from '../store'
-import type { ChangesFile, CoursesFile, Lang } from '../types'
+import type { ChangesFile, CoursesFile, Lang, StatusFile } from '../types'
 import { pendingAlerts } from '../logic/alerts'
 import { CatalogView } from './catalog/CatalogView'
 import { ChangesView } from './changes/ChangesView'
@@ -19,7 +19,10 @@ const tabFromHash = (): Tab => {
   return TABS.includes(h) ? h : 'catalog'
 }
 
-type Load = { status: 'loading' } | { status: 'error'; error: string } | { status: 'ready'; courses: CoursesFile; changes: ChangesFile }
+type Load =
+  | { status: 'loading' }
+  | { status: 'error'; error: string }
+  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; checkedAt: string }
 
 export function App() {
   const [load, setLoad] = useState<Load>({ status: 'loading' })
@@ -29,7 +32,8 @@ export function App() {
 
   useEffect(() => {
     loadData()
-      .then(({ courses, changes }) => setLoad({ status: 'ready', courses, changes }))
+      .then(({ courses, changes, status }: { courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null }) =>
+        setLoad({ status: 'ready', courses, changes, checkedAt: status?.checkedAt ?? courses.meta.scrapedAt }))
       .catch((e: unknown) => setLoad({ status: 'error', error: e instanceof Error ? e.message : String(e) }))
   }, [])
   useEffect(() => {
@@ -43,7 +47,7 @@ export function App() {
     () => (load.status === 'ready' ? pendingAlerts(state, load.courses, load.changes) : []),
     [load, state],
   )
-  const ageDays = load.status === 'ready' ? Math.floor((Date.now() - Date.parse(load.courses.meta.scrapedAt)) / 86400_000) : 0
+  const ageDays = load.status === 'ready' ? Math.floor((Date.now() - Date.parse(load.checkedAt)) / 86400_000) : 0
 
   return (
     <div class="app">
@@ -81,7 +85,7 @@ export function App() {
 
       {load.status === 'ready' && (
         <footer class="footer">
-          <span>{t(lang, 'data.age', { date: fmtDate(lang, load.courses.meta.scrapedAt) })}</span>
+          <span>{t(lang, 'data.age', { date: fmtDate(lang, load.checkedAt) })}</span>
           <span>{load.courses.meta.term} · SPO {load.courses.meta.spo}</span>
         </footer>
       )}

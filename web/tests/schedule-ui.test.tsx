@@ -36,6 +36,17 @@ describe('schedule view', () => {
     expect(list.textContent).toContain('15:00–15:30')
   })
 
+  test('session-based conflicts name the date of the first clash', async () => {
+    const courses = makeCourses()
+    courses.events.ml.sessions = [{ date: '2026-10-27', start: '15:00', end: '16:30', room: null, cancelled: false, slot: 0 }]
+    courses.events.gpu.sessions = courses.events.gpu.sessions.map((s) => ({ ...s, slot: 0 }))
+    loadData.mockResolvedValue({ courses, changes: makeChanges() })
+    setState({ selected: { gpu: pick('M1', 'fp-gpu'), ml: pick('M2', 'fp-ml') } })
+    render(<App />)
+    const list = await screen.findByRole('region', { name: 'Conflicts' })
+    expect(list.textContent).toContain('27/10/2026')
+  })
+
   test('ects total updates when module changes', async () => {
     setState({ selected: { ml: pick('M2', 'fp-ml') } })
     render(<App />)

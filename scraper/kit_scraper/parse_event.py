@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from bs4 import BeautifulSoup, Tag
 
-from .models import KIT_BASE, SPO, Event, Lecturer
+from .models import SPO, Event, Lecturer, kit_link
 from .parse_sessions import parse_appointments
 from .util import cascampus_path, clean, label_fields, label_value, paragraphs
 
@@ -81,7 +81,7 @@ def parse_event(html: str, event_id: str) -> ParsedEvent:
         format=label_value(fields, "Event format"),
         content_text=paragraphs(content_el),
         ilias_url=ilias["href"] if ilias else None,
-        kit_url=f"{KIT_BASE}event.asp?gguid={event_id}",
+        kit_url=kit_link(f"event.asp?gguid={event_id}"),
         catalog_paths=paths,
         lecturers=lecturers,
         slots=slots,

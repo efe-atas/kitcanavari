@@ -103,6 +103,11 @@ export interface ChangesFile {
   entries: Change[]
 }
 
+/** Written on every successful scrape, even when the catalog did not change. */
+export interface StatusFile {
+  checkedAt: string
+}
+
 export interface SelectedEntry {
   enabledSlots: number[]
   moduleId: string | null
