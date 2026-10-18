@@ -19,6 +19,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      has_data: ${{ steps.data.outputs.ok }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,18 +39,31 @@ jobs:
           npx vitest run
           npm run build
 
+      - name: Check for data
+        id: data
+        run: |
+          if [ -f data/courses.json ] && [ -f data/changes.json ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::data/ is empty — run the scrape workflow first; skipping deploy."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Bundle data
+        if: steps.data.outputs.ok == 'true'
         run: |
           rm -rf web/dist/data
           mkdir -p web/dist/data
           cp data/courses.json data/changes.json web/dist/data/
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.data.outputs.ok == 'true'
         with:
           path: web/dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.has_data == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

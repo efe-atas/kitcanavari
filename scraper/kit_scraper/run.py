@@ -116,8 +116,11 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
 
     events: dict[str, Event] = {}
     module_pages: dict[str, str] = {}
+    print(f"crawling {len(order)} events", file=sys.stderr, flush=True)
     for eid in order:
         res.attempted += 1
+        if res.attempted % 25 == 0:
+            print(f"  {res.attempted}/{len(order)} events, {len(events)} kept, {res.failed} failed", file=sys.stderr, flush=True)
         try:
             parsed = parse_event(fetcher.get(f"event.asp?gguid={eid}"), eid)
         except Exception as e:  # noqa: BLE001 - count, keep previous version, go on
@@ -135,6 +138,7 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
             module_pages.setdefault(mid, path)
 
     needed = {mid for e in events.values() for mid in e.module_ids}
+    print(f"fetching {len(needed)} modules", file=sys.stderr, flush=True)
     modules: dict[str, Module] = {}
     for mid in sorted(needed):
         path = module_pages.get(mid)
