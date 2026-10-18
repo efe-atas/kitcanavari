@@ -2,6 +2,8 @@ import { useCallback, useState } from 'preact/hooks'
 import type { CoursesFile, Event, Lang, UserState } from './types'
 
 export const STORAGE_KEY = 'kitcanavari:v1'
+/** ackFingerprint of an acknowledged event that is no longer in the catalog. */
+export const REMOVED_ACK = '__removed__'
 
 const browserLang = (): Lang =>
   typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('tr') ? 'tr' : 'en'
@@ -13,7 +15,11 @@ function isState(x: unknown): x is UserState {
   const s = x as Partial<UserState>
   return s.version === 1 && !!s.selected && typeof s.selected === 'object' && !Array.isArray(s.selected)
     && (s.lang === 'tr' || s.lang === 'en') && typeof s.lastSeenScrapedAt === 'string'
-    && Object.values(s.selected).every((e) => e && Array.isArray(e.enabledSlots) && typeof e.ackFingerprint === 'string')
+    && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
+      && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
+      && typeof e.ackFingerprint === 'string'
+      && (e.moduleId === null || typeof e.moduleId === 'string')
+      && (e.title === undefined || typeof e.title === 'string'))
 }
 
 export function loadState(storage: Storage | null): { state: UserState; persistent: boolean } {
@@ -68,7 +74,7 @@ export const addEvent = (s: UserState, ev: Event): UserState => ({
   ...s,
   selected: {
     ...s.selected,
-    [ev.id]: { enabledSlots: ev.slots.map((_, i) => i), moduleId: ev.moduleIds[0] ?? null, ackFingerprint: ev.fingerprint },
+    [ev.id]: { enabledSlots: ev.slots.map((_, i) => i), moduleId: ev.moduleIds[0] ?? null, ackFingerprint: ev.fingerprint, title: ev.title },
   },
 })
 
@@ -97,8 +103,8 @@ export function acknowledge(s: UserState, ids: string[], data: CoursesFile): Use
   const selected = { ...s.selected }
   for (const id of ids) {
     const ev = data.events[id]
-    if (!ev) delete selected[id]
-    else if (selected[id]) selected[id] = { ...selected[id], ackFingerprint: ev.fingerprint }
+    // A vanished event stays in the schedule (spec §7); only its alert is silenced.
+    if (selected[id]) selected[id] = { ...selected[id], ackFingerprint: ev ? ev.fingerprint : REMOVED_ACK }
   }
   return { ...s, selected, lastSeenScrapedAt: data.meta.scrapedAt }
 }

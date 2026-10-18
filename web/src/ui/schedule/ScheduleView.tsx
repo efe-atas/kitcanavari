@@ -26,7 +26,7 @@ export function ScheduleView({ data, state, update }: Props) {
   const ects = useMemo(() => computeEcts(state.selected, data.events, data.modules), [data, state.selected])
   const ids = Object.keys(state.selected).sort((a, b) =>
     (data.events[a]?.title ?? a).localeCompare(data.events[b]?.title ?? b))
-  const title = (id: string) => data.events[id]?.title ?? id
+  const title = (id: string) => data.events[id]?.title ?? state.selected[id]?.title ?? id
   const open = openId ? data.events[openId] : null
 
   const onImport = async (e: Event) => {
@@ -97,7 +97,7 @@ export function ScheduleView({ data, state, update }: Props) {
               if (!ev) {
                 return (
                   <li key={id} class="selected-item is-removed">
-                    <span class="title">{id}</span>
+                    <span class="title">{entry.title ?? id}</span>
                     <span class="removed-tag">{t(lang, 'schedule.removed')}</span>
                     <button type="button" class="link-button" onClick={() => update((s) => removeEvent(s, id))}>{t(lang, 'event.remove')}</button>
                   </li>

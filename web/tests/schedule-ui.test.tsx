@@ -45,10 +45,11 @@ describe('schedule view', () => {
     await waitFor(() => expect(screen.getByTestId('ects-total').textContent).toContain('8'))
   })
 
-  test('removed event is shown greyed and labelled', async () => {
-    setState({ selected: { gone: pick('M1', 'x') } })
+  test('removed event is shown greyed and labelled with its stored title', async () => {
+    setState({ selected: { gone: { ...pick('M1', 'x'), title: 'Old Seminar' } } })
     render(<App />)
     await screen.findByText('Removed from catalog')
+    expect(screen.getByText('Old Seminar')).toBeTruthy()
   })
 
   test('import invalid file shows error', async () => {

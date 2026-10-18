@@ -40,6 +40,21 @@ describe('findConflicts', () => {
   })
 })
 
+describe('activeSessions with slot index', () => {
+  test('parallel groups at the same time are told apart by slot index', () => {
+    const e = ev('a', [slot('Tue', '14:00', '15:30', 'weekly', 'R1'), slot('Tue', '14:00', '15:30', 'weekly', 'R2')], {
+      sessions: [{ ...session('2026-10-27', '14:00', '15:30'), slot: 0 }, { ...session('2026-10-27', '14:00', '15:30'), room: 'R2', slot: 1 }],
+    })
+    expect(activeSessions(e, [1]).map((s) => s.room)).toEqual(['R2'])
+  })
+  test('single-date slots can be switched off', () => {
+    const e = ev('a', [slot('Tue', '14:00', '15:30'), slot('Fri', '09:00', '17:00', 'single')], {
+      sessions: [{ ...session('2026-10-27', '14:00', '15:30'), slot: 0 }, { ...session('2026-10-16', '09:00', '17:00'), slot: 1 }],
+    })
+    expect(activeSessions(e, [0]).map((s) => s.date)).toEqual(['2026-10-27'])
+  })
+})
+
 describe('activeSessions', () => {
   test('keeps sessions of enabled slots and unmatched sessions, drops cancelled', () => {
     const e = ev('a', [slot('Tue', '14:00', '15:30'), slot('Fri', '09:45', '11:15')], {

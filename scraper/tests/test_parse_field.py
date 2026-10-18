@@ -29,3 +29,5 @@ def test_root_tree_rows():
     assert rows["0x51515308AECE499594589506DFA75784"].count == 41
     assert rows["0x51515308AECE499594589506DFA75784"].depth > rows["0x01291EE9E14C46BD916AC325D0EE8CE2"].depth
     assert p.event_ids == [] and p.total_count == 0
+    assert rows["0x01291EE9E14C46BD916AC325D0EE8CE2"].title == "1. Informatik Lehrveranstaltungen"
+    assert all(r.title for r in p.tree_rows)

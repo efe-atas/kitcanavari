@@ -18,6 +18,8 @@ export interface Session {
   end: string
   room: string | null
   cancelled: boolean
+  /** Index into Event.slots of the appointment series this date belongs to. */
+  slot?: number | null
 }
 
 export interface Lecturer {
@@ -105,6 +107,8 @@ export interface SelectedEntry {
   enabledSlots: number[]
   moduleId: string | null
   ackFingerprint: string
+  /** Title at the time of adding, shown if the event later disappears from the catalog. */
+  title?: string
 }
 
 export type Lang = 'tr' | 'en'

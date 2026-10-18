@@ -46,7 +46,8 @@ def parse_field(html: str) -> FieldPage:
         badge = tr.find("span", class_="badge")
         rows.append(FieldRow(
             id=tr.get("id", ""),
-            title=clean(link.get_text()) if link else "",
+            # The current/expandable node has no link; its title sits in td.title.
+            title=clean((link or tr.find("td", class_="title") or tr).get_text(" ")),
             depth=depth,
             count=int(badge.get_text()) if badge and badge.get_text().strip().isdigit() else None,
         ))

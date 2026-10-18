@@ -91,21 +91,34 @@ class Fetcher:
         return self._open(page).content()
 
     def get_field(self, page: str) -> str:
-        frame = self._open(page)
-        m = _ITEMS_RE.search(frame.evaluate("document.body.innerText"))
-        if m and int(m.group(2)) < int(m.group(3)):
-            self._show_all(frame)
-        return frame.content()
+        last: Exception | None = None
+        for _ in range(self.retries):
+            try:
+                frame = self._open(page)
+                m = _ITEMS_RE.search(frame.evaluate("document.body.innerText"))
+                if m and int(m.group(2)) < int(m.group(3)):
+                    frame = self._show_all(frame, int(m.group(3)))
+                return frame.content()
+            except Exception as e:  # noqa: BLE001 - Playwright timeouts etc. become a retryable FetchError
+                last = e
+        raise FetchError(f"failed to list all events of {page}: {last}")
 
-    def _show_all(self, frame: Frame) -> None:
-        """Pick 200 items per page in the events table and wait for the reload."""
+    def _show_all(self, frame: Frame, total: int) -> Frame:
+        """Pick 200 items per page and wait until the iframe itself lists all `total` events."""
         select = frame.locator("select:has(option[value='200'])").first
         if select.count():
-            with self._page.expect_event("framenavigated", timeout=self.timeout_ms):
-                select.select_option("200")
+            select.select_option("200")
         else:
-            link = frame.locator("a", has_text=re.compile(r"^\s*200\s*$")).first
-            with self._page.expect_event("framenavigated", timeout=self.timeout_ms):
-                link.click()
-        time.sleep(self.delay)
-        self._frame()
+            frame.locator("a", has_text=re.compile(r"^\s*200\s*$")).first.click()
+        deadline = time.monotonic() + self.timeout_ms / 1000
+        while time.monotonic() < deadline:
+            self._page.wait_for_timeout(500)
+            current = self._current_frame()
+            try:
+                m = current and _ITEMS_RE.search(current.evaluate("document.body.innerText"))
+            except Exception:  # noqa: BLE001 - frame is mid-navigation
+                continue
+            if m and int(m.group(1)) == 1 and int(m.group(2)) == int(m.group(3)) == total:
+                current.wait_for_load_state("networkidle")
+                return current
+        raise FetchError(f"listing did not expand to {total} items")

@@ -58,6 +58,7 @@ class Session(_Json):
     end: str
     room: str | None
     cancelled: bool
+    slot: int | None = None  # index into Event.slots of the appointment series this date belongs to
 
 
 @dataclass

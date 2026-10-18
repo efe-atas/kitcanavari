@@ -41,9 +41,9 @@ describe('store', () => {
     expect(saveState(s, st)).toBe(true)
     expect(loadState(s).state).toEqual(st)
   })
-  test('addEvent enables all slots, picks first module, stores fingerprint', () => {
+  test('addEvent enables all slots, picks first module, stores fingerprint and title', () => {
     const st = addEvent(defaultState(), ev('a', [slot('Tue', '14:00', '15:30'), slot('Fri', '10:00', '11:30')]))
-    expect(st.selected.a).toEqual({ enabledSlots: [0, 1], moduleId: 'M1', ackFingerprint: 'fp-a' })
+    expect(st.selected.a).toEqual({ enabledSlots: [0, 1], moduleId: 'M1', ackFingerprint: 'fp-a', title: 'Title a' })
   })
   test('toggleSlot, setModule, removeEvent', () => {
     let st = addEvent(defaultState(), ev('a', [slot('Tue', '14:00', '15:30'), slot('Fri', '10:00', '11:30')]))
@@ -54,6 +54,12 @@ describe('store', () => {
     st = setModule(st, 'a', 'M9')
     expect(st.selected.a.moduleId).toBe('M9')
     expect(removeEvent(st, 'a').selected).toEqual({})
+  })
+  test('loadState rejects entries with malformed moduleId or slots', () => {
+    const bad = (e: object) => memStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, lang: 'en', lastSeenScrapedAt: '', selected: { a: e } }) })
+    expect(loadState(bad({ enabledSlots: [0], ackFingerprint: '', moduleId: 5 })).state.selected).toEqual({})
+    expect(loadState(bad({ enabledSlots: ['x'], ackFingerprint: '', moduleId: null })).state.selected).toEqual({})
+    expect(loadState(bad({ enabledSlots: [0], ackFingerprint: '', moduleId: 'M1', title: 3 })).state.selected).toEqual({})
   })
   test('importState rejects garbage', () => {
     expect(importState('[]')).toBeNull()
@@ -94,7 +100,13 @@ describe('pendingAlerts', () => {
     expect(pendingAlerts(st, data, changes)).toEqual([])
     expect(st.lastSeenScrapedAt).toBe('2026-10-21T04:00:00Z')
   })
-  test('acknowledging a removed event drops it from the selection', () => {
-    expect(acknowledge(withA('x'), ['a'], courses({})).selected).toEqual({})
+  test('acknowledging a removed event keeps it in the schedule and silences the alert', () => {
+    const st = acknowledge(withA('x'), ['a'], courses({}))
+    expect(st.selected).toHaveProperty('a')
+    expect(pendingAlerts(st, courses({}), changes)).toEqual([])
+  })
+  test('a removed event that comes back alerts again', () => {
+    const st = acknowledge(withA('x'), ['a'], courses({}))
+    expect(pendingAlerts(st, courses({ a: ev('a') }), changes)).toHaveLength(1)
   })
 })

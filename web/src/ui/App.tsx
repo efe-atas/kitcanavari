@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
-import { setLang, useAppState } from '../store'
+import { defaultState, setLang, useAppState } from '../store'
 import type { ChangesFile, CoursesFile, Lang } from '../types'
 import { pendingAlerts } from '../logic/alerts'
 import { CatalogView } from './catalog/CatalogView'
 import { ChangesView } from './changes/ChangesView'
 import { ScheduleView } from './schedule/ScheduleView'
+import { ErrorBoundary } from './ErrorBoundary'
 import { fmtDate } from './format'
 
 type Tab = 'catalog' | 'schedule' | 'changes'
@@ -67,6 +68,7 @@ export function App() {
       {load.status === 'ready' && ageDays > STALE_DAYS && <p class="banner banner-warn">{t(lang, 'data.stale', { days: ageDays })}</p>}
 
       <main class="content">
+        <ErrorBoundary onReset={() => update(() => defaultState())}>
         {load.status === 'loading' && <p class="empty">{t(lang, 'data.loading')}</p>}
         {load.status === 'error' && <p class="banner banner-error">{t(lang, 'data.error', { error: load.error })}</p>}
         {load.status === 'ready' && tab === 'catalog' && <CatalogView data={load.courses} state={state} update={update} />}
@@ -74,6 +76,7 @@ export function App() {
         {load.status === 'ready' && tab === 'changes' && (
           <ChangesView data={load.courses} changes={load.changes} state={state} alerts={alerts} update={update} />
         )}
+        </ErrorBoundary>
       </main>
 
       {load.status === 'ready' && (

@@ -56,7 +56,7 @@ def parse_appointments(html: str | BeautifulSoup) -> tuple[list[Slot], list[Sess
         if "collapsible" in tr.get("class", []):
             d = us_date(tr.get_text())
             if current and d and current.start:
-                sessions.append(Session(d, current.start, current.end, current.room, _is_cancelled(tr)))
+                sessions.append(Session(d, current.start, current.end, current.room, _is_cancelled(tr), len(slots) - 1))
             continue
 
         def cell(name: str) -> str:
@@ -79,7 +79,7 @@ def parse_appointments(html: str | BeautifulSoup) -> tuple[list[Slot], list[Sess
         )
         slots.append(current)
         if single_date and start:
-            sessions.append(Session(single_date, start, end, current.room, _is_cancelled(tr)))
+            sessions.append(Session(single_date, start, end, current.room, _is_cancelled(tr), len(slots) - 1))
     return slots, sessions
 
 

@@ -16,6 +16,8 @@ export function weekdayOf(isoDate: string): Day {
 export function activeSessions(ev: Event, enabled: number[]): Session[] {
   return ev.sessions.filter((s) => {
     if (s.cancelled) return false
+    if (typeof s.slot === 'number') return enabled.includes(s.slot)
+    // Data without slot indices: match by weekday + start time.
     const owner = ev.slots.findIndex((sl) => sl.day === weekdayOf(s.date) && sl.start === s.start && sl.rhythm !== 'single')
     return owner === -1 || enabled.includes(owner)
   })

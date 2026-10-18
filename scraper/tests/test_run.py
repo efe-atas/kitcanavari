@@ -81,6 +81,54 @@ def test_non_spo_event_is_dropped():
 def test_short_field_listing_adds_warning():
     r = crawl(FakeFetcher(pages(**{"0xF2": field_html("0xF2", [GPU], listed=25, total=40)})), [ROOT], None, NOW)
     assert any("listed 25 of 40" in w for w in r.warnings)
+    assert r.field_failures == 1
+
+
+def _previous_with_tree(node_id: str, event_ids: list[str]) -> dict:
+    ev = parse_event(fixture("event_lecture.html"), "0xDEAD0002").event
+    return {"events": {"0xDEAD0002": ev.to_json_dict()}, "modules": {},
+            "tree": [{"id": "0xF1", "title": "F1", "eventIds": [], "children": [
+                {"id": node_id, "title": "F1a", "eventIds": event_ids, "children": []}]}]}
+
+
+def test_failed_field_falls_back_to_previous_event_ids():
+    p = pages(**{"0xF2": field_html("0xF2", [GPU])})
+    del p["field.asp?gguid=0xF1A"]
+    fake = FakeFetcher(p)
+    r = crawl(fake, [ROOT], _previous_with_tree("0xF1A", ["0xDEAD0002"]), NOW)
+    assert "event.asp?gguid=0xDEAD0002" in fake.calls
+    assert "0xDEAD0002" in r.data["events"]          # kept from previous (fetch failed in fake)
+    assert r.field_failures == 0
+
+
+def test_failed_field_without_previous_aborts(tmp_path):
+    p = pages(**{"0xF2": field_html("0xF2", [GPU])})
+    del p["field.asp?gguid=0xF1A"]
+    assert main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: FakeFetcher(p), now=NOW) == 2
+    assert not (tmp_path / "courses.json").exists()
+
+
+def test_short_listing_merges_previous_event_ids():
+    p = pages(**{"0xF1A": field_html("0xF1A", [GPU], listed=1, total=2)})
+    fake = FakeFetcher(p)
+    r = crawl(fake, [ROOT], _previous_with_tree("0xF1A", [GPU, "0xDEAD0002"]), NOW)
+    assert "event.asp?gguid=0xDEAD0002" in fake.calls and r.field_failures == 0
+
+
+class ExplodingFetcher(FakeFetcher):
+    def get(self, page):
+        if page == f"event.asp?gguid={BLOCK}":
+            return "<html>" + "x" * 10  # parses to an event without SPO; fine
+        if page == "event.asp?gguid=0xDEAD0003":
+            raise ValueError("boom")
+        return super().get(page)
+
+    get_field = get
+
+
+def test_unexpected_exception_counts_as_failed_event():
+    r = crawl(ExplodingFetcher(pages(**{"0xF2": field_html("0xF2", [GPU, "0xDEAD0003"])})), [ROOT], None, NOW)
+    assert (r.failed, r.attempted) == (1, 2) and GPU in r.data["events"]
 
 
 def test_failed_event_reuses_previous():
@@ -89,7 +137,7 @@ def test_failed_event_reuses_previous():
     r = crawl(FakeFetcher(pages(**{"0xF2": field_html("0xF2", [GPU, "0xDEAD0001"])})), [ROOT], previous, NOW)
     assert Event.from_json_dict(r.data["events"]["0xDEAD0001"]).number == "2400010"
     assert any("0xDEAD0001" in w for w in r.warnings)
-    assert r.failed == 0
+    assert r.failed == 1  # reused data still counts toward the failure ratio
 
 
 def test_failed_event_without_previous_counts_as_failed():

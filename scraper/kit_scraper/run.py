@@ -31,6 +31,7 @@ class CrawlResult:
     warnings: list[str] = field(default_factory=list)
     failed: int = 0
     attempted: int = 0
+    field_failures: int = 0
 
 
 def _subtree(rows: list[FieldRow], root: str) -> FieldNode | None:
@@ -65,10 +66,23 @@ def _prune_tree(node: FieldNode, keep: set[str]) -> FieldNode | None:
     return FieldNode(node.id, node.title, children, ids)
 
 
+def _previous_field_events(previous: dict | None) -> dict[str, list[str]]:
+    out: dict[str, list[str]] = {}
+
+    def walk(nodes: list[dict]) -> None:
+        for n in nodes:
+            out[n["id"]] = n.get("eventIds", [])
+            walk(n.get("children", []))
+
+    walk((previous or {}).get("tree", []))
+    return out
+
+
 def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int | None = None) -> CrawlResult:
     res = CrawlResult(data={})
     prev_events = (previous or {}).get("events", {})
     prev_modules = (previous or {}).get("modules", {})
+    prev_fields = _previous_field_events(previous)
 
     trees: list[FieldNode] = []
     for root in roots:
@@ -76,14 +90,22 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
         tree = _subtree(root_page.tree_rows, root) or FieldNode(root, root_page.title)
         trees.append(tree)
         for node in _walk(tree):
+            complete = True
             try:
                 page = root_page if node.id == root else parse_field(fetcher.get_field(f"field.asp?gguid={node.id}"))
-            except FetchError as e:
+                node.event_ids = page.event_ids
+                if page.listed_count < page.total_count:
+                    res.warnings.append(f"field {node.id}: listed {page.listed_count} of {page.total_count}")
+                    complete = False
+            except Exception as e:  # noqa: BLE001 - one bad field must not kill the run
                 res.warnings.append(f"field {node.id}: {e}")
-                continue
-            node.event_ids = page.event_ids
-            if page.listed_count < page.total_count:
-                res.warnings.append(f"field {node.id}: listed {page.listed_count} of {page.total_count}")
+                complete = False
+            if not complete:
+                # Never let a broken field page silently drop its events: reuse last run's list or abort.
+                if node.id in prev_fields:
+                    node.event_ids += [e for e in prev_fields[node.id] if e not in node.event_ids]
+                else:
+                    res.field_failures += 1
 
     order: list[str] = []
     for tree in trees:
@@ -98,13 +120,13 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
         res.attempted += 1
         try:
             parsed = parse_event(fetcher.get(f"event.asp?gguid={eid}"), eid)
-        except FetchError as e:
+        except Exception as e:  # noqa: BLE001 - count, keep previous version, go on
+            res.failed += 1
             if eid in prev_events:
                 events[eid] = Event.from_json_dict(prev_events[eid])
-                res.warnings.append(f"event {eid}: fetch failed, kept previous version ({e})")
+                res.warnings.append(f"event {eid}: failed, kept previous version ({e})")
             else:
-                res.failed += 1
-                res.warnings.append(f"event {eid}: fetch failed ({e})")
+                res.warnings.append(f"event {eid}: failed ({e})")
             continue
         if not parsed.in_spo:
             continue
@@ -125,10 +147,10 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
             if desc_path:
                 try:
                     desc = fetcher.get(desc_path)
-                except FetchError as e:
+                except Exception as e:  # noqa: BLE001
                     res.warnings.append(f"module {mid}: description failed ({e})")
             modules[mid] = parse_module(html, desc, KIT_BASE + path)
-        except FetchError as e:
+        except Exception as e:  # noqa: BLE001
             if mid in prev_modules:
                 modules[mid] = Module.from_json_dict(prev_modules[mid])
             res.warnings.append(f"module {mid}: fetch failed ({e})")
@@ -147,7 +169,9 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
     return res
 
 
-def check_thresholds(new: dict, previous: dict | None, failed: int, attempted: int) -> str | None:
+def check_thresholds(new: dict, previous: dict | None, failed: int, attempted: int, field_failures: int = 0) -> str | None:
+    if field_failures:
+        return f"{field_failures} field page(s) failed or were incomplete and no previous data exists"
     if attempted and failed / attempted > MAX_FAILED_RATIO:
         return f"too many failed events: {failed}/{attempted}"
     events = new.get("events", {})
@@ -187,7 +211,7 @@ def main(argv: list[str] | None = None, fetcher_factory: Callable = Fetcher, now
 
     for w in res.warnings:
         print("warning:", w, file=sys.stderr)
-    reason = None if args.limit else check_thresholds(res.data, previous, res.failed, res.attempted)
+    reason = None if args.limit else check_thresholds(res.data, previous, res.failed, res.attempted, res.field_failures)
     if reason:
         print(f"aborting, nothing written: {reason}", file=sys.stderr)
         return 2
