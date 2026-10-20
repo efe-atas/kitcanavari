@@ -1,7 +1,7 @@
 # Degree guidance: requirements tracker, catalog badges, guide page
 
-Date: 2026-10-20. Source of rules: module handbook 88-979-H-2025, version 14/10/2025, §1.3, §2, §3
-(https://www.informatik.kit.edu/downloads/stud/88-979-H-2025_v1_2025-10-14_en.pdf).
+Date: 2026-10-20. Source of rules: module handbook 88-979-H-2025, version 09/09/2026 (WS 26/27), §1.3, §2, §3
+(https://www.informatik.kit.edu/downloads/stud/88-979-H-2025_v1_2026-09-09_en.pdf).
 
 ## Problem
 A first-semester student sees courses but not how they add up to the degree: which area a course counts for,
@@ -12,7 +12,7 @@ what a Stammmodul is, how many seminars/practicals are needed.
 - 2 areas of specialization, each ≥15 CP, of which ≥10 CP lectures (8 for Telematics); seminars, practicals and
   Stammmodule do not count towards the lecture minimum. Both areas together ≤73 CP.
 - Elective Studies 6–49 CP; any area module may count there. Minor 9–18 CP. Interdisciplinary Qualifications 2–6 CP.
-- 4 Stammmodule (list of 10 titles from handbook Figure 2), counted in areas or electives.
+- 4 Stammmodule (11 modules in handbook Figure 2, matched by id and title), counted in areas or electives.
 - Seminars ≥3 CP, practicals ≥6 CP, together 12–18 CP (areas + electives only).
 - A module counts in exactly one place.
 

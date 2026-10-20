@@ -1,4 +1,4 @@
-// Degree rules of the Computer Science M.Sc., SPO 88-979-H-2025 (module handbook of 14/10/2025, §1.3, §2, §3).
+// Degree rules of the Computer Science M.Sc., SPO 88-979-H-2025 (module handbook of 09/09/2026, WS 26/27, §1.3, §2, §3).
 import type { CoursesFile, Module, UserState } from '../types'
 import { chosenModule } from './ects'
 
@@ -23,10 +23,15 @@ export const RULES = {
   semesterTarget: 30,
 }
 
-/** Handbook Figure 2. Matched by title because the catalog uses newer module ids. */
+/** Handbook Figure 2 (09/09/2026). Matched by id, and by title in case a module gets a new id. */
+const STAMM_IDS = new Set([
+  'M-INFO-107201', 'M-INFO-100818', 'M-INFO-100856', 'M-INFO-100799', 'M-INFO-107166', 'M-INFO-106998',
+  'M-INFO-107169', 'M-INFO-107676', 'M-INFO-107162', 'M-INFO-107235', 'M-INFO-107243',
+])
 const STAMM_TITLES = [
-  'Advanced Artificial Intelligence', 'Algorithms II', 'Computer Architecture', 'Computer Graphics', 'Formal Systems',
-  'Human Computer Interaction', 'IT Security', 'Robotics I - Introduction to Robotics', 'Software Engineering II', 'Telematics',
+  'Algorithms II', 'Computer Architecture', 'Computer Graphics', 'Formal Systems', 'Human Computer Interaction', 'IT Security',
+  'Machine Learning - Foundations and Algorithms', 'Multimodal Artificial Intelligence', 'Robotics I - Introduction to Robotics',
+  'Software Engineering II', 'Telematics',
 ]
 
 export const AREAS = [
@@ -84,7 +89,7 @@ function kindsFromTree(data: CoursesFile): Map<string, Kind> {
 }
 
 export const moduleKind = (data: CoursesFile, m: Module): Kind =>
-  kindFromTitle(m.title) ?? kindsFromTree(data).get(m.id) ?? 'lecture'
+  (STAMM_IDS.has(m.id) ? 'stamm' : null) ?? kindFromTitle(m.title) ?? kindsFromTree(data).get(m.id) ?? 'lecture'
 
 export function bucketOptions(m: Module): Bucket[] {
   const areas = moduleAreas(m)

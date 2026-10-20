@@ -38,8 +38,8 @@ test('registration hints are collected without raising the level', () => {
 })
 
 test('handbook-only statements are added by module id', () => {
-  const d = data('', null, 'P', 'M-INFO-107600')
-  expect(attendanceOf(d, d.events.e).hints[0]).toMatchObject({ kind: 'kickoff', source: 'handbook' })
+  const d = data('', null, 'S', 'M-INFO-103306')
+  expect(attendanceOf(d, d.events.e).hints[0]).toMatchObject({ kind: 'registration', source: 'handbook' })
 })
 
 test('abbreviations do not split sentences and "(attendance mandatory)" counts', () => {

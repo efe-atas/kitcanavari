@@ -1,5 +1,5 @@
 // Attendance and participation hints, read from the course page text and module descriptions in the catalog data,
-// plus a few statements that only the module handbook (14/10/2025, partial achievements) contains.
+// plus a few statements that only the module handbook (09/09/2026, partial achievements) contains.
 import type { CoursesFile, Event } from '../types'
 
 export type AttendanceLevel = 'required' | 'kickoff' | 'unknown'
@@ -25,7 +25,6 @@ const REGISTRATION = /(?:number of (?:places|participants) is limited|places are
 
 /** Statements from partial-achievement pages of the handbook, which the catalog data does not include. */
 const HANDBOOK: Record<string, Hint[]> = {
-  'M-INFO-107600': [{ kind: 'kickoff', source: 'handbook', text: 'Successful participation in the introductory assignment is a prerequisite for further participation in the practical course.' }],
   'M-INFO-103306': [{ kind: 'registration', source: 'handbook', text: 'Students may redraw from their participation until the end of the second seminar date.' }],
 }
 

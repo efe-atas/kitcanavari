@@ -111,3 +111,9 @@ test('suggestions rank areas by credits the selection could bring', () => {
     { area: 'Algorithm Engineering', cp: 6 },
   ])
 })
+
+test('Stammmodule of the 09/09/2026 handbook are recognised by id even under another title', () => {
+  const m: Module = { ...mod('M-INFO-107676', 6), title: 'Multimodal AI (renamed)' }
+  expect(moduleKind(data, m)).toBe('stamm')
+  expect(moduleKind(data, { ...mod('X', 6), title: 'Advanced Artificial Intelligence' })).toBe('lecture')
+})

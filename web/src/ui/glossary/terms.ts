@@ -1,5 +1,5 @@
 // Terms found in the KIT catalog data and on this site that are new to most incoming students.
-// Definitions follow the module handbook 88-979-H-2025 (14/10/2025) where it covers them.
+// Definitions follow the module handbook 88-979-H-2025 (09/09/2026) where it covers them.
 import { attendanceOf } from '../../logic/attendance'
 import { moduleKind } from '../../logic/degree'
 import type { CoursesFile, Lang } from '../../types'
@@ -77,8 +77,8 @@ export const TERMS: Term[] = [
   {
     id: 'handbook', cat: 'structure', term: 'Modül kitabı', aka: 'Modulhandbuch · Module handbook',
     def: {
-      tr: 'Tüm modülleri, içeriklerini, sınav şekillerini ve programın kurallarını anlatan resmî kılavuz. Her dönem güncellenir; o dönemin sürümü bağlayıcıdır.',
-      en: 'The official guide to every module, its content and exams, and the programme rules. It is updated every term; the current version is binding.',
+      tr: 'Tüm modülleri, içeriklerini, sınav şekillerini ve programın kurallarını anlatan resmî kılavuz. Her dönem güncellenir; o dönemin sürümü bağlayıcıdır. Bu site WS 26/27 için yayımlanan 09.09.2026 tarihli sürümü kullanıyor.',
+      en: 'The official guide to every module, its content and exams, and the programme rules. It is updated every term; the current version is binding. This site uses the 09/09/2026 version for WS 26/27.',
     },
     related: ['spo', 'module'],
   },
@@ -124,24 +124,24 @@ export const TERMS: Term[] = [
   {
     id: 'minor', cat: 'structure', term: 'Yan dal', aka: 'Ergänzungsfach · Minor Studies',
     def: {
-      tr: 'Bilgisayar bilimi dışından bir komşu alan: Elektrik, Matematik, Ekonomi ya da Hukuk. Tek bir yan dal seçilir; 9–18 ECTS. 18\'in üstü sayılmaz.',
-      en: 'A neighbouring field outside computer science: Electrical Engineering, Mathematics, Economics or Law. You pick one; 9–18 ECTS, credits above 18 are discarded.',
+      tr: 'Bilgisayar bilimi dışından bir komşu alan: Biologically Inspired Robotics, Elektrik, Matematik, Ekonomi ya da Hukuk. Tek bir yan dal seçilir; 9–18 ECTS. 18\'in üstü sayılmaz.',
+      en: 'A neighbouring field outside computer science: Biologically Inspired Robotics, Electrical Engineering, Mathematics, Economics or Law. You pick one; 9–18 ECTS, credits above 18 are discarded.',
     },
     related: ['iq'],
   },
   {
     id: 'iq', cat: 'structure', term: 'Disiplinlerarası yeterlilikler', aka: 'Überfachliche Qualifikationen · Interdisciplinary Qualifications',
     def: {
-      tr: 'Soft skill, dil ve toplumsal konular: 2–6 ECTS, notsuz (geçti/kaldı). HoC, FORUM ve Dil Merkezi (SpZ) dersleri sayılır. Katılım belgesi yetmez; bir sınav ya da ödev gerekir.',
-      en: 'Soft skills, languages and societal topics: 2–6 ECTS, pass/fail. Courses from HoC, FORUM and the Language Center (SpZ) count. A participation certificate is not enough; an exam or coursework is required.',
+      tr: 'Soft skill, dil ve toplumsal konular: 2–6 ECTS, notsuz (geçti/kaldı). HoC, FORUM ve Dil Merkezi (SpZ) dersleri sayılır; İngilizce dil sertifikalarının B2 üstü olması gerekir. "Practice of Research (Methods)" modülleri de buraya sayılabilir. Katılım belgesi yetmez; bir sınav ya da ödev gerekir.',
+      en: 'Soft skills, languages and societal topics: 2–6 ECTS, pass/fail. Courses from HoC, FORUM and the Language Center (SpZ) count; English certificates must be above B2. The “Practice of Research (Methods)” modules can count here too. A participation certificate is not enough; an exam or coursework is required.',
     },
     related: ['hoc', 'minor'],
   },
   {
     id: 'stamm', cat: 'structure', term: 'Stammmodul', aka: 'Advanced mandatory module',
     def: {
-      tr: 'Bilgisayar biliminin temel konularını kapsayan 10 modülden biri (ör. Algorithms II, IT Security). 4 tanesini almak zorunlu, her biri 6 ECTS. Yılda bir kez açılırlar. Uzmanlık alanında ya da seçmelide sayılırlar ama alanın "10 ECTS normal ders" şartına sayılmazlar. Lisansta aldığını tekrar alamazsın.',
-      en: 'One of 10 modules covering core computer science (e.g. Algorithms II, IT Security). Four are required, 6 ECTS each, offered once a year. They count in an area or in elective studies, but not towards an area’s 10 ECTS of lectures. One you passed in your Bachelor’s cannot be taken again.',
+      tr: 'Bilgisayar biliminin temel konularını kapsayan 11 modülden biri (ör. Algorithms II, IT Security). Bunların 3\'ü (Computer Architecture, Computer Graphics, Formal Systems) Almanca. 4 tanesini almak zorunlu, her biri 6 ECTS. Yılda bir kez açılırlar. Uzmanlık alanında ya da seçmelide sayılırlar ama alanın "10 ECTS normal ders" şartına sayılmazlar. Lisansta aldığını tekrar alamazsın.',
+      en: 'One of 11 modules covering core computer science (e.g. Algorithms II, IT Security); three of them (Computer Architecture, Computer Graphics, Formal Systems) are taught in German. Four are required, 6 ECTS each, offered once a year. They count in an area or in elective studies, but not towards an area’s 10 ECTS of lectures. One you passed in your Bachelor’s cannot be taken again.',
     },
     where: { tr: 'Kartlardaki koyu "Stammmodul" rozeti ve "Ders tipi" filtresi.', en: 'The dark badge on cards and the “Kind” filter.' },
     count: byKind('stamm'),

@@ -9,7 +9,7 @@ import { ExamplePlan } from './ExamplePlan'
 /** Glossary entry per rule card, in the order of `copy.*.rules`. */
 const RULE_TERMS: (string | null)[] = ['area', 'stamm', 'seminar', 'elective', 'minor', 'iq', 'module', 'area', null]
 
-const HANDBOOK = 'https://www.informatik.kit.edu/downloads/stud/88-979-H-2025_v1_2025-10-14_en.pdf'
+const HANDBOOK = 'https://www.informatik.kit.edu/downloads/stud/88-979-H-2025_v1_2026-09-09_en.pdf'
 const FAQ = 'https://www.informatik.kit.edu/faq-wiki/doku.php?id=start'
 const ISS = 'beratung-informatik@informatik.kit.edu'
 
@@ -27,8 +27,8 @@ const copy = {
       ['4 Stammmodul', 'Her biri 6 ECTS. Uzmanlık alanında ya da seçmelide sayılabilir. Lisansta aldığın bir Stammmodulü tekrar alamazsın.'],
       ['Seminer ve praktikum', `En az ${RULES.seminarMin} ECTS seminer ve en az ${RULES.practicalMin} ECTS praktikum. İkisi toplam ${RULES.spMin}–${RULES.spMax} ECTS; fazlası sayılmaz.`],
       ['Seçmeli', `${RULES.electiveMin}–${RULES.electiveMax} ECTS. Tüm alanların modülleri buraya sayılabilir.`],
-      ['Yan dal', `${RULES.minorMin}–${RULES.minorMax} ECTS, tek bir yan dal: Elektrik, Matematik, Ekonomi ya da Hukuk.`],
-      ['Disiplinlerarası', `${RULES.iqMin}–${RULES.iqMax} ECTS, notsuz. HoC, FORUM ve Dil Merkezi (SpZ) dersleri.`],
+      ['Yan dal', `${RULES.minorMin}–${RULES.minorMax} ECTS, tek bir yan dal: Biologically Inspired Robotics, Elektrik, Matematik, Ekonomi ya da Hukuk.`],
+      ['Disiplinlerarası', `${RULES.iqMin}–${RULES.iqMax} ECTS, notsuz. HoC, FORUM ve Dil Merkezi (SpZ) dersleri; İngilizce dil sertifikalarının B2 üstü olması gerekir.`],
       ['Bir modül tek yere', 'Her modül yalnızca bir bölüme sayılır. Bu yüzden "Programım"da her ders için nereye sayılacağını seçiyorsun.'],
       ['Alan sabitlenir', 'Bir alanda ilk sınava girdiğinde o alan sabitlenir. Değiştirmek için sınav kurulunun onayı gerekir.'],
       ['Dil', 'En fazla 30 ECTS Almanca ders alınabilir.'],
@@ -57,7 +57,7 @@ const copy = {
       ['Şartları takip et', '"Programım"da iki alanını seç, her dersin nereye sayılacağını belirle ve çubukları izle.'],
     ] as [string, string][],
     sourcesTitle: 'Resmî kaynaklar',
-    handbook: 'Modül kitabı 88-979-H-2025 (14.10.2025)',
+    handbook: 'Modül kitabı 88-979-H-2025 (09.09.2026, WS 26/27)',
     faq: 'Informatik FAQ wiki',
     iss: 'Informatik Studiengangservice (ISS)',
     disclaimer: 'Bu sayfa modül kitabının bir özetidir; bağlayıcı olan SPO ve güncel modül kitabıdır. Ders tipleri (seminer, praktikum, Stammmodul) katalogdan tahmin edilir. Emin olmadığında ISS\'e yaz.',
@@ -75,8 +75,8 @@ const copy = {
       ['4 advanced mandatory modules', '6 ECTS each, counted in an area or in elective studies. One you passed in your Bachelor’s cannot be taken again.'],
       ['Seminars and practicals', `At least ${RULES.seminarMin} ECTS of seminars and ${RULES.practicalMin} ECTS of practicals; ${RULES.spMin}–${RULES.spMax} ECTS together, credits above that do not count.`],
       ['Elective studies', `${RULES.electiveMin}–${RULES.electiveMax} ECTS. Modules of every area may count here.`],
-      ['Minor', `${RULES.minorMin}–${RULES.minorMax} ECTS in one minor: Electrical Engineering, Mathematics, Economics or Law.`],
-      ['Interdisciplinary qualifications', `${RULES.iqMin}–${RULES.iqMax} ECTS, pass/fail. Courses from HoC, FORUM and the Language Center (SpZ).`],
+      ['Minor', `${RULES.minorMin}–${RULES.minorMax} ECTS in one minor: Biologically Inspired Robotics, Electrical Engineering, Mathematics, Economics or Law.`],
+      ['Interdisciplinary qualifications', `${RULES.iqMin}–${RULES.iqMax} ECTS, pass/fail. Courses from HoC, FORUM and the Language Center (SpZ); English certificates must be above B2.`],
       ['One module, one place', 'Each module counts in exactly one part. That is why you pick where each course counts in “My schedule”.'],
       ['Areas get fixed', 'Your first exam in an area fixes that area. Changing it needs the examination board’s approval.'],
       ['Language', 'At most 30 ECTS may be taken in German.'],
@@ -105,7 +105,7 @@ const copy = {
       ['Track the requirements', 'In “My schedule”, choose your two areas, set where each course counts and watch the bars.'],
     ] as [string, string][],
     sourcesTitle: 'Official sources',
-    handbook: 'Module handbook 88-979-H-2025 (14/10/2025)',
+    handbook: 'Module handbook 88-979-H-2025 (09/09/2026, WS 26/27)',
     faq: 'Informatics FAQ wiki',
     iss: 'Informatics Study Program Service (ISS)',
     disclaimer: 'This page summarizes the module handbook; the examination regulations and the current handbook are binding. Course kinds (seminar, practical, advanced mandatory) are inferred from the catalog. Ask ISS when in doubt.',

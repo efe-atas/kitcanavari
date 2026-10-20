@@ -27,7 +27,7 @@ const PLAN: Chip[] = [
   { sem: 1, col: 'iq', kind: 'iq', ects: 2, title: 'SpZ' },
   { sem: 2, col: 'a1', kind: 'lecture', ects: 6, title: 'Privacy Enhancing Technologies' },
   { sem: 2, col: 'a1', kind: 'practical', ects: 4, title: 'AISEC-Lab' },
-  { sem: 2, col: 'a2', kind: 'stamm', ects: 6, title: 'Advanced Artificial Intelligence' },
+  { sem: 2, col: 'a2', kind: 'stamm', ects: 6, title: 'Multimodal Artificial Intelligence' },
   { sem: 2, col: 'elective', kind: 'stamm', ects: 6, title: 'Software Engineering II' },
   { sem: 2, col: 'minor', kind: 'minor', ects: 6, title: 'Math I' },
   { sem: 3, col: 'a2', kind: 'lecture', ects: 6, title: 'Reinforcement Learning' },
@@ -80,7 +80,7 @@ const copy = {
       {
         h: '2. dönem (yaz): 28 ECTS',
         p: [
-          'Yazın açılan iki Stammmodul alındı: Advanced AI 2. alana, Software Engineering II seçmeliye. Stammmodul sayacı 4/4.',
+          'Yazın açılan iki Stammmodul alındı: Multimodal AI 2. alana, Software Engineering II seçmeliye. Stammmodul sayacı 4/4.',
           'Privacy Enhancing Technologies ile 1. alanın normal ders toplamı 12 oldu; şart tamam.',
           'AISEC-Lab ilk praktikum. Yan dal (Matematik) ilk modülüyle başladı.',
         ],
@@ -137,7 +137,7 @@ const copy = {
       {
         h: 'Term 2 (summer): 28 ECTS',
         p: [
-          'The two summer advanced mandatory modules: Advanced AI goes to area 2, Software Engineering II to elective studies. Counter: 4/4.',
+          'The two summer advanced mandatory modules: Multimodal AI goes to area 2, Software Engineering II to elective studies. Counter: 4/4.',
           'Privacy Enhancing Technologies brings area 1 to 12 ECTS of lectures; requirement met.',
           'AISEC-Lab is the first practical. The minor (Mathematics) starts with its first module.',
         ],
