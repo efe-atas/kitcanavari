@@ -5147,7 +5147,7 @@
    "fingerprint": "0110d7901c432b65",
    "format": "On-Site",
    "id": "0x43473167369C4CB38854BCB2A597028D",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057194&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x43473167369C4CB38854BCB2A597028D&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -5616,7 +5616,7 @@
    "fingerprint": "b21b85b9c51a697e",
    "format": "On-Site",
    "id": "0x48E98E83C4014C4CA491A16C412C77A2",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3056646&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x48E98E83C4014C4CA491A16C412C77A2&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -6137,7 +6137,7 @@
    "fingerprint": "fceff19696865cdd",
    "format": "On-Site",
    "id": "0x530056B3E68540749C4F33CF6521F9DE",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3056722&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x530056B3E68540749C4F33CF6521F9DE&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "German/English",
    "lecturers": [
@@ -7463,7 +7463,7 @@
    "fingerprint": "c97097031499665d",
    "format": "On-Site",
    "id": "0x6DF7D7D74DCF48B7AACC7D4DA816F13E",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057602&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x6DF7D7D74DCF48B7AACC7D4DA816F13E&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -9868,10 +9868,10 @@
     ]
    ],
    "contentText": "Learning objectives\n\nUnderstand the motivation for self-adaptation\n\nGet familiar with the basic principles and conceptual model of self-adaptation\n\nUnderstand how to engineer self-adaptive software systems from a software engineering perspective\n\nUnderstand the decision-making process using formal analysis at runtime for quality assurance\n\nUnderstand the notion of uncertainty in self-adaptive systems and how to tame it with formal verification at runtime\n\nUnderstand the level of adoption of self-adaptive system in industry",
-   "fingerprint": "9837f58e02cb5ad7",
+   "fingerprint": "2c4e9aafa56a69ea",
    "format": null,
    "id": "0xA3F6FF2ABB9248A69F009643AB59FC4C",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3056351&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xA3F6FF2ABB9248A69F009643AB59FC4C&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -9888,133 +9888,133 @@
     {
      "cancelled": false,
      "date": "2026-10-29",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-11-05",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-11-12",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-11-19",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-11-26",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-12-03",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-12-10",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2026-12-17",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-01-07",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-01-14",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-01-21",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-01-28",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-02-04",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-02-11",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     },
     {
      "cancelled": false,
      "date": "2027-02-18",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
      "slot": 0,
-     "start": "09:45"
+     "start": "11:30"
     }
    ],
    "slots": [
     {
      "count": 15,
      "day": "Thu",
-     "end": "11:15",
+     "end": "13:00",
      "firstDate": "2026-10-29",
      "rhythm": "weekly",
-     "room": "50.34 Raum 131",
-     "start": "09:45"
+     "room": "50.34 Raum 236",
+     "start": "11:30"
     }
    ],
    "sws": 2.0,
@@ -11524,7 +11524,7 @@
    "fingerprint": "49b2f39abce0b140",
    "format": "On-Site",
    "id": "0xB88CBF421D30435D85990071EB867FC8",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057635&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xB88CBF421D30435D85990071EB867FC8&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -11694,7 +11694,7 @@
    "fingerprint": "113a33c031f8ad7f",
    "format": "On-Site",
    "id": "0xB95A03B3DCE64E35A4AC2C9EC7F6079D",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057195&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xB95A03B3DCE64E35A4AC2C9EC7F6079D&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -14457,7 +14457,7 @@
     ]
    ],
    "contentText": "Competence Goal Students learn to independently design, conduct, and critically evaluate empirical HRI studies. They can formulate research questions, select appropriate methods, address practical and ethical constraints, analyze data, and communicate findings and limitations.\n\nContent The module introduces experimental and exploratory study designs, Wizard-of-Oz methods, questionnaires, observation, interviews, and qualitative, quantitative, and mixed-methods analysis. In small groups, students develop an interaction scenario, plan and pilot a study, collect and analyze data, and present their results. Discussions address informed consent, participant safety, data handling, and the balance between experimental control and realistic interaction. The module complements “HRI and Social Robotics” but can be taken independently.\n\nAdditional Information Attendance is mandatory, as active participation in discussions, group work, and presentations is required.\n\nWorkload Course workload:\n\n1) Attendance of interactive course/exercise sessions: 45h (15 x 180 min) 2) Self-study of course material and work on homework assignments: 45h (≈3h/week) 3) Project work (study design, data collection, analysis, reporting): 90 h\n\nTotal Load = 180 h\n\nRecommendations Participation in the lecture “HRI and Social Robotics” or similar introductory courses is recommended but not required. Familiarization with the lecture content is recommended if the course has not been attended.",
-   "fingerprint": "0144ffac3a1ba33f",
+   "fingerprint": "0b6c18e19bb5bdc1",
    "format": "On-Site",
    "id": "0xFE73D782E69A4F0AA2F9C964BDC4B243",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3038893&client_id=produktiv",
@@ -14473,7 +14473,7 @@
      "unit": "IAR Bruno"
     },
     {
-     "name": "Utku Norman",
+     "name": "Dr. Utku Norman",
      "unit": "IAR Bruno"
     }
    ],
@@ -14750,7 +14750,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-19T09:36:30Z",
+  "scrapedAt": "2026-10-20T09:08:18Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
@@ -16514,13 +16514,14 @@
    },
    "ects": 3.0,
    "fields": [
+    "Area of Specialization: Software Engineering and Compiler Construction",
     "Elective Studies in Informatics"
    ],
    "id": "M-INFO-107233",
-   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xEBF07498713B4643B20F29389A97C808&camvguid=0x8CD02F2A73A34FD09E02C8735A162088&camvceid=CMPEL_D6B658EC&cafiguid=0x85D55FFA24FA48D4826A8F3E37731B4D&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xEBF07498713B4643B20F29389A97C808&camvguid=0x8CD02F2A73A34FD09E02C8735A162088&camvceid=CMPEL_F5634078&cafiguid=0x19E7F5AF94FE4DBA98EB2DAB641D6647&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "level": "4",
-   "part": "Elective Studies",
+   "part": "Elective Modules: Software Engineering and Compiler Construction",
    "recurrence": "Each winter term",
    "title": "Natural Language Processing and Software Engineering"
   },
