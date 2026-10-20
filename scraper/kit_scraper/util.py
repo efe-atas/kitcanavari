@@ -27,6 +27,11 @@ def cascampus_path(href: str) -> str:
     return name + ("?" + "&".join(f"{k}={v}" for k, v in query) if query else "")
 
 
+def table_after_caption(soup: BeautifulSoup, caption: str) -> Tag | None:
+    h2 = soup.find("h2", class_="table-caption", string=lambda s: s and clean(s).startswith(caption))
+    return h2.find_next("table") if h2 else None
+
+
 def label_fields(soup: BeautifulSoup) -> dict[str, Tag]:
     out: dict[str, Tag] = {}
     for f in soup.find_all("div", class_="field"):

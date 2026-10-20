@@ -15,12 +15,14 @@ from typing import Callable
 from .diff import diff, prune
 from .fetch import Fetcher, FetchError
 from .fingerprint import fingerprint
-from .models import SPO, TERM, TERM_GUID, Change, Event, FieldNode, Module, kit_link
+from .models import PROGRAM_PAGE, SPO, TERM, TERM_GUID, Change, Event, FieldNode, Module, kit_link
 from .parse_event import parse_event
 from .parse_field import FieldRow, parse_field
 from .parse_module import module_description_page, parse_module
+from .parse_spo import field_modules, minor_fields, module_events
 
 DEPARTMENT_ROOT = "0x94CCACA48C644F43B4A6B70586D36CA5"
+MINOR_ROOT = "minor-studies"
 MAX_FAILED_RATIO = 0.10
 MAX_COUNT_DROP = 0.30
 
@@ -78,7 +80,48 @@ def _previous_field_events(previous: dict | None) -> dict[str, list[str]]:
     return out
 
 
-def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int | None = None) -> CrawlResult:
+def _node_from_json(d: dict) -> FieldNode:
+    return FieldNode(d["id"], d["title"], [_node_from_json(c) for c in d.get("children", [])], list(d.get("eventIds", [])))
+
+
+def _minor_tree(fetcher, program: str, res: CrawlResult, previous: dict | None,
+                module_pages: dict[str, str], module_html: dict[str, str]) -> FieldNode:
+    """Minor modules belong to other departments: find this term's events via program → minor field → module page.
+
+    Failures only warn (minors are an extra); the affected nodes keep the previous run's event lists.
+    """
+    root = FieldNode(MINOR_ROOT, "Minor Studies")
+    prev_root = next((n for n in (previous or {}).get("tree", []) if n.get("id") == MINOR_ROOT), None)
+    prev_fields = _previous_field_events({"tree": [prev_root]} if prev_root else None)
+    try:
+        fields = minor_fields(fetcher.get(program))
+        if not fields:
+            raise FetchError("no minor fields listed")
+    except Exception as e:  # noqa: BLE001
+        res.warnings.append(f"program {program}: {e}; minor events kept from the previous run")
+        return _node_from_json(prev_root) if prev_root else root
+    for gid, title, path in fields:
+        node, complete = FieldNode(gid, title), True
+        try:
+            for mid, mpath in field_modules(fetcher.get(path)).items():
+                module_pages.setdefault(mid, mpath)
+                try:
+                    module_html[mpath] = fetcher.get(mpath)
+                    node.event_ids += [e for e in module_events(module_html[mpath]) if e not in node.event_ids]
+                except Exception as e:  # noqa: BLE001
+                    res.warnings.append(f"module {mid}: events failed ({e})")
+                    complete = False
+        except Exception as e:  # noqa: BLE001
+            res.warnings.append(f"minor field {gid}: {e}")
+            complete = False
+        if not complete:
+            node.event_ids += [e for e in prev_fields.get(gid, []) if e not in node.event_ids]
+        root.children.append(node)
+    return root
+
+
+def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int | None = None,
+          product: str | None = None) -> CrawlResult:
     res = CrawlResult(data={})
     prev_events = (previous or {}).get("events", {})
     prev_modules = (previous or {}).get("modules", {})
@@ -107,6 +150,12 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
                 else:
                     res.field_failures += 1
 
+    module_pages: dict[str, str] = {}
+    module_html: dict[str, str] = {}
+    if product:
+        # Wrapped so that "Minor Studies" itself becomes a top-level node of the output tree.
+        trees.append(FieldNode("", "", [_minor_tree(fetcher, product, res, previous, module_pages, module_html)]))
+
     order: list[str] = []
     for tree in trees:
         for node in _walk(tree):
@@ -115,7 +164,6 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
         order = order[:limit]
 
     events: dict[str, Event] = {}
-    module_pages: dict[str, str] = {}
     print(f"crawling {len(order)} events", file=sys.stderr, flush=True)
     for eid in order:
         res.attempted += 1
@@ -145,7 +193,7 @@ def crawl(fetcher, roots: list[str], previous: dict | None, now: str, limit: int
         try:
             if path is None:
                 raise FetchError("no module link")
-            html = fetcher.get(path)
+            html = module_html.get(path) or fetcher.get(path)
             desc_path = module_description_page(html)
             desc = None
             if desc_path:
@@ -214,7 +262,7 @@ def main(argv: list[str] | None = None, fetcher_factory: Callable = Fetcher, now
         return 3
     fetcher = fetcher_factory()
     with fetcher if hasattr(fetcher, "__enter__") else _null(fetcher) as f:
-        res = crawl(f, args.root or [DEPARTMENT_ROOT], previous, now, args.limit)
+        res = crawl(f, args.root or [DEPARTMENT_ROOT], previous, now, args.limit, None if args.root else PROGRAM_PAGE)
 
     for w in res.warnings:
         print("warning:", w, file=sys.stderr)

@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import re
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 
 from .models import Brick, Module, ModuleDescription
-from .util import cascampus_path, clean, label_fields, label_value, paragraphs
+from .util import cascampus_path, clean, label_fields, label_value, paragraphs, table_after_caption
 
 _BRICK_RE = re.compile(r"^T-[A-Z]+-\d+$")
 _NUM_RE = re.compile(r"^\d+(?:[.,]\d+)?$")
@@ -25,11 +25,6 @@ def _number(text: str | None) -> float | None:
     return float(text.replace(",", ".")) if _NUM_RE.match(text) else None
 
 
-def _table_after_caption(soup: BeautifulSoup, caption: str) -> Tag | None:
-    h2 = soup.find("h2", class_="table-caption", string=lambda s: s and clean(s).startswith(caption))
-    return h2.find_next("table") if h2 else None
-
-
 def module_description_page(html: str) -> str | None:
     a = BeautifulSoup(html, "lxml").find("a", id="tab-details")
     return cascampus_path(a["href"]) if a and a.get("href") else None
@@ -40,7 +35,7 @@ def parse_module(html: str, description_html: str | None, kit_url: str) -> Modul
     fields = label_fields(soup)
 
     bricks = []
-    table = _table_after_caption(soup, "Bricks")
+    table = table_after_caption(soup, "Bricks")
     for tr in table.find_all("tr") if table else []:
         cells = [clean(td.get_text(" ")) for td in tr.find_all("td")]
         idx = next((i for i, c in enumerate(cells) if _BRICK_RE.match(c)), None)
@@ -48,7 +43,7 @@ def parse_module(html: str, description_html: str | None, kit_url: str) -> Modul
             bricks.append(Brick(cells[idx], cells[idx + 1] if idx + 1 < len(cells) else "", _number(cells[-1])))
 
     field_titles = []
-    table = _table_after_caption(soup, "Fields")
+    table = table_after_caption(soup, "Fields")
     body = table.find("tbody", class_="tablecontent") if table else None
     for tr in body.find_all("tr") if body else []:
         title = clean(tr.get_text(" "))

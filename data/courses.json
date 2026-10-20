@@ -1,5 +1,47 @@
 {
  "events": {
+  "0x01D1B2A68E284BC6BCDFB22E6FD673DE": {
+   "catalogPaths": [
+    [
+     "KIT Department of Chemical and Process Engineering",
+     "Veranstaltungen von anderen Fakultäten"
+    ],
+    [
+     "KIT Department of Chemical and Process Engineering",
+     "Studiengang CIW/VT Master und BIW Master SPO 2016 ALT",
+     "Vertiefungsfächer",
+     "Vertiefungsfach Entrepreneurship in der Verfahrenstechnik"
+    ],
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Entrepreneurship, Technology-Management and Innovation"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "ee760ea6a249e947",
+   "format": null,
+   "id": "0x01D1B2A68E284BC6BCDFB22E6FD673DE",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037589&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x01D1B2A68E284BC6BCDFB22E6FD673DE&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": null,
+   "lecturers": [
+    {
+     "name": "Prof. Dr. Orestis Terzidis",
+     "unit": "KIT Department of Informatics (INFORMATIK) , KIT Department of Business and Economics (WIWI) , Institut für Entrepreneurship, Technologie­Management und Innovation (EnTechnon) (ENTECHNON) , Entrepreneurship und Technologie-Management (ENTECHNON)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105073"
+   ],
+   "number": "2545082",
+   "sessions": [],
+   "slots": [],
+   "sws": 4.0,
+   "title": "SIL Entrepreneurship Project",
+   "type": "Seminar (S)",
+   "typeCode": "S"
+  },
   "0x020D8FDB8FA84510A69499DAC43719B5": {
    "catalogPaths": [
     [
@@ -461,6 +503,41 @@
    "type": "Lecture / Practice (VÜ)",
    "typeCode": "VÜ"
   },
+  "0x072A4210C84941AE9B8F3812F09EA5C2": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Biomedizinische Technik (IBT)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "5751b64f74cf0bbc",
+   "format": "On-Site",
+   "id": "0x072A4210C84941AE9B8F3812F09EA5C2",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x072A4210C84941AE9B8F3812F09EA5C2&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Dr. Max Fabian Riedel",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    },
+    {
+     "name": "Prof. Dr. Werner Nahm",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-101834"
+   ],
+   "number": "2305743",
+   "sessions": [],
+   "slots": [],
+   "sws": 1.0,
+   "title": "Erxercise for 2305742 Business Innovation in Optics and Photonics",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
+  },
   "0x0811BAF86C0B4228B5C8DB1BDC8E6D25": {
    "catalogPaths": [
     [
@@ -736,6 +813,241 @@
    "title": "Programming Language Design and Implementation",
    "type": "Practical course (P)",
    "typeCode": "P"
+  },
+  "0x0A2589D706E44F96BAFD4118906CDEB2": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Nachrichtentechnik (CEL)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "e0683bb49eda3556",
+   "format": "On-Site",
+   "id": "0x0A2589D706E44F96BAFD4118906CDEB2",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3044817&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x0A2589D706E44F96BAFD4118906CDEB2&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Laurent Schmalen",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105617"
+   ],
+   "number": "2310520",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-27",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-03",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-10",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-17",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-24",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-01",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-08",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-15",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-22",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "11:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 1,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-10-27",
+     "rhythm": "weekly",
+     "room": "50.31 Seminarraum 012",
+     "start": "09:45"
+    },
+    {
+     "count": 8,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-10-28",
+     "rhythm": "fortnightly",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "start": "09:45"
+    }
+   ],
+   "sws": 3.0,
+   "title": "Channel Coding: Graph-Based Codes",
+   "type": "Lecture (V)",
+   "typeCode": "V"
   },
   "0x0B5FDC7E442F48FEA850F61283F6F2D1": {
    "catalogPaths": [
@@ -1281,6 +1593,183 @@
    "title": "Practical Course: Performance Engineering in C++ and Rust",
    "type": "Practical course (P)",
    "typeCode": "P"
+  },
+  "0x0FD49E8F65614083BA442885961F1E7E": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Technik der Informationsverarbeitung (ITIV)"
+    ],
+    [
+     "KIT Department of Mechanical Engineering",
+     "Vorlesungen und Übungen aus anderen Fakultäten"
+    ],
+    [
+     "Karlsruhe School of Optics & Photonics (KSOP)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "15c455a1f6eaf229",
+   "format": "Blended (On-Site/Online)",
+   "id": "0x0FD49E8F65614083BA442885961F1E7E",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x0FD49E8F65614083BA442885961F1E7E&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Roland Stroop",
+     "unit": "Institut für Technik der Informationsverarbeitung (ITIV)"
+    },
+    {
+     "name": "Dr. Jochen Hagel",
+     "unit": "Institut für Technik der Informationsverarbeitung (ITIV)"
+    },
+    {
+     "name": "Sinja Gerdes",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Technik der Informationsverarbeitung (ITIV)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-100537"
+   ],
+   "number": "2311607",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-26",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-09",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-16",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-23",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-30",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-07",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-14",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-21",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-11",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-18",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-25",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-01",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-08",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-15",
+     "end": "11:15",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Mon",
+     "end": "11:15",
+     "firstDate": "2026-10-26",
+     "rhythm": "weekly",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "start": "09:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Tutoral for 2311605 Systems and Software Engineering",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
   },
   "0x0FE81E17009B4B898BB17397589AA516": {
    "catalogPaths": [
@@ -2287,6 +2776,104 @@
    "title": "Telematics",
    "type": "Lecture (V)",
    "typeCode": "V"
+  },
+  "0x16262A2BDB774DBB9FDADAFD408571E9": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Nachrichtentechnik (CEL)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "e7d9942eccb71afd",
+   "format": "On-Site",
+   "id": "0x16262A2BDB774DBB9FDADAFD408571E9",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x16262A2BDB774DBB9FDADAFD408571E9&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Peter Rost",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105971"
+   ],
+   "number": "2310524",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-16",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-30",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-14",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-11",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-25",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-08",
+     "end": "09:30",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "08:00"
+    }
+   ],
+   "slots": [
+    {
+     "count": 7,
+     "day": "Mon",
+     "end": "09:30",
+     "firstDate": "2026-11-02",
+     "rhythm": "fortnightly",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "start": "08:00"
+    }
+   ],
+   "sws": 1.0,
+   "title": "Exercises for 2310523 Mobile Communications",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
   },
   "0x194760AF1EF245E9B6B02EDDB821C174": {
    "catalogPaths": [
@@ -4113,6 +4700,311 @@
    "type": "Lecture (V)",
    "typeCode": "V"
   },
+  "0x2E659B67549D440A9DC0DAB169421EDA": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "a7878c7aeb750219",
+   "format": "On-Site",
+   "id": "0x2E659B67549D440A9DC0DAB169421EDA",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x2E659B67549D440A9DC0DAB169421EDA&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-107621"
+   ],
+   "number": "2121334",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-26",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 1,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-09",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-16",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 3,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-23",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 4,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-30",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 5,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-07",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 6,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-14",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 7,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-21",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 8,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-11",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 9,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-18",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 10,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-25",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 11,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-01",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 12,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-08",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 13,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-15",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 14,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-22",
+     "end": "13:00",
+     "room": "20.21 Pool C",
+     "slot": 15,
+     "start": "11:30"
+    }
+   ],
+   "slots": [
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-10-26",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-11-02",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-11-09",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-11-16",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-11-23",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-11-30",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-12-07",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-12-14",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2026-12-21",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-01-11",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-01-18",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-01-25",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-02-01",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-02-08",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-02-15",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "13:00",
+     "firstDate": "2027-02-22",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "11:30"
+    }
+   ],
+   "sws": 1.0,
+   "title": "Robotic Intelligence: Navigation and Mobile Manipulation (Exercise)",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
+  },
   "0x31A423B745934C409A52090863A0C180": {
    "catalogPaths": [
     [
@@ -4608,6 +5500,38 @@
    "title": "Computational Imaging",
    "type": "Lecture / Practice (VÜ)",
    "typeCode": "VÜ"
+  },
+  "0x3D4ECCD620FF469880E6D13AFA9D4C02": {
+   "catalogPaths": [
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Finance"
+    ]
+   ],
+   "contentText": "The course is targeted to students with a major in Data Science and/or Machine Learning. It offers students the opportunity to develop hands-on knowledge on new developments in data science and machine learning.\n\nWorkload :\n\nThe total workload for this course is structured as follows:\n\n• Attendance at lectures/exercises (presence time) (6 SWS × 15 weeks): 90 h\n\n• Preparation and follow-up of course content: 100 h\n\n• Exam preparation and participation in the assessment: 80 h\n\nTotal workload: 270 h (corresponds to 9 ECTS credits)",
+   "fingerprint": "e14c9aed545c20f6",
+   "format": "Blended (On-Site/Online)",
+   "id": "0x3D4ECCD620FF469880E6D13AFA9D4C02",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3010144&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x3D4ECCD620FF469880E6D13AFA9D4C02&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr. Maxim Ulrich",
+     "unit": "KIT Department of Business and Economics (WIWI) , Institut für Finanzwirtschaft, Banken und Versicherungen (FBV) , Finanzwirtschaft und Risikomanagement (FBV)"
+    }
+   ],
+   "moduleIds": [
+    "M-WIWI-105659"
+   ],
+   "number": "2500063",
+   "sessions": [],
+   "slots": [],
+   "sws": 4.0,
+   "title": "Advanced Machine Learning and Data Science",
+   "type": "Project (PRO)",
+   "typeCode": "PRO"
   },
   "0x3DB27C712222421B8C7F80C5ACD8A2D2": {
    "catalogPaths": [
@@ -6550,6 +7474,44 @@
    "type": "Seminar (S)",
    "typeCode": "S"
   },
+  "0x5B264A715EE24A8797FDF2871A7E5182": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Biomedizinische Technik (IBT)"
+    ],
+    [
+     "Karlsruhe School of Optics & Photonics (KSOP)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "5751b64f74cf0bbc",
+   "format": "On-Site",
+   "id": "0x5B264A715EE24A8797FDF2871A7E5182",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_2987153&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x5B264A715EE24A8797FDF2871A7E5182&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Dr. Max Fabian Riedel",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    },
+    {
+     "name": "Prof. Dr. Werner Nahm",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-101834"
+   ],
+   "number": "2305742",
+   "sessions": [],
+   "slots": [],
+   "sws": 2.0,
+   "title": "Business Innovation in Optics and Photonics",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
   "0x5CF1F73ADB964E629847AB2076260093": {
    "catalogPaths": [
     [
@@ -7447,6 +8409,172 @@
    "title": "Scientific Methods to Design and Analyze Secure Decentralized Systems",
    "type": "Lecture / Practice (VÜ)",
    "typeCode": "VÜ"
+  },
+  "0x67749F54075C40B2B39F4AF8914C9BCC": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Technik der Informationsverarbeitung (ITIV)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "cc4dbbbd2856c526",
+   "format": "On-Site",
+   "id": "0x67749F54075C40B2B39F4AF8914C9BCC",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037960&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x67749F54075C40B2B39F4AF8914C9BCC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Jürgen Becker",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Technik der Informationsverarbeitung (ITIV)"
+    },
+    {
+     "name": "Dr.-Ing. Jens Becker",
+     "unit": "Institut für Technik der Informationsverarbeitung (ITIV)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-100449"
+   ],
+   "number": "2311608",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "13:00",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "slot": 0,
+     "start": "11:30"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Wed",
+     "end": "13:00",
+     "firstDate": "2026-10-28",
+     "rhythm": "weekly",
+     "room": "30.10 Nachrichtentechnik-Hörsaal (NTI)",
+     "start": "11:30"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Hardware Modeling and Simulation",
+   "type": "Lecture (V)",
+   "typeCode": "V"
   },
   "0x6DF7D7D74DCF48B7AACC7D4DA816F13E": {
    "catalogPaths": [
@@ -8795,6 +9923,168 @@
    "type": "Lecture (V)",
    "typeCode": "V"
   },
+  "0x8F5E2EA08ECD4EF083979F6498DBBF67": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Biomedizinische Technik (IBT)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "77c699a4cc8b1b97",
+   "format": "On-Site",
+   "id": "0x8F5E2EA08ECD4EF083979F6498DBBF67",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x8F5E2EA08ECD4EF083979F6498DBBF67&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "PD Dr. Bastian Breustedt",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-107839"
+   ],
+   "number": "2305290",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-30",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-06",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-13",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-20",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-27",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-04",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-11",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-18",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-08",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-15",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-22",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-29",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-05",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-12",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-19",
+     "end": "11:15",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "slot": 0,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Fri",
+     "end": "11:15",
+     "firstDate": "2026-10-30",
+     "rhythm": "weekly",
+     "room": "30.28 Seminarraum 4 (R004)",
+     "start": "09:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Seminar Radiation Protection in Medicine",
+   "type": "Seminar (S)",
+   "typeCode": "S"
+  },
   "0x93504EA110CF48EAA2CB5E40F5D33B51": {
    "catalogPaths": [
     [
@@ -8926,6 +10216,168 @@
    "title": "Practical Course: Neural Network Acceleration on FPGAs",
    "type": "Practical course (P)",
    "typeCode": "P"
+  },
+  "0x946FB740F5C9476F860F2F310FD6ECFB": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Nachrichtentechnik (CEL)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "aa6050295d316c62",
+   "format": "On-Site",
+   "id": "0x946FB740F5C9476F860F2F310FD6ECFB",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3034324&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x946FB740F5C9476F860F2F310FD6ECFB&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Peter Rost",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105971"
+   ],
+   "number": "2310523",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "13:00",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "slot": 0,
+     "start": "11:30"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Wed",
+     "end": "13:00",
+     "firstDate": "2026-10-28",
+     "rhythm": "weekly",
+     "room": "30.35 Hochspannungstechnik-Hörsaal (HSI)",
+     "start": "11:30"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Mobile Communications",
+   "type": "Lecture (V)",
+   "typeCode": "V"
   },
   "0x977366524B9C4C599C5D76428FC73BF5": {
    "catalogPaths": [
@@ -9690,6 +11142,329 @@
    "type": "Lecture (V)",
    "typeCode": "V"
   },
+  "0x9D13D6A8BEBF4FD9B4C037AE05C848D9": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "Students are able to understand biologically inspired mobile robots and extend their software.\n\nThis module teaches students how to work with and expand biologically inspired mobile robotics. The topics covered include control engineering, computer vision, 3D mapping, navigation and human-machine interaction. Students work in groups and produce a joint final report and presentation.",
+   "fingerprint": "c10fde76c79a4ceb",
+   "format": "On-Site",
+   "id": "0x9D13D6A8BEBF4FD9B4C037AE05C848D9",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031101&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x9D13D6A8BEBF4FD9B4C037AE05C848D9&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-106904"
+   ],
+   "number": "2121342",
+   "sessions": [],
+   "slots": [],
+   "sws": 4.0,
+   "title": "Practical Course: Software Development and Application of Mobile, Bio-Inspired Robots",
+   "type": "Practical course (P)",
+   "typeCode": "P"
+  },
+  "0x9E0235BD715A40DA905CFC3C6D955654": {
+   "catalogPaths": [
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Customer Insights (CIN)"
+    ]
+   ],
+   "contentText": "The judgments and decisions that we make can have long ranging and important consequences for our (financial) well-being and individual health. Hence, the goal of this lecture is to gain a better understanding of how people make judgments and decisions and the factors that influences their behavior. We will look into simple heuristics and mental shortcuts that decision makers use to navigate their environment, in particular so in an economic context. Following this, the lecture will provide an overview into social and emotional influences on decision making. In the second half of the semester we will look into some more specific topics including self-control, nudging, and food choice. The last part of the lecture will focus on risk communication and risk perception. We will address these questions from an interdisciplinary perspective at the intersection of Psychology, Behavioral Economics, Marketing, Cognitive Science, and Biology. Across all topics covered in class, we will engage with basic theoretical work as well as with groundbreaking empirical research and current scientific debates.\n\nThe workload of the class is 4.5 ECTS. This consists of 3 ETCS for the lecture and 1.5 ETCS for the Übung. Details about the Übung will be communicated at the first day of the class.\n\nWorkload:\n\nThe total workload for this course is structured as follows:\n\n• Attendance at lectures/exercises (presence time) (3 SWS × 15 weeks): 45 h\n\n• Preparation and follow-up of course content: 50 h\n\n• Exam preparation and participation in the assessment: 40 h\n\nTotal workload: 135 h (corresponds to 4.5 ECTS credits)",
+   "fingerprint": "f291a34ded7e0821",
+   "format": "On-Site",
+   "id": "0x9E0235BD715A40DA905CFC3C6D955654",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x9E0235BD715A40DA905CFC3C6D955654&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr. Benjamin Scheibehenne",
+     "unit": "KIT Department of Business and Economics (WIWI) , Institute for Customer Insights (CIN) (CIN)"
+    }
+   ],
+   "moduleIds": [
+    "M-WIWI-106258"
+   ],
+   "number": "2500059",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-26",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-09",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-16",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-23",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-30",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-07",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-14",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-21",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-11",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-18",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-25",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-01",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-08",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-15",
+     "end": "11:15",
+     "room": "11.40 Raum -116",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-10-29",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-05",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-12",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-19",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-26",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-03",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-10",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-17",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-07",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-14",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-21",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-28",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-04",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-11",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-18",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.019",
+     "slot": 1,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Mon",
+     "end": "11:15",
+     "firstDate": "2026-10-26",
+     "rhythm": "weekly",
+     "room": "11.40 Raum -116",
+     "start": "09:45"
+    },
+    {
+     "count": 15,
+     "day": "Thu",
+     "end": "11:15",
+     "firstDate": "2026-10-29",
+     "rhythm": "weekly",
+     "room": "20.30 Seminarraum 0.019",
+     "start": "09:45"
+    }
+   ],
+   "sws": 3.0,
+   "title": "Economic Decision Making",
+   "type": "Lecture / Practice (VÜ)",
+   "typeCode": "VÜ"
+  },
   "0xA236AD9E9D9A4E3BA89110E45BA67956": {
    "catalogPaths": [
     [
@@ -10021,6 +11796,37 @@
    "title": "Engineering Self-Adaptive Systems",
    "type": "Lecture (V)",
    "typeCode": "V"
+  },
+  "0xA72C149B46C94E85AB8FAB25BC418EFF": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "The aim is to work independently on a scientific topic in the field of biologically inspired algorithms and robot technologies. Students are able to independently carry out a literature search on the state of research, summarize external work accurately, relate it to each other and evaluate it. The results and content can be summerized in a seminar paper and an oral presentation.\n\nBiologically inspired robots and their methods and technologies transfer concepts for problem solving from nature to mechanical design, sensor technology, navigation, control and interpretation, among other things. These solution approaches are approximated by technical systems. The spectrum of robotics inspired by biology ranges from multi-legged walking robots, distributed sensor concepts and lightweight construction to machine learning methods and neuromorphic hardware.",
+   "fingerprint": "0e331732c8103ca9",
+   "format": "On-Site",
+   "id": "0xA72C149B46C94E85AB8FAB25BC418EFF",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031102&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xA72C149B46C94E85AB8FAB25BC418EFF&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-106902"
+   ],
+   "number": "2121343",
+   "sessions": [],
+   "slots": [],
+   "sws": 2.0,
+   "title": "Seminar: Bionic Algorithms and Robot Technologies",
+   "type": "Seminar (S)",
+   "typeCode": "S"
   },
   "0xA75D9335BF994221B0DAC43FF50A04EB": {
    "catalogPaths": [
@@ -11849,6 +13655,330 @@
    "type": "Lecture (V)",
    "typeCode": "V"
   },
+  "0xBD96AD69172B4B35AE7E48412F35C2C9": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "39b59a2ad7ae1514",
+   "format": "On-Site",
+   "id": "0xBD96AD69172B4B35AE7E48412F35C2C9",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031079&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xBD96AD69172B4B35AE7E48412F35C2C9&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-107621"
+   ],
+   "number": "2121333",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-29",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-05",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-12",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-19",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-26",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-03",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-10",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-17",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-07",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-14",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-21",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-28",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-04",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-11",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-18",
+     "end": "17:15",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "slot": 0,
+     "start": "15:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Thu",
+     "end": "17:15",
+     "firstDate": "2026-10-29",
+     "rhythm": "weekly",
+     "room": "20.40 Architektur-Hörsaal Nr. 9",
+     "start": "15:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Robotic Intelligence: Navigation and Mobile Manipulation",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
+  "0xBE8402815B4448DDADC58A5E824FB713": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Technik der Informationsverarbeitung (ITIV)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "c45ae5cfa2e8245a",
+   "format": "On-Site",
+   "id": "0xBE8402815B4448DDADC58A5E824FB713",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xBE8402815B4448DDADC58A5E824FB713&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Georgios Sotiropoulos",
+     "unit": "Institut für Technik der Informationsverarbeitung (ITIV)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-100449"
+   ],
+   "number": "2311610",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-30",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-06",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-13",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-20",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-27",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-04",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-11",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-18",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-08",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-15",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-22",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-29",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-05",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-12",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-19",
+     "end": "11:15",
+     "room": "20.30 Seminarraum 0.014",
+     "slot": 0,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Fri",
+     "end": "11:15",
+     "firstDate": "2026-10-30",
+     "rhythm": "weekly",
+     "room": "20.30 Seminarraum 0.014",
+     "start": "09:45"
+    }
+   ],
+   "sws": 1.0,
+   "title": "Tutorial for 2311608 Hardware Modeling and Simulation",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
+  },
   "0xBFCBD608EA154F7E8E6111EB1854DC0F": {
    "catalogPaths": [
     [
@@ -12019,6 +14149,696 @@
    "type": "Seminar (S)",
    "typeCode": "S"
   },
+  "0xBFFAE1787FCB4D11AE2EADACB0D0F1A8": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Regelungs- und Steuerungssysteme (IRS)"
+    ],
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Biomedizinische Technik (IBT)"
+    ],
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Hochfrequenztechnik und Elektronik (IHE)"
+    ],
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Nachrichtentechnik (CEL)"
+    ],
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Technik der Informationsverarbeitung (ITIV)"
+    ]
+   ],
+   "contentText": "This lab is part of the module Student Innovation Lab. An application is required until 24.10.2021 via kit-sil.de. The lab is only selectable in combination with the lecture and seminar Entrepreneurship. The Innovation Lab will take two semesters. For further information, please consult the module handbook or the website of SIL (kit-sil.de).",
+   "fingerprint": "64d647942186ed6b",
+   "format": "On-Site",
+   "id": "0xBFFAE1787FCB4D11AE2EADACB0D0F1A8",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xBFFAE1787FCB4D11AE2EADACB0D0F1A8&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Sören Hohmann",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Regelungs- und Steuerungssysteme (IRS)"
+    },
+    {
+     "name": "Prof. Dr.-Ing. Thomas Zwick",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Hochfrequenztechnik und Elektronik (IHE)"
+    },
+    {
+     "name": "Prof. Dr.-Ing. Eric Sax",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Technik der Informationsverarbeitung (ITIV)"
+    },
+    {
+     "name": "Prof. Dr. Wilhelm Stork",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Technik der Informationsverarbeitung (ITIV)"
+    },
+    {
+     "name": "Prof. Dr. Werner Nahm",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Biomedizinische Technik (IBT)"
+    },
+    {
+     "name": "Prof. Dr.-Ing. Laurent Schmalen",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    },
+    {
+     "name": "Prof. Dr.-Ing. Peter Rost",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105073"
+   ],
+   "number": "2303192",
+   "sessions": [],
+   "slots": [],
+   "sws": 2.0,
+   "title": "Innovation Lab",
+   "type": "Project (PRO)",
+   "typeCode": "PRO"
+  },
+  "0xC12424E383904C138AA3359689B3701C": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "a6333faed684f408",
+   "format": "On-Site",
+   "id": "0xC12424E383904C138AA3359689B3701C",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xC12424E383904C138AA3359689B3701C&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-107558"
+   ],
+   "number": "2121332",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 2,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 3,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 4,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 5,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 6,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 7,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 8,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 9,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 10,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 11,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 12,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 13,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "11:15",
+     "room": "20.21 Pool C",
+     "slot": 14,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-10-28",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-11-04",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-11-11",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-11-18",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-11-25",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-12-02",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-12-09",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-12-16",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-12-23",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-01-13",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-01-20",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-01-27",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-02-03",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-02-10",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2027-02-17",
+     "rhythm": "single",
+     "room": "20.21 Pool C",
+     "start": "09:45"
+    }
+   ],
+   "sws": 1.0,
+   "title": "Robotic Intelligence: Perception and Scene Understanding (Exercise)",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
+  },
+  "0xC39CC2F4A157411BB5C5DDEB5D9D7D45": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Technik der Informationsverarbeitung (ITIV)"
+    ],
+    [
+     "KIT Department of Mechanical Engineering",
+     "Vorlesungen und Übungen aus anderen Fakultäten"
+    ],
+    [
+     "Karlsruhe School of Optics & Photonics (KSOP)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "77e14d4c3d68e960",
+   "format": "On-Site",
+   "id": "0xC39CC2F4A157411BB5C5DDEB5D9D7D45",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037957&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xC39CC2F4A157411BB5C5DDEB5D9D7D45&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Eric Sax",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Technik der Informationsverarbeitung (ITIV)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-100537"
+   ],
+   "number": "2311605",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-27",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-03",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-10",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-17",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-24",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-01",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-08",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-15",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-22",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "17:15",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "slot": 0,
+     "start": "15:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-10-27",
+     "rhythm": "weekly",
+     "room": "30.41 Chemie-Hörsaal Nr. 2 (HS2)",
+     "start": "15:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Systems and Software Engineering",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
+  "0xC96F7C15CD934165B7902FFAD456DE0A": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "The lecture Robotic Intelligence: Perception and Scene Understanding combines modern AI-based perception methods with the engineering skills needed to apply them in robotics. It covers the full perception chain, from acquiring and calibrating sensor data to interpreting scenes and integrating perception modules into robotic systems, like mobile walking robots. Students will first build a foundation in machine learning and computer vision, covering image classification, object detection, tracking, and segmentation in both 2D and 3D. The course then explores advanced deep learning architectures, including Vision Transformers, multimodal perception systems, and end-to-end multimodal machine learning pipelines. Special emphasis is placed on techniques for integrating vision, depth, and other sensing modalities, enabling robust perception in challenging real-world environments.\n\nA key part of the course is practical group work in the Machine Intelligence and Robotics Lab (MaiRo) , where students solve hands-on tasks using real sensors and robots, building both technical competence and teamwork skills.\n\nTopics include:\n\nFundamentals of machine learning and computer vision for robotics\n\nVision Transformers and advanced deep learning architectures\n\nObject detection, tracking, and segmentation (2D and 3D)\n\nInstance, semantic, and panoptic segmentation\n\nMultimodal sensing, fusion, and end-to-end multimodal ML\n\nWorld models and their role in robotics\n\nSensor modeling, calibration, and perception system integration\n\nBy the end of the course, students will be able to design, implement, and integrate intelligent robotic perception systems that enable mobile robots to understand and act within complex, dynamic environments.",
+   "fingerprint": "e23120334848351e",
+   "format": "On-Site",
+   "id": "0xC96F7C15CD934165B7902FFAD456DE0A",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031078&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xC96F7C15CD934165B7902FFAD456DE0A&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-107558"
+   ],
+   "number": "2121331",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-27",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-03",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-10",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-17",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-24",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-01",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-08",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-15",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-22",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 0,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-10-27",
+     "rhythm": "weekly",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "start": "09:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Robotic Intelligence: Perception and Scene Understanding",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
   "0xCAA32A1C972445399DE22FB847089951": {
    "catalogPaths": [
     [
@@ -12188,6 +15008,68 @@
    "title": "Cryptographic Protocols II: Universal Composability",
    "type": "Lecture (V)",
    "typeCode": "V"
+  },
+  "0xD203887369C547C488B01EE898D20BFC": {
+   "catalogPaths": [],
+   "contentText": "This Seminar will cover relevant case laws concerning digital platforms such as Google, Meta, YouTube, Amazon etc. from the EU and the US courts. Through an in-depth analysis of court decisions and the associated legal frameworks/instruments governing digital public space and digital platforms, students would explore how judicial scrutiny translates into practical platform design choices such as content moderation, recommender systems, explainability, and user appeal mechanisms. Furthermore, students will learn about the distinct approaches of the EU and US courts in regulating platforms and protecting public law values such as human dignity, data protection and privacy, accountability and proportionality.",
+   "fingerprint": "5f28c5ecfcf0c400",
+   "format": "On-Site",
+   "id": "0xD203887369C547C488B01EE898D20BFC",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_2994783&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xD203887369C547C488B01EE898D20BFC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Abhilasha Abhilasha",
+     "unit": "Institut für Informations- und Wirtschaftsrecht (IIWR)"
+    }
+   ],
+   "moduleIds": [
+    "M-INFO-107028"
+   ],
+   "number": "2400221",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "15:00",
+     "room": "07.08 SR 313",
+     "slot": 0,
+     "start": "10:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-22",
+     "end": "17:00",
+     "room": "07.08 SR 313",
+     "slot": 1,
+     "start": "10:00"
+    }
+   ],
+   "slots": [
+    {
+     "count": null,
+     "day": "Mon",
+     "end": "15:00",
+     "firstDate": "2026-11-02",
+     "rhythm": "single",
+     "room": "07.08 SR 313",
+     "start": "10:00"
+    },
+    {
+     "count": null,
+     "day": "Fri",
+     "end": "17:00",
+     "firstDate": "2027-01-22",
+     "rhythm": "single",
+     "room": "07.08 SR 313",
+     "start": "10:00"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Digital Platforms on Trial: EU and US Case Law Perspectives",
+   "type": "Seminar (S)",
+   "typeCode": "S"
   },
   "0xD2467E39EEBB403AABB7740C4211B77C": {
    "catalogPaths": [
@@ -13499,6 +16381,41 @@
    "type": "Seminar (S)",
    "typeCode": "S"
   },
+  "0xE88A35C901E14EEE85138EB784C623B1": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institut für Fahrzeugsystemtechnik (Fahrzeugtechnik)"
+    ]
+   ],
+   "contentText": "The main objective of this course is to implement the pipeline required for automated/autonomous driving functions using a real test vehicle. This includes environmental perception using various sensors, processing the collected sensor data, planning driving maneuvers, and finally executing the maneuvers via the actuators. • Sensor data acquisition: Setup and data recording of the sensor systems on the test vehicle • Perception: Data annotation, segmentation of sensor data, object detection • Maneuver planning: Path and trajectory planning, behavior generation, etc. • Maneuver execution: Vehicle control, implementation of the driving maneuver in the real test vehicle via actuators",
+   "fingerprint": "1dd4552719c0d77d",
+   "format": "On-Site",
+   "id": "0xE88A35C901E14EEE85138EB784C623B1",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3024389&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xE88A35C901E14EEE85138EB784C623B1&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Dr.-Ing. Michael Frey",
+     "unit": "Institut für Fahrzeugsystemtechnik (FAST)"
+    },
+    {
+     "name": "Kevin Simon",
+     "unit": "Institut für Fahrzeugsystemtechnik (FAST) , Bereich Fahrzeugtechnik (FAST)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-107806"
+   ],
+   "number": "2113820",
+   "sessions": [],
+   "slots": [],
+   "sws": 3.0,
+   "title": "Autonomous Driving in Practice",
+   "type": "Lecture / Practice (VÜ)",
+   "typeCode": "VÜ"
+  },
   "0xE94B51161A6F433FB957268ECF3B31C1": {
    "catalogPaths": [
     [
@@ -13761,6 +16678,100 @@
    "title": "Seminar: Hot Topics in Security of Machine Learning",
    "type": "Seminar (S)",
    "typeCode": "S"
+  },
+  "0xEC323E90061F499E8B079C663675997C": {
+   "catalogPaths": [
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Customer Insights (CIN)"
+    ],
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Entrepreneurship, Technology-Management and Innovation"
+    ]
+   ],
+   "contentText": "This course is offered as part of the EUCOR programme in cooperation with EM Strasbourg. Max. 10 students of KIT and max. 10 students of EM Strasbourg will develop a sales presentation in tandems (teams of 2). This is based on the value proposition of a business model.\n\nAn application is required to participate in this event. The application phase usually takes place at the beginning of the lecture period. Further information on the application process can be found on the website of the Institute for Entrepreneurship and Technology and the Institute for Customer Insights (CIN) shortly before the start of the lecture period.\n\nThe total workload for this course is structured as follows:\n\n• Attendance at lectures/exercises (presence time) (4 SWS × 15 weeks): 60 h\n\n• Preparation and follow-up of course content: 80 h\n\n• Exam preparation and participation in the assessment: 40 h\n\nTotal workload: 180 h (corresponds to 6 ECTS credits)",
+   "fingerprint": "0f9839e9c070c398",
+   "format": "On-Site",
+   "id": "0xEC323E90061F499E8B079C663675997C",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xEC323E90061F499E8B079C663675997C&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr. Orestis Terzidis",
+     "unit": "KIT Department of Informatics (INFORMATIK) , KIT Department of Business and Economics (WIWI) , Institut für Entrepreneurship, Technologie­Management und Innovation (EnTechnon) (ENTECHNON) , Entrepreneurship und Technologie-Management (ENTECHNON)"
+    },
+    {
+     "name": "Prof. Dr. Ann-Kristin Kupfer",
+     "unit": "KIT Department of Business and Economics (WIWI) , Institute for Customer Insights (CIN) (CIN) , Digital Marketing (IISM)"
+    }
+   ],
+   "moduleIds": [
+    "M-WIWI-106258"
+   ],
+   "number": "2572189",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "17:00",
+     "room": "10.11 SR 111",
+     "slot": 0,
+     "start": "09:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-21",
+     "end": "17:00",
+     "room": "10.11 SR 111",
+     "slot": 1,
+     "start": "09:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-22",
+     "end": "17:00",
+     "room": "11.40 Seminarraum 231",
+     "slot": 2,
+     "start": "09:00"
+    }
+   ],
+   "slots": [
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "17:00",
+     "firstDate": "2027-01-20",
+     "rhythm": "single",
+     "room": "10.11 SR 111",
+     "start": "09:00"
+    },
+    {
+     "count": null,
+     "day": "Thu",
+     "end": "17:00",
+     "firstDate": "2027-01-21",
+     "rhythm": "single",
+     "room": "10.11 SR 111",
+     "start": "09:00"
+    },
+    {
+     "count": null,
+     "day": "Fri",
+     "end": "17:00",
+     "firstDate": "2027-01-22",
+     "rhythm": "single",
+     "room": "11.40 Seminarraum 231",
+     "start": "09:00"
+    }
+   ],
+   "sws": 4.0,
+   "title": "International Entrepreneurship and Brand Development",
+   "type": "Block (B)",
+   "typeCode": "B"
   },
   "0xEC4FA70252EB4F5AB955F865D1D26822": {
    "catalogPaths": [
@@ -14287,6 +17298,138 @@
    "type": "Lecture / Practice (VÜ)",
    "typeCode": "VÜ"
   },
+  "0xF4DA25B5B6F448EEAFE54A67E0F56C45": {
+   "catalogPaths": [
+    [
+     "KIT Department of Civil Engineering, Geo- and Environmental Sciences",
+     "Master Degree Program Technology and Management in Construction",
+     "Courses in Profile 2 - Project Management and Lean Construction"
+    ],
+    [
+     "KIT Department of Civil Engineering, Geo- and Environmental Sciences",
+     "Courses of other Departments"
+    ],
+    [
+     "KIT Department of Chemical and Process Engineering",
+     "Veranstaltungen von anderen Fakultäten"
+    ],
+    [
+     "KIT Department of Chemical and Process Engineering",
+     "Studiengang CIW/VT Master und BIW Master SPO 2016 ALT",
+     "Vertiefungsfächer",
+     "Vertiefungsfach Entrepreneurship in der Verfahrenstechnik"
+    ],
+    [
+     "KIT Department of Humanities and Social Sciences",
+     "Wissenschaft-Medien-Kommunikation (W-M-K)",
+     "W-M-K MASTER"
+    ],
+    [
+     "KIT Department of Economics and Management",
+     "Business Administration",
+     "Institute for Entrepreneurship, Technology-Management and Innovation"
+    ],
+    [
+     "General Studies. Forum Science and Society (FORUM)",
+     "General Studies (FORUM)",
+     "4. Economy & Law"
+    ]
+   ],
+   "contentText": "The lecture as an obligatory part of the module \"Entrepreneurship\" introduces the basic concepts of entrepreneurship. Important concepts and empirical facts are presented that relate to the conception and implementation of newly founded companies.\n\nThe focus here is on the introduction to methods for generating innovative business ideas, for transferring patents into business concepts and general principles of business modelling and business planning. In particular approaches such as Lean Startup and Effectuation as well as concepts for the financing of young enterprises are treated.\n\nA \"KIT Entrepreneurship Talk\" is part of each session, in which experienced founder and entrepreneur personalities report on their experiences in practice of the establishment of an enterprise. Dates and speakers will be announced on the EnTechnon homepage.\n\nLearning objectives:\n\nThe studentsare introduced to the topic Entrepreneurship. After successful attendance of the meeting they are to have an overview of the subranges of the Entrepreneurships and be able to understand basic concepts of the Entrepreneurships and apply key concepts.\n\nWorkload :\n\nTotal effort with 3 credit points: approx. 90 hours Presence time: 30 hours Pre- and postprocessing of the LV: 45.0 hours Exam and exam preparation: 15.0 hours\n\nExamination :\n\nThe assessment of success takes place in the form of a written examination (60 min.) (according to §4(2), 1 SPO). The grade is the grade of the written exam.\n\nA grade bonus can be earned through successful participation in a case study in the Entrepreneurship lecture. If the grade of the written exam is between 4.0 and 1.3, the bonus improves the grade by up to 0.3 or 0.4.The bonus only applies if you have passed the exam with at least a 4.0. More details will be provided in the lecture. Participation in the case study is voluntary.\n\nExam date : 14.12.2026",
+   "fingerprint": "6f1a0287dd36fdea",
+   "format": "Blended (On-Site/Online)",
+   "id": "0xF4DA25B5B6F448EEAFE54A67E0F56C45",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3038746&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xF4DA25B5B6F448EEAFE54A67E0F56C45&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr. Orestis Terzidis",
+     "unit": "KIT Department of Informatics (INFORMATIK) , KIT Department of Business and Economics (WIWI) , Institut für Entrepreneurship, Technologie­Management und Innovation (EnTechnon) (ENTECHNON) , Entrepreneurship und Technologie-Management (ENTECHNON)"
+    },
+    {
+     "name": "Assany Michiko Dang",
+     "unit": "KIT Department of Business and Economics (WIWI) , Institut für Entrepreneurship, Technologie­Management und Innovation (EnTechnon) (ENTECHNON) , Entrepreneurship und Technologie-Management (ENTECHNON)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105073"
+   ],
+   "number": "2545001",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-26",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-02",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-09",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-16",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-23",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-30",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-07",
+     "end": "19:00",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "slot": 0,
+     "start": "15:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 7,
+     "day": "Mon",
+     "end": "19:00",
+     "firstDate": "2026-10-26",
+     "rhythm": "weekly",
+     "room": "10.91 Ferdinand-Redtenbacher-Hörsaal",
+     "start": "15:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Entrepreneurship",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
   "0xF71D8E7C962F4E1697DDF78E7F335380": {
    "catalogPaths": [
     [
@@ -14448,6 +17591,135 @@
    "title": "Software Evolution",
    "type": "Lecture (V)",
    "typeCode": "V"
+  },
+  "0xFD1F140143164FFB8658A3C751D2F772": {
+   "catalogPaths": [
+    [
+     "KIT Department of Electrical Engineering and Information Technology",
+     "Institut für Nachrichtentechnik (CEL)"
+    ]
+   ],
+   "contentText": "",
+   "fingerprint": "59544e2ac429c0aa",
+   "format": "On-Site",
+   "id": "0xFD1F140143164FFB8658A3C751D2F772",
+   "iliasUrl": null,
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xFD1F140143164FFB8658A3C751D2F772&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Laurent Schmalen",
+     "unit": "KIT Department of Electrical Engineering and Information Technology (ETIT) , Institut für Nachrichtentechnik (CEL)"
+    }
+   ],
+   "moduleIds": [
+    "M-ETIT-105617"
+   ],
+   "number": "2310521",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "11:15",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "slot": 0,
+     "start": "09:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 7,
+     "day": "Wed",
+     "end": "11:15",
+     "firstDate": "2026-11-04",
+     "rhythm": "fortnightly",
+     "room": "20.30 Seminarraum -1.025 (UG)",
+     "start": "09:45"
+    }
+   ],
+   "sws": 1.0,
+   "title": "Exercise for 2310520 Channel Coding: Graph-Based Codes",
+   "type": "Practice (Ü)",
+   "typeCode": "Ü"
+  },
+  "0xFD51ADBC028A4A129D6F19A6F10B99FB": {
+   "catalogPaths": [
+    [
+     "KIT Department of Mechanical Engineering",
+     "Institute for Information Management in Engineering"
+    ]
+   ],
+   "contentText": "The module CAD Engineering Project for Intelligent Systems is a project-based master’s-level course that offers students the opportunity to gain and to deepen engineering competencies in the development of intelligent mechatronic systems through practical application. Working in interdisciplinary teams, students conceive, design, and realize a robotic prototype across a complete development cycle.\n\nStarting from a defined problem statement, students develop a technical concept and implement it as a detailed mechanical design using CAD software (Autodesk Fusion 360). Particular emphasis is placed on the basics of rapid prototyping, function-oriented component design, correct parametrization, consideration of manufacturing constraints, and the integration of mechanical and electronic components as well as their software interfacing.\n\nThe designed components are predominantly manufactured using additive manufacturing methods (in particular 3D printing) and are supplemented by basic conventional manufacturing techniques. In parallel, students integrate suitable sensors, actuators, and additional electronic components into the system and develop the necessary software for control and regulation of the robotic prototype.\n\nFinally, the developed system is assembled, commissioned, and tested and evaluated under realistic conditions. The results are subsequently documented and presented. In addition to technical expertise, the module particularly promotes project management skills, teamwork, interdisciplinary thinking, and a systematic, solution-oriented approach, as required for the development of intelligent technical systems in research and industry.\n\nPrerequisites :\n\nBasic knowledge of common CAD software solutions, ideally Fusion 360.\n\nStudents must hand in a small application, detailing motivation and prior experience. For the deadline and application, see Ilias.",
+   "fingerprint": "33a0c17c4854c8ef",
+   "format": "On-Site",
+   "id": "0xFD51ADBC028A4A129D6F19A6F10B99FB",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031104&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xFD51ADBC028A4A129D6F19A6F10B99FB&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Arne Rönnau",
+     "unit": "KIT Department of Mechanical Engineering (MACH) , Institut für Informationsmanagement im Ingenieurwesen (IMI)"
+    }
+   ],
+   "moduleIds": [
+    "M-MACH-106905"
+   ],
+   "number": "2122331",
+   "sessions": [],
+   "slots": [],
+   "sws": 4.0,
+   "title": "CAD Engineering Project for Intelligent Systems",
+   "type": "Seminar (S)",
+   "typeCode": "S"
   },
   "0xFE73D782E69A4F0AA2F9C964BDC4B243": {
    "catalogPaths": [
@@ -14757,6 +18029,212 @@
   "warnings": []
  },
  "modules": {
+  "M-ETIT-100449": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 4.0,
+     "id": "T-ETIT-100672",
+     "title": "Hardware Modeling and Simulation"
+    }
+   ],
+   "description": {
+    "content": "In order to address the complexity of modern chips during development, it is essential to utilize modern hardware description languages. This course offers insights into the various levels of abstraction in these languages. It starts by covering the fundamentals of analog description using SPICE and then progresses through VHDL, VHDL-AMS, and Verilog. Additionally, the course introduces more abstract languages like Chisel and SystemC.\n\nTopics covered in the course are:\n\nDesign Process\n\nBasics of Modeling and Simulation\n\nLow Level Modeling\n\nVHDL VHDL-AMS 9-valued logic Delta cycle simulation Fault simulation\n\nVHDL-AMS\n\n9-valued logic\n\nDelta cycle simulation\n\nFault simulation\n\nVerilog\n\nChisel\n\nSystemC",
+    "exam": "Achievement is examined in the form of a written examination lasting 120 minutes.",
+    "objectives": "After completing this module, students will be familiar with different hardware description languages and their applications in various abstraction levels. They will gain knowledge of the SPICE Hardware Description Language and become proficient in building and deriving the analog matrix for spice simulation. In the realm of digital design, they will develop a comprehensive understanding of the hardware description language VHDL, encompassing the VHDL Standard and its extensions, such as VHDL 2008, the 9-valued logic, and the VHDL-AMS standard. Furthermore, students will achieve a profound comprehension of simulator principles, particularly the delta cycle model. They will also grasp the fundamentals of fault simulations for testing fabricated circuits and learn to derive test vectors. Additionally, students will acquire an understanding of higher-level hardware construction languages like Chisel and SystemC.",
+    "prerequisites": "none",
+    "workload": "The workload is covered by:\n\nParticipating in lectures and tutorials: 33h\n\nPreparing and wrap up of the above named units: 66h\n\nExam preparation and presence: 21h\n\nSum: 120h = 4 LP"
+   },
+   "ects": 4.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-100449",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x231D69D33406CD45B8C44FE2C0E2E59D&camvguid=0xA998A0917D534198BA6C9C18D6ADAEDB&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Hardware Modeling and Simulation"
+  },
+  "M-ETIT-100537": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-ETIT-100675",
+     "title": "Systems and Software Engineering"
+    }
+   ],
+   "description": {
+    "content": "The focus of the course is on processes and methods for the design of systems composed of electrical, electronic and electronically programmable systems that contain software, hardware and mechanical components. The desired competencies of the course include the knowledge and goal-oriented use of modeling techniques, design processes, description and representation tools as well as specification languages that correspond to the current state of the art.",
+    "exam": "Written exam of 90 minutes.\n\nStudents are given the opportunity to earn a grade bonus through separate task assignments. If the grade of the written exam is between 4.0 and 1.3, the bonus improves the grade by a maximum of one grade level (0.3 or 0.4). The exact criteria for awarding a bonus will be announced at the beginning of the lecture. Bonus points do not expire and remain valid for exams taken at a later date .",
+    "objectives": "• Students are able to analyse and explain the functional principles and applications of embedded systems.\n\n• Students are able to evaluate and apply maturity models as well as Software Development Life Cycle models including the waterfall model, V-model, prototyping model, agile models, and DevOps.\n\n• Students are able to apply various creativity techniques to develop innovative solutions to problems. They will be able to derive and analyse requirements.\n\n• Students are familiar with diagram formats software modelling languages; they can evaluate and create these based on problem descriptions of an application area. They will be able to create and evaluate functional, data-oriented, algorithmic, state-oriented, and object-oriented views.\n\n• Students are able to understand and apply various aspects of the realization of embedded systems. They will be able to consider implementation alternatives: hardware, co-design and scheduling aspects.\n\n• Students are familiar with the various testing phases in a project and can explain them. They can assess the reliability of a system and understand the concept of functional safety.",
+    "prerequisites": "none",
+    "workload": "15 weeks of 1.5h attendance in lecture and of 1 .5h attendance in each exercise = 45 h\n\n15 weeks of 2h preparation and follow-up per lecture and at least 3h preparation for each exercise (includes processing of exercise sheets and additional learning material, the processing of tasks for the acquisition of bonus points) = 75h\n\nPreparation for the exam = 60h\n\nIn total: 180h"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-100537",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x642D89135ACBEE42ADE85FB557B22B02&camvguid=0xC7A55CAC437848E5919F14398E240497&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Systems and Software Engineering"
+  },
+  "M-ETIT-101834": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 4.0,
+     "id": "T-ETIT-104572",
+     "title": "Business Innovation in Optics and Photonics"
+    }
+   ],
+   "description": {
+    "content": "This course is instructed by ZEISS employees, active within the ZEISS corporate innovation ecosystem.\n\nMonday: Introduction into spectroscopy and the deep tech exploration method • Technology introduction, state-of-the-art • Scenario Introduction: Found your own start-up • Overview Deep Tech Exploration methodology / Select your use case\n\nTuesday: Deep dive – deep tech exploration • Methods and ideation techniques • Fundamental principles in Innovation / Value Proposition • Define your tech product\n\nWednesday: Business case development • How to protect your business idea with IP? • Develop your business idea with the help of the Business Model Canvas • Writing a Business plan\n\nThursday: Storytelling and pitching • Entrepreneurial fincance: tech product problem sizing / ballparking • Storytelling • Preparing an elevator pitch\n\nFriday-Thursday of second week: Final pitch preparation • Self-organized by groups\n\nFriday of second week: Final pitch",
+    "exam": "Type of Examination: examination of another type\n\nDuration of Examination: 4 group presentations à 20 minutes (approx.)\n\nModality of Exam: The exam consists of four group presentations. 2nd day: Technology Presentation. 3rd day: Development plan presentation. 4th day: Business Canvas presentation. Final presentation: Business pitch. The overall impression is rated.",
+    "objectives": "The student has an understanding how innovative concepts for optical and photonics products are transferred into a successful business development. The student knows about and makes first The student develops practical experience of how to analyse, develop, and pitch innovative business ideas based on optics & photonics technologies, specifically in the field of spectroscopy and hyperspectral imaging. Through a series of short lectures followed by extensive group work over the first week of the block course the student acquires hands-on experience of business development as lived in a technology start-up environment. The students are given a basic introduction to spectroscopy and are challenged to propose innovative businesses enabled by evolving technology and market needs. To assist in this process the students are introduced to the innovation methodology “Deep Tech Exploration” and primed on themes from intellectual property management to effective pitching. The students organize themselves into teams, and work cooperatively within the team to develop and deliver the complete business pitch. In summary the students:\n\nlearn innovation methodologies to assess and optimize the desirability, viability, and feasibility of business ideas.\n\nare introduced to methods to assess and generate relevant intellectual property.\n\nget to apply the knowledge gained with extensive group work developing their own business idea and pitch.",
+    "prerequisites": "none",
+    "workload": "Total 120 h, thereof 34 h contact hours and 86 h preparation, homework, and self-studies"
+   },
+   "ects": 4.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-101834",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xBD67F58DC911C4458BF3A76345DFB208&camvguid=0x7EF018E20325483F8A8B21FBF467CEB6&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Business Innovation in Optics and Photonics"
+  },
+  "M-ETIT-105073": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 9.0,
+     "id": "T-ETIT-110291",
+     "title": "Innovation Lab"
+    },
+    {
+     "ects": 3.0,
+     "id": "T-WIWI-102864",
+     "title": "Entrepreneurship"
+    },
+    {
+     "ects": 3.0,
+     "id": "T-WIWI-110166",
+     "title": "SIL Entrepreneurship Project"
+    }
+   ],
+   "description": {
+    "content": "This module strives to combine technical, social and personal competences from the technical and entrepreneurial domain. The objective is to prepare students as best as possible for entrepreneurial activity within or outside of an established organization. Our teaching methods are research-based with a practical orientation.\n\nThe lecture Entrepreneurship as the essential component offers the theoretical basis and provides insight in important theoretical concepts and empirical evidence. Currently released case studies and practical experiences of successful founders support the theoretical and empirical content. In order to run a company for the long term additional knowledge is important. That’s why the lecture also teaches basic principles for opportunity recognition, business modeling, an introduction to entrepreneurial marketing and leadership. Customer-based design methods from the lean startup approach as well as methods of technology-centered innovation are presented. Future founders have to be able to develop and handle resources such as financial and human capital, infrastructure and intellectual property. Further aspects tackle the establishment of an organization and funding of the own project.\n\nThe knowledge taught in the lecture Entrepreneurship will be applied in an application-oriented seminar and the labs. Hence we use an action learning approach to extend the taught knowledge by practical skills and reflection capabilities. In an team of five, the students will experience their way from the ideation process to the final pitch in front of investors.\n\nThe students are able to choose between the following options concerning the labs:\n\nThe Automation Innovation Lab offers drones as an innovation platform for cooperative swarm solutions.\n\nThe Industry 4.0 Innovation Lab enables innovation in the context of the next industrial revolution via mobile robot platforms.\n\nIn the Interconnected Intelligent Systems Lab innovations in the context of Assisted Living and Smart Housing are enabled by providing a rich assembly set of mobile robots, actuators and sensors.\n\nThe Computer Vision for Health Lab offers a selection of state-of-the-art imaging devices and powerful computing hardware for innovative image-based applications for medicine and healthcare.\n\nThe module also presents methods of agile system development (Scrum) along with associated validation methods as well as methods for functional prototyping. Gate plans are used within the module to determine the progress of the project. Methods for single person work and teamwork are presented and applied. Additionally group-specific knowledge of the different roles of team members, solutions to conflict situations and interdisciplinary teams are presented.",
+    "exam": "This module consists of an 60-minute written exam on the contents of the Entrepreneurship lectures, as well as 5 other types of exams on the contents of the seminar Entrepreneurship and Innovation Lab in the form of term papers and presentations. All exams results are graded. Details are given in the module components and will be given during the course.",
+    "objectives": "Personal competence\n\nReflection faculty: The students are able to analyze, evaluate and develop an alternative for action for certain elements of action in social interaction\n\nDecision-making ability: The students are able to prepare a decision template in time and to provide the necessary arguments for alternative decisions and therefore are able to decide in time.\n\nInterdisciplinary teamwork Students are able to detect their limits of competence in one domain and to adjust to a the non-specialist domain. The students are able to detect a lack in competence and to compensate this lack via competences of other team members. The students are able to communicate their domain-specific knowledge and develop a basic understanding of other domains.\n\nValue-based action: The students are able to use selected psychological tools to determine their own values. They are able to match these values with team members and reflect if their offer fits these values.\n\nSocial competence\n\nAbility to cooperate: The students are able to analyze and judge their cooperative behavior in a group.\n\nCommunication competence: The students are able to present their information in persuasive, focused and target group oriented way.\n\nAbility to deal with conflicts: The students are able to detect conflicts in advance, analyze them and name solution concepts.\n\nInnovation and entrepreneurship competence\n\nAgile product development: The students are able to apply methods of agile product development e.g. Scrum.\n\nMethodical innovation retrieval: The students are able to conduct processes for user- and technology-centered innovation to develop sustainable value propositions for certain target groups (e.g. Design Thinking (DT), Technology Application Selection (TAS)- process).\n\nOrientation on management of new technology-based firms (NTBF): The students are able to name central concepts of intellectual property and legal structures. The students are able to name the most important tasks of entrepreneurial leadership. They are able to name the most common form of business modeling and to setup a business plan. The students know important approaches to establish an organization. The students are able to determine the ownership structure in an investment situation. The students are able to name marketing concepts and setup a business model.\n\nGenerate investment readiness: The students are able to setup rudimentary revenue and cost plan. Furthermore, they are able to establish a project plan for a company in order to derive an investment plan. The students are able to present their business proposal to investors and develop empathy for the investors.\n\nCompetence to develop a business model: The students are able to apply respective tools for business modeling e.g. Business Model Canvas. The students are able to develop and assess alternative business models.\n\nRisk handling: The students are able to name basic risks w.r.t. requirements, technical limitations and profitability. The students are able to apply methods of customer interaction for evaluation of requirements and willingness to pay. The students are able to setup a rudimentary competitors analyze. The students are able to name and identify risks and present potential reactions.\n\nSystemic technical competence\n\nProblem solution competence: The students are able to analyze, assess and structurally solve a technical problem.\n\nAgile methodology of system development: The students are able to name and apply different system development processes.\n\nValidation in volatile environment: The students are able to conduct technical and economical validation under volatile constraints. For this, they are able to name the constraints and interpret the results of the validation.\n\nFunctional decomposition: The students are able to identify, interpret and derive functional requirements from complex customer needs.\n\nArchitecture development: The students are able to recognize coherences from the functional requirements and derive a suitable system architecture.",
+    "prerequisites": "none",
+    "workload": "Lecture Entrepreneurship: 32h attendance time, 48h preparation and follow-up time, 10h preparation time for assessment\n\nSeminar Entrepreneurship: 34h attendance time, 3h preparation and follow-up time, 53h preparation time for assessment.\n\nInnovation Lab: 8h attendance time, 213h preparation and follow-up time, 49h preparation time for assessment.\n\nThis results in a total of 450 hours and a total of 15 LPs for both semesters (15*30/2 = 225)."
+   },
+   "ects": 15.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-105073",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x7767A8097F73477AAAA8A0C376F12F70&camvguid=0x906CA39BFCF74D1DA8C5F9C89EA003B3&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each term",
+   "title": "Student Innovation Lab"
+  },
+  "M-ETIT-105617": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-ETIT-111245",
+     "title": "Channel Coding: Graph-Based Codes"
+    }
+   ],
+   "description": {
+    "content": "The course expands on the topics dealt with in the lecture “Verfahren der Kanalcodierung”. The focus is on modern methods that have been brought into practice in the past few years and that achieve the capacity limits postulated by Shannon. For this purpose, known techniques have to be extended and new methods have to be learnt additionally. The lecture introduces the theoretical limits very quickly and follows with a discussion on the basic concepts of channel coding, including block codes. Based on this, modern error correction methods like LDPC codes, spatially coupled codes, and Polar codes are treated in depth. The lecture ends with a view on the application of channel coding in classical and distributed storage scenarios and in computer networks. Many of the applications are illustrated with example implementations in software (python/MATLAB).",
+    "exam": "The success control takes place in the form of an oral examination lasting approx. 25 minutes. Before the examination, there is a preparation phase of 30 minutes in which preparatory tasks are solved.",
+    "objectives": "Students will be able to understand and apply advanced and modern methods of channel coding. They get to know various tools of modern coding theory for the analysis and optimization of coding schemes, conceptual design approaches of error correction building blocks as well as applications in digital communications (for example, 5G). Additionally, they will get knowledge to current research topics and research results.",
+    "prerequisites": "Module \" M-ETIT-105009 – Channel Coding 2 – Advanced Methods \" must be not started yet .",
+    "workload": "- Lecture attendance time: 15 * 3 h = 45 h - Presence time Exercise: 15 * 1 h = 15 h - Lecture preparation / revision: 15 * 3 h = 45 h - Exercise: 15 * 1 h = 15 h - Exam preparation and attendance: 60 h\n\nTotal workload: approx. 180 h = 6 LP"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-105617",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xDE2F627E13504C83ACFE9BC7A5790CEB&camvguid=0x5C3D8D84929345E38F114A9C49499755&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Channel Coding: Graph-Based Codes"
+  },
+  "M-ETIT-105971": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 4.0,
+     "id": "T-ETIT-112127",
+     "title": "Mobile Communications"
+    }
+   ],
+   "description": {
+    "content": "At the beginning, this course describes exemplary applications of mobile communications and elaborates on resulting requirements. Based on a solid understanding of those requirements, selected approaches and techniques will be presented that are solving the respective challenges in mobile communication systems. To this end, algorithms as well as system architectures are discussed in order to acquire solid knowledge on the radio network, the core network and the integration with applications and services.",
+    "exam": "The success control takes place in the form of an oral examination lasting approx. 25 minutes. Before the examination, there is a preparation phase of 15 minutes in which preparatory tasks are solved.",
+    "objectives": "Students are enabled to analyze and assess functionalities of mobile communication systems. They learn how to apply and implement fundamental methods of the lecture “Communications Engineering I” in mobile radio networks. Furthermore, students will be enabled to understand requirements and limitations of mobile applications.",
+    "prerequisites": "none",
+    "workload": "Attendance time in lectures: 15 * 2 h = 30 h\n\nPreparation and follow-up of lectures: 15 * 2 h = 30 h\n\nAttendance time in excercises: 15 * 1 h = 15 h\n\nPreparation and follow-up of excercises: 15 * 1 h = 15 h\n\nPreparation for the oral exam: 30 h\n\nIn total: 120 h = 4 LP"
+   },
+   "ects": 4.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-105971",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xA9E4BB40ECA144A0839255F79CD4AD5D&camvguid=0xA3B3E2EFABFD4135B3DB9C3CBBCE895A&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Mobile Communications"
+  },
+  "M-ETIT-107839": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 3.0,
+     "id": "T-ETIT-115253",
+     "title": "Seminar Radiation Protection in Medicine"
+    }
+   ],
+   "description": {
+    "content": "The seminar will consist of a block of 3 introductory lectures presenting medical exposures in the system of radiological protection. Applications of radiation in medicine will be presented and their specific issues regarding protection of patient, staff and public will be outlined. The second block will consist of presentations of the students on a dedicated topic, which will be selected by them a the begin of the term. Students shall look into the problem and develop a solution to the issues identified. The presentations shall introduce the topic, state the problems from a radiation protection perspective and introduce solutions and methods applied. The topic will then be discussed within the group. A final lecture will summarize the presentations of the students and offer space for a final discussion on medical radiation protection.",
+    "exam": "The examination consists of a written handout (approx. 2-3 pages) and an oral presentation (approx. 25-35 min.) of the students work. Considered will be the quality of the contents, the style of the presentation, the quality and content of the handout. The overall impression is rated.",
+    "objectives": "The students have an overview of the applications of radiation protection in medicine.\n\nThe students are able to understand medical exposures in terms of their magnitude (dose) and risk. They are able to propose appropriate radiation protection measures for the cases considered.\n\nThe students can analyze, structure and formally describe radiation protection issues in medicine.\n\nThe students have an understanding of the radiation protection principles and the system proposed by the International Commission of Radiological Protection. They are able to describe the systems’ implementation into legal force via Basic Safety Standards and national regulations. They are able to define the interplay with other fields of regulations (such as the medical devices act).\n\nThe students are able to present cases of use of (ionizing) radiation in medicine and will be able to classify these in the framework of radiological protection and discuss appropriate regulations and practical measures that need to be applied.",
+    "prerequisites": "none",
+    "workload": "Attendance in lectures: 15* 2 h= 30 h\n\nPreparation / follow up of lectures: 15 * 2 h = 30 h\n\nPreparation of Presentation/Handout = 30h\n\nA total of 90 h = 3 CR"
+   },
+   "ects": 3.0,
+   "fields": [
+    "Minor Studies: Electrical Engineering"
+   ],
+   "id": "M-ETIT-107839",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x50AEF8A572E74E5D94128C6EA033587D&camvguid=0xFCE8C61ECE70411B8494D9F6B9534B0E&camvceid=CMPEL_4495B58A&cafiguid=0x003F4C12839946899E421678281BA212&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Seminar Radiation Protection in Medicine"
+  },
   "M-INFO-100719": {
    "assignment": "Compulsory elective",
    "bricks": [
@@ -17698,6 +21176,260 @@
    "part": "Elective Modules: Cryptography and Security",
    "recurrence": "Each winter term",
    "title": "Seminar: Post-Quantum Cryptography (Information Security)"
+  },
+  "M-MACH-106902": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 3.0,
+     "id": "T-MACH-113842",
+     "title": "Seminar: Bionic Algorithms and Robot Technologies"
+    }
+   ],
+   "description": {
+    "content": "Biologically inspired robots and their methods and technologies transfer concepts for problem solving from nature to mechanical design, sensor technology, navigation, control and interpretation, among other things. These solution approaches are approximated by technical systems. The spectrum of robotics inspired by biology ranges from multi-legged walking robots, distributed sensor concepts and lightweight construction to machine learning methods and neuromorphic hardware.",
+    "exam": "See partial achievement",
+    "objectives": "The aim is to work independently on a scientific topic in the field of biologically inspired algorithms and robot technologies.\n\nStudents are able to independently carry out a literature search on the state of research, summarize external work accurately, relate it to each other and evaluate it.\n\nThe results and content can be summerized in a seminar paper and an oral presentation.\n\nStudents are familiar with the DFG Code of Conduct \"Guidelines for Safeguarding Good Scientific Practice\" and apply these guidelines successfully in the preparation of their scientific work.",
+    "prerequisites": "None",
+    "workload": "90h workload\n\n- Literature research: 35h\n\n- Elaboration of the seminar paper: 35h\n\n- Preparation of the final presentation: 10h\n\n- Attendance time: Kickoff, presentation and discussion as well as meeting with supervisors: 10h"
+   },
+   "ects": 3.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-106902",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xA30BE99ABB264681B4FC200BC9AD56B1&camvguid=0xB321D4C4951548948670462A2511321D&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each term",
+   "title": "Seminar: Bionic Algorithms and Robot Technologies"
+  },
+  "M-MACH-106904": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-MACH-113854",
+     "title": "Practical Course: Software Development and Application of Mobile, Bio-Inspired Robots"
+    }
+   ],
+   "description": {
+    "content": "This module teaches students how to work with and expand biologically inspired mobile robotics. The topics covered include control engineering, computer vision, 3D mapping, navigation and human-machine interaction.\n\nStudents work in groups and produce a joint final report and presentation.",
+    "exam": "See partial achievement",
+    "objectives": "Students are able to understand biologically inspired mobile robots and extend their software.",
+    "prerequisites": "None",
+    "workload": "180h\n\n- 30h weekly regular meeting\n\n- 120h preparation and follow-up time\n\n- 30h Presentation and report preparation"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-106904",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x3886CB72E6E0450B94AD8D2B6F95270A&camvguid=0xC114ECD069C54F718A3148375830EDBC&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Practical Course: Software Development and Application of Mobile, Bio-Inspired Robots"
+  },
+  "M-MACH-106905": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-MACH-113857",
+     "title": "CAD Engineering Project for Intelligent Systems"
+    }
+   ],
+   "description": {
+    "content": "The module CAD Engineering Project for Intelligent Systems is a project-based master’s-level course that offers students the opportunity to gain and to deepen engineering competencies in the development of intelligent mechatronic systems through practical application. Working in interdisciplinary teams, students conceive, design, and realize a robotic prototype across a complete development cycle.\n\nStarting from a defined problem statement, students develop a technical concept and implement it as a detailed mechanical design using CAD software (Autodesk Fusion 360). Particular emphasis is placed on the basics of rapid prototyping, function-oriented component design, correct parametrization, consideration of manufacturing constraints, and the integration of mechanical and electronic components as well as their software interfacing.\n\nThe designed components are predominantly manufactured using additive manufacturing methods (in particular 3D printing) and are supplemented by basic conventional manufacturing techniques. In parallel, students integrate suitable sensors, actuators, and additional electronic components into the system and develop the necessary software for control and regulation of the robotic prototype.\n\nFinally, the developed system is assembled, commissioned, and tested and evaluated under realistic conditions. The results are subsequently documented and presented. In addition to technical expertise, the module particularly promotes project management skills, teamwork, interdisciplinary thinking, and a systematic, solution-oriented approach, as required for the development of intelligent technical systems in research and industry.\n\nPrerequisites: Basic knowledge of common CAD software solutions, ideally Fusion 360.\n\nStudents must hand in a small application, detailing motivation and prior experience. The application is done via Ilias ( ilias.studium.kit.edu ) - Deadline: 16.04.2026 .",
+    "exam": "See module component",
+    "objectives": null,
+    "prerequisites": "None",
+    "workload": "Attendance time internship: 60 h (4 SWS*15 h)\n\nWork on the project, self-study time incl. exam preparation: 120 h Total: 180 h\n\nDivision of content:\n\nInitial design / idea of a (biologically inspired) mechatronic component: 20h\n\nConstruction using CAD system and overall system design: 60h\n\n3D printing, assembly, integration of electronics and functional tests: 80h\n\nDocumentation and report: 10h\n\nMeetings: Kickoff, interim and final presentation and discussions as well as meetings with supervisors: 10h"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-106905",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xE0DAFC27BB6E40009A6AD33657E7C37D&camvguid=0x1FB2E760279F4233B4B1BCE7F13DEB15&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each term",
+   "title": "CAD Engineering Project for Intelligent Systems"
+  },
+  "M-MACH-107558": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-MACH-114813",
+     "title": "Robotic Intelligence: Perception and Scene Understanding"
+    }
+   ],
+   "description": {
+    "content": "The lecture Robotic Intelligence: Perception and Scene Understanding combines modern AI-based perception methods with the engineering skills needed to apply them in robotics. It covers the full perception chain, from acquiring and calibrating sensor data to interpreting scenes and integrating perception modules into robotic systems, like mobile walking robots. Students will first build a foundation in machine learning and computer vision, covering image classification, object detection, tracking, and segmentation in both 2D and 3D. The course then explores advanced deep learning architectures, including Vision Transformers, multimodal perception systems, and end-to-end multimodal machine learning pipelines. Special emphasis is placed on techniques for integrating vision, depth, and other sensing modalities, enabling robust perception in challenging real-world environments.\n\nA key part of the course is practical group work in the Machine Intelligence and Robotics Lab (MaiRo) , where students solve hands-on tasks using real sensors and robots, building both technical competence and teamwork skills.\n\nTopics include:\n\nFundamentals of machine learning and computer vision for robotics\n\nVision Transformers and advanced deep learning architectures\n\nObject detection, tracking, and segmentation (2D and 3D)\n\nInstance, semantic, and panoptic segmentation\n\nMultimodal sensing, fusion, and end-to-end multimodal ML\n\nWorld models and their role in robotics\n\nSensor modeling, calibration, and perception system integration\n\nBy the end of the course, students will be able to design, implement, and integrate intelligent robotic perception systems that enable mobile robots to understand and act within complex, dynamic environments.",
+    "exam": "See module component",
+    "objectives": "The student will understand the fundamental principles and state-of-the-art methods for robotic perception and scene understanding. They will gain the ability to select and apply suitable machine learning and computer vision techniques to interpret complex real-world environments, from raw sensory data to structured scene representations. The student will be able to design perception pipelines that combine multiple sensing modalities, enabling robust object recognition, tracking, segmentation, and 3D scene analysis. Furthermore, they will be able to critically assess and adapt these methods for robotic applications that require situational awareness and informed decision-making.",
+    "prerequisites": "See module component",
+    "workload": "180 working hours, of which approx:\n\n30h for attendance time in lectures\n\n110h for exercises and group work\n\n40h for exam preparation and participation in the written exam"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-107558",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xB2218F4070E648A3BE0B694CD6FC9DF2&camvguid=0xDFCDE35938C240AEBE823DCBDD7910FE&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Robotic Intelligence: Perception and Scene Understanding"
+  },
+  "M-MACH-107621": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-MACH-114952",
+     "title": "Robotic Intelligence: Navigation and Mobile Manipulation"
+    }
+   ],
+   "description": {
+    "content": "The lecture Robotic Intelligence: Navigation and Mobile Manipulation provides fundamental and advanced concepts for developing intelligent, autonomous robots for complex environments. The focus is on methods for navigation, legged locomotion, and mobile manipulation, as well as their integration into real robotic systems. Covered topics include sensor fusion, localization and mapping (SLAM), decision-making, and collision-free motion and path planning. Additionally, machine learning techniques for controlling legged robots in challenging terrain and for direct physical interaction with the environment are introduced. The course further addresses concepts of mobile manipulation, enabling robots to safely grasp, handle, or interact with objects and their surroundings. Both classical and modern, learning-based approaches are presented and discussed. By combining these methods, robotic systems can achieve a high level of autonomy. The lecture integrates theoretical foundations with application-oriented methods and enables students to develop and critically assess autonomous robotic systems and their methods for real-world scenarios.\n\nAn important component of the course is the practical group work conducted in the Machine Intelligence and Robotics Lab (MaiRo) , where students solve tasks using real sensors and robots. They develop both technical competencies and teamwork skills to address complex navigation and manipulation challenges of mobile systems. The topics include:\n\nFundamentals of machine learning and sensor fusion\n\nSimultaneous Localization and Mapping (SLAM) in unknown environments\n\nApproaches for motion planning and collision avoidance\n\nIntelligent decision-making and task planning\n\nReinforcement learning for the locomotion of legged robots\n\nMachine learning approaches for traversing and coping with complex obstacles\n\nManipulation of objects in static scenarios\n\nMobile manipulation in complex environments\n\nBy the end of the course, students can design, implement, and integrate methods for navigation and mobile manipulation. These approaches enable mobile systems to autonomously navigate through complex, dynamic environments, apply learned locomotion strategies, and perform various manipulation tasks.",
+    "exam": "See module component",
+    "objectives": "Students acquire a solid understanding of fundamental principles and current methods in robotics, including navigation, legged locomotion, and manipulation with mobile systems. They can apply suitable techniques from machine learning, simultaneous localisation and mapping (SLAM), decision-making, and collision-free path planning to autonomously traverse complex real-world environments—for example, with a multi-legged robot. A particular emphasis is placed on the direct physical interaction of legged robots with terrain and obstacles. Students learn to design suitable machine learning approaches for locomotion and to train them in dynamic simulation environments, enabling robots to perform movements on simple, flat terrain and to overcome complex obstacles such as stairs.\n\nFurthermore, students gain knowledge of various manipulation techniques, including robotic grasping and object handling. They can analyse and compare both classical manipulation approaches and modern machine-learning-based methods, and evaluate their performance. Combined, these capabilities enable mobile robots to navigate challenging terrain and autonomously manipulate objects at their destination.",
+    "prerequisites": "See module component",
+    "workload": "180 hours total, including approximately:\n\n30h of in-person lecture time\n\n110h of exercises and group work\n\n40h for exam preparation and participation in the written exam"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-107621",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x76A04FF534544ECB9A0446493AE340F0&camvguid=0xCA6F0CF9232C4CDB8846E03029FE7A2F&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each summer term",
+   "title": "Robotic Intelligence: Navigation and Mobile Manipulation"
+  },
+  "M-MACH-107806": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 6.0,
+     "id": "T-MACH-115202",
+     "title": "Autonomous Driving in Practice"
+    }
+   ],
+   "description": {
+    "content": "The main objective of the event is the practical implementation of the pipeline required for automated/autonomous driving functions with a real test vehicle. This includes recording the environment using various sensors, processing the recorded sensor data (perception), planning driving maneuver and the final execution of the maneuver by the actuators.\n\n- Sensor data acquisition: Setup and data recording of the sensors on the test vehicle - Perception: data annotation, segmentation of sensor data, object detection - Maneuver planning: path and trajectory planning, behaviour generation, etc. - Maneuver execution: vehicle control, implementation of the driving maneuver in the real test vehicle using actuators",
+    "exam": "The final grade is based on: 2 written exams (duration about 30 minutes) and the final presentation of the practical task (duration 30 minutes max.), including the final report (2-3 pages). Submission of the homework is mandatory.\n\nThe overall impression will be evaluated.",
+    "objectives": "Students can configure sensors on the test vehicle, record data and check the quality of the recorded sensor data.\n\nStudents can annotate and segment sensor data and recognize and classify objects using suitable algorithms.\n\nStudents can plan paths and trajectories for driving maneuvers, generate behavioral strategies and evaluate their feasibility.\n\nStudents can implement driving maneuvers using suitable control strategies and control the actuators of the test vehicle.\n\nStudents can implement the entire pipeline - from environmental perception to planning and execution - and test it in a real test vehicle.",
+    "prerequisites": "none",
+    "workload": "The workload includes:\n\nAttendance time in lectures: 60 h\n\nWork on the project: 120 h\n\nTotal: 180 h"
+   },
+   "ects": 6.0,
+   "fields": [
+    "Minor Studies: Biologically Inspired Robotics"
+   ],
+   "id": "M-MACH-107806",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xF3064E631ED749719C2E61D4F6EF90E9&camvguid=0xC25889103CAB42FC92185379F0F425CD&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each winter term",
+   "title": "Autonomous Driving in Practice"
+  },
+  "M-WIWI-105659": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 9.0,
+     "id": "T-WIWI-111305",
+     "title": "Advanced Machine Learning and Data Science"
+    }
+   ],
+   "description": {
+    "content": "The course is targeted at students with a major in Data Science and/or Machine Learning and/or Quantitative Finance. It offers students the opportunity to develop hands-on knowledge on new developments in the intersection of quantitative financial markets, data science and machine learning. The result of the project should not only be a final thesis, but the implementation of methods or development of an algorithm in machine learning and data science. Typically, problems and data are taken from current research and innovations in the field of quantitative asset and risk management.",
+    "exam": "The assessment is carried out as a single examination of another type. It includes the interim presentations during the project, the quality of the implementation, the written final paper, and the final presentation. All components are integrated into a single overall assessment, and the resulting grade reflects the overall impression of the combined performance.",
+    "objectives": "After a successful project, the students can:\n\nselect and apply modern machine learning methods to solve a data science problem;\n\norganize themselves in a team in a goal-oriented manner and bring an extensive software project in the field of data science and machine learning to success;\n\ndeepen their data science and machine learning skills\n\nsolve a finance problem with the help of data science and machine learning algorithm.",
+    "prerequisites": "None",
+    "workload": "Total effort for 9 credit points: approx. 270 hours are divided into the following parts: Communication:Exchange during the project: 30 h, Final presentation: 10 h; Implementation and thesis: Preparation before development (Problem analysis and solution design): 70 h, Solution implementation: 110 h, Tests and quality assurance: 50 h."
+   },
+   "ects": 9.0,
+   "fields": [
+    "Minor Studies: Economics"
+   ],
+   "id": "M-WIWI-105659",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x40DE6119E87E4F6F81ED6D0E7BD1F602&camvguid=0xC85B34068300430289910C4909325BB9&camvceid=CMPEL_BA65E0CF&cafiguid=0x1FBFC2BD05E04FC2A800943CF5475F62&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each term",
+   "title": "Advanced Machine Learning and Data Science"
+  },
+  "M-WIWI-106258": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 4.5,
+     "id": "T-WIWI-112693",
+     "title": "Digital Marketing"
+    },
+    {
+     "ects": 4.5,
+     "id": "T-WIWI-114174",
+     "title": "Economic Decision Making"
+    },
+    {
+     "ects": 6.0,
+     "id": "T-WIWI-114893",
+     "title": "International Entrepreneurship and Brand Development"
+    },
+    {
+     "ects": 1.5,
+     "id": "T-WIWI-115326",
+     "title": "AI- and Data-Driven B2B Sales"
+    },
+    {
+     "ects": 4.5,
+     "id": "T-WIWI-107720",
+     "title": "Market Research"
+    },
+    {
+     "ects": 4.5,
+     "id": "T-WIWI-112711",
+     "title": "Media Management"
+    },
+    {
+     "ects": 3.0,
+     "id": "T-WIWI-111848",
+     "title": "Online Concepts for Karlsruhe City Retailers"
+    }
+   ],
+   "description": {
+    "content": "The \"Digital Marketing\" module explores advanced marketing strategies within the context of digital transformation. Students develop a deep understanding of digital consumer behavior, the digital environment, and digital marketing strategies:\n\nPrinciples of Digital Marketing: In this mandatory course of the module, students learn about practices and strategies like search engine optimization, word-of-mouth, and influencer marketing.\n\nPerformance Analytics and Practical Applications: Practical applications of SEO, SEA, and Content Management Systems. Students learn to monitor performance using Key Performance Indicators (KPIs), dashboards, and Return on Investment (RoI) calculations and apply their knowledge to real-world cases.\n\nContextualization: Via course selections, students can learn about specific requirements for B2B digital strategies, media industries, and retailing.\n\nDecision Psychology: Students can decide to deepen their knowledge on consumer psychology, including heuristics, nudging, and risk perception.\n\nMarket Research & Methods: Students can learn about advanced empirical techniques to interpret customer attitudes and prepare for scientific research.\n\nBy integrating these multidisciplinary perspectives, the module enables students to implement sophisticated marketing instruments and critically evaluate current practices in digital business environments.",
+    "exam": "The assessment is carried out as partial exams of the core course and further single courses of this module, whose sum of credits must meet the minimum requirement of credits of this module. The assessment procedures are described for each course of the module separately. The overall grade of the module is the average of the grades for each course, weighted by the credits and truncated after the first decimal.",
+    "objectives": "Students\n\nhave an advanced knowledge about central marketing contents\n\nhave a fundamental understanding of the marketing instruments\n\nknow current fundamental principles and latest trends in the field of digital marketing\n\nknow and understand several strategic concepts and how to implement them\n\nare able to implement their extensive marketing knowledge in a practical context\n\nare able to critically discuss and question theoretical concepts and current practices in marketing\n\nhave theoretical knowledge that is fundamental for writing a master thesis in the field of marketing\n\nhave gained insight into scientific research that prepares them to independently write a master's thesis\n\nhave the theoretical knowledge and skills necessary to work in or collaborate with the marketing department of a company",
+    "prerequisites": "None",
+    "workload": "Total effort for 9 credit points: approx. 270 hours. The exact distribution is done according to the credit points of the courses of the module."
+   },
+   "ects": 9.0,
+   "fields": [
+    "Minor Studies: Economics"
+   ],
+   "id": "M-WIWI-106258",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x5DEE06C0E1624607B7123E43727517FD&camvguid=0x3A5FB7160C9C4869ABD8A8AC9FEB94DB&camvceid=CMPEL_BA65E0CF&cafiguid=0x1FBFC2BD05E04FC2A800943CF5475F62&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules",
+   "recurrence": "Each term",
+   "title": "Digital Marketing"
   }
  },
  "tree": [
@@ -17873,6 +21605,71 @@
    "eventIds": [],
    "id": "0xAFBC2DD27CE849B0AC50E14A5BDF04B3",
    "title": "2. Law Courses in Computer Science, Information Systems"
+  },
+  {
+   "children": [
+    {
+     "children": [],
+     "eventIds": [
+      "0xE88A35C901E14EEE85138EB784C623B1",
+      "0xFD51ADBC028A4A129D6F19A6F10B99FB",
+      "0x9D13D6A8BEBF4FD9B4C037AE05C848D9",
+      "0xBD96AD69172B4B35AE7E48412F35C2C9",
+      "0x2E659B67549D440A9DC0DAB169421EDA",
+      "0xC96F7C15CD934165B7902FFAD456DE0A",
+      "0xC12424E383904C138AA3359689B3701C",
+      "0xA72C149B46C94E85AB8FAB25BC418EFF"
+     ],
+     "id": "0x7E147493AD4B4EFAB386F1ED24D2FEAC",
+     "title": "Minor Studies: Biologically Inspired Robotics"
+    },
+    {
+     "children": [],
+     "eventIds": [
+      "0x5B264A715EE24A8797FDF2871A7E5182",
+      "0x072A4210C84941AE9B8F3812F09EA5C2",
+      "0x0A2589D706E44F96BAFD4118906CDEB2",
+      "0xFD1F140143164FFB8658A3C751D2F772",
+      "0x67749F54075C40B2B39F4AF8914C9BCC",
+      "0xBE8402815B4448DDADC58A5E824FB713",
+      "0x946FB740F5C9476F860F2F310FD6ECFB",
+      "0x16262A2BDB774DBB9FDADAFD408571E9",
+      "0x8F5E2EA08ECD4EF083979F6498DBBF67",
+      "0xBFFAE1787FCB4D11AE2EADACB0D0F1A8",
+      "0xF4DA25B5B6F448EEAFE54A67E0F56C45",
+      "0x01D1B2A68E284BC6BCDFB22E6FD673DE",
+      "0xC39CC2F4A157411BB5C5DDEB5D9D7D45",
+      "0x0FD49E8F65614083BA442885961F1E7E"
+     ],
+     "id": "0x003F4C12839946899E421678281BA212",
+     "title": "Minor Studies: Electrical Engineering"
+    },
+    {
+     "children": [],
+     "eventIds": [
+      "0x3D4ECCD620FF469880E6D13AFA9D4C02",
+      "0x9E0235BD715A40DA905CFC3C6D955654",
+      "0xEC323E90061F499E8B079C663675997C"
+     ],
+     "id": "0x1FBFC2BD05E04FC2A800943CF5475F62",
+     "title": "Minor Studies: Economics"
+    },
+    {
+     "children": [],
+     "eventIds": [
+      "0x3DB27C712222421B8C7F80C5ACD8A2D2",
+      "0xD68A032260334E6FB446540ED9A1DFED",
+      "0xD9A7407960F14A8F92A2F9F3D5319F98",
+      "0xD203887369C547C488B01EE898D20BFC",
+      "0x6F5BF258CD0D4D359F82C963DFFD0732"
+     ],
+     "id": "0x349AA4DF25064CF6B0B1CC9190594123",
+     "title": "Minor Studies: Law"
+    }
+   ],
+   "eventIds": [],
+   "id": "minor-studies",
+   "title": "Minor Studies"
   }
  ]
 }

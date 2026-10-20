@@ -9,6 +9,8 @@ KIT_BASE = "https://campus.studium.kit.edu/english/events/catalog.php#!campus/al
 TERM_GUID = "0xD25DBD9C86874091993315DA11571AAF"
 TERM = "WS 26/27"
 SPO = "88-979-H-2025"
+# The degree program's structure page: areas, elective studies and the minors with their modules.
+PROGRAM_PAGE = "abstractProductView.asp?gguid=0x145ED90B945B4646A4F1A0D692CFB1EF&capvguid=0xFA9C7D68ABBF47A49D089550A75E7E71"
 
 
 def kit_link(page: str) -> str:

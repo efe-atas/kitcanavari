@@ -210,3 +210,44 @@ def test_main_threshold_leaves_files_untouched(tmp_path):
     empty = FakeFetcher(pages())
     assert main(["--out", str(tmp_path), "--root", ROOT], fetcher_factory=lambda: empty, now=NOW) == 2
     assert (tmp_path / "courses.json").read_text() == before
+
+
+MINOR_EVENT = "0xC96F7C15CD934165B7902FFAD456DE0A"
+PRODUCT = "abstractProductView.asp?gguid=0xPROG"
+MINOR_FIELD = "abstractFieldView.asp?gguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC"
+MINOR_MODULE = ("abstractModuleView.asp?gguid=0xB2218F4070E648A3BE0B694CD6FC9DF2&camvguid=0xDFCDE35938C240AEBE823DCBDD7910FE"
+                "&camvceid=CMPEL_84ED3984&cafiguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC")
+
+
+def minor_pages() -> dict[str, str]:
+    """The program page offers one minor; its module lists one module with two events, one of which is fetched."""
+    product = ('<a href="../../campus/all/abstractFieldView.asp?gguid=0x7E147493AD4B4EFAB386F1ED24D2FEAC&amp;tguid=0x1">'
+               'Minor Studies: Biologically Inspired Robotics</a>'
+               '<a href="../../campus/all/abstractFieldView.asp?gguid=0xAREA">Area of Specialization: X</a>')
+    field = (f'<a href="../../campus/all/{MINOR_MODULE.replace("&", "&amp;")}&amp;tguid=0x1">M-MACH-107558</a>')
+    return {PRODUCT: product, MINOR_FIELD: field, MINOR_MODULE: fixture("module_minor.html"),
+            f"event.asp?gguid={MINOR_EVENT}": fixture("event_minor.html")}
+
+
+def test_minor_events_are_found_through_the_program_structure():
+    fake = FakeFetcher({**pages(), **minor_pages()})
+    r = crawl(fake, [ROOT], None, NOW, product=PRODUCT)
+    assert MINOR_EVENT in r.data["events"]
+    minor = r.data["tree"][-1]
+    assert minor["title"] == "Minor Studies"
+    assert minor["children"][0]["title"] == "Minor Studies: Biologically Inspired Robotics"
+    assert minor["children"][0]["eventIds"] == [MINOR_EVENT]
+    assert r.data["modules"]["M-MACH-107558"]["id"] == "M-MACH-107558"
+    assert fake.calls.count(MINOR_MODULE) == 1  # the module page is fetched once for events and data
+    # The second event of the module page is missing from the fake site: counted as a failed event, nothing else.
+    assert r.failed == 1 and r.field_failures == 0
+
+
+def test_broken_program_page_keeps_previous_minor_events():
+    previous = {"tree": [{"id": "minor-studies", "title": "Minor Studies", "eventIds": [], "children": [
+        {"id": "0x7E147493AD4B4EFAB386F1ED24D2FEAC", "title": "Minor Studies: X", "eventIds": [MINOR_EVENT], "children": []}]}]}
+    site = {**pages(), **minor_pages()}
+    del site[PRODUCT]
+    r = crawl(FakeFetcher(site), [ROOT], previous, NOW, product=PRODUCT)
+    assert r.data["tree"][-1]["children"][0]["eventIds"] == [MINOR_EVENT]
+    assert r.field_failures == 0 and any("program" in w for w in r.warnings)
