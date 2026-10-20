@@ -15,11 +15,14 @@ function isState(x: unknown): x is UserState {
   const s = x as Partial<UserState>
   return s.version === 1 && !!s.selected && typeof s.selected === 'object' && !Array.isArray(s.selected)
     && (s.lang === 'tr' || s.lang === 'en') && typeof s.lastSeenScrapedAt === 'string'
+    && (s.theme === undefined || s.theme === 'light' || s.theme === 'dark')
+    && (s.areas === undefined || (Array.isArray(s.areas) && s.areas.every((a) => typeof a === 'string')))
     && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'
       && (e.moduleId === null || typeof e.moduleId === 'string')
-      && (e.title === undefined || typeof e.title === 'string'))
+      && (e.title === undefined || typeof e.title === 'string')
+      && (e.countAs === undefined || e.countAs === null || typeof e.countAs === 'string'))
 }
 
 export function loadState(storage: Storage | null): { state: UserState; persistent: boolean } {
@@ -107,7 +110,22 @@ export const setModule = (s: UserState, id: string, moduleId: string | null): Us
   return e ? { ...s, selected: { ...s.selected, [id]: { ...e, moduleId } } } : s
 }
 
+export const setCountAs = (s: UserState, id: string, countAs: string | null): UserState => {
+  const e = s.selected[id]
+  return e ? { ...s, selected: { ...s.selected, [id]: { ...e, countAs } } } : s
+}
+
+/** Sets area slot `idx` (0 or 1); an empty value clears it. */
+export const setArea = (s: UserState, idx: number, area: string | null): UserState => {
+  const areas = [...(s.areas ?? [])]
+  if (area) areas[idx] = area
+  else areas.splice(idx, 1)
+  return { ...s, areas: areas.filter((a, i) => a && areas.indexOf(a) === i).slice(0, 2) }
+}
+
 export const setLang = (s: UserState, lang: Lang): UserState => ({ ...s, lang })
+
+export const toggleTheme = (s: UserState): UserState => ({ ...s, theme: s.theme === 'dark' ? 'light' : 'dark' })
 
 export function acknowledge(s: UserState, ids: string[], data: CoursesFile): UserState {
   const selected = { ...s.selected }

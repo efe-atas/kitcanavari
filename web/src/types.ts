@@ -114,6 +114,8 @@ export interface SelectedEntry {
   ackFingerprint: string
   /** Title at the time of adding, shown if the event later disappears from the catalog. */
   title?: string
+  /** Where the module's credits count: an area of specialization, 'elective', 'minor' or 'iq'. Unset = default. */
+  countAs?: string | null
 }
 
 export type Lang = 'tr' | 'en'
@@ -123,4 +125,8 @@ export interface UserState {
   selected: Record<string, SelectedEntry>
   lang: Lang
   lastSeenScrapedAt: string
+  /** Chosen areas of specialization (at most two). */
+  areas?: string[]
+  /** Colour theme; light when unset. */
+  theme?: 'light' | 'dark'
 }

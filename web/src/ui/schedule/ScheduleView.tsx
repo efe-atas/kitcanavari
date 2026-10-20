@@ -3,12 +3,16 @@ import { t } from '../../i18n'
 import { findConflicts } from '../../logic/conflicts'
 import { chosenModule, computeEcts } from '../../logic/ects'
 import { buildIcs } from '../../logic/ics'
-import { addEvent, exportState, importState, removeEvent, setModule, toggleSlot } from '../../store'
-import type { CoursesFile, UserState } from '../../types'
+import { bucketOf, bucketOptions } from '../../logic/degree'
+import { addEvent, exportState, importState, removeEvent, setCountAs, setModule, toggleSlot } from '../../store'
+import type { CoursesFile, Lang, UserState } from '../../types'
 import { EventDetail } from '../catalog/EventDetail'
 import { download } from '../download'
 import { fmtDate, fmtSlot, typeClass } from '../format'
+import { Icon } from '../Icon'
+import { DegreePanel } from './DegreePanel'
 import { EctsPanel } from './EctsPanel'
+import { PlanBoard } from './PlanBoard'
 import { UnscheduledList } from './UnscheduledList'
 import { WeekGrid } from './WeekGrid'
 
@@ -16,6 +20,27 @@ interface Props {
   data: CoursesFile
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
+}
+
+/** "Counts towards" select; hidden when the module can only count in one place. */
+function BucketSelect({ lang, data, state, id, onChange }: {
+  lang: Lang; data: CoursesFile; state: UserState; id: string; onChange: (b: string | null) => void
+}) {
+  const ev = data.events[id]
+  const mid = chosenModule(state.selected[id], ev)
+  const options = mid && data.modules[mid] ? bucketOptions(data.modules[mid]) : []
+  if (options.length < 2) return null
+  return (
+    <>
+      <label class="field-label" for={`bucket-${id}`}>{t(lang, 'schedule.countsAs')}</label>
+      <select id={`bucket-${id}`} value={bucketOf(state, data, id) ?? ''}
+        onChange={(e) => onChange((e.target as HTMLSelectElement).value || null)}>
+        {options.map((b) => (
+          <option key={b} value={b}>{b === 'elective' || b === 'minor' || b === 'iq' ? t(lang, `bucket.${b}`) : b}</option>
+        ))}
+      </select>
+    </>
+  )
 }
 
 export function ScheduleView({ data, state, update }: Props) {
@@ -39,10 +64,12 @@ export function ScheduleView({ data, state, update }: Props) {
   }
 
   const tools = (
-    <div class="schedule-tools">
+    <header class="page-head">
+      <h2>{t(lang, 'tab.schedule')}</h2>
+      <div class="schedule-tools">
       {ids.length > 0 && (
         <button type="button" class="button" onClick={() => download('kit-schedule.ics', buildIcs(state.selected, data.events, data.meta.scrapedAt), 'text/calendar')}>
-          {t(lang, 'schedule.ics')}
+          <Icon name="download" size={16} />{t(lang, 'schedule.ics')}
         </button>
       )}
       {ids.length > 0 && (
@@ -51,18 +78,23 @@ export function ScheduleView({ data, state, update }: Props) {
         </button>
       )}
       <label class="button-quiet">
-        {t(lang, 'schedule.import')}
+        <Icon name="upload" size={16} />{t(lang, 'schedule.import')}
         <input type="file" accept="application/json,.json" aria-label={t(lang, 'schedule.import')} hidden onChange={onImport} />
       </label>
       {importError && <span class="note note-warn" role="alert">{t(lang, 'schedule.importError')}</span>}
-    </div>
+      </div>
+    </header>
   )
 
   if (!ids.length) {
     return (
       <div>
         {tools}
-        <p class="empty">{t(lang, 'schedule.empty')}</p>
+        <div class="empty-state">
+          <Icon name="calendar" size={28} />
+          <p>{t(lang, 'schedule.empty')}</p>
+          <a class="button" href="#/catalog"><Icon name="catalog" size={16} />{t(lang, 'tab.catalog')}</a>
+        </div>
       </div>
     )
   }
@@ -73,7 +105,7 @@ export function ScheduleView({ data, state, update }: Props) {
         {tools}
         {conflicts.length > 0 && (
           <section class="conflict-list" role="region" aria-label={t(lang, 'schedule.conflicts')}>
-            <h3>{t(lang, 'schedule.conflicts')}</h3>
+            <h3><Icon name="alert" size={16} />{t(lang, 'schedule.conflicts')}</h3>
             <ul>
               {conflicts.map((c) => (
                 <li key={`${c.a}-${c.b}-${c.day}-${c.start}`}>
@@ -85,12 +117,15 @@ export function ScheduleView({ data, state, update }: Props) {
           </section>
         )}
         <WeekGrid lang={lang} data={data} state={state} conflicts={conflicts} onOpen={setOpenId} />
+        <PlanBoard lang={lang} data={data} state={state} onOpen={setOpenId} />
       </div>
 
       <aside class="side-panel">
         <EctsPanel lang={lang} ects={ects} />
+        <DegreePanel lang={lang} data={data} state={state} update={update} />
         <UnscheduledList lang={lang} data={data} state={state} onOpen={setOpenId} />
         <section class="panel">
+          <h3>{t(lang, 'tab.schedule')} <span class="panel-count">{ids.length}</span></h3>
           <ul class="selected-list">
             {ids.map((id) => {
               const ev = data.events[id]
@@ -119,7 +154,7 @@ export function ScheduleView({ data, state, update }: Props) {
                     </div>
                   )}
                   {ev.moduleIds.length > 0 && (
-                    <label class="muted" for={selectId} style={{ fontSize: '0.8rem' }}>{t(lang, 'schedule.countsFor')}</label>
+                    <label class="field-label" for={selectId}>{t(lang, 'schedule.countsFor')}</label>
                   )}
                   {ev.moduleIds.length > 0 && (
                     <select id={selectId} value={chosenModule(entry, ev) ?? ''}
@@ -130,7 +165,9 @@ export function ScheduleView({ data, state, update }: Props) {
                       })}
                     </select>
                   )}
-                  <button type="button" class="link-button" onClick={() => update((s) => removeEvent(s, id))}>{t(lang, 'event.remove')}</button>
+                  <BucketSelect lang={lang} data={data} state={state} id={id}
+                    onChange={(b) => update((st) => setCountAs(st, id, b))} />
+                  <button type="button" class="link-button link-danger" onClick={() => update((s) => removeEvent(s, id))}>{t(lang, 'event.remove')}</button>
                 </li>
               )
             })}
@@ -139,7 +176,7 @@ export function ScheduleView({ data, state, update }: Props) {
       </aside>
 
       {open && (
-        <EventDetail lang={lang} data={data} ev={open} inSchedule={!!state.selected[open.id]}
+        <EventDetail lang={lang} data={data} ev={open} myAreas={state.areas ?? []} inSchedule={!!state.selected[open.id]}
           onToggle={() => update((s) => (s.selected[open.id] ? removeEvent(s, open.id) : addEvent(s, open)))}
           onClose={() => setOpenId(null)} />
       )}

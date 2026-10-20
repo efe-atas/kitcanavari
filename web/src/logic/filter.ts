@@ -1,5 +1,6 @@
 import type { CoursesFile, Event, FieldNode, UserState } from '../types'
 import { findConflicts } from './conflicts'
+import { moduleAreas, moduleKind, type Kind } from './degree'
 import { toMinutes } from './time'
 
 export interface Filters {
@@ -11,12 +12,13 @@ export interface Filters {
   from: string | null
   to: string | null
   ects: number[]
-  parts: string[]
+  areas: string[]
+  kinds: Kind[]
   noConflict: boolean
 }
 
 export const emptyFilters = (): Filters => ({
-  query: '', fieldId: null, types: [], languages: [], days: [], from: null, to: null, ects: [], parts: [], noConflict: false,
+  query: '', fieldId: null, types: [], languages: [], days: [], from: null, to: null, ects: [], areas: [], kinds: [], noConflict: false,
 })
 
 export function findNode(nodes: FieldNode[], id: string): FieldNode | null {
@@ -59,7 +61,8 @@ export function filterEvents(data: CoursesFile, f: Filters, state: UserState): E
     .filter((ev) => !f.languages.length || (ev.language !== null && f.languages.includes(ev.language)))
     .filter((ev) => matchesTime(ev, f))
     .filter((ev) => !f.ects.length || eventModules(data, ev).some((m) => m.ects !== null && f.ects.includes(m.ects)))
-    .filter((ev) => !f.parts.length || eventModules(data, ev).some((m) => m.part !== null && f.parts.includes(m.part)))
+    .filter((ev) => !f.areas.length || eventModules(data, ev).some((m) => moduleAreas(m).some((a) => f.areas.includes(a))))
+    .filter((ev) => !f.kinds.length || eventModules(data, ev).some((m) => f.kinds.includes(moduleKind(data, m))))
     .filter((ev) => {
       if (!f.noConflict || state.selected[ev.id]) return true
       const trial = { ...state.selected, [ev.id]: { enabledSlots: ev.slots.map((_, i) => i), moduleId: null, ackFingerprint: '' } }

@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/preact'
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/preact'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import { STORAGE_KEY } from '../src/store'
 import type { UserState } from '../src/types'
@@ -63,6 +63,26 @@ describe('schedule view', () => {
     expect(screen.getByText('Old Seminar')).toBeTruthy()
   })
 
+  test('choosing an area tracks its credits and suggests areas before that', async () => {
+    setState({ selected: { sec: pick('M3', 'fp-sec') } })
+    render(<App />)
+    const degree = await screen.findByRole('region', { name: 'Degree requirements' })
+    expect(within(degree).getByRole('button', { name: /Cryptography and Security/ })).toBeTruthy()
+    fireEvent.change(within(degree).getByLabelText('Area of specialization 1'), { target: { value: 'Cryptography and Security' } })
+    await waitFor(() => expect(within(degree).getByText('Area total')).toBeTruthy())
+    expect(JSON.parse(localStorage.getItem(STORAGE_KEY)!).areas).toEqual(['Cryptography and Security'])
+    expect((screen.getByLabelText('Counts towards') as HTMLSelectElement).value).toBe('Cryptography and Security')
+  })
+
+  test('bucket board fills the chosen area with the selected course', async () => {
+    setState({ selected: { sec: pick('M3', 'fp-sec') }, areas: ['Cryptography and Security'] })
+    render(<App />)
+    const board = await screen.findByRole('region', { name: 'Your buckets' })
+    const bucket = within(board).getByText('Area of specialization 1').closest('.bucket') as HTMLElement
+    expect(within(bucket).getByText('IT Security')).toBeTruthy()
+    expect(within(bucket).getByText('8', { selector: '.bucket-foot strong' })).toBeTruthy()
+  })
+
   test('import invalid file shows error', async () => {
     setState({})
     render(<App />)
@@ -106,5 +126,43 @@ describe('changes view', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Only my schedule' }))
     await waitFor(() => expect(screen.queryByText('Added: IT Security')).toBeNull())
     expect(screen.getByText('Added: GPU')).toBeTruthy()
+  })
+})
+
+describe('guide view', () => {
+  test('explains the degree and lists this term\'s advanced mandatory modules', async () => {
+    location.hash = '#/guide'
+    setState({})
+    const courses = makeCourses()
+    courses.modules.M3 = { ...courses.modules.M3, title: 'IT Security' }
+    loadData.mockResolvedValue({ courses, changes: makeChanges() })
+    render(<App />)
+    await screen.findByText('How the Master’s degree works')
+    expect(screen.getByText('IT Security', { selector: '.stamm-list span' })).toBeTruthy()
+  })
+
+  test('example plan steps through four terms to 120 ECTS with every rule met', async () => {
+    location.hash = '#/guide'
+    setState({})
+    render(<App />)
+    const next = await screen.findByRole('button', { name: 'Next' })
+    for (let i = 0; i < 4; i++) fireEvent.click(next)
+    await screen.findByText('Term 4: thesis')
+    const counters = document.querySelectorAll('.counters .counter')
+    expect(counters[0].textContent).toContain('120')
+    expect([...counters].every((c) => c.classList.contains('is-done'))).toBe(true)
+  })
+})
+
+describe('glossary view', () => {
+  test('deep link focuses a term and search narrows the list', async () => {
+    location.hash = '#/glossary/sws'
+    setState({})
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Glossary' })
+    expect(document.getElementById('term-sws')?.classList.contains('is-focus')).toBe(true)
+    fireEvent.input(screen.getByPlaceholderText(/Search a term/), { target: { value: 'teilleistung' } })
+    await waitFor(() => expect(document.getElementById('term-sws')).toBeNull())
+    expect(document.getElementById('term-teilleistung')).toBeTruthy()
   })
 })

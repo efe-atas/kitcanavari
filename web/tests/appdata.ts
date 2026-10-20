@@ -22,7 +22,7 @@ export const makeCourses = (scrapedAt = daysAgo(0)): CoursesFile => ({
       number: '2400010', title: 'IT Security', typeCode: 'VÜ', lecturers: [{ name: 'Müller-Quade', unit: '' }], moduleIds: ['M3'],
     }),
   },
-  modules: { M1: mod('M1', 6), M2: mod('M2', 4), M3: mod('M3', 8, 'Area of Specialization') },
+  modules: { M1: mod('M1', 6), M2: mod('M2', 4), M3: { ...mod('M3', 8, 'Area of Specialization'), fields: ['Area of Specialization: Cryptography and Security'] } },
 })
 
 export const makeChanges = (): ChangesFile => ({ entries: [] })

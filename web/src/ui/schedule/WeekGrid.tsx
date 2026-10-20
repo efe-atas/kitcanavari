@@ -56,11 +56,16 @@ export function WeekGrid({ lang, data, state, conflicts, onOpen }: Props) {
   const hours = Array.from({ length: (endMin - startMin) / 60 + 1 }, (_, i) => startMin / 60 + i)
   const pos = (m: number) => `calc(var(--hour) * ${(m - startMin) / 60})`
   const height = `calc(var(--hour) * ${(endMin - startMin) / 60})`
+  const today = (['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as Day[])[new Date().getDay()]
 
   return (
     <div class="week" style={{ '--days': days.length }}>
       <div class="week-head" style={{ gridColumn: 1 }} />
-      {days.map((d, i) => <div key={d} class="week-head" style={{ gridColumn: i + 2 }}>{t(lang, `day.${d}`)}</div>)}
+      {days.map((d, i) => (
+        <div key={d} class={`week-head${d === today ? ' is-today' : ''}`} style={{ gridColumn: i + 2 }}>
+          <span>{t(lang, `day.${d}`)}</span>
+        </div>
+      ))}
       <div class="week-hours" style={{ height }}>
         {hours.map((h) => <span key={h} class="week-hour" style={{ top: pos(h * 60) }}>{`${h}:00`}</span>)}
       </div>
@@ -79,7 +84,8 @@ export function WeekGrid({ lang, data, state, conflicts, onOpen }: Props) {
                 onClick={() => onOpen(b.eventId)}
               >
                 <strong>{ev.title}</strong>
-                {b.start}–{b.end}{b.room ? ` · ${b.room}` : ''}
+                <span class="block-time">{b.start}–{b.end}</span>
+                {b.room && <span class="block-room">{b.room}</span>}
               </button>
             )
           })}

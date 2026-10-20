@@ -13,7 +13,7 @@ const data: CoursesFile = {
     b: ev('b', [slot('Tue', '15:00', '16:00')], { number: '100', title: 'Robotics', typeCode: 'S', language: 'German', moduleIds: ['M2'] }),
     c: ev('c', [slot('Wed', '08:00', '09:30')], { number: '200', title: 'Telematics' }),
   },
-  modules: { M1: mod('M1', 6), M2: mod('M2', 3, 'Seminar') },
+  modules: { M1: mod('M1', 6), M2: { ...mod('M2', 3, 'Seminar'), title: 'Seminar: Robots', fields: ['Area of Specialization: Robotics and Automation'] } },
 }
 
 describe('filterEvents', () => {
@@ -27,7 +27,7 @@ describe('filterEvents', () => {
   test('filter by fieldId includes descendants', () => {
     expect(filterEvents(data, { ...emptyFilters(), fieldId: 'F1' }, defaultState()).map((e) => e.id)).toEqual(['b'])
   })
-  test('filter by type, language, day, time, ects, part', () => {
+  test('filter by type, language, day, time, ects, area, kind', () => {
     const f = emptyFilters()
     expect(filterEvents(data, { ...f, types: ['S'] }, defaultState()).map((e) => e.id)).toEqual(['b'])
     expect(filterEvents(data, { ...f, languages: ['German'] }, defaultState()).map((e) => e.id)).toEqual(['b'])
@@ -35,7 +35,8 @@ describe('filterEvents', () => {
     expect(filterEvents(data, { ...f, from: '14:30' }, defaultState()).map((e) => e.id)).toEqual(['b'])
     expect(filterEvents(data, { ...f, to: '10:00' }, defaultState()).map((e) => e.id)).toEqual(['c'])
     expect(filterEvents(data, { ...f, ects: [3] }, defaultState()).map((e) => e.id)).toEqual(['b'])
-    expect(filterEvents(data, { ...f, parts: ['Seminar'] }, defaultState()).map((e) => e.id)).toEqual(['b'])
+    expect(filterEvents(data, { ...f, areas: ['Robotics and Automation'] }, defaultState()).map((e) => e.id)).toEqual(['b'])
+    expect(filterEvents(data, { ...f, kinds: ['seminar'] }, defaultState()).map((e) => e.id)).toEqual(['b'])
   })
   test('filter noConflict hides overlapping events', () => {
     const st = { ...defaultState(), selected: { a: entry('M1') } }
