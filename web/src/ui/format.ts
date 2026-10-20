@@ -1,5 +1,5 @@
 import { t } from '../i18n'
-import { moduleAreas, moduleKind, type Kind } from '../logic/degree'
+import { moduleAreas, moduleKind, moduleMinors, type Kind } from '../logic/degree'
 import { eventModules } from '../logic/filter'
 import type { CoursesFile, Event, Lang, Slot } from '../types'
 
@@ -41,6 +41,13 @@ export const typeClass = (code: string) => {
 export function eventKind(data: CoursesFile, ev: Event): Kind | null {
   const m = eventModules(data, ev)[0]
   return m ? moduleKind(data, m) : null
+}
+
+/** Minor subjects of an event whose modules count only as a minor (taught by another department or law). */
+export function eventMinors(data: CoursesFile, ev: Event): string[] {
+  const mods = eventModules(data, ev)
+  if (mods.some((m) => moduleAreas(m).length || m.fields.some((f) => f.startsWith('Elective Studies')))) return []
+  return [...new Set(mods.flatMap(moduleMinors))]
 }
 
 export const eventAreas = (data: CoursesFile, ev: Event): string[] =>

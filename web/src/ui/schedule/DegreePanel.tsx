@@ -97,7 +97,10 @@ export function DegreePanel({ lang, data, state, update }: Props) {
         <Row label={t(lang, 'deg.sp')} value={sp} min={RULES.spMin} max={RULES.spMax} />
         <Row term="elective" lang={lang} label={t(lang, 'deg.elective')} value={r.electiveCp} min={RULES.electiveMin} max={RULES.electiveMax} />
       </ul>
-      <p class="note">{t(lang, 'deg.other', { minor: `${RULES.minorMin}–${RULES.minorMax}`, iq: `${RULES.iqMin}–${RULES.iqMax}` })}</p>
+      <ul class="reqs reqs-after">
+        <Row term="minor" lang={lang} label={t(lang, 'bucket.minor')} value={r.minorCp} min={RULES.minorMin} max={RULES.minorMax} />
+      </ul>
+      <p class="note">{t(lang, 'deg.other', { iq: `${RULES.iqMin}–${RULES.iqMax}` })}</p>
 
       {r.issues.length > 0 && (
         <ul class="issues">

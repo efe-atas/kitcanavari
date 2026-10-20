@@ -2,7 +2,7 @@ import { t } from '../../i18n'
 import { attendanceOf } from '../../logic/attendance'
 import { toMinutes } from '../../logic/time'
 import type { CoursesFile, Day, Event, Lang, Slot } from '../../types'
-import { ectsLabel, eventAreas, eventKind, fmtSlot, typeClass } from '../format'
+import { ectsLabel, eventAreas, eventKind, eventMinors, fmtSlot, typeClass } from '../format'
 import { Icon } from '../Icon'
 
 interface Props {
@@ -50,6 +50,7 @@ export function EventCard({ lang, data, ev, inSchedule, conflict, myAreas, onOpe
   const kind = eventKind(data, ev)
   const mine = eventAreas(data, ev).filter((a) => myAreas.includes(a))
   const att = attendanceOf(data, ev).level
+  const minors = eventMinors(data, ev)
   const irregular = ev.moduleIds.some((id) => /irregular/i.test(data.modules[id]?.recurrence ?? ''))
   return (
     <li class={`card type-${typeClass(ev.typeCode)}${inSchedule ? ' is-selected' : ''}${conflict ? ' has-conflict' : ''}`}>
@@ -64,9 +65,10 @@ export function EventCard({ lang, data, ev, inSchedule, conflict, myAreas, onOpe
           )}
         </span>
         <span class="card-title">{ev.title}</span>
-        {(kind && kind !== 'lecture') || mine.length || irregular || att !== 'unknown' ? (
+        {(kind && kind !== 'lecture') || mine.length || minors.length || irregular || att !== 'unknown' ? (
           <span class="card-tags">
             {kind && kind !== 'lecture' && <span class={`tag tag-${kind}`}>{t(lang, `kind.${kind}`)}</span>}
+            {minors.map((m) => <span key={m} class="tag tag-minor">{t(lang, 'bucket.minor')}: {m}</span>)}
             {mine.map((a) => <span key={a} class="tag tag-area"><Icon name="check" size={12} />{a}</span>)}
             {att === 'required' && <span class="tag tag-required">{t(lang, 'att.tagRequired')}</span>}
             {att === 'kickoff' && <span class="tag tag-kickoff">{t(lang, 'att.tagKickoff')}</span>}

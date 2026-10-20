@@ -54,6 +54,12 @@ const STAMM = new Set(STAMM_TITLES.map(norm))
 export const moduleAreas = (m: Module): string[] =>
   m.fields.filter((f) => f.startsWith(AREA_PREFIX)).map((f) => f.slice(AREA_PREFIX.length))
 
+const MINOR_PREFIX = 'Minor Studies: '
+
+/** Minor subjects a module belongs to, e.g. "Mathematics". */
+export const moduleMinors = (m: Module): string[] =>
+  m.fields.filter((f) => f.startsWith(MINOR_PREFIX)).map((f) => f.slice(MINOR_PREFIX.length).trim())
+
 const kindFromTitle = (title: string): Kind | null => {
   if (STAMM.has(norm(title))) return 'stamm'
   if (/\bseminar\b/i.test(title)) return 'seminar'
@@ -194,6 +200,8 @@ export function degreeReport(state: UserState, data: CoursesFile): DegreeReport 
   if (r.electiveCp > RULES.electiveMax) r.issues.push({ key: 'deg.electiveOver', params: { n: r.electiveCp } })
   if (r.minorCp > RULES.minorMax) r.issues.push({ key: 'deg.minorOver', params: { n: r.minorCp } })
   if (r.stamm.count > RULES.stamm) r.issues.push({ key: 'deg.stammExtra', params: { n: r.stamm.count } })
+  const minors = [...new Set(withKind.filter((x) => x.bucket === MINOR).flatMap((x) => moduleMinors(x.m)))]
+  if (minors.length > 1) r.issues.push({ key: 'deg.twoMinors', params: { minors: minors.join(', ') } })
   return r
 }
 

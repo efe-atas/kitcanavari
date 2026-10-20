@@ -117,3 +117,14 @@ test('Stammmodule of the 09/09/2026 handbook are recognised by id even under ano
   expect(moduleKind(data, m)).toBe('stamm')
   expect(moduleKind(data, { ...mod('X', 6), title: 'Advanced Artificial Intelligence' })).toBe('lecture')
 })
+
+test('courses from two different minors are flagged; only one minor counts', () => {
+  const two: CoursesFile = {
+    ...data,
+    events: { ...data.events, math: ev('math', [], { moduleIds: ['MATH'] }) },
+    modules: { ...data.modules, MATH: m('MATH', 9, 'Graph Theory', ['Minor Studies: Mathematics']) },
+  }
+  const r = degreeReport(withSel({ law: 'LAW', math: 'MATH' }), two)
+  expect(r.minorCp).toBe(12)
+  expect(r.issues).toContainEqual({ key: 'deg.twoMinors', params: { minors: 'Law, Mathematics' } })
+})

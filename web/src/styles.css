@@ -763,3 +763,5 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .att-hint-kind { font-size: 0.72rem; font-weight: 600; color: var(--muted); }
 .att-hint q { font-style: italic; }
 .attendance .note { margin: 0; }
+.tag-minor { background: color-mix(in srgb, var(--t-x) 16%, transparent); color: var(--text); }
+.reqs-after { margin-top: 12px; }
