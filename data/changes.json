@@ -1,6 +1,36 @@
 {
  "entries": [
   {
+   "after": [
+    "Dr. Patricia Guerra Balboa",
+    "Fritz Windisch",
+    "Prof. Dr. Thorsten Strufe"
+   ],
+   "at": "2026-10-21T09:08:08Z",
+   "before": [
+    "Dr. Patricia Guerra Balboa",
+    "Prof. Dr. Thorsten Strufe"
+   ],
+   "eventId": "0x42C93759742A4EBB9BC6E74262565ED7",
+   "eventTitle": "Seminar Privacy and Security",
+   "kind": "lecturers_changed",
+   "summary": "Lecturers: Dr. Patricia Guerra Balboa, Prof. Dr. Thorsten Strufe → Dr. Patricia Guerra Balboa, Fritz Windisch, Prof. Dr. Thorsten Strufe"
+  },
+  {
+   "after": [
+    "Daniel Schadt",
+    "Prof. Dr. Thorsten Strufe"
+   ],
+   "at": "2026-10-21T09:08:08Z",
+   "before": [
+    "Prof. Dr. Thorsten Strufe"
+   ],
+   "eventId": "0x74BEC9B70D754315AD9F25B1C72006D3",
+   "eventTitle": "Practical Course: Building PETs",
+   "kind": "lecturers_changed",
+   "summary": "Lecturers: Prof. Dr. Thorsten Strufe → Daniel Schadt, Prof. Dr. Thorsten Strufe"
+  },
+  {
    "at": "2026-10-20T09:08:18Z",
    "eventId": "0xA3F6FF2ABB9248A69F009643AB59FC4C",
    "eventTitle": "Engineering Self-Adaptive Systems",

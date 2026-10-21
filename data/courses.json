@@ -6033,7 +6033,7 @@
     ]
    ],
    "contentText": "This Seminar discusses current toppics of the resarch field technical data security.\n\nThis involves, for example:\n\n- anonymous communication\n\n- network security\n\n- anonymous online- services\n\n- anonymous digital payment services\n\n- rating of the anonymity of online services\n\n- anonymous publications of data (differential privacy, k- anonymity)\n\n- transparency-/awareness-improvement systems\n\n- support for media understanding.",
-   "fingerprint": "6cb84107abb9eabd",
+   "fingerprint": "0b1dc6a136b530d7",
    "format": null,
    "id": "0x42C93759742A4EBB9BC6E74262565ED7",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3034019&client_id=produktiv",
@@ -6047,6 +6047,10 @@
     {
      "name": "Dr. Patricia Guerra Balboa",
      "unit": "KIT Department of Informatics (INFORMATIK) , KASTEL Strufe (TM)"
+    },
+    {
+     "name": "Fritz Windisch",
+     "unit": "KASTEL Strufe (TM)"
     }
    ],
    "moduleIds": [
@@ -9061,7 +9065,7 @@
     ]
    ],
    "contentText": "This practical course teaches students the theoretical basics of Privacy Enhancing Technology implementations. The methods consist of data privacy notions (k-anonymity and Differential Privacy), private information retrieval and anonymous communication. Additionally, students must implement those methods in small example programs in a programming language of their choice.",
-   "fingerprint": "8c85134f30ae2722",
+   "fingerprint": "eac9858f6feb6148",
    "format": "On-Site",
    "id": "0x74BEC9B70D754315AD9F25B1C72006D3",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3034016&client_id=produktiv",
@@ -9070,6 +9074,10 @@
    "lecturers": [
     {
      "name": "Prof. Dr. Thorsten Strufe",
+     "unit": "KIT Department of Informatics (INFORMATIK) , KASTEL Strufe (TM)"
+    },
+    {
+     "name": "Daniel Schadt",
      "unit": "KIT Department of Informatics (INFORMATIK) , KASTEL Strufe (TM)"
     }
    ],
@@ -18022,7 +18030,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-20T09:08:18Z",
+  "scrapedAt": "2026-10-21T09:08:08Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
