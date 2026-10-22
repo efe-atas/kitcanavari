@@ -112,3 +112,20 @@ def test_full_handbook_smoke():
     rec = Counter(m["recurrence"] for m in mods.values())
     assert (rec["winter"], rec["summer"], rec["each"]) == (66, 54, 39)
     assert all(re.fullmatch(r"M-[A-Z]+-\d+", k) and m["title"] and m["ects"] for k, m in mods.items())
+
+
+def test_more_bullet_styles_start_new_lines():
+    text = ("                 4.1 Module: X [M-INFO-1]\n        Part of:  Elective Studies in Informatics\n\n"
+            "       Content\n       Topics:\n       ◦ VHDL ▪ nested\n       ▪ Verilog\n       – SystemC\n       * Chisel\n")
+    content = parse_handbook_text(text)["modules"]["M-INFO-1"]["content"]
+    assert content.split("\n") == ["Topics:", "◦ VHDL ▪ nested", "▪ Verilog", "– SystemC", "* Chisel"]
+
+
+def test_page_break_does_not_split_a_sentence():
+    text = ("                 4.1 Module: X [M-INFO-1]\n        Part of:  Elective Studies in Informatics\n\n"
+            "       Content\n       The course covers many\n\n\n\n"
+            "Computer Science Master 2025 (Master of Science (M.Sc.))\n                                   42\n"
+            "Module Handbook as of 09/09/2026\n4 MODULES                       Module: X [M-INFO-1]\n\n\n"
+            "       topics in one paragraph.\n\n       Second paragraph.\n")
+    content = parse_handbook_text(text)["modules"]["M-INFO-1"]["content"]
+    assert content == "The course covers many topics in one paragraph.\n\nSecond paragraph."

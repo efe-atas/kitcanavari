@@ -49,7 +49,7 @@ _SECTIONS = {
 _PLACEHOLDER_RE = re.compile(r"^(none\.?|see (partial a\w+|module component)\b.*)$", re.I)
 _FIELD_PREFIXES = ("Area of Specialization", "Elective Studies", "Minor Studies", "Interdisciplinary", "Master")
 _USAGE_RE = re.compile(r"\s*\(Usage (?:from|until) [^)]*\)$")
-_ITEM_RE = re.compile(r"^(-|•|◦|\d+\.)\s")
+_ITEM_RE = re.compile(r"^(-|–|\*|•|◦|▪|\d+\.)\s")
 _RECURRENCE = {"Each winter term": "winter", "Each summer term": "summer", "Each term": "each"}
 
 
@@ -174,6 +174,9 @@ def parse_handbook_text(text: str) -> dict:
         if _COMPONENTS_RE.match(line):
             break
         if any(r.match(line) for r in _NOISE_RES):
+            # A page break is not a paragraph break: drop the blank lines before the footer as well.
+            while blocks and blocks[-1][1] and not blocks[-1][1][-1].strip():
+                blocks[-1][1].pop()
             continue
         if in_header:
             if not _MODULE_RE.match(line) and (not line.strip() or any(r.match(line) for r in _HEADER_PART_RES)):
