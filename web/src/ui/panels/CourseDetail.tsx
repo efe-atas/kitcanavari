@@ -148,7 +148,7 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
                   <li key={i}>
                     <label class="check">
                       <input type="checkbox" checked={e.enabledSlots.includes(i)} onChange={() => update((st) => toggleSlot(st, eid, i))} />
-                      {fmtSlot(lang, s)}{s.room && <span class="muted">, {s.room}</span>}
+                      <span>{fmtSlot(lang, s)}</span>{s.room && <span class="muted">{s.room}</span>}
                     </label>
                   </li>
                 ))}

@@ -1004,7 +1004,7 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 @media (max-width: 1100px) { .app.has-drawer .layout { grid-template-columns: minmax(0, 1fr) 380px; } }
 @media (max-width: 860px) {
   .app.has-drawer .layout { grid-template-columns: minmax(0, 1fr); }
-  .drawer { position: fixed; inset: var(--topbar-h) 0 0 auto; width: min(440px, 100%); z-index: 30; box-shadow: var(--shadow-3); height: auto; }
+  .drawer { position: fixed; inset: var(--topbar-h) 0 0 auto; width: min(440px, 100%); z-index: 30; box-shadow: var(--shadow-3); height: auto; align-self: stretch; }
 }
 @media (max-width: 640px) {
   .drawer { inset: 0; width: 100%; border-left: 0; z-index: 40; }
@@ -1057,3 +1057,14 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .topbar { padding: 0 24px; }
 @media (min-width: 861px) { .plan-page { gap: 32px; } }
 @media (pointer: coarse) { .brand { min-height: 44px; min-width: 44px; } }
+.course-detail { display: grid; gap: 20px; align-content: start; }
+.field-grid select, .field-grid input { width: 100%; min-width: 0; }
+.field-grid label { min-width: 0; }
+.plan-table .col-total { position: sticky; right: 0; background: var(--surface); box-shadow: -8px 0 8px -8px rgb(28 34 51 / 0.12); }
+.weekly-event .check { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.drawer-body { grid-template-columns: minmax(0, 1fr); }
+.drawer-body > * { min-width: 0; }
+@media (max-width: 640px) {
+  .topbar { padding-inline: 12px; gap: 8px; }
+  .top-actions { gap: 0; }
+}
