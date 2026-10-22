@@ -4,7 +4,7 @@ import { attendanceOf } from '../../logic/attendance'
 import { moduleKind } from '../../logic/degree'
 import type { CoursesFile, Lang } from '../../types'
 
-export type Category = 'structure' | 'types' | 'time' | 'exams' | 'places'
+export type Category = 'structure' | 'types' | 'time' | 'exams' | 'places' | 'career'
 
 export interface Term {
   id: string
@@ -26,6 +26,7 @@ export const CATEGORIES: Record<Category, Record<Lang, string>> = {
   time: { tr: 'Zaman ve yük', en: 'Time and workload' },
   exams: { tr: 'Sınavlar ve kayıt', en: 'Exams and registration' },
   places: { tr: 'Kurumlar, araçlar, yerler', en: 'Offices, tools, places' },
+  career: { tr: 'Kariyer görünümü', en: 'Career view' },
 }
 
 const byType = (code: string) => (data: CoursesFile, lang: Lang) => {
@@ -416,6 +417,33 @@ export const TERMS: Term[] = [
       tr: 'Takvim dosyası. "Programım"daki ".ics indir" ile programını Google Takvim, Apple Takvim ya da Outlook\'a aktarabilirsin.',
       en: 'A calendar file. “Download .ics” in “My schedule” exports your timetable to Google Calendar, Apple Calendar or Outlook.',
     },
+  },
+  {
+    id: 'skill-score', cat: 'career', term: 'Beceri puanı', aka: 'Skill score',
+    def: {
+      tr: 'Her modülün 15 beceriden her birine 0–3 arası katkısı ve tek cümlelik gerekçesi. Puanlar modül el kitabının metninden elle hazırlandı (Claude, 22.10.2026); otomatik değil, yön göstericidir.',
+      en: 'Each module’s 0–3 contribution to each of 15 skills, with a one-sentence reason. Scores were curated by hand from the module handbook text (Claude, 22 Oct 2026); they are a guide, not automatic.',
+    },
+    where: { tr: 'Katalog modül kartlarındaki beceri rozetleri ve modül detayındaki "Beceriler".', en: 'Skill badges on catalog module cards and “Skills” in the module detail.' },
+    related: ['career-fit'],
+  },
+  {
+    id: 'career-fit', cat: 'career', term: 'Kariyer uyumu', aka: 'Career fit',
+    def: {
+      tr: 'Yol haritandaki modüllerin beceri puanları ECTS ile ağırlıklanıp toplanır ve bir rolün hedefleriyle karşılaştırılır. "Planla" geçilen + planlanan, "şu an" sadece geçilen modülleri sayar. Yüzde yaklaşık bir ölçüdür.',
+      en: 'The skill scores of your roadmap modules, weighted by ECTS and summed, compared with a role’s targets. “Planned” counts passed and planned modules, “now” only passed ones. The percentage is approximate.',
+    },
+    where: { tr: '"Kariyer" sekmesindeki ısı haritası ve "Yol Haritası"ndaki takip çubukları.', en: 'The grid on the “Career” tab and the followed-path bars on the “Roadmap”.' },
+    related: ['employer-lens', 'skill-score'],
+  },
+  {
+    id: 'employer-lens', cat: 'career', term: 'İşveren merceği', aka: 'Employer lens',
+    def: {
+      tr: 'Aynı rol farklı işverenlerde farklı becerileri öne çıkarır (ör. Big Tech algoritma ve dağıtık sistemler, AI lab araştırma). Mercek rol ağırlıklarını buna göre çarpar; şehirler, mülakat, ders dışı adımlar ve kaynaklı maaş bantlarını da taşır.',
+      en: 'The same role stresses different skills at different employers (e.g. Big Tech algorithms and distributed systems, AI labs research). A lens multiplies the role’s weights accordingly and also lists cities, interviews, steps beyond courses and sourced salary bands.',
+    },
+    where: { tr: '"Kariyer" sekmesinin sütunları ve yol detayı.', en: 'The columns of the “Career” tab and the path detail.' },
+    related: ['career-fit'],
   },
 ]
 

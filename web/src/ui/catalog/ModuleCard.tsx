@@ -1,5 +1,7 @@
 import { t } from '../../i18n'
+import { topRoles } from '../../logic/career'
 import { moduleAreas, moduleKind } from '../../logic/degree'
+import { roleTitle } from '../career/model'
 import type { ModuleRow } from '../../logic/handbook'
 import type { CareerData, CoursesFile, Lang, SkillId } from '../../types'
 import { Icon } from '../Icon'
@@ -17,6 +19,7 @@ interface Props {
 export function ModuleCard({ lang, data, career, row, myAreas, onOpen }: Props) {
   const kind = moduleKind(data, row)
   const mine = moduleAreas(row).filter((a) => myAreas.includes(a))
+  const best = career ? topRoles(row.id, career).map((r) => roleTitle(career, r.role, lang)) : []
   const strong = Object.entries(career?.skills.modules[row.id] ?? {})
     .filter(([, v]) => v?.[0] === 3).slice(0, 3).map(([s]) => s as SkillId)
   return (
@@ -34,6 +37,7 @@ export function ModuleCard({ lang, data, career, row, myAreas, onOpen }: Props) 
           {strong.map((s) => <span key={s} class="tag tag-skill">{t(lang, `skill.${s}`)}</span>)}
           {career && !career.skills.modules[row.id] && <span class="tag tag-quiet">{t(lang, 'module.unscoredShort')}</span>}
         </span>
+        {best.length > 0 && <span class="card-best">{t(lang, 'module.bestFor', { roles: best.join(', ') })}</span>}
         <span class="card-meta">
           {row.ects !== null && <span class="card-ects">{t(lang, 'module.ects', { n: row.ects })}</span>}
           {row.hb?.coordinators.length ? <span class="muted">{row.hb.coordinators.join(', ')}</span> : null}

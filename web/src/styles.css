@@ -862,3 +862,4 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .followed { margin-bottom: 16px; }
 @media (max-width: 860px) { .path-grid { grid-template-columns: minmax(0, 1fr); } }
 .gap-module .link-button { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.card-best { font-size: 0.75rem; color: var(--muted); }

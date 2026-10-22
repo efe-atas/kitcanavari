@@ -21,7 +21,7 @@ export function FollowedBars({ lang, career, rows, state }: { lang: Lang; career
           const now = fit(points.now, role, lens)
           return (
             <li key={`${f.role}-${f.lens}`}>
-              <a class="skill-name" href="#/career">{pathTitle(career, f.role, f.lens, lang)}</a>
+              <a class="skill-name" href={`#/career/${f.role}:${f.lens}`}>{pathTitle(career, f.role, f.lens, lang)}</a>
               <span class="muted">{t(lang, 'career.cell', { n: all, now })}</span>
               <span class="req-bar" aria-hidden="true"><span style={{ width: `${all}%` }} /></span>
             </li>

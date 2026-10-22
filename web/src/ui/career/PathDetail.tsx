@@ -40,10 +40,11 @@ export function PathDetail({ lang, career, role: roleId, lens: lensId, points, r
           <h3>{title}</h3>
           <p class="panel-sub">{role.summary[lang]}</p>
         </div>
-        <button type="button" class={on ? 'button-quiet' : 'button'} disabled={full} title={full ? t(lang, 'career.followLimit') : undefined}
+        <button type="button" class={on ? 'button-quiet' : 'button'} disabled={full}
           onClick={() => update((s) => setFollow(s, roleId, lensId, !on))}>
           {t(lang, on ? 'career.unfollow' : 'career.follow')}
         </button>
+        {full && <p class="note">{t(lang, 'career.followLimit')}</p>}
       </header>
 
       <div class="path-grid">

@@ -243,6 +243,9 @@ const tr = {
   'career.unfollow': 'Takibi bırak',
   'career.followLimit': 'En fazla 3 yol takip edebilirsin.',
   'career.followed': 'Takip ettiğin yollar',
+  'career.followedMark': 'takip ediliyor',
+  'career.stale': 'Takip ettiğin bu yollar artık kariyer verisinde yok:',
+  'career.remove': 'Kaldır',
   'career.skills': 'Beceri profili',
   'career.gaps': 'En büyük açıklar',
   'career.noGaps': 'Bu yol için açık kalmadı.',
@@ -259,6 +262,7 @@ const tr = {
   'module.topRoles': 'En uygun roller',
   'module.unscored': 'Henüz puanlanmadı.',
   'module.unscoredShort': 'Puanlanmadı',
+  'module.bestFor': 'En uygun: {roles}',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -504,6 +508,9 @@ const en: Record<keyof typeof tr, string> = {
   'career.unfollow': 'Unfollow',
   'career.followLimit': 'You can follow up to 3 paths.',
   'career.followed': 'Followed paths',
+  'career.followedMark': 'followed',
+  'career.stale': 'These followed paths are no longer in the career data:',
+  'career.remove': 'Remove',
   'career.skills': 'Skill profile',
   'career.gaps': 'Biggest gaps',
   'career.noGaps': 'No gaps left for this path.',
@@ -520,6 +527,7 @@ const en: Record<keyof typeof tr, string> = {
   'module.topRoles': 'Best for',
   'module.unscored': 'Not scored yet.',
   'module.unscoredShort': 'Not scored',
+  'module.bestFor': 'Best for: {roles}',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }

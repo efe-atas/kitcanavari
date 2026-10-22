@@ -37,6 +37,7 @@ export function ModuleDetail({ lang, data, career, row, myAreas, onOpenEvent, te
   }, [row.id])
 
   const kind = moduleKind(data, row)
+  const best = career ? topRoles(row.id, career).map((r) => roleTitle(career, r.role, lang)) : []
   const places = bucketOptions(row)
   const { hb, current } = row
   const sections: [string, string | null | undefined][] = hb
@@ -103,9 +104,7 @@ export function ModuleDetail({ lang, data, career, row, myAreas, onOpenEvent, te
                       <li key={s}><span class="tag tag-skill">{t(lang, `skill.${s}`)} {'●'.repeat(score)}{'○'.repeat(3 - score)}</span> {reason}</li>
                     ))}
                 </ul>
-                {topRoles(row.id, career).length > 0 && (
-                  <p><strong>{t(lang, 'module.topRoles')}:</strong> {topRoles(row.id, career).map((r) => roleTitle(career, r.role, lang)).join(', ')}</p>
-                )}
+                {best.length > 0 && <p><strong>{t(lang, 'module.topRoles')}:</strong> {best.join(', ')}</p>}
               </>
             ) : <p class="muted">{t(lang, 'module.unscored')}</p>}
           </section>

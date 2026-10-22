@@ -26,6 +26,15 @@ describe('validateCareer', () => {
     expect(has(errors, 'ghost')).toBe(true)
   })
 
+  test('reports malformed lenses instead of throwing', () => {
+    const c = makeCareer()
+    delete (c.lenses.lenses[0] as Partial<typeof c.lenses.lenses[0]>).offCourse
+    delete (c.lenses.lenses[0] as Partial<typeof c.lenses.lenses[0]>).cities
+    expect(() => validateCareer(c)).not.toThrow()
+    expect(has(validateCareer(c), 'offCourse')).toBe(true)
+    expect(has(validateCareer(c), 'cities')).toBe(true)
+  })
+
   test('requires every role and lens id', () => {
     const c = makeCareer()
     c.roles.roles = c.roles.roles.slice(1)
@@ -55,6 +64,17 @@ test('lists handbook modules without scores', () => {
 
 describe('loadData career', () => {
   afterEach(() => vi.unstubAllGlobals())
+  test('invalid career files are not used', async () => {
+    const bad = makeCareer()
+    bad.roles.roles = bad.roles.roles.slice(1)
+    const files: Record<string, unknown> = { 'courses.json': makeCourses(), 'changes.json': makeChanges(), 'skills.json': bad.skills, 'roles.json': bad.roles, 'lenses.json': bad.lenses }
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      const body = files[url.split('/').pop()!]
+      return body ? new Response(JSON.stringify(body)) : new Response('nope', { status: 404 })
+    }))
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
+    expect((await loadData()).career).toBeNull()
+  })
   test('missing career files do not fail loading', async () => {
     const files: Record<string, unknown> = { 'courses.json': makeCourses(), 'changes.json': makeChanges(), 'roles.json': makeCareer().roles }
     vi.stubGlobal('fetch', vi.fn(async (url: string) => {

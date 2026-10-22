@@ -119,7 +119,7 @@ export function App() {
           <RoadmapView data={load.courses} handbook={load.handbook} career={load.career} state={state} update={update} />
         )}
         {load.status === 'ready' && tab === 'career' && (
-          <CareerView data={load.courses} handbook={load.handbook} career={load.career} state={state} update={update} />
+          <CareerView data={load.courses} handbook={load.handbook} career={load.career} focus={route.sub} state={state} update={update} />
         )}
         {load.status === 'ready' && tab === 'guide' && <GuideView lang={lang} data={load.courses} />}
         {load.status === 'ready' && tab === 'glossary' && <GlossaryView lang={lang} data={load.courses} focus={route.sub} />}

@@ -27,6 +27,10 @@ export function validateCareer(c: CareerData): string[] {
   const roleIds = c.roles.roles.map((r) => r.id)
   for (const id of ROLE_IDS) if (!roleIds.includes(id)) errors.push(`roles: missing ${id}`)
   for (const r of c.roles.roles) {
+    if (!r.weights || !r.targets) {
+      errors.push(`role ${r.id}: weights/targets missing`)
+      continue
+    }
     if (!ROLE_IDS.includes(r.id)) errors.push(`roles: unknown role ${r.id}`)
     if (!filled(r.title?.tr) || !filled(r.title?.en) || !filled(r.summary?.tr) || !filled(r.summary?.en)) errors.push(`role ${r.id}: title/summary missing`)
     const sum = Object.values(r.weights).reduce((n, w) => n + (w ?? 0), 0)
@@ -39,13 +43,20 @@ export function validateCareer(c: CareerData): string[] {
   }
   const lensIds = c.lenses.lenses.map((l) => l.id)
   for (const id of LENS_IDS) if (!lensIds.includes(id)) errors.push(`lenses: missing ${id}`)
+  const strings = (x: unknown) => Array.isArray(x) && x.every(filled)
   for (const l of c.lenses.lenses) {
     if (!LENS_IDS.includes(l.id)) errors.push(`lenses: unknown lens ${l.id}`)
-    for (const [k, m] of Object.entries(l.multipliers)) {
+    if (!filled(l.title?.tr) || !filled(l.title?.en)) errors.push(`lens ${l.id}: title missing`)
+    if (!strings(l.cities)) errors.push(`lens ${l.id}: cities must be a list of names`)
+    for (const k of ['offCourse', 'downsides'] as const) {
+      if (!strings(l[k]?.tr) || !strings(l[k]?.en)) errors.push(`lens ${l.id}: ${k} must have tr and en lists`)
+    }
+    if (!Array.isArray(l.salary)) errors.push(`lens ${l.id}: salary must be a list`)
+    for (const [k, m] of Object.entries(l.multipliers ?? {})) {
       if (!isSkill(k)) errors.push(`lens ${l.id}: unknown skill ${k}`)
       if (!((m ?? 0) > 0)) errors.push(`lens ${l.id}: multiplier for ${k} must be > 0`)
     }
-    for (const b of l.salary) {
+    for (const b of Array.isArray(l.salary) ? l.salary : []) {
       if (!ROLE_IDS.includes(b.role)) errors.push(`lens ${l.id}: salary for unknown role ${b.role}`)
       if (!/^https?:\/\//.test(b.source ?? '')) errors.push(`lens ${l.id}: salary source missing for ${b.role}`)
       if (!/^\d{4}-\d{2}$/.test(b.asOf ?? '')) errors.push(`lens ${l.id}: salary asOf must be YYYY-MM for ${b.role}`)
