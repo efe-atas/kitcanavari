@@ -39,7 +39,7 @@ export function isProfile(x: unknown): x is Profile {
     && isObj(p.modules) && Object.values(p.modules).every((m) => isObj(m)
       && typeof m.term === 'string' && STATUSES.includes(m.status as ModuleStatus)
       && (m.countAs === null || typeof m.countAs === 'string')
-      && (m.grade === null || typeof m.grade === 'number'))
+      && (m.grade === null || (typeof m.grade === 'number' && m.grade >= 1 && m.grade <= 4)))
     && isObj(p.weekly) && Object.values(p.weekly).every((e) => isObj(e)
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'

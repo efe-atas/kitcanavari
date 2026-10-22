@@ -266,7 +266,8 @@ export function roadmapReport(state: UserState, courses: CoursesFile, handbook: 
   return {
     done: reportFromItems(done, chosen),
     all: reportFromItems(all, chosen),
-    gpa: gradedCp ? Math.round((weighted / gradedCp) * 100) / 100 : null,
+    // KIT keeps only the first decimal of an overall grade, without rounding (the epsilon absorbs float noise).
+    gpa: gradedCp ? Math.floor((weighted / gradedCp) * 10 + 1e-9) / 10 : null,
     gradedCp,
     unknown,
   }

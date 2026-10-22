@@ -99,4 +99,29 @@ describe('roadmap tab', () => {
     expect(within(col).getByText('GONE')).toBeTruthy()
     expect(within(col).getByText('Unknown module')).toBeTruthy()
   })
+
+  test('entries in a term that is not in the list still get a column', async () => {
+    setState({ roadmap: { terms: ['WS26', 'SS27'], modules: { H1: { term: 'WS29', status: 'planned', countAs: null, grade: null } }, notes: {} } })
+    render(<App />)
+    const col = await column('WS 29/30')
+    expect(within(col).getByText('Reinforcement Learning')).toBeTruthy()
+  })
+
+  test('a note is saved without leaving the field', async () => {
+    setState({ roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: { H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }, notes: {} } })
+    render(<App />)
+    const col = await column('SS 27')
+    fireEvent.input(within(col).getByLabelText('Note'), { target: { value: 'yazarken' } })
+    await waitFor(() => expect(saved().roadmap.notes.H2).toBe('yazarken'), { timeout: 2000 })
+  })
+
+  test('a weekly-plan module moved to another term is flagged', async () => {
+    setState({
+      selected: { sec: { enabledSlots: [0], moduleId: 'M3', ackFingerprint: '' } },
+      roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: { M3: { term: 'SS27', status: 'planned', countAs: null, grade: null } }, notes: {} },
+    })
+    render(<App />)
+    const col = await column('SS 27')
+    expect(within(col).getByText('In this term’s schedule')).toBeTruthy()
+  })
 })

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { bucketOptions, moduleKind } from '../../logic/degree'
 import type { ModuleRow } from '../../logic/handbook'
-import { offeringIssue, PRIOR } from '../../logic/terms'
+import { CURRENT_TERM, offeringIssue, PRIOR } from '../../logic/terms'
 import { placeModule, removeFromRoadmap, setEntryCountAs, setGrade, setNote, setStatus } from '../../store'
 import type { CoursesFile, Lang, ModuleStatus, RoadmapEntry, UserState } from '../../types'
 import { Icon } from '../Icon'
@@ -25,6 +25,17 @@ const STATUSES: ModuleStatus[] = ['planned', 'passed', 'failed', 'dropped']
 export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule, terms, update }: Props) {
   const [draft, setDraft] = useState(note)
   useEffect(() => setDraft(note), [note])
+  // Notes save shortly after typing stops, on blur, and when the card goes away (no lost drafts).
+  const pendingNote = useRef<string | null>(null)
+  const noteTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const saveNote = () => {
+    if (noteTimer.current) clearTimeout(noteTimer.current)
+    noteTimer.current = null
+    const text = pendingNote.current
+    pendingNote.current = null
+    if (text !== null) update((s) => setNote(s, id, text))
+  }
+  useEffect(() => saveNote, [])
   const [gradeBad, setGradeBad] = useState(false)
   const commitGrade = (raw: string) => {
     const text = raw.trim().replace(',', '.')
@@ -34,6 +45,8 @@ export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule,
     if (value !== entry.grade) update((s) => setGrade(s, id, value))
   }
   const issue = row ? offeringIssue(row, entry.term) : null
+  // Still in this term's weekly plan, but planned for another term.
+  const elsewhere = inSchedule && entry.term !== CURRENT_TERM
   const kind = row ? moduleKind(data, row) : null
   const places = row ? bucketOptions(row) : []
   return (
@@ -47,11 +60,12 @@ export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule,
         </button>
       </div>
       <p class="road-title">{row ? row.title : t(lang, 'road.unknown')}</p>
-      {((kind && kind !== 'lecture') || inSchedule || issue) && (
+      {((kind && kind !== 'lecture') || inSchedule || issue || elsewhere) && (
         <p class="card-tags">
           {kind && kind !== 'lecture' && <span class={`tag tag-${kind}`}>{t(lang, `kind.${kind}`)}</span>}
           {inSchedule && <span class="tag tag-area"><Icon name="check" size={12} />{t(lang, 'road.inSchedule')}</span>}
           {issue && <span class="tag tag-warn"><Icon name="alert" size={12} />{t(lang, `road.warn.${issue}`)}</span>}
+          {elsewhere && <span class="tag tag-warn"><Icon name="alert" size={12} />{t(lang, 'road.warn.scheduleElsewhere')}</span>}
         </p>
       )}
       <div class="road-fields">
@@ -89,8 +103,14 @@ export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule,
       <details class="road-note" open={!!note}>
         <summary>{t(lang, 'road.noteToggle')}</summary>
         <textarea aria-label={t(lang, 'road.note')} rows={2} value={draft}
-          onInput={(e) => setDraft((e.target as HTMLTextAreaElement).value)}
-          onBlur={() => draft !== note && update((s) => setNote(s, id, draft))} />
+          onInput={(e) => {
+            const text = (e.target as HTMLTextAreaElement).value
+            setDraft(text)
+            pendingNote.current = text
+            if (noteTimer.current) clearTimeout(noteTimer.current)
+            noteTimer.current = setTimeout(saveNote, 600)
+          }}
+          onBlur={saveNote} />
       </details>
     </li>
   )

@@ -3,7 +3,7 @@ import { t } from '../../i18n'
 import { roadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows, type ModuleRow } from '../../logic/handbook'
 import { derivedEntries, roadmapEntries } from '../../logic/roadmap'
-import { DEFAULT_TERMS, PRIOR } from '../../logic/terms'
+import { DEFAULT_TERMS, PRIOR, termOrder } from '../../logic/terms'
 import { addTerm, placeModule } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, UserState } from '../../types'
 import { FollowedBars } from '../career/FollowedBars'
@@ -29,6 +29,9 @@ export function RoadmapView({ data, handbook, career, state, update }: Props) {
   const inSchedule = new Set(Object.keys(derivedEntries(state)))
   const taken = new Set(Object.keys(entries))
   const terms = state.roadmap?.terms ?? DEFAULT_TERMS
+  // Entries can sit in a term missing from the list (e.g. a hand-edited profile): give them a column too.
+  const extra = [...new Set(Object.values(entries).map((e) => e.term))]
+    .filter((t) => t !== PRIOR && !terms.includes(t)).sort((a, b) => termOrder(a) - termOrder(b))
   const report = useMemo(() => roadmapReport(state, data, handbook), [state, data, handbook])
 
   return (
@@ -38,7 +41,7 @@ export function RoadmapView({ data, handbook, career, state, update }: Props) {
         <p class="result-count">{t(lang, 'road.summary', { n: report.all.total, done: report.done.total })}</p>
       </header>
       <div class="road-columns">
-        {[PRIOR, ...terms].map((term) => {
+        {[PRIOR, ...terms, ...extra].map((term) => {
           const label = termName(lang, term)
           const here = Object.entries(entries).filter(([, e]) => e.term === term)
           const cp = here.reduce((n, [id, e]) => n + (e.status === 'passed' || e.status === 'planned' ? byId.get(id)?.ects ?? 0 : 0), 0)

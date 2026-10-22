@@ -6,7 +6,7 @@ import {
 } from '../src/store'
 import { bucketOf } from '../src/logic/degree'
 import { makeCourses } from './appdata'
-import { profileFromState, stateFromProfile } from '../src/sync/profile'
+import { isProfile, profileFromState, stateFromProfile } from '../src/sync/profile'
 import { ev } from './fixtures'
 
 const withM1 = () => addEvent(defaultState(), ev('e1', [], { moduleIds: ['M1'] }))
@@ -95,5 +95,21 @@ describe('roadmap state', () => {
     const local = removeEvent(s, 'e1')
     const synced = removeEvent(stateFromProfile(profileFromState(s, null), { lang: 'en' }), 'e1')
     expect(roadmapEntries(local)).toEqual(roadmapEntries(synced))
+  })
+
+  test('grades outside 1.0–4.0 are rejected when loading', () => {
+    const bad = { version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '', roadmap: { terms: [], notes: {}, modules: { M1: { term: 'prior', status: 'passed', countAs: null, grade: 7 } } } }
+    expect(importState(JSON.stringify(bad))).toBeNull()
+    const p = { ...profileFromState(defaultState(), null), modules: { M1: { term: 'prior', status: 'passed' as const, countAs: null, grade: 0 } } }
+    expect(isProfile(p)).toBe(false)
+  })
+
+  test('addTerm copes with an empty or odd term list', () => {
+    const empty = { ...defaultState(), roadmap: { terms: [], modules: {}, notes: {} } }
+    expect(addTerm(empty).roadmap!.terms).toEqual(['WS26'])
+    const odd = { ...defaultState(), roadmap: { terms: ['WS26', 'later'], modules: {}, notes: {} } }
+    expect(addTerm(odd).roadmap!.terms).toEqual(['WS26', 'later', 'SS27'])
+    const full = { ...defaultState(), roadmap: { terms: ['SS27', 'WS26'], modules: {}, notes: {} } }
+    expect(addTerm(full).roadmap!.terms).toEqual(['SS27', 'WS26', 'WS27'])
   })
 })

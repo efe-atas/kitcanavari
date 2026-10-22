@@ -36,7 +36,7 @@ export function offeringIssue(row: Pick<ModuleRow, 'recurrence' | 'eventIds'>, t
 }
 
 /** Sortable position of a term id: WS26 < SS27 < WS27 …; other ids sort first. */
-const termOrder = (term: string): number => {
+export const termOrder = (term: string): number => {
   const m = TERM_RE.exec(term)
   if (!m) return -1
   const y = Number(m[2])

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import { CACHE_KEY, defaultDeps, SyncEngine, type SyncStatus } from './sync/engine'
 import type { SyncConfig } from './sync/github'
 import { emptyRoadmap, roadmapEntries } from './logic/roadmap'
-import { CURRENT_TERM, nextTerm, PRIOR } from './logic/terms'
+import { CURRENT_TERM, nextTerm, PRIOR, termOrder } from './logic/terms'
 import type { CoursesFile, Event, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
 
 export { roadmapEntries }
@@ -24,7 +24,7 @@ function isRoadmap(r: unknown): r is Roadmap {
   return Array.isArray(m.terms) && m.terms.every((t) => typeof t === 'string')
     && !!m.modules && typeof m.modules === 'object' && Object.values(m.modules).every((e) => !!e && typeof e === 'object'
       && typeof e.term === 'string' && STATUSES.includes(e.status)
-      && (e.countAs === null || typeof e.countAs === 'string') && (e.grade === null || typeof e.grade === 'number'))
+      && (e.countAs === null || typeof e.countAs === 'string') && (e.grade === null || (typeof e.grade === 'number' && e.grade >= 1 && e.grade <= 4)))
     && !!m.notes && typeof m.notes === 'object' && Object.values(m.notes).every((n) => typeof n === 'string')
 }
 
@@ -309,9 +309,12 @@ export function setNote(s: UserState, id: string, text: string): UserState {
   return { ...s, roadmap: { ...r, notes: text.trim() ? { ...notes, [id]: text } : notes } }
 }
 
+/** Add the term after the latest one (or the current term to an empty list); never a duplicate. */
 export function addTerm(s: UserState): UserState {
   const r = roadmapOf(s)
-  return { ...s, roadmap: { ...r, terms: [...r.terms, nextTerm(r.terms[r.terms.length - 1])] } }
+  const latest = r.terms.filter((t) => termOrder(t) >= 0).sort((a, b) => termOrder(a) - termOrder(b)).at(-1)
+  const next = latest ? nextTerm(latest) : CURRENT_TERM
+  return r.terms.includes(next) ? s : { ...s, roadmap: { ...r, terms: [...r.terms, next] } }
 }
 
 export const MAX_FOLLOWED = 3

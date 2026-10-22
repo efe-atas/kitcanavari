@@ -22,6 +22,7 @@ export function RoadmapDegreePanel({ lang, report, state, update }: Props) {
       <p class="road-gpa">
         {report.gpa !== null ? t(lang, 'road.gpa', { gpa: report.gpa, cp: report.gradedCp }) : t(lang, 'road.noGpa')}
       </p>
+      {report.gpa !== null && <p class="note">{t(lang, 'road.gpaRule')}</p>}
       <ul class="reqs">
         <Row label={t(lang, 'road.total')} value={all.total} min={RULES.total - RULES.thesis} detail={`${passed(done.total)} · ${t(lang, 'road.thesis')}`} />
         {all.areas.map((a, i) => (

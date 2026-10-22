@@ -29,7 +29,7 @@ describe('roadmapReport', () => {
     s = setGrade(placeModule(s, 'M3', 'prior'), 'M3', 2.0)
     s = placeModule(s, 'H2', 'prior')
     const r = report(s)
-    expect(r.gpa).toBe(1.57)
+    expect(r.gpa).toBe(1.5) // KIT keeps only the first decimal, without rounding
     expect(r.gradedCp).toBe(14)
     expect(report(base()).gpa).toBeNull()
   })
@@ -44,5 +44,11 @@ describe('roadmapReport', () => {
     const s: UserState = { ...base(), selected: { sec: { enabledSlots: [0], moduleId: 'M3', ackFingerprint: '' } } }
     expect(report(s).all.total).toBe(8)
     expect(report(s).done.total).toBe(0)
+  })
+
+  test('gpa truncation is safe against floating point noise', () => {
+    let s = setGrade(placeModule(base(), 'H1', 'prior'), 'H1', 1.3)
+    s = setGrade(placeModule(s, 'H2', 'prior'), 'H2', 1.3)
+    expect(report(s).gpa).toBe(1.3)
   })
 })
