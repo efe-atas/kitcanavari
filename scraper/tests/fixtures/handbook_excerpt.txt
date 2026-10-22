@@ -1,0 +1,307 @@
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                        35
+Module Handbook as of 09/09/2026
+                 4.1 Module: Access Control Systems: Models and Technology [M-
+            M
+                 INFO-106303]
+
+        Coordinators:        Prof. Dr. Hannes Hartenstein
+        Organisation:        KIT Department of Informatics
+              Part of:       Area of Specialization: Cryptography and Security
+                             Area of Specialization: Telematics
+                             Elective Studies in Informatics
+
+
+                   Credits       Grading       Recurrence           Duration     Language       Level     Version
+                    5 CP         graded      Each summer term        1 term       English         4          1
+
+
+                                                                                     Term
+       ID                     Name                                                 offered   Credits Lecturers
+       Mandatory
+         T-INFO-112775        Access Control Systems: Models and Technology            ST       5 CP Hartenstein
+
+       Assessment
+       See Partial Achievements (Teilleistung).
+
+       Prerequisites
+       See Partial Achievements (Teilleistung).
+
+       Competence Goal
+          ◦ The student understands the challenges of access control in the era of hyperconnectivity.
+          ◦ The student understands that an information security model defines access rights that express for a given
+            system which subjects are allowed to perform which actions on which objects. The student understands that a
+            system is said to be secure with respect to a given information security model, if it enforces the corresponding
+            access rights.
+          ◦ The student is able to derive suitable access control models from scenario requirements and is able to specify
+            concrete access control systems. The student is able to decide which concrete architectures and protocols are
+            technically suited for realizing a given access control model.
+          ◦ The student knows access control protocols using cryptographic methods and is able to compare protocol
+            realizations based on different cryptographic building blocks.
+          ◦ The student is aware of the limits of access control models and systems with respect to their analyzability and
+            performance and security characteristics. The student is able to identify the resulting tradeoffs.
+          ◦ The student knows the state of the art with respect to current research endeavors, e.g., access control in the
+            context of decentralized and distributed systems, Trusted Execution Environments, AI, robotics, or hash-chain
+            based systems.
+
+       Content
+       Access control systems are everywhere and the backbone of secure services as they incorporate who is and who is not
+       authorized: think of operating systems, information systems, banking, vehicles, robotics, cryptocurrencies, or
+       decentralized applications as examples. The course starts with current challenges of access control in the era of
+       hyperconnectivity, i.e., in cyber-physical or decentralized systems. Based on the derived needs for next generation
+       access control, we first study how to specify access control and analyze strengths and weaknesses of various
+       approaches. We then focus on up-to-date proposals, like IoT and AI access control. We look at current cryptographic
+       access control aspects, blockchains and cryptocurrencies, and trusted execution environments. We also discuss the
+       ethical dimension of access management. Students prepare for lecture and exercise sessions by studying previously
+       announced literature and by preparation of exercises that are jointly discussed in the sessions.
+
+       Workload
+       Lecture workload:
+           1. Attendance time
+              Lecture: 2 SWS: 2,0h x 15 = 30h
+              Exercises: 1 SWS: 1,0h x 15 = 15h
+           2. Self-study (e.g., independent review of course material, work on homework assignments)
+              Weekly preparation and follow-up of the lecture: 15 x 1h x 3 = 45h
+              Weekly preparation and follow-up of the exercise: 15 x 2h = 30h
+           3. Preparation for the exam: 30h
+       Σ = 150h = 5 ECTS
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                               36
+Module Handbook as of 09/09/2026
+4 MODULES                                       Module: Access Control Systems: Models and Technology [M-INFO-106303]
+
+
+       Recommendations
+       Basics according to the lectures "Information Security" and "IT Security Management for Networked Systems" are
+       recommended.
+
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                  37
+Module Handbook as of 09/09/2026
+4 MODULES                                                           Module: Advanced Bayesian Data Analysis [M-INFO-106812]
+
+
+
+
+                 4.128 Module: Reinforcement Learning [M-INFO-105623]
+            M
+
+        Coordinators:      TT-Prof. Dr. Rudolf Lioutikov
+                           Prof. Dr. Gerhard Neumann
+         Organisation:     KIT Department of Informatics
+              Part of:     Area of Specialization: Human-centred Machine Intelligence
+                           Elective Studies in Informatics
+
+
+                     Credits      Grading          Recurrence       Duration      Language      Level       Version
+                      6 CP        graded         Each winter term    1 term        English        4            2
+
+
+                                                                                       Term
+       ID                      Name                                                  offered   Credits Lecturers
+       Mandatory
+         T-INFO-111255         Reinforcement Learning                                   WT       6 CP Lioutikov, Neumann
+
+       Assessment
+       See partial achievements (Teilleistung)
+
+       Prerequisites
+       See partial achievements (Teilleistung)
+
+       Competence Goal
+       - Students are able to understand the RL problem and challenges.
+       - Students can differentiate between different RL algorithm and understand their underlying theory
+       - Students will know the mathematical tools necessary to understand RL algorithms
+       - Students can implement RL algorithms for various tasks
+       - Students understand current research questions in RL
+
+       Content
+       Reinforcement Learning (RL) is a sub-field of machine learning in which an artificial agent has to interact with its
+       environment and learn how to improve its behaviour by trial and error. For doing so, the agent is provided with an
+       evaluative feedback signal, called reward, that he perceives for each action performed in its environment. RL is one of
+       the hardest machine learning problems, as, in contrast to standard supervised learning, we do not know the targets (i.e.
+       the optimal actions) for our inputs (i.e. the state of the environment) and we also need to consider the long-term effects
+       of the agent’s actions on the state of the environment. Due to recent successes, RL has gained a lot of popularity with
+       applications in robotics, automation, health care, trading and finance, natural language processing, autonomous driving
+       and computer games. This lecture will introduce the concepts and theory of RL and review current state of the art
+       methods with a particular focus on RL applications in robotics. An exemplary list of topics is given below:
+
+       • Primer in Machine Learning and Deep Learning
+       • Supervised Learning of Behaviour
+       • Introduction in Reinforcement Learning
+       • Dynamic Programming
+       • Value Based Methods
+       • Policy Optimization and Trust Regions
+       • Episodic Reinforcement Learning and Skill Learning
+       • Bayesian Optimization
+       • Variational Inference, Max-Entropy RL and Versatility
+       • Model-based Reinforcement Learning
+       • Offline Reinforcement Learning
+       • Inverse Reinforcement Learning
+       • Hierarchical Reinforcement Learning
+       • Exploration and Artificial Curiosity
+       • Meta Reinforcement Learning
+
+       Workload
+       Approximately 180 hours, divided into:
+       • 45 hours of lecture attendance
+       • 15 hours of exercise attendance
+       • 90 hours of post-processing and working on exercise sheets
+       • 30 hours of exam preparation.
+
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                             187
+Module Handbook as of 09/09/2026
+4 MODULES                                                                     Module: Reinforcement Learning [M-INFO-105623]
+
+
+       Recommendations
+           ◦ It is recommended that students are familiar with the content of the "Foundations of Artificial Intelligence"
+             lecture.
+           ◦ Good Python knowledge is recommended.
+           ◦ Good mathematical background knowledge is recommended.
+
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                             188
+Module Handbook as of 09/09/2026
+4 MODULES                                                                          Module: Reliable Computing I [M-INFO-100850]
+
+
+
+
+                  4.129 Module: Reliable Computing I [M-INFO-100850]
+            M
+
+        Coordinators:       Prof. Dr. Mehdi Baradaran Tahoori
+        Organisation:       KIT Department of Informatics
+              Part of:      Area of Specialization: Design of Embedded Systems and Computer Architectures
+                            Elective Studies in Informatics
+
+
+                       Credits      Grading       Recurrence       Duration       Language        Level     Version
+                        3 CP        graded         Irregular        1 term         English          4          1
+
+
+                                                                                         Term
+       ID                     Name                                                     offered    Credits Lecturers
+       Mandatory
+         T-INFO-101387        Reliable Computing I                                       Irreg.      3 CP Tahoori
+
+       Assessment
+       See partial achievements (Teilleistung)
+
+       Prerequisites
+       See partial achievements (Teilleistung)
+
+       Competence Goal
+       The objective of this course is to become familiar with general and state of the art techniques used in design and
+       analysis of fault-tolerant digital systems.
+
+       Content
+       The objective of this course is to become familiar with general and state of the art techniques used in design and
+       analysis of fault-tolerant digital systems. The students will study and investigate existing fault-tolerant systems. Both
+       Hardware and software methods will be studied and new research topics will be investigated.
+       This course overviews reliable (fault-tolerant) computing and the design and evaluation of dependable systems, and
+       provides a base for research in reliable systems. Models and methods are used in the analysis and design of fault-
+       tolerant and highly reliable computer systems will be taught in this course. Topics include faults and their manifestations,
+       fault/error modeling, reliability, availability and maintainability analysis, system evaluation, performance-reliability trade-
+       offs, system level fault diagnosis, hardware and software redundancy techniques, and fault-tolerant system design
+       methods.
+
+       Workload
+       2 SWS: (2 SWS + 1,5 x 2 SWS) x 15 + 15 h preparation for the exam = 90 h = 3 ECTS
+
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                                  189
+Module Handbook as of 09/09/2026
+4 MODULES                                        Module: Research Focus Class: Blockchain & Cryptocurrencies [M-INFO-106654]
+
+
+
+
+                 4.94 Module: Practical Course: Customized Embedded Processor Design
+            M
+                 [M-INFO-107897]
+
+        Coordinators:         Prof. Dr.-Ing. Jörg Henkel
+        Organisation:         KIT Department of Informatics
+              Part of:        Area of Specialization: Design of Embedded Systems and Computer Architectures (Usage from
+                              7/13/2026)
+                              Elective Studies in Informatics (Usage from 7/13/2026)
+
+
+                    Credits      Grading        Recurrence         Duration      Language       Level     Version
+                     4 CP        graded       Each summer term      1 term        English         4          1
+
+
+                                                                                     Term
+       ID                      Name                                                offered   Credits Lecturers
+       Mandatory
+         T-INFO-115314         Practical Course: Customized Embedded                   ST       4 CP Henkel
+                               Processor Design
+
+       Assessment
+       See partial achievements (Teilleistung)
+
+       Prerequisites
+       See partial achievements (Teilleistung)
+
+       Competence Goal
+       The student will be able to adapt a processor to specific applications with the help of suitable tools so that it is
+       particularly efficient in terms of performance and power consumption. The student will be able to synthesize and
+       simulate the design.
+
+       Content
+       The design of embedded processors has made rapid progress in recent years. This development has been and
+       continues to be characterized by the increasing demand for application-specific solutions in order to meet the diverse
+       and sometimes contradictory requirements for low power consumption, high performance, low costs and, above all, a
+       fast time-to-market.
+       This is where the internship comes in. The use of an embedded processor tool suite is practiced. Specifically,
+       application-specific processors are developed for embedded applications, whereby the main focus is on adapting the
+       application-specific instruction set. The description of the customized
+       processor is then evaluated for functional correctness and efficiency, e.g. performance/power consumption,
+       performance/chip area, etc., on an FPGA platform after various simulation and synthesis steps. If necessary, some or all
+       design steps are iterated several times in order to find an optimal solution. One learning objective is to see that
+       optimizations at a high level of abstraction are particularly effective.
+
+       Workload
+       1. attendance time in the internship: 36 h
+       2. Preparation/follow-up of the same: 24
+
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                           147
+Module Handbook as of 09/09/2026
+4 MODULES                                                Module: Practical Course: Decentralized Learning Lab [M-INFO-107836]
+
+
+
+
+                    5.1 Module component: Practical Course: Decentralized Learning Lab [T-
+           T
+                    INFO-115246]
+
+         Coordinators:             Prof. Dr. Hannes Hartenstein
+         Organisation:             KIT Department of Informatics
+               Part of:            M-INFO-107836 - Practical Course: Decentralized Learning Lab
+
+
+                             Type                               Credits       Grading    Term offered       Expansion     Version
+                   Examination of another type                   3 CP         graded    Each winter term    1 semesters      1
