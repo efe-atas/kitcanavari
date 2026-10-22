@@ -24,21 +24,30 @@ const MAX_ATTEMPTS = 3
 type Updater = (s: UserState) => UserState
 interface Cache { profile: Profile; sha: string | null; dirty: boolean }
 
+/** The parts of a profile a user edits; used to tell a real local plan from an empty one. */
+const planOf = (p: Profile) => JSON.stringify([p.weekly, p.areas, p.modules])
+const isEmptyPlan = (s: UserState) => !Object.keys(s.selected).length && !(s.areas ?? []).length
+
 export class SyncEngine {
+  private cfg: SyncConfig
+  private deps: EngineDeps
+  private onState: (s: UserState) => void
+  private onStatus: (s: SyncStatus, detail?: string) => void
+
   private current: UserState | null = null
+  /** The local plan when start() was called, before any edit made while loading. */
+  private startLocal: UserState | null = null
   /** Last profile known to be on the server, and its sha. */
   private base: Profile | null = null
   private sha: string | null = null
   private pending: Updater[] = []
   private timer: unknown = null
+  /** True once the first load (and, if needed, the first save) has succeeded. */
   private started = false
+  private disposed = false
+  private waitingOnline = false
   private status: SyncStatus = 'off'
   private work: Promise<void> = Promise.resolve()
-
-  private cfg: SyncConfig
-  private deps: EngineDeps
-  private onState: (s: UserState) => void
-  private onStatus: (s: SyncStatus, detail?: string) => void
 
   constructor(cfg: SyncConfig, deps: EngineDeps, onState: (s: UserState) => void, onStatus: (s: SyncStatus, detail?: string) => void) {
     this.cfg = cfg
@@ -47,23 +56,37 @@ export class SyncEngine {
     this.onStatus = onStatus
   }
 
-  /** Resolves when queued network work has finished (tests, and before tearing the engine down). */
+  /** Resolves when queued network work has finished. */
   idle(): Promise<void> {
     return this.work
   }
 
+  /** Stop for good: no more saves, timers, cache writes or callbacks (after disconnect or a new connection). */
+  dispose(): void {
+    this.disposed = true
+    if (this.timer !== null) this.deps.clearTimer(this.timer)
+    this.timer = null
+  }
+
   start(local: UserState): Promise<void> {
-    return this.enqueue(() => this.doStart(local))
+    this.current = local
+    this.startLocal = local
+    return this.enqueue(() => this.doStart())
   }
 
   record(fn: Updater, next: UserState): void {
+    if (this.disposed) return
+    const prev = this.current
     this.current = next
+    // Language and theme are not in the profile: nothing to save.
+    if (prev && planOf(profileFromState(prev, this.base)) === planOf(profileFromState(next, this.base))
+      && JSON.stringify(prev.lastSeenScrapedAt) === JSON.stringify(next.lastSeenScrapedAt)) return
     this.pending.push(fn)
-    this.writeCache(true)
-    if (this.status === 'conflict' || this.status === 'error' || this.status === 'auth') return
+    // Before the first load there is no server version to be dirty against; kitcanavari:v1 still has the edit.
+    if (this.started) this.writeCache(true)
+    if (!this.started || this.status === 'conflict' || this.status === 'error' || this.status === 'auth') return
     this.setStatus('pending')
-    if (this.timer !== null) this.deps.clearTimer(this.timer)
-    this.timer = this.deps.setTimer(() => { this.timer = null; void this.flush() }, SAVE_DELAY_MS)
+    this.schedule()
   }
 
   flush(): Promise<void> {
@@ -71,7 +94,7 @@ export class SyncEngine {
   }
 
   retry(): Promise<void> {
-    return this.started ? this.flush() : this.start(this.current!)
+    return this.started ? this.flush() : this.enqueue(() => this.doStart())
   }
 
   resolveConflict(keep: 'local' | 'remote'): Promise<void> {
@@ -88,6 +111,7 @@ export class SyncEngine {
           this.pending = []
           this.writeCache(false)
         }
+        this.started = true
         this.setStatus('saved')
       } catch (e) {
         this.fail(e)
@@ -96,41 +120,69 @@ export class SyncEngine {
   }
 
   private enqueue(job: () => Promise<void>): Promise<void> {
-    this.work = this.work.then(job, job)
+    const run = () => (this.disposed ? Promise.resolve() : job())
+    this.work = this.work.then(run, run)
     return this.work
   }
 
-  private async doStart(local: UserState): Promise<void> {
-    this.current = local
+  private schedule(): void {
+    if (this.timer !== null) this.deps.clearTimer(this.timer)
+    this.timer = this.deps.setTimer(() => { this.timer = null; void this.flush() }, SAVE_DELAY_MS)
+  }
+
+  private async doStart(): Promise<void> {
     const cache = this.readCache()
-    if (cache) this.emit(stateFromProfile(cache.profile, device(local)))
+    if (cache) this.emit(this.replay(stateFromProfile(cache.profile, device(this.current!))))
     this.setStatus('loading')
     try {
-      const remote = await this.deps.get(this.cfg)
-      this.started = true
-      if (!remote) {
-        const profile = profileFromState(this.current, cache?.profile ?? null)
-        this.sha = await this.deps.put(this.cfg, profile, null, this.message())
-        this.base = profile
-        this.writeCache(false)
-      } else if (cache?.dirty) {
-        // Changes made offline before a reload: their updaters are gone, so they only apply onto the same version.
-        this.base = remote.profile
-        this.sha = remote.sha
-        if (cache.sha !== remote.sha) {
-          this.setStatus('conflict')
+      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+        try {
+          await this.startOnce(cache)
           return
+        } catch (e) {
+          // The file appeared or changed between our GET and PUT: look again.
+          if (!(e instanceof ConflictError)) throw e
         }
-        this.sha = await this.deps.put(this.cfg, cache.profile, remote.sha, this.message())
-        this.base = cache.profile
-        this.writeCache(false)
-      } else {
-        this.adopt(remote.profile, remote.sha)
       }
-      this.setStatus('saved')
+      this.setStatus('conflict')
     } catch (e) {
       this.fail(e)
     }
+  }
+
+  private async startOnce(cache: Cache | null): Promise<void> {
+    const remote = await this.deps.get(this.cfg)
+    if (this.disposed) return
+    if (!remote) {
+      const sent = this.pending.length
+      const profile = profileFromState(this.current!, cache?.profile ?? null)
+      this.sha = await this.deps.put(this.cfg, profile, null, this.message())
+      this.base = profile
+      this.pending = this.pending.slice(sent)
+    } else if (cache?.dirty) {
+      // Changes made offline before a reload: their updaters are gone, so they only apply onto the same version.
+      this.base = remote.profile
+      this.sha = remote.sha
+      if (cache.sha !== remote.sha) {
+        this.setStatus('conflict')
+        return
+      }
+      this.sha = await this.deps.put(this.cfg, cache.profile, remote.sha, this.message())
+      this.base = cache.profile
+    } else if (!cache && !isEmptyPlan(this.startLocal!)
+      && planOf(profileFromState(this.startLocal!, remote.profile)) !== planOf(remote.profile)) {
+      // First connection on a device that already has its own plan: never drop it silently.
+      this.base = remote.profile
+      this.sha = remote.sha
+      this.setStatus('conflict')
+      return
+    } else {
+      this.adopt(remote.profile, remote.sha)
+    }
+    this.started = true
+    this.writeCache(this.pending.length > 0)
+    this.setStatus(this.pending.length ? 'pending' : 'saved')
+    if (this.pending.length) this.schedule()
   }
 
   private async doFlush(): Promise<void> {
@@ -146,7 +198,7 @@ export class SyncEngine {
           this.pending = this.pending.slice(sent)
           this.writeCache(this.pending.length > 0)
           this.setStatus(this.pending.length ? 'pending' : 'saved')
-          if (this.pending.length) this.timer = this.deps.setTimer(() => { this.timer = null; void this.flush() }, SAVE_DELAY_MS)
+          if (this.pending.length) this.schedule()
           return
         } catch (e) {
           if (!(e instanceof ConflictError)) throw e
@@ -154,7 +206,7 @@ export class SyncEngine {
           this.base = remote?.profile ?? null
           this.sha = remote?.sha ?? null
           const from = remote ? stateFromProfile(remote.profile, device(this.current!)) : this.current!
-          this.emit(this.pending.reduce((s, fn) => fn(s), from))
+          this.emit(this.replay(from))
         }
       }
       this.setStatus('conflict')
@@ -163,24 +215,32 @@ export class SyncEngine {
     }
   }
 
-  /** Replace local state with a remote profile. */
+  /** Apply local updates that the server has not seen yet. */
+  private replay(from: UserState): UserState {
+    return this.pending.reduce((s, fn) => fn(s), from)
+  }
+
+  /** Take a remote profile as the new base, keeping local updates not yet sent. */
   private adopt(profile: Profile, sha: string): void {
     this.base = profile
     this.sha = sha
-    this.emit(stateFromProfile(profile, device(this.current!)))
-    this.writeCache(false)
+    this.emit(this.replay(stateFromProfile(profile, device(this.current!))))
+    this.writeCache(this.pending.length > 0)
   }
 
   private emit(s: UserState): void {
     this.current = s
-    this.onState(s)
+    if (!this.disposed) this.onState(s)
   }
 
   private fail(e: unknown): void {
     const detail = e instanceof Error ? e.message : String(e)
     if (e instanceof OfflineError) {
       this.setStatus('offline', detail)
-      this.deps.onOnline(() => void this.retry())
+      if (!this.waitingOnline) {
+        this.waitingOnline = true
+        this.deps.onOnline(() => { this.waitingOnline = false; if (!this.disposed) void this.retry() })
+      }
     } else if (e instanceof AuthError) this.setStatus('auth', detail)
     else if (e instanceof InvalidRemoteError) this.setStatus('error', detail)
     else this.setStatus('error', detail)
@@ -188,7 +248,7 @@ export class SyncEngine {
 
   private setStatus(s: SyncStatus, detail?: string): void {
     this.status = s
-    this.onStatus(s, detail)
+    if (!this.disposed) this.onStatus(s, detail)
   }
 
   private message(): string {
@@ -206,7 +266,7 @@ export class SyncEngine {
   }
 
   private writeCache(dirty: boolean): void {
-    if (!this.current) return
+    if (!this.current || this.disposed) return
     const cache: Cache = { profile: profileFromState(this.current, this.base), sha: this.sha, dirty }
     try {
       this.deps.storage?.setItem(CACHE_KEY, JSON.stringify(cache))

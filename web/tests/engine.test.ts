@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { SyncEngine, type EngineDeps, type SyncStatus } from '../src/sync/engine'
 import { AuthError, ConflictError, InvalidRemoteError, OfflineError } from '../src/sync/github'
 import { emptyProfile, profileFromState, type Profile } from '../src/sync/profile'
-import { addEvent, defaultState, setArea } from '../src/store'
+import { addEvent, defaultState, setArea, toggleTheme } from '../src/store'
 import type { UserState } from '../src/types'
 import { ev } from './fixtures'
 
@@ -32,9 +32,11 @@ function server(initial: Profile | null = null) {
     s.sha = `v${++n}`
     return s.sha
   })
+  /** Another device creates the file. */
+  const remoteEditInit = (p: Profile) => { s.profile = structuredClone(p); s.sha = `v${++n}` }
   /** Another device writes directly. */
   const remoteEdit = (fn: (p: Profile) => Profile) => { s.profile = fn(structuredClone(s.profile!)); s.sha = `v${++n}` }
-  return { s, get, put, remoteEdit }
+  return { s, get, put, remoteEdit, remoteEditInit }
 }
 
 function setup(srv: ReturnType<typeof server>, storage = memStorage()) {
@@ -190,5 +192,85 @@ describe('SyncEngine', () => {
     expect(t.states.length).toBe(before)
     expect(JSON.parse(storage.getItem(CACHE)!).dirty).toBe(true)
     expect(profileFromState(withEvent('e1'), null).weekly).toHaveProperty('e1')
+  })
+
+  test('connecting with a local plan to an existing remote asks instead of discarding it', async () => {
+    const srv = server({ ...emptyProfile(), areas: ['Telematics'] })
+    const t = setup(srv)
+    await t.engine.start(withEvent('e1'))
+    expect(t.statuses.at(-1)).toBe('conflict')
+    expect(t.states.some((s) => !s.selected.e1)).toBe(false)
+    expect(srv.s.puts).toBe(0)
+    await t.engine.resolveConflict('local')
+    expect(srv.s.profile!.weekly).toHaveProperty('e1')
+  })
+
+  test('edits made while the first load is in flight are kept and sent', async () => {
+    const srv = server({ ...emptyProfile(), areas: ['Telematics'] })
+    let release!: () => void
+    const gate = new Promise<void>((r) => { release = r })
+    const realGet = srv.get
+    srv.get = vi.fn(async (c) => { await gate; return realGet(c) })
+    const t = setup(srv)
+    const started = t.engine.start(defaultState())
+    t.engine.record((s) => withEvent('e1', s), withEvent('e1'))
+    release()
+    await started
+    const shown = t.states.at(-1)!
+    expect(shown.areas).toEqual(['Telematics'])
+    expect(shown.selected).toHaveProperty('e1')
+    await t.fire()
+    expect(srv.s.profile!.weekly).toHaveProperty('e1')
+    expect(srv.s.profile!.areas).toEqual(['Telematics'])
+  })
+
+  test('a failed first save is retried when the connection returns', async () => {
+    const srv = server()
+    srv.s.failPut = () => new OfflineError('offline')
+    const t = setup(srv)
+    await t.engine.start(withEvent('e1'))
+    expect(t.statuses.at(-1)).toBe('offline')
+    srv.s.failPut = null
+    await t.goOnline()
+    expect(srv.s.profile!.weekly).toHaveProperty('e1')
+    expect(t.statuses.at(-1)).toBe('saved')
+  })
+
+  test('a file created elsewhere during the first connect is loaded, not an error', async () => {
+    const srv = server()
+    const realGet = srv.get
+    srv.get = vi.fn(async (c) => {
+      const r = await realGet(c)
+      if (!srv.s.profile) srv.remoteEditInit({ ...emptyProfile(), areas: ['Telematics'] })
+      return r
+    })
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    expect(t.statuses.at(-1)).toBe('saved')
+    expect(t.states.at(-1)!.areas).toEqual(['Telematics'])
+  })
+
+  test('a disposed engine stops saving and writing the cache', async () => {
+    const storage = memStorage()
+    const srv = server(emptyProfile())
+    const t = setup(srv, storage)
+    await t.engine.start(defaultState())
+    t.engine.record((s) => withEvent('e1', s), withEvent('e1'))
+    t.engine.dispose()
+    storage.removeItem(CACHE)
+    await t.fire()
+    t.engine.record((s) => withEvent('e2', s), withEvent('e2'))
+    expect(srv.s.puts).toBe(0)
+    expect(storage.getItem(CACHE)).toBeNull()
+  })
+
+  test('device-only changes do not save', async () => {
+    const srv = server(emptyProfile())
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    t.engine.record(toggleTheme, toggleTheme(defaultState()))
+    expect(t.hasTimer()).toBe(false)
+    expect(t.statuses.at(-1)).toBe('saved')
+    expect(srv.s.puts).toBe(0)
   })
 })

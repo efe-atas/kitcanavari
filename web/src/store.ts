@@ -134,6 +134,15 @@ export function useAppState(): [UserState, (fn: (s: UserState) => UserState) => 
   }, [commit])
 
   const startEngine = useCallback((cfg: SyncConfig) => {
+    engine.current?.dispose()
+    // Spec §3: the pre-sync plan stays as a backup.
+    try {
+      const storage = safeLocalStorage()
+      const raw = storage?.getItem(STORAGE_KEY)
+      if (raw && !storage!.getItem(`${STORAGE_KEY}:backup`)) storage!.setItem(`${STORAGE_KEY}:backup`, raw)
+    } catch {
+      /* best effort */
+    }
     const e = new SyncEngine(cfg, defaultDeps(safeLocalStorage()),
       // Remote state never carries this device's language or theme.
       (s) => { if (engine.current === e) commit({ ...s, lang: current.current.lang, theme: current.current.theme }) },
@@ -155,6 +164,7 @@ export function useAppState(): [UserState, (fn: (s: UserState) => UserState) => 
       startEngine(cfg)
     },
     disconnect: () => {
+      engine.current?.dispose()
       engine.current = null
       clearSync(safeLocalStorage())
       setConfig(null)
