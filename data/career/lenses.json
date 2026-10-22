@@ -1,0 +1,362 @@
+{
+ "lenses": [
+  {
+   "id": "bigtech",
+   "title": {
+    "tr": "Big Tech / FAANG",
+    "en": "Big Tech / FAANG"
+   },
+   "multipliers": {
+    "algo": 1.5,
+    "distsys": 1.4,
+    "swe": 1.2,
+    "sysperf": 1.2
+   },
+   "cities": [
+    "Zürich",
+    "München",
+    "London",
+    "Dublin",
+    "Amsterdam"
+   ],
+   "salary": [
+    {
+     "role": "backend",
+     "band": "Google L3 (giriş), Zürih: toplam ~CHF 182k / yıl",
+     "source": "https://www.levels.fyi/en-gb/companies/google/salaries/software-engineer/locations/greater-zurich-area",
+     "asOf": "2026-07"
+    }
+   ],
+   "interview": {
+    "tr": "2–4 algoritma/veri yapısı (LeetCode tarzı) mülakatı, kıdemli seviyede system design, davranışsal görüşme; dersler değil mülakat performansı belirleyici.",
+    "en": "2–4 algorithm/data-structure (LeetCode-style) rounds, system design from mid level, a behavioural round; interview performance, not coursework, decides."
+   },
+   "offCourse": {
+    "tr": [
+     "Düzenli LeetCode / competitive programming",
+     "Big Tech staj başvuruları (kış dönemi başında açılır)",
+     "Referans: KIT mezunları ve LinkedIn",
+     "Açık kaynak veya ölçekli bir yan proje"
+    ],
+    "en": [
+     "Regular LeetCode / competitive programming",
+     "Big Tech internship applications (open early in the winter term)",
+     "Referrals: KIT alumni and LinkedIn",
+     "Open-source work or a side project at scale"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Giriş çok rekabetçi, işe alım dönemsel donuyor",
+     "Almanya'da ofis sayısı az (çoğu Zürih/Münih)",
+     "Rol dar ve süreç ağır olabilir"
+    ],
+    "en": [
+     "Very competitive entry; hiring freezes come and go",
+     "Few offices in Germany (mostly Zurich/Munich)",
+     "Roles can be narrow and process-heavy"
+    ]
+   }
+  },
+  {
+   "id": "quant",
+   "title": {
+    "tr": "Quant / Trading",
+    "en": "Quant / Trading"
+   },
+   "multipliers": {
+    "algo": 1.6,
+    "sysperf": 1.5,
+    "data": 1.2,
+    "research": 0.7
+   },
+   "cities": [
+    "Amsterdam",
+    "Londra / London",
+    "Frankfurt",
+    "Zürich"
+   ],
+   "salary": [
+    {
+     "role": "quant",
+     "band": "Optiver giriş (L3), Hollanda: toplam ~€169k / yıl",
+     "source": "https://www.levels.fyi/company/Optiver/salaries/Software-Engineer",
+     "asOf": "2026-02"
+    }
+   ],
+   "interview": {
+    "tr": "Zamanlı aritmetik ve olasılık testleri, algoritma ve C++ derinliği, düşük seviye performans soruları; birkaç aşamalı ve hızlı.",
+    "en": "Timed arithmetic and probability tests, algorithms and C++ depth, low-level performance questions; several fast rounds."
+   },
+   "offCourse": {
+    "tr": [
+     "Competitive programming (ICPC, Codeforces)",
+     "Olasılık/zeka bulmacaları pratiği",
+     "C++ veya Rust ile düşük gecikmeli yan proje",
+     "Optiver/IMC/Jane Street staj programları"
+    ],
+    "en": [
+     "Competitive programming (ICPC, Codeforces)",
+     "Probability and brain-teaser practice",
+     "A low-latency side project in C++ or Rust",
+     "Optiver/IMC/Jane Street internship programmes"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Çok az sayıda pozisyon, çok seçici",
+     "Yüksek tempo ve performans baskısı",
+     "Almanya dışına taşınmak gerekebilir"
+    ],
+    "en": [
+     "Very few openings, very selective",
+     "High pace and performance pressure",
+     "Usually means moving out of Germany"
+    ]
+   }
+  },
+  {
+   "id": "ailab",
+   "title": {
+    "tr": "AI Lab / Scale-up",
+    "en": "AI Lab / Scale-up"
+   },
+   "multipliers": {
+    "mltheory": 1.4,
+    "dl": 1.4,
+    "research": 1.5,
+    "nlp": 1.2,
+    "swe": 0.8
+   },
+   "cities": [
+    "Londra / London",
+    "Paris",
+    "Zürich",
+    "Heidelberg",
+    "München"
+   ],
+   "salary": [],
+   "interview": {
+    "tr": "ML teorisi ve kodlama, makale tartışması, bazen ev ödevi; yayın veya güçlü açık kaynak katkısı kapıyı açar.",
+    "en": "ML theory and coding, a paper discussion, sometimes a take-home; publications or strong open-source work open the door."
+   },
+   "offCourse": {
+    "tr": [
+     "KIT'te ML laboratuvarında HiWi",
+     "Workshop/konferans makalesi (tez dahil)",
+     "Açık kaynak model/araç katkısı",
+     "Kaggle veya benchmark sonuçları"
+    ],
+    "en": [
+     "HiWi in a KIT ML lab",
+     "A workshop/conference paper (thesis included)",
+     "Contributions to open-source models or tools",
+     "Kaggle or benchmark results"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Yayın olmadan giriş zor",
+     "Alan çok hızlı değişiyor, startup riski yüksek",
+     "Ücret şirkete göre çok değişken (güvenilir giriş verisi az)"
+    ],
+    "en": [
+     "Hard to enter without publications",
+     "The field moves fast; startup risk is high",
+     "Pay varies a lot by company (little reliable entry-level data)"
+    ]
+   }
+  },
+  {
+   "id": "industry",
+   "title": {
+    "tr": "Alman sanayisi / Mittelstand",
+    "en": "German industry / Mittelstand"
+   },
+   "multipliers": {
+    "swe": 1.3,
+    "embedded": 1.3,
+    "robotics": 1.2,
+    "research": 0.6,
+    "formal": 0.8
+   },
+   "cities": [
+    "Stuttgart",
+    "Karlsruhe",
+    "München",
+    "Walldorf",
+    "Wolfsburg"
+   ],
+   "salary": [
+    {
+     "role": "backend",
+     "band": "SAP T1 (Associate Developer), Almanya: toplam ~€63.6k / yıl",
+     "source": "https://levels.fyi/company/sap/salaries/software-engineer",
+     "asOf": "2026-07"
+    },
+    {
+     "role": "ml-eng",
+     "band": "Erken kariyer ML mühendisi, Münih: medyan taban ~€57k / yıl",
+     "source": "https://www.payscale.com/research/DE/Job=Machine_Learning_Engineer/Salary/a92c8d01/Early-Career-Munich",
+     "asOf": "2026-10"
+    },
+    {
+     "role": "security",
+     "band": "Junior siber güvenlik mühendisi, Almanya: ortalama taban ~€60k / yıl",
+     "source": "https://www.payscale.com/research/DE/Job=Junior_Cybersecurity_Engineer/Salary",
+     "asOf": "2026-10"
+    }
+   ],
+   "interview": {
+    "tr": "Teknik görüşme + vaka/proje sunumu, çoğunlukla Almanca; Werkstudent veya şirkette yazılan tez doğrudan teklife dönüşebilir.",
+    "en": "A technical interview plus a case or project presentation, often in German; a Werkstudent job or a thesis written at the company often turns into an offer."
+   },
+   "offCourse": {
+    "tr": [
+     "Werkstudent (Bosch, SAP, Vector, IONOS, Porsche…)",
+     "Tezi şirkette yazmak",
+     "Almanca B2+",
+     "Sektöre özgü bilgi (otomotiv, AUTOSAR, ISO 26262)"
+    ],
+    "en": [
+     "Werkstudent jobs (Bosch, SAP, Vector, IONOS, Porsche…)",
+     "Writing the thesis at a company",
+     "German at B2+",
+     "Domain knowledge (automotive, AUTOSAR, ISO 26262)"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Maaş artışı yavaş, tavan düşük",
+     "Otomotiv krizleri işe alımı etkiliyor",
+     "Almanca olmadan yükselmek zor"
+    ],
+    "en": [
+     "Slower raises and a lower ceiling",
+     "Automotive downturns hit hiring",
+     "Hard to advance without German"
+    ]
+   }
+  },
+  {
+   "id": "startup",
+   "title": {
+    "tr": "Startup",
+    "en": "Startup"
+   },
+   "multipliers": {
+    "swe": 1.4,
+    "distsys": 1.1,
+    "data": 1.1,
+    "research": 0.5,
+    "formal": 0.6
+   },
+   "cities": [
+    "Berlin",
+    "München",
+    "Karlsruhe (CyberForum)",
+    "Amsterdam"
+   ],
+   "salary": [
+    {
+     "role": "backend",
+     "band": "Junior yazılım mühendisi, Berlin: ortalama taban ~€45.8k / yıl (+ hisse)",
+     "source": "https://www.payscale.com/research/DE/Job=Junior_Software_Engineer/Salary/5c71f008/Berlin",
+     "asOf": "2026-10"
+    }
+   ],
+   "interview": {
+    "tr": "Pratik kodlama görevi veya ev ödevi, ürün ve takım uyumu; çok yönlülük ve hızlı teslim önemli.",
+    "en": "A practical coding task or take-home, plus product and team fit; breadth and shipping fast matter."
+   },
+   "offCourse": {
+    "tr": [
+     "Uçtan uca yan proje veya hackathon",
+     "KIT girişimcilik ekosistemi (KIT-Gründerschmiede)",
+     "Kendi ürününü yayınlamak"
+    ],
+    "en": [
+     "An end-to-end side project or hackathon",
+     "KIT's founder ecosystem (KIT-Gründerschmiede)",
+     "Shipping a product of your own"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Düşük taban maaş, hisse belirsiz",
+     "Şirket batma riski",
+     "Mentorluk ve yapı az olabilir"
+    ],
+    "en": [
+     "Lower base pay; equity is uncertain",
+     "Risk of the company folding",
+     "Little mentoring or structure"
+    ]
+   }
+  },
+  {
+   "id": "academia",
+   "title": {
+    "tr": "Akademi",
+    "en": "Academia"
+   },
+   "multipliers": {
+    "research": 1.8,
+    "formal": 1.3,
+    "mltheory": 1.1,
+    "swe": 0.7
+   },
+   "cities": [
+    "Karlsruhe",
+    "München",
+    "Berlin",
+    "Saarbrücken",
+    "Tübingen"
+   ],
+   "salary": [
+    {
+     "role": "academia",
+     "band": "Doktora (TV-L E13, Kademe 1, tam zaman): ~€4,760 / ay brüt ≈ €57k / yıl",
+     "source": "https://tarifvertrag-online.de/gehaltsrechner/oeffentlicher-dienst/tv-l/entgeltgruppe-13",
+     "asOf": "2026-04"
+    },
+    {
+     "role": "research-sci",
+     "band": "Doktora araştırmacısı (TV-L E13, Kademe 1): ~€4,760 / ay brüt",
+     "source": "https://tarifvertrag-online.de/gehaltsrechner/oeffentlicher-dienst/tv-l/entgeltgruppe-13",
+     "asOf": "2026-04"
+    }
+   ],
+   "interview": {
+    "tr": "Hocayla görüşme, tez/proje sunumu, bazen bir araştırma sorusu üzerine konuşma; tavsiye mektubu ve önceki çalışma belirleyici.",
+    "en": "A talk with the professor, a thesis/project presentation, sometimes a discussion of a research question; references and prior work decide."
+   },
+   "offCourse": {
+    "tr": [
+     "Practice of Research modülleri",
+     "Hedef laboratuvarda HiWi ve tez",
+     "Yayın (workshop dahil)",
+     "Hocalarla erken ilişki"
+    ],
+    "en": [
+     "The Practice of Research modules",
+     "HiWi and thesis in the target lab",
+     "Publications (workshops count)",
+     "Getting to know professors early"
+    ]
+   },
+   "downsides": {
+    "tr": [
+     "Sanayiye göre düşük maaş",
+     "Sözleşmeler genelde süreli",
+     "Kalıcı pozisyon az ve rekabetçi"
+    ],
+    "en": [
+     "Lower pay than industry",
+     "Contracts are usually fixed-term",
+     "Few, competitive permanent positions"
+    ]
+   }
+  }
+ ]
+}

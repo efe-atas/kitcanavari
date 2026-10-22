@@ -1,0 +1,258 @@
+{
+ "roles": [
+  {
+   "id": "ml-eng",
+   "title": {
+    "tr": "ML / AI Mühendisi",
+    "en": "ML / AI Engineer"
+   },
+   "summary": {
+    "tr": "Modelleri eğitir, üretime alır ve ölçekler; deep learning, ML teorisi ve sağlam yazılım mühendisliği birlikte gerekir.",
+    "en": "Trains models, ships them to production and scales them; needs deep learning, ML theory and solid software engineering together."
+   },
+   "weights": {
+    "dl": 0.3,
+    "mltheory": 0.2,
+    "swe": 0.15,
+    "data": 0.1,
+    "sysperf": 0.1,
+    "nlp": 0.075,
+    "cv": 0.075
+   },
+   "targets": {
+    "dl": 9,
+    "mltheory": 9,
+    "swe": 6,
+    "data": 4,
+    "sysperf": 4,
+    "nlp": 3,
+    "cv": 3
+   }
+  },
+  {
+   "id": "research-sci",
+   "title": {
+    "tr": "Araştırma Bilimcisi",
+    "en": "Research Scientist"
+   },
+   "summary": {
+    "tr": "Yeni yöntemler geliştirir ve yayınlar; güçlü ML teorisi ve araştırma deneyimi (yayın, tez) belirleyicidir.",
+    "en": "Develops and publishes new methods; strong ML theory and research experience (papers, thesis) decide."
+   },
+   "weights": {
+    "mltheory": 0.3,
+    "research": 0.3,
+    "dl": 0.2,
+    "formal": 0.1,
+    "nlp": 0.05,
+    "cv": 0.05
+   },
+   "targets": {
+    "mltheory": 9,
+    "research": 9,
+    "dl": 6,
+    "formal": 4,
+    "nlp": 3,
+    "cv": 3
+   }
+  },
+  {
+   "id": "data-sci",
+   "title": {
+    "tr": "Veri Bilimcisi",
+    "en": "Data Scientist"
+   },
+   "summary": {
+    "tr": "Veriden karar çıkarır: istatistik, ML ve analiz; ürün ve iş tarafıyla yakın çalışır.",
+    "en": "Turns data into decisions: statistics, ML and analysis, working closely with product and business."
+   },
+   "weights": {
+    "data": 0.35,
+    "mltheory": 0.25,
+    "dl": 0.15,
+    "algo": 0.1,
+    "swe": 0.15
+   },
+   "targets": {
+    "data": 9,
+    "mltheory": 6,
+    "dl": 4,
+    "algo": 4,
+    "swe": 4
+   }
+  },
+  {
+   "id": "backend",
+   "title": {
+    "tr": "Backend / Dağıtık Sistemler",
+    "en": "Backend / Distributed Systems"
+   },
+   "summary": {
+    "tr": "Ölçeklenen servisler ve altyapı kurar; dağıtık sistemler, algoritmalar ve performans öne çıkar.",
+    "en": "Builds services and infrastructure that scale; distributed systems, algorithms and performance stand out."
+   },
+   "weights": {
+    "distsys": 0.3,
+    "swe": 0.25,
+    "algo": 0.2,
+    "sysperf": 0.15,
+    "security": 0.1
+   },
+   "targets": {
+    "distsys": 9,
+    "swe": 9,
+    "algo": 6,
+    "sysperf": 4,
+    "security": 3
+   }
+  },
+  {
+   "id": "quant",
+   "title": {
+    "tr": "Quant Geliştirici",
+    "en": "Quant Developer"
+   },
+   "summary": {
+    "tr": "Düşük gecikmeli trading sistemleri ve araçları yazar; algoritma, C++/Rust performansı ve olasılık sezgisi ister.",
+    "en": "Writes low-latency trading systems and tooling; demands algorithms, C++/Rust performance and a feel for probability."
+   },
+   "weights": {
+    "algo": 0.35,
+    "sysperf": 0.3,
+    "data": 0.15,
+    "mltheory": 0.1,
+    "distsys": 0.1
+   },
+   "targets": {
+    "algo": 9,
+    "sysperf": 9,
+    "data": 4,
+    "mltheory": 4,
+    "distsys": 3
+   }
+  },
+  {
+   "id": "security",
+   "title": {
+    "tr": "Güvenlik Mühendisi",
+    "en": "Security Engineer"
+   },
+   "summary": {
+    "tr": "Sistemleri saldırılara karşı tasarlar, test eder ve korur; uygulama/ağ güvenliği ve kriptografi temeli gerekir.",
+    "en": "Designs, tests and defends systems against attacks; needs application/network security and a cryptography base."
+   },
+   "weights": {
+    "security": 0.45,
+    "crypto": 0.25,
+    "distsys": 0.1,
+    "formal": 0.1,
+    "embedded": 0.1
+   },
+   "targets": {
+    "security": 12,
+    "crypto": 6,
+    "distsys": 3,
+    "formal": 3,
+    "embedded": 3
+   }
+  },
+  {
+   "id": "robotics",
+   "title": {
+    "tr": "Robotik / Otonom Sistemler",
+    "en": "Robotics / Autonomous Systems"
+   },
+   "summary": {
+    "tr": "Algılama, planlama ve kontrolü gerçek robotlarda ve araçlarda birleştirir.",
+    "en": "Combines perception, planning and control on real robots and vehicles."
+   },
+   "weights": {
+    "robotics": 0.4,
+    "cv": 0.2,
+    "dl": 0.15,
+    "mltheory": 0.15,
+    "embedded": 0.1
+   },
+   "targets": {
+    "robotics": 12,
+    "cv": 4,
+    "dl": 4,
+    "mltheory": 4,
+    "embedded": 3
+   }
+  },
+  {
+   "id": "embedded",
+   "title": {
+    "tr": "Gömülü / Donanım-AI",
+    "en": "Embedded / Hardware AI"
+   },
+   "summary": {
+    "tr": "Kısıtlı donanımda yazılım ve hızlandırıcılar geliştirir (FPGA, edge-AI); donanım bilgisi ve performans odaklı çalışma ister.",
+    "en": "Builds software and accelerators on constrained hardware (FPGA, edge AI); needs hardware knowledge and a performance mindset."
+   },
+   "weights": {
+    "embedded": 0.45,
+    "sysperf": 0.2,
+    "dl": 0.15,
+    "robotics": 0.1,
+    "security": 0.1
+   },
+   "targets": {
+    "embedded": 12,
+    "sysperf": 6,
+    "dl": 3,
+    "robotics": 3,
+    "security": 3
+   }
+  },
+  {
+   "id": "architect",
+   "title": {
+    "tr": "Yazılım Mimarı",
+    "en": "Software Architect"
+   },
+   "summary": {
+    "tr": "Büyük sistemlerin yapısını, kalitesini ve evrimini yönetir; yazılım mühendisliği derinliği ve sistem görüşü ister.",
+    "en": "Shapes the structure, quality and evolution of large systems; needs software engineering depth and a systems view."
+   },
+   "weights": {
+    "swe": 0.4,
+    "distsys": 0.25,
+    "formal": 0.1,
+    "security": 0.1,
+    "sysperf": 0.15
+   },
+   "targets": {
+    "swe": 12,
+    "distsys": 6,
+    "formal": 3,
+    "security": 3,
+    "sysperf": 4
+   }
+  },
+  {
+   "id": "academia",
+   "title": {
+    "tr": "Akademi / Doktora",
+    "en": "Academia / PhD"
+   },
+   "summary": {
+    "tr": "Doktora ve sonrası araştırma kariyeri; araştırma deneyimi, teori ve yayın en önemli girdiler.",
+    "en": "A PhD and research career beyond it; research experience, theory and publications are the key inputs."
+   },
+   "weights": {
+    "research": 0.4,
+    "formal": 0.2,
+    "algo": 0.2,
+    "mltheory": 0.2
+   },
+   "targets": {
+    "research": 12,
+    "formal": 6,
+    "algo": 6,
+    "mltheory": 6
+   }
+  }
+ ]
+}
