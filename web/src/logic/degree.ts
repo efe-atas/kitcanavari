@@ -51,7 +51,7 @@ const AREA_PREFIX = 'Area of Specialization: '
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '')
 const STAMM = new Set(STAMM_TITLES.map(norm))
 
-export const moduleAreas = (m: Module): string[] =>
+export const moduleAreas = (m: Pick<Module, 'fields'>): string[] =>
   m.fields.filter((f) => f.startsWith(AREA_PREFIX)).map((f) => f.slice(AREA_PREFIX.length))
 
 const MINOR_PREFIX = 'Minor Studies: '
@@ -94,10 +94,10 @@ function kindsFromTree(data: CoursesFile): Map<string, Kind> {
   return out
 }
 
-export const moduleKind = (data: CoursesFile, m: Module): Kind =>
+export const moduleKind = (data: CoursesFile, m: Pick<Module, 'id' | 'title'>): Kind =>
   (STAMM_IDS.has(m.id) ? 'stamm' : null) ?? kindFromTitle(m.title) ?? kindsFromTree(data).get(m.id) ?? 'lecture'
 
-export function bucketOptions(m: Module): Bucket[] {
+export function bucketOptions(m: Pick<Module, 'fields'>): Bucket[] {
   const areas = moduleAreas(m)
   const out: Bucket[] = [...areas]
   if (areas.length || m.fields.some((f) => f.startsWith('Elective Studies'))) out.push(ELECTIVE)

@@ -1,4 +1,4 @@
-import type { ChangesFile, CoursesFile } from '../src/types'
+import type { ChangesFile, CoursesFile, HandbookFile, HandbookModule } from '../src/types'
 import { ev, mod, session, slot } from './fixtures'
 
 export const daysAgo = (n: number) => new Date(Date.now() - n * 86400_000).toISOString().replace(/\.\d+Z$/, 'Z')
@@ -26,3 +26,20 @@ export const makeCourses = (scrapedAt = daysAgo(0)): CoursesFile => ({
 })
 
 export const makeChanges = (): ChangesFile => ({ entries: [] })
+
+const hbMod = (id: string, title: string, ects: number, recurrence: HandbookModule['recurrence'], fields: string[],
+  coordinators: string[] = ['Prof. Coordinator']): HandbookModule => ({
+  id, title, ects, recurrence, language: 'English', level: 4, fields, coordinators,
+  bricks: [{ id: `T-${id}`, title, ects, term: 'WT' }],
+  competenceGoals: `Goals of ${title}`, content: `Content of ${title}`, prerequisites: null, recommendations: null,
+})
+
+export const makeHandbook = (): HandbookFile => ({
+  meta: { source: '88-979-H-2025 Module Handbook', asOf: '2026-09-09', parsedAt: '2026-10-22T00:00:00Z' },
+  modules: {
+    M3: hbMod('M3', 'Module M3', 8, 'winter', ['Area of Specialization: Cryptography and Security']),
+    H1: hbMod('H1', 'Reinforcement Learning', 6, 'winter',
+      ['Area of Specialization: Human-centred Machine Intelligence', 'Elective Studies in Informatics'], ['Prof. Dr. Gerhard Neumann']),
+    H2: hbMod('H2', 'Seminar: Post-Quantum Cryptography', 3, 'summer', ['Area of Specialization: Cryptography and Security']),
+  },
+})

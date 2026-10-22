@@ -77,6 +77,30 @@ export interface FieldNode {
   eventIds: string[]
 }
 
+export type Recurrence = 'winter' | 'summer' | 'each' | 'irregular'
+
+/** One module of the module handbook (data/handbook.json), parsed from the PDF by hand. */
+export interface HandbookModule {
+  id: string
+  title: string
+  ects: number | null
+  recurrence: Recurrence
+  language: string | null
+  level: number | null
+  fields: string[]
+  coordinators: string[]
+  bricks: { id: string; title: string; ects: number | null; term: string }[]
+  competenceGoals: string | null
+  content: string | null
+  prerequisites: string | null
+  recommendations: string | null
+}
+
+export interface HandbookFile {
+  meta: { source: string; asOf: string; parsedAt: string }
+  modules: Record<string, HandbookModule>
+}
+
 export type ChangeKind =
   | 'added' | 'removed' | 'slot_changed' | 'room_changed'
   | 'session_cancelled' | 'session_added' | 'session_removed'
