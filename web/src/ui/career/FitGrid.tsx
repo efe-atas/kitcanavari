@@ -37,7 +37,7 @@ export function FitGrid({ lang, career, points, followed, selected, onSelect }: 
                   <td key={l.id}>
                     <button type="button" class={`fit-cell${picked ? ' is-picked' : ''}`} style={{ '--fit': all / 100 }}
                       aria-pressed={picked}
-                      aria-label={`${r.title[lang]} · ${l.title[lang]}: ${t(lang, 'career.cell', { n: all, now })}${on ? `, ${t(lang, 'career.followedMark')}` : ''}`}
+                      aria-label={`${r.title[lang]}, ${l.title[lang]}: ${t(lang, 'career.cell', { n: all, now })}${on ? `, ${t(lang, 'career.followedMark')}` : ''}`}
                       onClick={() => onSelect(r.id, l.id)}>
                       <strong>{all}%</strong>
                       <span class="fit-now">{now}%</span>

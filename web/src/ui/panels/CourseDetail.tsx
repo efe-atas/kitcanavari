@@ -142,13 +142,13 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
           <h3>{t(lang, 'detail.thisWeek')}</h3>
           {weekly.map(({ eid, e, ev }) => (
             <div key={eid} class="weekly-event">
-              <p><strong>{ev.title}</strong> <span class="muted">{ev.typeCode} · {ev.number}</span></p>
+              <p><strong>{ev.title}</strong> <span class="muted">{ev.number}</span></p>
               <ul class="plain">
                 {ev.slots.map((s, i) => (
                   <li key={i}>
                     <label class="check">
                       <input type="checkbox" checked={e.enabledSlots.includes(i)} onChange={() => update((st) => toggleSlot(st, eid, i))} />
-                      {fmtSlot(lang, s)}{s.room && <span class="muted"> · {s.room}</span>}
+                      {fmtSlot(lang, s)}{s.room && <span class="muted">, {s.room}</span>}
                     </label>
                   </li>
                 ))}

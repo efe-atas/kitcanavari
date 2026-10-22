@@ -54,9 +54,15 @@ describe('nextSteps', () => {
 
   test('lists missing requirements in order with add actions', () => {
     const steps = nextSteps(placeModule(base(), 'H1', 'prior'), makeCourses(), makeHandbook())
-    expect(steps.map((s) => s.key)).toEqual(['step.areaCp', 'step.areaLecture', 'step.areaCp', 'step.areaLecture', 'step.stamm', 'step.seminar', 'step.practical', 'step.elective'])
+    expect(steps.map((s) => s.key)).toEqual(['step.areaCp', 'step.areaCp', 'step.stamm', 'step.seminar', 'step.practical', 'step.elective'])
     expect(steps[0]).toMatchObject({ params: { area: AREAS[0], n: 9 }, action: { term: 'SS27', row: 'area0' } })
     expect(steps.find((s) => s.key === 'step.seminar')!.action).toMatchObject({ kind: 'seminar' })
+  })
+
+  test('an area short on lectures says so', () => {
+    const s = placeModule(placeModule(base(), 'M3', 'prior'), 'H2', 'prior') // 11 CP in area 2, none of it lectures
+    const step = nextSteps(s, makeCourses(), makeHandbook()).find((x) => x.params?.area === AREAS[1])!
+    expect(step).toMatchObject({ key: 'step.areaLecture', params: { n: 10 }, action: { kind: 'lecture' } })
   })
 
   test('says nothing is missing when every rule is met', () => {

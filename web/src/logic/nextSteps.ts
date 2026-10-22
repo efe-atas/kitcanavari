@@ -28,9 +28,13 @@ export function nextSteps(s: UserState, courses: CoursesFile, handbook: Handbook
   const out: Step[] = []
   r.areas.forEach((a, i) => {
     const row: RowId = i === 0 ? 'area0' : 'area1'
-    if (a.cp < RULES.areaMin) out.push({ key: 'step.areaCp', params: { area: a.area, n: RULES.areaMin - a.cp }, action: { term, row }, severity: 'todo' })
-    if (a.lectureCp < a.lectureMin) {
-      out.push({ key: 'step.areaLecture', params: { area: a.area, n: a.lectureMin - a.lectureCp }, action: { term, row, kind: 'lecture' }, severity: 'todo' })
+    // One step per area: the larger of the two gaps, as lectures when lectures are what is short.
+    const cpGap = RULES.areaMin - a.cp
+    const lectureGap = a.lectureMin - a.lectureCp
+    if (lectureGap > 0 && lectureGap >= cpGap) {
+      out.push({ key: 'step.areaLecture', params: { area: a.area, n: lectureGap }, action: { term, row, kind: 'lecture' }, severity: 'todo' })
+    } else if (cpGap > 0) {
+      out.push({ key: 'step.areaCp', params: { area: a.area, n: cpGap }, action: { term, row }, severity: 'todo' })
     }
   })
   if (r.stamm.count < RULES.stamm) out.push({ key: 'step.stamm', params: { n: RULES.stamm - r.stamm.count }, action: { term, row: 'elective', kind: 'stamm' }, severity: 'todo' })

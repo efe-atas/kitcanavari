@@ -3,8 +3,8 @@
   {
    "id": "ml-eng",
    "title": {
-    "tr": "ML / AI Mühendisi",
-    "en": "ML / AI Engineer"
+    "tr": "Makine öğrenmesi mühendisi",
+    "en": "Machine learning engineer"
    },
    "summary": {
     "tr": "Modelleri eğitir, üretime alır ve ölçekler; deep learning, ML teorisi ve sağlam yazılım mühendisliği birlikte gerekir.",
@@ -184,8 +184,8 @@
   {
    "id": "embedded",
    "title": {
-    "tr": "Gömülü / Donanım-AI",
-    "en": "Embedded / Hardware AI"
+    "tr": "Gömülü sistemler ve donanım",
+    "en": "Embedded systems and hardware"
    },
    "summary": {
     "tr": "Kısıtlı donanımda yazılım ve hızlandırıcılar geliştirir (FPGA, edge-AI); donanım bilgisi ve performans odaklı çalışma ister.",

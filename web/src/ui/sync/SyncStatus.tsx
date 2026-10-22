@@ -8,7 +8,8 @@ export function SyncStatus({ lang, sync, onOpen }: { lang: Lang; sync: Sync; onO
   return (
     <button type="button" class={`sync-status sync-${sync.status}`} onClick={onOpen} aria-label={label} title={label}>
       <Icon name="cloud" size={16} />
-      <span class="sync-label">{label}</span>
+      {/* Only states that need the user speak up; "off" and "saved" stay an icon with a name. */}
+      {!['off', 'saved', 'loading'].includes(sync.status) && <span class="sync-label">{label}</span>}
     </button>
   )
 }

@@ -60,8 +60,8 @@ describe('plan page', () => {
   test('the + of a cell opens the add panel, highlights the cell, and adding fills it', async () => {
     render(<App />)
     const target = await cell('Elective studies', 2)
-    location.hash = within(target).getByRole('link', { name: /Elective studies · SS 27: add a course/ }).getAttribute('href')!
-    const panel = await screen.findByRole('complementary', { name: 'Add a course · SS 27 · Elective studies' })
+    location.hash = within(target).getByRole('link', { name: /Add a course to Elective studies, SS 27/ }).getAttribute('href')!
+    const panel = await screen.findByRole('complementary', { name: 'Add a course to Elective studies, SS 27' })
     expect(target.className).toContain('is-target')
     fireEvent.click(within(panel).getByRole('button', { name: 'Add: Seminar: Post-Quantum Cryptography' }))
     await waitFor(() => expect(saved().roadmap.modules.H2).toMatchObject({ term: 'SS27', countAs: 'elective' }))
@@ -75,7 +75,7 @@ describe('plan page', () => {
     fireEvent.click(within(panel).getByRole('button', { name: 'Add: Module M3' }))
     await waitFor(() => expect(Object.keys(saved().selected).sort()).toEqual(['ml', 'sec']))
     location.hash = '#/week'
-    const week = await screen.findByRole('complementary', { name: 'Weekly timetable · WS 26/27' })
+    const week = await screen.findByRole('complementary', { name: 'Weekly timetable for WS 26/27' })
     expect(within(week).getAllByText('IT Security').length).toBeGreaterThan(0)
   })
 
@@ -115,16 +115,16 @@ describe('plan page', () => {
     location.hash = '#/schedule'
     await screen.findByRole('complementary', { name: /Weekly timetable/ })
     location.hash = '#/catalog'
-    await screen.findByRole('complementary', { name: /Add a course · WS 26\/27/ })
+    await screen.findByRole('complementary', { name: /Add a course to .*, WS 26\/27/ })
   })
 
   test('following a goal shows it in the top bar', async () => {
     location.hash = '#/goal'
     render(<App />)
     const panel = await screen.findByRole('complementary', { name: 'Goal: career paths' })
-    fireEvent.click(within(panel).getByRole('button', { name: /^security · Big Tech/ }))
+    fireEvent.click(within(panel).getByRole('button', { name: /^security, Big Tech/ }))
     fireEvent.click(await within(panel).findByRole('button', { name: 'Follow' }))
-    await screen.findByRole('link', { name: /Goal: security · Big Tech/ })
+    await screen.findByRole('link', { name: /Goal: security \(\d+%\)/ })
   })
 
   test('without career data there is no goal button', async () => {

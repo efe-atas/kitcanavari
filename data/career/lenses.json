@@ -3,8 +3,8 @@
   {
    "id": "bigtech",
    "title": {
-    "tr": "Big Tech / FAANG",
-    "en": "Big Tech / FAANG"
+    "tr": "Büyük teknoloji şirketleri",
+    "en": "Big tech companies"
    },
    "multipliers": {
     "algo": 1.5,
@@ -118,8 +118,8 @@
   {
    "id": "ailab",
    "title": {
-    "tr": "AI Lab / Scale-up",
-    "en": "AI Lab / Scale-up"
+    "tr": "Yapay zekâ laboratuvarları",
+    "en": "AI research labs"
    },
    "multipliers": {
     "mltheory": 1.4,

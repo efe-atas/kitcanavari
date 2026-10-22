@@ -56,7 +56,7 @@ export function RowTotalCell({ lang, matrix, row }: { lang: Lang; matrix: Matrix
   return (
     <span class={`row-total${ok && lectureOk ? ' is-done' : ' is-missing'}`}>
       <span><strong>{total.cp}</strong> / {total.max !== null ? `${total.min}–${total.max}` : total.min}</span>
-      {total.lectureCp !== undefined && (
+      {total.lectureCp !== undefined && !lectureOk && (
         <span class="row-sub">{t(lang, 'plan.lectures', { n: total.lectureCp, min: total.lectureMin ?? 0 })}</span>
       )}
     </span>

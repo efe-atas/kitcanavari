@@ -6,7 +6,7 @@ import { EMPTY_HANDBOOK, moduleRows } from '../logic/handbook'
 import { pendingAlerts } from '../logic/alerts'
 import { defaultState, setLang, toggleTheme, useAppState } from '../store'
 import type { CareerData, ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile } from '../types'
-import { pathTitle, pointsOf } from './career/model'
+import { pointsOf, roleTitle } from './career/model'
 import { CareerView } from './career/CareerView'
 import { ChangesView } from './changes/ChangesView'
 import { Drawer } from './Drawer'
@@ -75,7 +75,7 @@ export function App() {
     if (!f) return { label: t(lang, 'top.goalPick'), href: panelHref({ kind: 'goal', focus: null }) }
     const rows = moduleRows(load.courses, load.handbook ?? EMPTY_HANDBOOK)
     const n = fit(pointsOf(state, c, rows).all, c.roles.roles.find((r) => r.id === f.role)!, c.lenses.lenses.find((l) => l.id === f.lens)!)
-    return { label: t(lang, 'top.goal', { path: pathTitle(c, f.role, f.lens, lang), n }), href: panelHref({ kind: 'goal', focus: `${f.role}:${f.lens}` }) }
+    return { label: t(lang, 'top.goal', { path: roleTitle(c, f.role, lang), n }), href: panelHref({ kind: 'goal', focus: `${f.role}:${f.lens}` }) }
   }, [load, state, lang])
 
   const panelView = (() => {
@@ -123,7 +123,7 @@ export function App() {
           {goal && <a class="top-button" href={goal.href}><Icon name="compass" size={16} /><span class="top-label">{goal.label}</span></a>}
           <a class="top-button" href={panelHref({ kind: 'changes' })} aria-label={t(lang, 'top.changes', { n: alerts.length })}>
             <Icon name="bell" size={16} />
-            <span class="top-label">{t(lang, 'tab.changes')}</span>
+            {alerts.length > 0 && <span class="top-label">{t(lang, 'tab.changes')}</span>}
             {alerts.length > 0 && <span class="tab-badge" data-testid="changes-badge">{alerts.length}</span>}
           </a>
           <a class="top-button" href={panelHref({ kind: 'info', id: null })} aria-label={t(lang, 'info.title')}><Icon name="glossary" size={16} /></a>
@@ -162,7 +162,8 @@ export function App() {
       {load.status === 'ready' && (
         <footer class="footer">
           <span class="footer-status"><span class="status-dot" aria-hidden="true" />{t(lang, 'data.age', { date: fmtDate(lang, load.checkedAt) })}</span>
-          <span>{load.courses.meta.term} · SPO {load.courses.meta.spo}</span>
+          <span>{load.courses.meta.term}</span>
+          <span>SPO {load.courses.meta.spo}</span>
         </footer>
       )}
     </div>

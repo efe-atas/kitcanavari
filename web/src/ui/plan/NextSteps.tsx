@@ -5,7 +5,7 @@ import type { Lang } from '../../types'
 import { Icon } from '../Icon'
 import { panelHref } from '../route'
 
-const SHOWN = 3
+const SHOWN = 2
 
 /** The missing requirements as actions: "what do I do next". */
 export function NextSteps({ lang, steps, onFocusAreas }: { lang: Lang; steps: Step[]; onFocusAreas: () => void }) {

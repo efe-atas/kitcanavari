@@ -25,7 +25,7 @@ export function UnscheduledList({ lang, data, state, onOpen }: { lang: Lang; dat
           return (
             <li key={id}>
               <button type="button" class="link-button" onClick={() => onOpen(id)}>{ev.title}</button>
-              {when && <span class="muted"> · {when}</span>}
+              {when && <span class="muted">, {when}</span>}
             </li>
           )
         })}

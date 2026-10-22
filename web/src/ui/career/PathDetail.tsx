@@ -78,7 +78,7 @@ export function PathDetail({ lang, data, handbook, career, role: roleId, lens: l
                         const row = byId.get(m.id)
                         return (
                           <li key={m.id} class="gap-module">
-                            <span>{row?.title ?? m.id} <span class="muted">· {row?.ects ?? '?'} ECTS · {m.term ? termName(lang, m.term) : ''}</span></span>
+                            <span class="gap-module-title">{row?.title ?? m.id}<span class="muted">{row?.ects ?? '?'} ECTS, {m.term ? termName(lang, m.term) : ''}</span></span>
                             <button type="button" class="link-button" aria-label={`${t(lang, 'career.addToRoadmap')}: ${row?.title ?? m.id}`}
                               onClick={() => m.term && update((s) => addModuleToTerm(s, data, handbook, m.id, m.term!))}>
                               <Icon name="plus" size={14} />{t(lang, 'career.addToRoadmap')}

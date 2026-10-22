@@ -80,7 +80,7 @@ export function WeekGrid({ lang, data, state, conflicts, onOpen }: Props) {
                 type="button"
                 class={`block type-${typeClass(ev.typeCode)}${bad ? ' is-conflict' : ''}`}
                 style={{ top: pos(toMinutes(b.start)), height: `calc(var(--hour) * ${(toMinutes(b.end) - toMinutes(b.start)) / 60})` }}
-                title={`${ev.number} ${ev.title} · ${b.start}–${b.end}${b.room ? ` · ${b.room}` : ''}`}
+                title={`${ev.number} ${ev.title}, ${b.start}–${b.end}${b.room ? `, ${b.room}` : ''}`}
                 onClick={() => onOpen(b.eventId)}
               >
                 <strong>{ev.title}</strong>
