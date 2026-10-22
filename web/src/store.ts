@@ -3,7 +3,9 @@ import { CACHE_KEY, defaultDeps, SyncEngine, type SyncStatus } from './sync/engi
 import type { SyncConfig } from './sync/github'
 import { emptyRoadmap, roadmapEntries } from './logic/roadmap'
 import { CURRENT_TERM, nextTerm, PRIOR, termOrder } from './logic/terms'
-import type { CoursesFile, Event, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
+import { defaultBucket } from './logic/degree'
+import { rowBucket, type RowId } from './logic/matrix'
+import type { CoursesFile, Event, HandbookFile, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
 
 export { roadmapEntries }
 
@@ -315,6 +317,28 @@ export function addTerm(s: UserState): UserState {
   const latest = r.terms.filter((t) => termOrder(t) >= 0).sort((a, b) => termOrder(a) - termOrder(b)).at(-1)
   const next = latest ? nextTerm(latest) : CURRENT_TERM
   return r.terms.includes(next) ? s : { ...s, roadmap: { ...r, terms: [...r.terms, next] } }
+}
+
+/**
+ * Add a module to a term of the plan. In the current term its courses join the weekly schedule too, so "course"
+ * and "module" stay one thing for the user. A row that differs from where it would count by default becomes countAs.
+ */
+export function addModuleToTerm(s: UserState, courses: CoursesFile, handbook: HandbookFile | null, id: string, term: string,
+  row?: RowId): UserState {
+  let next = s
+  if (term === CURRENT_TERM) {
+    const selected = { ...next.selected }
+    for (const ev of Object.values(courses.events)) {
+      if (!ev.moduleIds.includes(id) || selected[ev.id]) continue
+      selected[ev.id] = { enabledSlots: ev.slots.map((_, i) => i), moduleId: id, ackFingerprint: ev.fingerprint, title: ev.title }
+    }
+    next = { ...next, selected }
+  }
+  next = placeModule(next, id, term)
+  const bucket = row ? rowBucket(next, row) : null
+  const fields = (handbook?.modules[id] ?? courses.modules[id])?.fields
+  if (bucket && fields && defaultBucket(fields, next.areas ?? [], null) !== bucket) next = setEntryCountAs(next, id, bucket)
+  return next
 }
 
 export const MAX_FOLLOWED = 3
