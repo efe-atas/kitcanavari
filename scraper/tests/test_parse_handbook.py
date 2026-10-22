@@ -81,6 +81,21 @@ def test_usage_until_and_prerequisite_for_label():
     assert m["coordinators"] == ["Prof. A"]
 
 
+def test_wrapped_running_header_does_not_leak():
+    mods = parse_handbook_text(fixture("handbook_wrapped_header.txt"))["modules"]
+    rec = mods["M-INFO-1"]["recommendations"]
+    assert rec.endswith("Knowledge of power systems or power electronics is helpful.")
+    assert mods["M-MACH-106904"]["title"] == "Practical Course: Software Development and Application of Mobile, Bio-Inspired Robots"
+
+
+@pytest.mark.parametrize("heading", ["Additional Information", "Module Grade Calculation", "Teaching and Learning Methods",
+                                     "Modeled Prerequisites", "Election notes"])
+def test_unknown_headings_close_the_section(heading):
+    text = ("                 4.1 Module: X [M-INFO-1]\n        Part of:  Elective Studies in Informatics\n\n"
+            f"       Content\n       Real content.\n\n       {heading}\n       Admin text.\n")
+    assert parse_handbook_text(text)["modules"]["M-INFO-1"]["content"] == "Real content."
+
+
 @pytest.mark.parametrize("body", ["None", "none", "None.", "See partial archievements (Teilleistung)", "See partial achivements (Teilleitung)", "See module component",
                                   "See partial achievement"])
 def test_placeholder_prerequisites_are_none(body):

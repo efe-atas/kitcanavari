@@ -21,6 +21,8 @@ _NOISE_RES = [
     re.compile(r"^5 MODULE COMPONENTS\b"),
     re.compile(r"^\s*M\s*$"),
 ]
+# Running page header after a footer; a long title wraps around the "4 MODULES" line.
+_HEADER_PART_RES = [re.compile(r"^\s{20,}Module: "), re.compile(r"^\s{20,}.*\[M-[A-Z]+-\d+\]\s*$")]
 _LABEL_RE = re.compile(r"^\s*(Coordinators|Organisation|Part of|Prerequisite for):\s*(.*)$")
 _CREDITS_HEAD_RE = re.compile(r"^\s*Credits\s+Grading\s+Recurrence")
 _CREDITS_RE = re.compile(
@@ -35,6 +37,13 @@ _SECTIONS = {
     "Recommendations": "recommendations",
     "Annotation": None,
     "Literature": None,
+    "Additional Information": None,
+    "Module Grade Calculation": None,
+    "Teaching and Learning Methods": None,
+    "Modeled Prerequisites": None,
+    "Election notes": None,
+    "Courses": None,
+    "Exams": None,
 }
 # Bodies that only say "nothing here" (several misspellings occur in the handbook).
 _PLACEHOLDER_RE = re.compile(r"^(none\.?|see (partial a\w+|module component)\b.*)$", re.I)
@@ -156,13 +165,20 @@ def _clean_fields(fields: list[str]) -> list[str]:
 def parse_handbook_text(text: str) -> dict:
     as_of = None
     blocks: list[tuple[str, list[str]]] = []
+    in_header = False
     for line in text.splitlines():
-        if not as_of and (am := _AS_OF_RE.search(line)):
-            as_of = f"{am.group(3)}-{am.group(2)}-{am.group(1)}"
+        if am := _AS_OF_RE.search(line):
+            as_of = as_of or f"{am.group(3)}-{am.group(2)}-{am.group(1)}"
+            in_header = True
+            continue
         if _COMPONENTS_RE.match(line):
             break
         if any(r.match(line) for r in _NOISE_RES):
             continue
+        if in_header:
+            if not _MODULE_RE.match(line) and (not line.strip() or any(r.match(line) for r in _HEADER_PART_RES)):
+                continue
+            in_header = False
         if hm := _MODULE_RE.match(line):
             blocks.append((hm.group(1), []))
         elif blocks:

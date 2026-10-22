@@ -1,0 +1,27 @@
+                 4.116 Module: Prev [M-INFO-1]
+        Part of:  Elective Studies in Informatics
+
+       Recommendations
+       - Knowledge of the fundamentals of energy informatics is a prerequisite.
+       - Knowledge of the fundamentals of electrical engineering and energy technology is required.
+       - Knowledge of the basics of mechatronics, data analysis and signal processing is helpful.
+       - Knowledge of power systems or power electronics is helpful.
+
+
+
+Computer Science Master 2025 (Master of Science (M.Sc.))
+                                                                                                                                170
+Module Handbook as of 09/09/2026
+                                                            Module: Practical Course: Software Development and Application of
+4 MODULES
+                                                                                Mobile, Bio-Inspired Robots [M-MACH-106904]
+
+
+
+                  4.117 Module: Practical Course: Software Development and Application of
+            M
+                  Mobile, Bio-Inspired Robots [M-MACH-106904]
+
+
+       Content
+       Robots.
