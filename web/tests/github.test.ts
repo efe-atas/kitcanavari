@@ -1,5 +1,7 @@
 import { describe, expect, test } from 'vitest'
-import { AuthError, ConflictError, getProfile, InvalidRemoteError, OfflineError, putProfile, type SyncConfig } from '../src/sync/github'
+import {
+  AuthError, ConflictError, getProfile, InvalidRemoteError, OfflineError, putProfile, RateLimitError, RepoNotFoundError, type SyncConfig,
+} from '../src/sync/github'
 import { emptyProfile } from '../src/sync/profile'
 
 const cfg: SyncConfig = { owner: 'o', repo: 'r', token: 't' }
@@ -30,7 +32,7 @@ describe('github client', () => {
   })
 
   test('sends auth headers and no-store', async () => {
-    const get = fakeFetch(() => json({}, 404))
+    const get = fakeFetch(({ url }) => (url === URL_ ? json({}, 404) : json({ id: 1 })))
     await getProfile(cfg, get.f)
     expect(get.calls[0].url).toBe(URL_)
     expect(header(get.calls[0], 'Authorization')).toBe('Bearer t')
@@ -45,9 +47,7 @@ describe('github client', () => {
   })
 
   test('maps statuses', async () => {
-    expect(await getProfile(cfg, fakeFetch(() => json({}, 404)).f)).toBeNull()
     await expect(putProfile(cfg, emptyProfile(), 's', 'm', fakeFetch(() => json({}, 409)).f)).rejects.toBeInstanceOf(ConflictError)
-    await expect(putProfile(cfg, emptyProfile(), 's', 'm', fakeFetch(() => json({}, 422)).f)).rejects.toBeInstanceOf(ConflictError)
     await expect(getProfile(cfg, fakeFetch(() => json({}, 401)).f)).rejects.toBeInstanceOf(AuthError)
     await expect(putProfile(cfg, emptyProfile(), 's', 'm', fakeFetch(() => json({}, 403)).f)).rejects.toBeInstanceOf(AuthError)
     const offline = (async () => { throw new TypeError('Failed to fetch') }) as unknown as typeof fetch
@@ -55,5 +55,29 @@ describe('github client', () => {
     const garbage = btoa('{"version": 7}')
     await expect(getProfile(cfg, fakeFetch(() => json({ sha: 'a', content: garbage })).f)).rejects.toBeInstanceOf(InvalidRemoteError)
     await expect(getProfile(cfg, fakeFetch(() => json({ sha: 'a', content: btoa('not json') })).f)).rejects.toBeInstanceOf(InvalidRemoteError)
+  })
+
+  test('a 422 is a conflict only when it is about the sha', async () => {
+    const sha = fakeFetch(() => json({ message: 'Invalid request.\n\n"sha" wasn\'t supplied.' }, 422))
+    await expect(putProfile(cfg, emptyProfile(), null, 'm', sha.f)).rejects.toBeInstanceOf(ConflictError)
+    const big = fakeFetch(() => json({ message: 'File is too large' }, 422))
+    const err = await putProfile(cfg, emptyProfile(), 's', 'm', big.f).catch((e: unknown) => e)
+    expect(err).toBeInstanceOf(Error)
+    expect(err).not.toBeInstanceOf(ConflictError)
+  })
+
+  test('rate limits are not reported as a bad token', async () => {
+    const limited = fakeFetch(() => new Response('{}', { status: 403, headers: { 'x-ratelimit-remaining': '0' } }))
+    await expect(getProfile(cfg, limited.f)).rejects.toBeInstanceOf(RateLimitError)
+    const secondary = fakeFetch(() => new Response('{}', { status: 429, headers: { 'retry-after': '60' } }))
+    await expect(getProfile(cfg, secondary.f)).rejects.toBeInstanceOf(RateLimitError)
+  })
+
+  test('a missing file and a missing repo are told apart', async () => {
+    const noFile = fakeFetch(({ url }) => (url.endsWith('/contents/profile.json') ? json({}, 404) : json({ id: 1 })))
+    expect(await getProfile(cfg, noFile.f)).toBeNull()
+    expect(noFile.calls[1].url).toBe('https://api.github.com/repos/o/r')
+    const noRepo = fakeFetch(() => json({}, 404))
+    await expect(getProfile(cfg, noRepo.f)).rejects.toBeInstanceOf(RepoNotFoundError)
   })
 })

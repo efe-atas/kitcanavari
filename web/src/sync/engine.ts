@@ -1,10 +1,13 @@
 // Keeps the in-memory UserState and the remote profile.json in step (spec §3): debounced saves, replay of pending
 // updates on a sha conflict, an offline cache that survives reloads, and a status for the top bar.
 import type { UserState } from '../types'
-import { AuthError, ConflictError, getProfile, InvalidRemoteError, OfflineError, putProfile, type SyncConfig } from './github'
-import { isProfile, profileFromState, stateFromProfile, type Profile } from './profile'
+import {
+  AuthError, ConflictError, getProfile, InvalidRemoteError, OfflineError, putProfile, RateLimitError, RepoNotFoundError, type SyncConfig,
+} from './github'
+import { emptyProfile, isProfile, profileFromState, stateFromProfile, type Profile } from './profile'
 
-export type SyncStatus = 'off' | 'loading' | 'saved' | 'pending' | 'saving' | 'offline' | 'auth' | 'conflict' | 'error'
+export type SyncStatus =
+  | 'off' | 'loading' | 'saved' | 'pending' | 'saving' | 'offline' | 'auth' | 'limited' | 'norepo' | 'conflict' | 'error'
 
 export interface EngineDeps {
   get: (cfg: SyncConfig) => ReturnType<typeof getProfile>
@@ -86,7 +89,7 @@ export class SyncEngine {
     this.pending.push(fn)
     // Before the first load there is no server version to be dirty against; kitcanavari:v1 still has the edit.
     if (this.started) this.writeCache(true)
-    if (!this.started || this.status === 'conflict' || this.status === 'error' || this.status === 'auth') return
+    if (!this.started || ['conflict', 'error', 'auth', 'norepo'].includes(this.status)) return
     this.setStatus('pending')
     this.schedule()
   }
@@ -205,9 +208,11 @@ export class SyncEngine {
         } catch (e) {
           if (!(e instanceof ConflictError)) throw e
           const remote = await this.deps.get(this.cfg)
+          // Replay onto the server's version; if the file is gone, onto the last version we synced (never onto
+          // the current state, which already contains the pending updates).
+          const from = stateFromProfile(remote?.profile ?? this.base ?? emptyProfile(), device(this.current!))
           this.base = remote?.profile ?? null
           this.sha = remote?.sha ?? null
-          const from = remote ? stateFromProfile(remote.profile, device(this.current!)) : this.current!
           this.emit(this.replay(from))
         }
       }
@@ -244,6 +249,9 @@ export class SyncEngine {
         this.deps.onOnline(() => { this.waitingOnline = false; if (!this.disposed) void this.retry() })
       }
     } else if (e instanceof AuthError) this.setStatus('auth', detail)
+    else if (e instanceof RateLimitError) this.setStatus('limited', detail)
+    else if (e instanceof RepoNotFoundError) this.setStatus('norepo', detail)
+    else if (e instanceof ConflictError) this.setStatus('conflict', detail)
     else if (e instanceof InvalidRemoteError) this.setStatus('error', detail)
     else this.setStatus('error', detail)
   }

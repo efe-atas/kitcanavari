@@ -23,8 +23,9 @@ export function SyncDialog({ lang, sync, onClose }: Props) {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  const repoOk = /^[\w.-]+\/[\w.-]+$/.test(repo.trim())
   const [owner, name] = repo.trim().split('/')
-  const valid = !!owner && !!name && token.trim().length > 0
+  const valid = repoOk && token.trim().length > 0
   const connected = !!sync.config
 
   return (
@@ -37,7 +38,7 @@ export function SyncDialog({ lang, sync, onClose }: Props) {
 
         <p class={`sync-state sync-${sync.status}`}>
           <strong>{t(lang, `sync.${sync.status}`)}</strong>
-          {(sync.status === 'auth' || sync.status === 'error' || sync.status === 'offline' || sync.status === 'conflict') && (
+          {['auth', 'error', 'offline', 'conflict', 'limited', 'norepo'].includes(sync.status) && (
             <span> — {t(lang, `sync.help.${sync.status}`)}</span>
           )}
           {sync.detail && sync.status === 'error' && <span class="muted"> ({sync.detail})</span>}
@@ -49,7 +50,7 @@ export function SyncDialog({ lang, sync, onClose }: Props) {
             <button type="button" class="button-quiet" onClick={() => sync.resolve('remote')}>{t(lang, 'sync.keepRemote')}</button>
           </div>
         )}
-        {connected && (sync.status === 'auth' || sync.status === 'error' || sync.status === 'offline') && (
+        {connected && ['auth', 'error', 'offline', 'limited', 'norepo'].includes(sync.status) && (
           <div class="detail-actions">
             <button type="button" class="button-quiet" onClick={() => sync.retry()}>{t(lang, 'sync.retry')}</button>
           </div>

@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest'
 import { SyncEngine, type EngineDeps, type SyncStatus } from '../src/sync/engine'
-import { AuthError, ConflictError, InvalidRemoteError, OfflineError } from '../src/sync/github'
+import { AuthError, ConflictError, InvalidRemoteError, OfflineError, RateLimitError, RepoNotFoundError } from '../src/sync/github'
 import { emptyProfile, profileFromState, type Profile } from '../src/sync/profile'
 import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, setFollow, toggleTheme } from '../src/store'
 import type { UserState } from '../src/types'
@@ -307,5 +307,41 @@ describe('SyncEngine', () => {
     const t = setup(srv)
     await t.engine.start(setFollow(defaultState(), 'quant', 'quant', true))
     expect(t.statuses.at(-1)).toBe('conflict')
+  })
+
+  test('rate limits and a missing repo get their own status', async () => {
+    const srv = server()
+    srv.s.failGet = () => new RateLimitError('limit')
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    expect(t.statuses.at(-1)).toBe('limited')
+    srv.s.failGet = () => new RepoNotFoundError('no repo')
+    const t2 = setup(srv)
+    await t2.engine.start(defaultState())
+    expect(t2.statuses.at(-1)).toBe('norepo')
+  })
+
+  test('a conflict while keeping the local version stays a conflict', async () => {
+    const srv = server(emptyProfile())
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    srv.s.failPut = () => new ConflictError('409')
+    t.engine.record((s) => withEvent('e1', s), withEvent('e1'))
+    await t.fire()
+    await t.engine.resolveConflict('local')
+    expect(t.statuses.at(-1)).toBe('conflict')
+  })
+
+  test('if the remote file was deleted, pending updates are replayed on the last synced plan', async () => {
+    const srv = server({ ...emptyProfile(), areas: ['Telematics'] })
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    const toggled = (s: UserState) => ({ ...s, areas: (s.areas ?? []).includes('Data Science') ? [] : [...(s.areas ?? []), 'Data Science'] })
+    // Another device deleted the file: our PUT with the old sha conflicts, the re-GET finds nothing.
+    srv.s.profile = null
+    srv.s.sha = null
+    t.engine.record(toggled, toggled(t.states.at(-1)!))
+    await t.fire()
+    expect(srv.s.profile!.areas).toEqual(['Telematics', 'Data Science'])
   })
 })

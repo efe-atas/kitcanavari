@@ -15,6 +15,7 @@ function github(status: number | null = null) {
   const f = vi.fn(async (url: string, init: RequestInit = {}) => {
     s.urls.push(url)
     if (status) return new Response('{}', { status })
+    if (url === 'https://api.github.com/repos/efe-atas/kitcanavari-me') return new Response('{"id":1}')
     if (url !== PROFILE_URL) return new Response('{}', { status: 404 })
     if (init.method === 'PUT') {
       const body = JSON.parse(String(init.body)) as { content: string; sha?: string }
@@ -98,5 +99,16 @@ describe('profile sync', () => {
     expect(puts()).toBe(afterConnect)
     expect(localStorage.getItem('kitcanavari:profile-cache')).toBeNull()
     expect(screen.getByRole('button', { name: /Sync off/ })).toBeTruthy()
+  })
+
+  test('the repo field needs exactly owner/name', async () => {
+    vi.stubGlobal('fetch', github().f)
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: /Sync off/ }))
+    fireEvent.input(screen.getByLabelText('Token'), { target: { value: 't' } })
+    fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'a/b/c' } })
+    expect((screen.getByRole('button', { name: 'Connect' }) as HTMLButtonElement).disabled).toBe(true)
+    fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'efe-atas/kitcanavari-me' } })
+    expect((screen.getByRole('button', { name: 'Connect' }) as HTMLButtonElement).disabled).toBe(false)
   })
 })

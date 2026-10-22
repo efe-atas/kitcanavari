@@ -786,8 +786,8 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
   color: var(--muted); border-radius: 999px; padding: 4px 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
 }
 .sync-status.sync-saved { color: var(--text); }
-.sync-status.sync-auth, .sync-status.sync-error, .sync-status.sync-conflict { color: var(--danger); border-color: var(--danger); }
-.sync-status.sync-offline { color: var(--warn); border-color: var(--warn); }
+.sync-status.sync-auth, .sync-status.sync-error, .sync-status.sync-conflict, .sync-status.sync-norepo { color: var(--danger); border-color: var(--danger); }
+.sync-status.sync-offline, .sync-status.sync-limited { color: var(--warn); border-color: var(--warn); }
 .sync-dialog { max-width: 520px; }
 .sync-form { display: grid; gap: 12px; }
 .sync-form .field { display: grid; gap: 4px; font-size: 0.85rem; font-weight: 600; }

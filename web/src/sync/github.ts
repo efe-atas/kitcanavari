@@ -13,11 +13,15 @@ export class ConflictError extends Error {}
 /** The remote file is not a profile we understand; it must never be overwritten. */
 export class InvalidRemoteError extends Error {}
 export class OfflineError extends Error {}
+/** GitHub's primary or secondary rate limit; not a token problem. */
+export class RateLimitError extends Error {}
+/** The repo does not exist, or the token cannot see it (GitHub answers 404 for both). */
+export class RepoNotFoundError extends Error {}
 
 const FILE = 'profile.json'
 
-const url = (cfg: SyncConfig) =>
-  `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/contents/${FILE}`
+const repoUrl = (cfg: SyncConfig) => `https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}`
+const url = (cfg: SyncConfig) => `${repoUrl(cfg)}/contents/${FILE}`
 
 const headers = (cfg: SyncConfig) => ({
   Authorization: `Bearer ${cfg.token}`,
@@ -43,13 +47,22 @@ async function request(f: typeof fetch, input: string, init: RequestInit): Promi
   } catch (e) {
     throw new OfflineError(e instanceof Error ? e.message : String(e))
   }
+  if (res.status === 429 || (res.status === 403
+    && (res.headers.get('x-ratelimit-remaining') === '0' || res.headers.has('retry-after')))) {
+    throw new RateLimitError(`GitHub ${res.status}`)
+  }
   if (res.status === 401 || res.status === 403) throw new AuthError(`GitHub ${res.status}`)
   return res
 }
 
 export async function getProfile(cfg: SyncConfig, f: typeof fetch = fetch): Promise<{ profile: Profile; sha: string } | null> {
   const res = await request(f, url(cfg), { headers: headers(cfg), cache: 'no-store' })
-  if (res.status === 404) return null
+  if (res.status === 404) {
+    // No file yet, or no repo / no access: only the first may be created.
+    const repo = await request(f, repoUrl(cfg), { headers: headers(cfg), cache: 'no-store' })
+    if (repo.status === 404) throw new RepoNotFoundError(`${cfg.owner}/${cfg.repo}`)
+    return null
+  }
   if (!res.ok) throw new Error(`GitHub ${res.status}`)
   const body = (await res.json()) as { sha: string; content: string }
   let parsed: unknown
@@ -66,7 +79,13 @@ export async function putProfile(cfg: SyncConfig, profile: Profile, sha: string 
   f: typeof fetch = fetch): Promise<string> {
   const body = { message, content: toBase64(JSON.stringify(profile, null, 1) + '\n'), ...(sha ? { sha } : {}) }
   const res = await request(f, url(cfg), { method: 'PUT', headers: headers(cfg), body: JSON.stringify(body) })
-  if (res.status === 409 || res.status === 422) throw new ConflictError(`GitHub ${res.status}`)
+  if (res.status === 409) throw new ConflictError('GitHub 409')
+  if (res.status === 422) {
+    // 422 is also used for validation errors (e.g. a file that is too large); only a sha mismatch is a conflict.
+    const message = String(((await res.json().catch(() => ({}))) as { message?: unknown }).message ?? '')
+    if (/sha/i.test(message)) throw new ConflictError(`GitHub 422: ${message}`)
+    throw new Error(`GitHub 422: ${message}`)
+  }
   if (!res.ok) throw new Error(`GitHub ${res.status}`)
   return ((await res.json()) as { content: { sha: string } }).content.sha
 }
