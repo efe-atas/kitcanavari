@@ -79,9 +79,9 @@
    "salary": [
     {
      "role": "quant",
-     "band": "Optiver giriş (L3), Hollanda: toplam ~€169k / yıl",
-     "source": "https://www.levels.fyi/company/Optiver/salaries/Software-Engineer",
-     "asOf": "2026-02"
+     "band": "Optiver L3 (giriş), Hollanda: medyan toplam ~€206k / yıl",
+     "source": "https://www.levels.fyi/companies/optiver/salaries/software-engineer/locations/netherlands",
+     "asOf": "2026-10"
     }
    ],
    "interview": {
@@ -190,14 +190,8 @@
    "salary": [
     {
      "role": "backend",
-     "band": "SAP T1 (Associate Developer), Almanya: toplam ~€63.6k / yıl",
-     "source": "https://levels.fyi/company/sap/salaries/software-engineer",
-     "asOf": "2026-07"
-    },
-    {
-     "role": "ml-eng",
-     "band": "Erken kariyer ML mühendisi, Münih: medyan taban ~€57k / yıl",
-     "source": "https://www.payscale.com/research/DE/Job=Machine_Learning_Engineer/Salary/a92c8d01/Early-Career-Munich",
+     "band": "SAP T1 (Associate Developer), Almanya: medyan toplam ~€66k / yıl",
+     "source": "https://www.levels.fyi/companies/sap/salaries/software-engineer/locations/germany",
      "asOf": "2026-10"
     },
     {

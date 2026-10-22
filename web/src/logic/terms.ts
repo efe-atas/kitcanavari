@@ -34,3 +34,15 @@ export function offeringIssue(row: Pick<ModuleRow, 'recurrence' | 'eventIds'>, t
   if (season && row.recurrence !== 'each' && row.recurrence !== season) return 'wrongSeason'
   return null
 }
+
+/** Sortable position of a term id: WS26 < SS27 < WS27 …; other ids sort first. */
+const termOrder = (term: string): number => {
+  const m = TERM_RE.exec(term)
+  if (!m) return -1
+  const y = Number(m[2])
+  return m[1] === 'WS' ? y * 2 + 1 : y * 2
+}
+
+/** The current term and the ones after it. */
+export const remainingTerms = (terms: string[], current: string = CURRENT_TERM): string[] =>
+  terms.filter((t) => termOrder(t) >= termOrder(current))

@@ -2,7 +2,7 @@ import { t } from '../../i18n'
 import { gaps, lensWeights, type SkillPoints } from '../../logic/career'
 import type { ModuleRow } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
-import { MAX_FOLLOWED, placeModule, toggleFollow } from '../../store'
+import { MAX_FOLLOWED, placeModule, setFollow } from '../../store'
 import type { CareerData, Lang, SkillId, UserState } from '../../types'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
@@ -41,7 +41,7 @@ export function PathDetail({ lang, career, role: roleId, lens: lensId, points, r
           <p class="panel-sub">{role.summary[lang]}</p>
         </div>
         <button type="button" class={on ? 'button-quiet' : 'button'} disabled={full} title={full ? t(lang, 'career.followLimit') : undefined}
-          onClick={() => update((s) => toggleFollow(s, roleId, lensId))}>
+          onClick={() => update((s) => setFollow(s, roleId, lensId, !on))}>
           {t(lang, on ? 'career.unfollow' : 'career.follow')}
         </button>
       </header>

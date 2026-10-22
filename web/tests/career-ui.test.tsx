@@ -52,4 +52,13 @@ describe('career tab', () => {
     await screen.findByText('RL theory.')
     expect(screen.getByText('ML Engineer')).toBeTruthy()
   })
+
+  test('catalog cards mark modules that are not scored', async () => {
+    location.hash = '#/catalog/all'
+    render(<App />)
+    const card = (await screen.findByText('Module M1')).closest('li')!
+    expect(within(card).getByText('Not scored')).toBeTruthy()
+    const scored = screen.getByText('Reinforcement Learning').closest('li')!
+    expect(within(scored).queryByText('Not scored')).toBeNull()
+  })
 })

@@ -838,10 +838,10 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .fit-cell {
   width: 100%; min-width: 72px; display: grid; justify-items: center; gap: 0; padding: 6px 4px; border-radius: 8px; cursor: pointer; position: relative;
   border: 1px solid var(--line); color: var(--text); font: inherit;
-  background: color-mix(in srgb, var(--accent) calc(var(--fit) * 70%), var(--surface));
+  background: color-mix(in srgb, var(--accent) calc(var(--fit) * 35%), var(--surface));
 }
 .fit-cell strong { font-size: 0.9rem; }
-.fit-cell .fit-now { font-size: 0.68rem; color: var(--text); opacity: 0.75; }
+.fit-cell .fit-now { font-size: 0.7rem; color: var(--text); }
 .fit-cell.is-picked { outline: 2px solid var(--text); outline-offset: 1px; }
 .fit-star { position: absolute; top: 2px; right: 4px; }
 .path-detail { margin-bottom: 20px; }

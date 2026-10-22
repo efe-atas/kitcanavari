@@ -32,6 +32,7 @@ export function ModuleCard({ lang, data, career, row, myAreas, onOpen }: Props) 
           <span class="tag tag-quiet">{t(lang, `rec.${row.recurrence}`)}</span>
           {mine.map((a) => <span key={a} class="tag tag-area"><Icon name="check" size={12} />{a}</span>)}
           {strong.map((s) => <span key={s} class="tag tag-skill">{t(lang, `skill.${s}`)}</span>)}
+          {career && !career.skills.modules[row.id] && <span class="tag tag-quiet">{t(lang, 'module.unscoredShort')}</span>}
         </span>
         <span class="card-meta">
           {row.ects !== null && <span class="card-ects">{t(lang, 'module.ects', { n: row.ects })}</span>}

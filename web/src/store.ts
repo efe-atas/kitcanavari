@@ -316,11 +316,15 @@ export function addTerm(s: UserState): UserState {
 
 export const MAX_FOLLOWED = 3
 
-/** Follow or unfollow a career path; a fourth one is not added. */
-export function toggleFollow(s: UserState, role: string, lens: string): UserState {
+/**
+ * Follow (on) or unfollow a career path; a fourth one is not added. Takes the wanted end state rather than toggling,
+ * so a sync conflict replay on another device's state cannot flip it back.
+ */
+export function setFollow(s: UserState, role: string, lens: string, on: boolean): UserState {
   const list = s.followed ?? []
-  const on = list.some((f) => f.role === role && f.lens === lens)
-  if (on) return { ...s, followed: list.filter((f) => !(f.role === role && f.lens === lens)) }
+  const has = list.some((f) => f.role === role && f.lens === lens)
+  if (on === has) return s
+  if (!on) return { ...s, followed: list.filter((f) => !(f.role === role && f.lens === lens)) }
   return list.length >= MAX_FOLLOWED ? s : { ...s, followed: [...list, { role, lens }] }
 }
 

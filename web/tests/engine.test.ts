@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { SyncEngine, type EngineDeps, type SyncStatus } from '../src/sync/engine'
 import { AuthError, ConflictError, InvalidRemoteError, OfflineError } from '../src/sync/github'
 import { emptyProfile, profileFromState, type Profile } from '../src/sync/profile'
-import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, toggleFollow, toggleTheme } from '../src/store'
+import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, setFollow, toggleTheme } from '../src/store'
 import type { UserState } from '../src/types'
 import { ev } from './fixtures'
 
@@ -297,8 +297,15 @@ describe('SyncEngine', () => {
     const srv = server(emptyProfile())
     const t = setup(srv)
     await t.engine.start(defaultState())
-    t.engine.record((s) => toggleFollow(s, 'ml-eng', 'bigtech'), toggleFollow(defaultState(), 'ml-eng', 'bigtech'))
+    t.engine.record((s) => setFollow(s, 'ml-eng', 'bigtech', true), setFollow(defaultState(), 'ml-eng', 'bigtech', true))
     await t.fire()
     expect(srv.s.profile!.followed).toEqual([{ role: 'ml-eng', lens: 'bigtech' }])
+  })
+
+  test('followed paths alone are not dropped on first connect', async () => {
+    const srv = server({ ...emptyProfile(), areas: ['Telematics'] })
+    const t = setup(srv)
+    await t.engine.start(setFollow(defaultState(), 'quant', 'quant', true))
+    expect(t.statuses.at(-1)).toBe('conflict')
   })
 })

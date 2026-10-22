@@ -252,6 +252,7 @@ const tr = {
   'module.skills': 'Beceriler',
   'module.topRoles': 'En uygun roller',
   'module.unscored': 'Henüz puanlanmadı.',
+  'module.unscoredShort': 'Puanlanmadı',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -506,6 +507,7 @@ const en: Record<keyof typeof tr, string> = {
   'module.skills': 'Skills',
   'module.topRoles': 'Best for',
   'module.unscored': 'Not scored yet.',
+  'module.unscoredShort': 'Not scored',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }

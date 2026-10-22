@@ -28,6 +28,7 @@ interface Cache { profile: Profile; sha: string | null; dirty: boolean }
 const planOf = (p: Profile) => JSON.stringify([p.weekly, p.areas, p.modules, p.terms, p.notes, p.followed])
 const isEmptyPlan = (s: UserState) => !Object.keys(s.selected).length && !(s.areas ?? []).length
   && !Object.keys(s.roadmap?.modules ?? {}).length && !Object.keys(s.roadmap?.notes ?? {}).length
+  && !(s.followed ?? []).length
 
 export class SyncEngine {
   private cfg: SyncConfig

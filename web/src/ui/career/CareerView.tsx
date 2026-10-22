@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
-import { DEFAULT_TERMS } from '../../logic/terms'
+import { DEFAULT_TERMS, remainingTerms } from '../../logic/terms'
 import type { CareerData, CoursesFile, HandbookFile, UserState } from '../../types'
 import { FitGrid } from './FitGrid'
 import { pointsOf } from './model'
@@ -34,7 +34,7 @@ export function CareerView({ data, handbook, career, state, update }: Props) {
         onSelect={(role, lens) => setSelected({ role, lens })} />
       {selected && (
         <PathDetail lang={lang} career={career} role={selected.role} lens={selected.lens} points={points} rows={rows}
-          terms={state.roadmap?.terms ?? DEFAULT_TERMS} state={state} update={update} />
+          terms={remainingTerms(state.roadmap?.terms ?? DEFAULT_TERMS)} state={state} update={update} />
       )}
     </div>
   )

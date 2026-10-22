@@ -2,7 +2,8 @@ import { describe, expect, test } from 'vitest'
 import { fit, gaps, skillPoints, topRoles } from '../src/logic/career'
 import { moduleRows } from '../src/logic/handbook'
 import { roadmapEntries } from '../src/logic/roadmap'
-import { defaultState, placeModule, toggleFollow } from '../src/store'
+import { remainingTerms } from '../src/logic/terms'
+import { defaultState, placeModule, setFollow } from '../src/store'
 import { profileFromState, stateFromProfile } from '../src/sync/profile'
 import type { RoadmapEntry } from '../src/types'
 import { makeCourses, makeHandbook } from './appdata'
@@ -59,6 +60,11 @@ describe('career', () => {
     expect(g.find((x) => x.skill === 'crypto')!.modules.map((m) => m.id)).not.toContain('H2')
   })
 
+  test('only the current and later terms are offered for suggestions', () => {
+    expect(remainingTerms(['WS26', 'SS27', 'WS27'], 'SS27')).toEqual(['SS27', 'WS27'])
+    expect(remainingTerms(['WS26', 'SS27'], 'WS26')).toEqual(['WS26', 'SS27'])
+  })
+
   test('top roles of a module', () => {
     expect(topRoles('H1', career)[0].role).toBe('ml-eng')
     expect(topRoles('NOPE', career)).toEqual([])
@@ -66,16 +72,22 @@ describe('career', () => {
 })
 
 describe('followed paths', () => {
-  test('toggle adds, removes and caps at three', () => {
-    let s = toggleFollow(defaultState(), 'ml-eng', 'bigtech')
+  test('setFollow is idempotent, so a sync replay cannot flip it, and caps at three', () => {
+    let s = setFollow(setFollow(defaultState(), 'ml-eng', 'bigtech', true), 'ml-eng', 'bigtech', true)
     expect(s.followed).toEqual([{ role: 'ml-eng', lens: 'bigtech' }])
-    s = toggleFollow(toggleFollow(toggleFollow(s, 'quant', 'quant'), 'security', 'industry'), 'robotics', 'industry')
+    s = setFollow(setFollow(setFollow(s, 'quant', 'quant', true), 'security', 'industry', true), 'robotics', 'industry', true)
     expect(s.followed).toHaveLength(3)
-    expect(toggleFollow(s, 'ml-eng', 'bigtech').followed).toHaveLength(2)
+    const off = setFollow(s, 'ml-eng', 'bigtech', false)
+    expect(setFollow(off, 'ml-eng', 'bigtech', false).followed).toHaveLength(2)
+  })
+
+  test('followed written by older code is kept when the state has none', () => {
+    const prev = { ...profileFromState(defaultState(), null), followed: [{ role: 'quant', lens: 'quant' }] }
+    expect(profileFromState(defaultState(), prev).followed).toEqual([{ role: 'quant', lens: 'quant' }])
   })
 
   test('followed survives the profile round trip', () => {
-    const s = toggleFollow(placeModule(defaultState(), 'H1', 'SS27'), 'ml-eng', 'bigtech')
+    const s = setFollow(placeModule(defaultState(), 'H1', 'SS27'), 'ml-eng', 'bigtech', true)
     const back = stateFromProfile(profileFromState(s, null), { lang: 'en' })
     expect(back.followed).toEqual([{ role: 'ml-eng', lens: 'bigtech' }])
     expect(roadmapEntries(back).H1.term).toBe('SS27')
