@@ -32,15 +32,21 @@ function github(status: number | null = null) {
 
 async function connect() {
   fireEvent.click(await screen.findByRole('button', { name: /Sync off/ }))
-  fireEvent.input(screen.getByLabelText('Token'), { target: { value: 'github_pat_test' } })
+  fireEvent.input(await screen.findByLabelText('Token'), { target: { value: 'github_pat_test' } })
   fireEvent.click(screen.getByRole('button', { name: 'Connect' }))
+}
+
+/** Add module M3 (two courses this term) through the add panel. */
+async function addCourse() {
+  location.hash = '#/add/WS26/elective'
+  fireEvent.click(await screen.findByRole('button', { name: 'Add: Module M3' }))
 }
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: true })
   localStorage.clear()
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '' }))
-  location.hash = '#/catalog'
+  location.hash = '#/'
   loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: null })
 })
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals() })
@@ -53,11 +59,11 @@ describe('profile sync', () => {
     await connect()
     await screen.findByRole('button', { name: /Saved/ })
     expect(gh.profile().weekly).toEqual({})
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
+    await addCourse()
     await screen.findByRole('button', { name: /Saving/ })
     await act(async () => { vi.advanceTimersByTime(3000) })
     await screen.findByRole('button', { name: /Saved/ })
-    expect(Object.keys(gh.profile().weekly)).toHaveLength(1)
+    expect(Object.keys(gh.profile().weekly)).toHaveLength(2)
     expect(JSON.parse(localStorage.getItem('kitcanavari:sync')!).token).toBe('github_pat_test')
   })
 
@@ -67,16 +73,15 @@ describe('profile sync', () => {
     await connect()
     await screen.findByRole('button', { name: /Token invalid/ })
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
-    await waitFor(() => expect(Object.keys(JSON.parse(localStorage.getItem(STORAGE_KEY)!).selected)).toHaveLength(1))
+    await addCourse()
+    await waitFor(() => expect(Object.keys(JSON.parse(localStorage.getItem(STORAGE_KEY)!).selected)).toHaveLength(2))
   })
 
   test('without a config the app never calls GitHub', async () => {
     const gh = github()
     vi.stubGlobal('fetch', gh.f)
     render(<App />)
-    await screen.findByText('IT Security')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
+    await addCourse()
     await act(async () => { vi.advanceTimersByTime(5000) })
     expect(gh.s.urls.filter((u) => u.includes('api.github.com'))).toEqual([])
   })
@@ -92,9 +97,9 @@ describe('profile sync', () => {
     const puts = () => gh.f.mock.calls.filter(([, init]) => (init as RequestInit | undefined)?.method === 'PUT').length
     const afterConnect = puts()
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
+    await addCourse()
     fireEvent.click(screen.getByRole('button', { name: /Saving/ }))
-    fireEvent.click(screen.getByRole('button', { name: 'Disconnect' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Disconnect' }))
     await act(async () => { vi.advanceTimersByTime(5000) })
     expect(puts()).toBe(afterConnect)
     expect(localStorage.getItem('kitcanavari:profile-cache')).toBeNull()
@@ -105,7 +110,7 @@ describe('profile sync', () => {
     vi.stubGlobal('fetch', github().f)
     render(<App />)
     fireEvent.click(await screen.findByRole('button', { name: /Sync off/ }))
-    fireEvent.input(screen.getByLabelText('Token'), { target: { value: 't' } })
+    fireEvent.input(await screen.findByLabelText('Token'), { target: { value: 't' } })
     fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'a/b/c' } })
     expect((screen.getByRole('button', { name: 'Connect' }) as HTMLButtonElement).disabled).toBe(true)
     fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'efe-atas/kitcanavari-me' } })

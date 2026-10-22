@@ -2,14 +2,16 @@ import { t } from '../../i18n'
 import { gaps, lensWeights, type SkillPoints } from '../../logic/career'
 import type { ModuleRow } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
-import { MAX_FOLLOWED, placeModule, setFollow } from '../../store'
-import type { CareerData, Lang, SkillId, UserState } from '../../types'
+import { addModuleToTerm, MAX_FOLLOWED, setFollow } from '../../store'
+import type { CareerData, CoursesFile, HandbookFile, Lang, SkillId, UserState } from '../../types'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
 import { pathTitle, roleTitle } from './model'
 
 interface Props {
   lang: Lang
+  data: CoursesFile
+  handbook: HandbookFile | null
   career: CareerData
   role: string
   lens: string
@@ -20,7 +22,7 @@ interface Props {
   update: (fn: (s: UserState) => UserState) => void
 }
 
-export function PathDetail({ lang, career, role: roleId, lens: lensId, points, rows, terms, state, update }: Props) {
+export function PathDetail({ lang, data, handbook, career, role: roleId, lens: lensId, points, rows, terms, state, update }: Props) {
   const role = career.roles.roles.find((r) => r.id === roleId)!
   const lens = career.lenses.lenses.find((l) => l.id === lensId)!
   const title = pathTitle(career, roleId, lensId, lang)
@@ -78,7 +80,7 @@ export function PathDetail({ lang, career, role: roleId, lens: lensId, points, r
                           <li key={m.id} class="gap-module">
                             <span>{row?.title ?? m.id} <span class="muted">· {row?.ects ?? '?'} ECTS · {m.term ? termName(lang, m.term) : ''}</span></span>
                             <button type="button" class="link-button" aria-label={`${t(lang, 'career.addToRoadmap')}: ${row?.title ?? m.id}`}
-                              onClick={() => m.term && update((s) => placeModule(s, m.id, m.term!))}>
+                              onClick={() => m.term && update((s) => addModuleToTerm(s, data, handbook, m.id, m.term!))}>
                               <Icon name="plus" size={14} />{t(lang, 'career.addToRoadmap')}
                             </button>
                           </li>

@@ -37,9 +37,6 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
 
   return (
     <div class="career">
-      <header class="page-head">
-        <h2>{t(lang, 'tab.career')}</h2>
-      </header>
       <p class="scope-note">{t(lang, 'career.sub')}</p>
       {unscored > 0 && <p class="banner banner-warn">{t(lang, 'career.unscored', { n: unscored })}</p>}
       {stale.length > 0 && (
@@ -62,7 +59,7 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
       <FitGrid lang={lang} career={career} points={points} followed={state.followed ?? []} selected={selected}
         onSelect={(role, lens) => setSelected({ role, lens })} />
       {valid && (
-        <PathDetail lang={lang} career={career} role={valid.role} lens={valid.lens} points={points} rows={rows}
+        <PathDetail lang={lang} data={data} handbook={handbook} career={career} role={valid.role} lens={valid.lens} points={points} rows={rows}
           terms={remainingTerms(state.roadmap?.terms ?? DEFAULT_TERMS)} state={state} update={update} />
       )}
     </div>

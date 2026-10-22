@@ -26,7 +26,7 @@ const copy = {
 
 const norm = (s: string) => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '')
 
-export function GlossaryView({ lang, data, focus }: { lang: Lang; data: CoursesFile; focus: string | null }) {
+export function GlossaryView({ lang, data, focus, embedded = false }: { lang: Lang; data: CoursesFile; focus: string | null; embedded?: boolean }) {
   const c = copy[lang]
   const [query, setQuery] = useState('')
   const [cat, setCat] = useState<Category | null>(null)
@@ -55,10 +55,12 @@ export function GlossaryView({ lang, data, focus }: { lang: Lang; data: CoursesF
 
   return (
     <article class="glossary">
-      <header class="guide-head">
-        <h2>{c.title}</h2>
-        <p class="guide-lead">{c.lead}</p>
-      </header>
+      {!embedded && (
+        <header class="guide-head">
+          <h2>{c.title}</h2>
+          <p class="guide-lead">{c.lead}</p>
+        </header>
+      )}
 
       <div class="glossary-tools">
         <label class="search-wrap">
@@ -98,7 +100,7 @@ export function GlossaryView({ lang, data, focus }: { lang: Lang; data: CoursesF
                         <span>{c.related}:</span>
                         {t.related.map((id) => {
                           const r = termById(id)
-                          return r ? <a key={id} class="chip" href={`#/glossary/${id}`}>{r.term}</a> : null
+                          return r ? <a key={id} class="chip" href={`#/info/${id}`}>{r.term}</a> : null
                         })}
                       </p>
                     )}
@@ -118,5 +120,5 @@ export function TermLink({ id, lang }: { id: string; lang: Lang }) {
   const term = termById(id)
   if (!term) return null
   const label = lang === 'tr' ? `${term.term} ne demek?` : `What is ${term.term}?`
-  return <a class="term-link" href={`#/glossary/${id}`} title={label} aria-label={label}>?</a>
+  return <a class="term-link" href={`#/info/${id}`} title={label} aria-label={label}>?</a>
 }
