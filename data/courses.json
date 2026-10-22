@@ -223,7 +223,7 @@
    "fingerprint": "29949cb833ccf3e1",
    "format": null,
    "id": "0x066D053413A34C368741946F2902B963",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3059217&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x066D053413A34C368741946F2902B963&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -3249,168 +3249,6 @@
    "title": "Praktical Course: Designing and Conducting Experimental Studies",
    "type": "Practical course (P)",
    "typeCode": "P"
-  },
-  "0x1C38637C3AB14B11B7523F9C07F271C1": {
-   "catalogPaths": [
-    [
-     "1. Informatik Lehrveranstaltungen",
-     "1.9 Elective Studies in Computer Science"
-    ]
-   ],
-   "contentText": "The exercise deepens the content of the lecture SQM and applies it to practical examples. At the end of the course there is also the opportunity to be certified as an \"ISTQB - Certified Tester - Foundation Level\". A date and the modalities for the exam will be agreed on in the lecture.",
-   "fingerprint": "9e848970f272cd48",
-   "format": "On-Site",
-   "id": "0x1C38637C3AB14B11B7523F9C07F271C1",
-   "iliasUrl": null,
-   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x1C38637C3AB14B11B7523F9C07F271C1&tguid=0xD25DBD9C86874091993315DA11571AAF",
-   "language": "English",
-   "lecturers": [
-    {
-     "name": "Prof. Dr.-Ing. Ina Schaefer",
-     "unit": "KIT Department of Informatics (INFORMATIK) , KASTEL Schaefer"
-    }
-   ],
-   "moduleIds": [
-    "M-INFO-107239"
-   ],
-   "number": "2400113",
-   "sessions": [
-    {
-     "cancelled": false,
-     "date": "2026-10-29",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-05",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-12",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-19",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-26",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-03",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-10",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-17",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-07",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-14",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-21",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-28",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-04",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-11",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-18",
-     "end": "15:30",
-     "room": "50.34 Raum -119 (UG)",
-     "slot": 0,
-     "start": "14:00"
-    }
-   ],
-   "slots": [
-    {
-     "count": 15,
-     "day": "Thu",
-     "end": "15:30",
-     "firstDate": "2026-10-29",
-     "rhythm": "weekly",
-     "room": "50.34 Raum -119 (UG)",
-     "start": "14:00"
-    }
-   ],
-   "sws": 2.0,
-   "title": "Softwaretest and Quality Management (SQM) - Exercise",
-   "type": "Practice (Ü)",
-   "typeCode": "Ü"
   },
   "0x1C4A285B74E94A13A11D15470FA50BC9": {
    "catalogPaths": [
@@ -7527,7 +7365,7 @@
    "fingerprint": "15b93714dadf1a3d",
    "format": "On-Site",
    "id": "0x5CF1F73ADB964E629847AB2076260093",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3059171&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x5CF1F73ADB964E629847AB2076260093&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -9768,168 +9606,6 @@
    "title": "AI for climate and weather predictions",
    "type": "Practical course (P)",
    "typeCode": "P"
-  },
-  "0x8713F6A74C34412DB83E838FC73F34AC": {
-   "catalogPaths": [
-    [
-     "1. Informatik Lehrveranstaltungen",
-     "1.9 Elective Studies in Computer Science"
-    ]
-   ],
-   "contentText": "Basics (introduction, definition of terms, principles of software testing, fundamental test process, psychology of testing)\n\nTesting in the software life cycle (general V-model, component test, integration test, system test, acceptance test, testing of new product versions, overview of test types)\n\nStatic testing (structured group tests, static analyses, metrics)\n\nDynamic testing (black-box procedure, white-box procedure, experience-based test case determination)\n\nTest management (test organisation and planning, economic aspects, test strategy, management of test work, error management, requirements for configuration management).\n\nTesting tools (types, selection, introduction)\n\nModern test procedures (model-based testing, regression testing, testing of variant-rich systems)\n\nDebugging",
-   "fingerprint": "903268de191d0459",
-   "format": "On-Site",
-   "id": "0x8713F6A74C34412DB83E838FC73F34AC",
-   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3013430&client_id=produktiv",
-   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x8713F6A74C34412DB83E838FC73F34AC&tguid=0xD25DBD9C86874091993315DA11571AAF",
-   "language": "English",
-   "lecturers": [
-    {
-     "name": "Prof. Dr.-Ing. Ina Schaefer",
-     "unit": "KIT Department of Informatics (INFORMATIK) , KASTEL Schaefer"
-    }
-   ],
-   "moduleIds": [
-    "M-INFO-107239"
-   ],
-   "number": "2400112",
-   "sessions": [
-    {
-     "cancelled": false,
-     "date": "2026-10-28",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-04",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-11",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-18",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-25",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-02",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-09",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-16",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-23",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-13",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-20",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-27",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-03",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-10",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-17",
-     "end": "13:00",
-     "room": "50.34 Raum -101 (UG)",
-     "slot": 0,
-     "start": "11:30"
-    }
-   ],
-   "slots": [
-    {
-     "count": 15,
-     "day": "Wed",
-     "end": "13:00",
-     "firstDate": "2026-10-28",
-     "rhythm": "weekly",
-     "room": "50.34 Raum -101 (UG)",
-     "start": "11:30"
-    }
-   ],
-   "sws": 2.0,
-   "title": "Softwaretest and Quality Management (SQM)",
-   "type": "Lecture (V)",
-   "typeCode": "V"
   },
   "0x8F5E2EA08ECD4EF083979F6498DBBF67": {
    "catalogPaths": [
@@ -12674,7 +12350,7 @@
    "fingerprint": "36bb6e1073729c39",
    "format": "Blended (On-Site/Online)",
    "id": "0xAAE6821CC3534029A56DEE182C64E0A0",
-   "iliasUrl": "https://mediaservice.bibliothek.kit.edu/#/search/grid/newest",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3059743&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xAAE6821CC3534029A56DEE182C64E0A0&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -18030,7 +17706,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-21T09:08:08Z",
+  "scrapedAt": "2026-10-22T09:10:23Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
@@ -20097,35 +19773,6 @@
    "recurrence": "Each winter term",
    "title": "Software Architecture and Quality"
   },
-  "M-INFO-107239": {
-   "assignment": "Compulsory elective",
-   "bricks": [
-    {
-     "ects": 5.0,
-     "id": "T-INFO-114263",
-     "title": "Softwaretest and Quality Management (SQM)"
-    }
-   ],
-   "description": {
-    "content": "1. Basics (introduction, definition of terms, principles of software testing, fundamental test process, psychology of testing) 2. Testing in the software life cycle (general V-model, component test, integration test, system test, acceptance test, testing of new product versions, overview of test types) 3. Static testing (structured group tests, static analyses, metrics) 4. Dynamic testing (black-box procedure, white-box procedure, experience-based test case determination) 5. Test management (test organisation and planning, economic aspects, test strategy, management of test work, error management, requirements for configuration management). 6. Testing tools (types, selection, introduction) 7. Modern test procedures (model-based testing, regression testing, testing of variant-rich systems) 8. Debugging",
-    "exam": "See partial achievements (Teilleistung)",
-    "objectives": "After completing the module, participants will be familiar with the basic principles of software testing. They will be able to apply the general testing process and master the activities and techniques to support it. Participants will be able to specify test cases in all phases of the software life cycle. They know test procedures and methods with which they can prepare and carry out software tests efficiently. They are familiar with common methods of test management methods and test tools for automating test activities.",
-    "prerequisites": "Module \" M-INFO-106024 – Software Test and Quality Management (SQM) \" must be not started yet .",
-    "workload": "150h"
-   },
-   "ects": 5.0,
-   "fields": [
-    "Area of Specialization: Software Engineering and Compiler Construction",
-    "Elective Studies in Informatics"
-   ],
-   "id": "M-INFO-107239",
-   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x38C5B82403264304A17768B6DB122F85&camvguid=0xB6878F03B50D461DA5A5609A8830A448&camvceid=CMPEL_F5634078&cafiguid=0x19E7F5AF94FE4DBA98EB2DAB641D6647&tguid=0xD25DBD9C86874091993315DA11571AAF",
-   "language": "English",
-   "level": "4",
-   "part": "Elective Modules: Software Engineering and Compiler Construction",
-   "recurrence": "Each winter term",
-   "title": "Software Test and Quality Management (SQM)"
-  },
   "M-INFO-107241": {
    "assignment": "Compulsory elective",
    "bricks": [
@@ -21322,7 +20969,7 @@
    "language": "English",
    "level": "4",
    "part": "Elective Modules",
-   "recurrence": "Each summer term",
+   "recurrence": "Each winter term",
    "title": "Robotic Intelligence: Navigation and Mobile Manipulation"
   },
   "M-MACH-107806": {
@@ -21554,8 +21201,6 @@
       "0x9ADFF7F563DC490D97512CAE6D57E83B",
       "0x6DF7D7D74DCF48B7AACC7D4DA816F13E",
       "0xAAE6821CC3534029A56DEE182C64E0A0",
-      "0x8713F6A74C34412DB83E838FC73F34AC",
-      "0x1C38637C3AB14B11B7523F9C07F271C1",
       "0x53417BA55A8348C889AD56600BC1941F",
       "0x37B1BA43881D47218FD18E5DF3EC63C0",
       "0x3BF2EF4B91F64DEEB9FF81AA01631BAA",
