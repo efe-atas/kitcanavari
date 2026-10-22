@@ -101,6 +101,48 @@ export interface HandbookFile {
   modules: Record<string, HandbookModule>
 }
 
+export type SkillId =
+  | 'algo' | 'distsys' | 'sysperf' | 'mltheory' | 'dl' | 'nlp' | 'cv' | 'robotics'
+  | 'security' | 'crypto' | 'embedded' | 'swe' | 'data' | 'formal' | 'research'
+
+export interface Bilingual { tr: string; en: string }
+
+/** Curated by Claude by hand (spec §1): module → skill → [score 0–3, one-sentence reason]. */
+export interface SkillsFile {
+  meta: { curatedAt: string; handbookAsOf: string }
+  modules: Record<string, Partial<Record<SkillId, [number, string]>>>
+}
+
+export interface Role {
+  id: string
+  title: Bilingual
+  summary: Bilingual
+  /** Sum to 1. */
+  weights: Partial<Record<SkillId, number>>
+  /** Skill points (score × ECTS / 6) that count as full coverage. */
+  targets: Partial<Record<SkillId, number>>
+}
+
+export interface RolesFile { roles: Role[] }
+
+export interface SalaryBand { role: string; band: string; source: string; asOf: string }
+
+export interface Lens {
+  id: string
+  title: Bilingual
+  /** Unlisted skills: 1. */
+  multipliers: Partial<Record<SkillId, number>>
+  cities: string[]
+  salary: SalaryBand[]
+  interview: Bilingual
+  offCourse: { tr: string[]; en: string[] }
+  downsides: { tr: string[]; en: string[] }
+}
+
+export interface LensesFile { lenses: Lens[] }
+
+export interface CareerData { skills: SkillsFile; roles: RolesFile; lenses: LensesFile }
+
 export type ChangeKind =
   | 'added' | 'removed' | 'slot_changed' | 'room_changed'
   | 'session_cancelled' | 'session_added' | 'session_removed'

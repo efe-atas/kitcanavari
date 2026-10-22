@@ -55,6 +55,7 @@ jobs:
           rm -rf web/dist/data
           mkdir -p web/dist/data
           cp data/*.json web/dist/data/
+          if [ -d data/career ]; then cp -r data/career web/dist/data/; fi
 
       - uses: actions/upload-pages-artifact@v3
         if: steps.data.outputs.ok == 'true'

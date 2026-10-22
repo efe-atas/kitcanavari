@@ -1,18 +1,21 @@
-import type { ChangesFile, CoursesFile, HandbookFile, StatusFile } from './types'
+import type { CareerData, ChangesFile, CoursesFile, HandbookFile, LensesFile, RolesFile, SkillsFile, StatusFile } from './types'
 
 export async function loadData(): Promise<{
-  courses: CoursesFile; changes: ChangesFile; status: StatusFile | null; handbook: HandbookFile | null
+  courses: CoursesFile; changes: ChangesFile; status: StatusFile | null; handbook: HandbookFile | null; career: CareerData | null
 }> {
   const get = async <T,>(name: string): Promise<T> => {
     const res = await fetch(`./data/${name}`, { cache: 'no-cache' })
     if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`)
     return res.json() as Promise<T>
   }
-  const [courses, changes, status, handbook] = await Promise.all([
+  const [courses, changes, status, handbook, career] = await Promise.all([
     get<CoursesFile>('courses.json'),
     get<ChangesFile>('changes.json'),
     get<StatusFile>('status.json').catch(() => null),
     get<HandbookFile>('handbook.json').catch(() => null),
+    Promise.all([get<SkillsFile>('career/skills.json'), get<RolesFile>('career/roles.json'), get<LensesFile>('career/lenses.json')])
+      .then(([skills, roles, lenses]): CareerData => ({ skills, roles, lenses }))
+      .catch(() => null),
   ])
-  return { courses, changes, status, handbook }
+  return { courses, changes, status, handbook, career }
 }
