@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'preact/hooks'
+import { useEffect, useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { findConflicts } from '../../logic/conflicts'
 import { AREAS, moduleAreas } from '../../logic/degree'
@@ -58,6 +58,8 @@ export function CatalogView({ data, handbook, career, allModules, state, update 
   }), [rows])
   const showModules = allModules && !!handbook
   const openModule = openModuleId ? rows.find((r) => r.id === openModuleId) ?? null : null
+  // Leaving "all modules" closes its detail, so it does not reappear on return.
+  useEffect(() => { if (!showModules) setOpenModuleId(null) }, [showModules])
 
   const options = useMemo(() => {
     const evs = Object.values(data.events)
@@ -148,7 +150,7 @@ export function CatalogView({ data, handbook, career, allModules, state, update 
         <ModuleDetail lang={lang} data={data} career={career} row={openModule} myAreas={state.areas ?? []} onClose={() => setOpenModuleId(null)}
           terms={state.roadmap?.terms ?? DEFAULT_TERMS} placedTerm={roadmapEntries(state)[openModule.id]?.term ?? null}
           onPlace={(term) => update((s) => placeModule(s, openModule.id, term))}
-          onOpenEvent={(id) => { setOpenModuleId(null); setOpenId(id); location.hash = '#/catalog' }} />
+          onOpenEvent={(id) => { setOpenModuleId(null); setOpenId(id) }} />
       )}
     </div>
   )

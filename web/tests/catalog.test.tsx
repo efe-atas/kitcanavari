@@ -106,7 +106,22 @@ describe('all modules mode', () => {
     await screen.findByText('Goals of Module M3')
     fireEvent.click(screen.getByRole('button', { name: 'IT Security' }))
     await screen.findByRole('button', { name: 'Add to schedule' })
-    expect(location.hash).toBe('#/catalog')
+    expect(location.hash).toBe('#/catalog/all')
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
+    await waitFor(() => expect(screen.queryByRole('button', { name: 'Add to schedule' })).toBeNull())
+    expect(screen.getByText('5 modules')).toBeTruthy()
+  })
+
+  test('an open module detail does not come back after leaving all modules', async () => {
+    location.hash = '#/catalog/all'
+    render(<App />)
+    fireEvent.click(await screen.findByText('Module M3'))
+    await screen.findByText('Goals of Module M3')
+    fireEvent.click(screen.getByRole('button', { name: 'This term' }))
+    await screen.findByText('3 courses')
+    fireEvent.click(screen.getByRole('button', { name: 'All modules' }))
+    await screen.findByText('5 modules')
+    expect(screen.queryByText('Goals of Module M3')).toBeNull()
   })
 
   test('hides the mode switch without a handbook', async () => {
