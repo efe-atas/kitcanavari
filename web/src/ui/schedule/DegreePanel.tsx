@@ -13,7 +13,7 @@ interface Props {
 }
 
 /** One requirement: credits so far against a minimum (and optional maximum). */
-function Row({ label, value, min, max, unit = 'ECTS', detail, term, lang }: {
+export function Row({ label, value, min, max, unit = 'ECTS', detail, term, lang }: {
   label: string; value: number; min: number; max?: number; unit?: string; detail?: string; term?: string; lang?: Lang
 }) {
   const over = max !== undefined && value > max
@@ -39,6 +39,27 @@ function Row({ label, value, min, max, unit = 'ECTS', detail, term, lang }: {
   )
 }
 
+/** The two area-of-specialization selects. */
+export function AreaPickers({ lang, chosen, update }: { lang: Lang; chosen: string[]; update: Props['update'] }) {
+  return (
+    <div class="area-pickers">
+      {[0, 1].map((i) => (
+        <div key={i} class="area-picker">
+          <span class="field-label">
+            <label for={`area-${i}`}>{t(lang, 'deg.area', { n: i + 1 })}</label>
+            {i === 0 && <TermLink id="area" lang={lang} />}
+          </span>
+          <select id={`area-${i}`} value={chosen[i] ?? ''} onChange={(e) => update((s) => setArea(s, i, (e.target as HTMLSelectElement).value || null))}
+            disabled={i === 1 && !chosen[0]}>
+            <option value="">{t(lang, 'deg.noArea')}</option>
+            {AREAS.filter((a) => a === chosen[i] || !chosen.includes(a)).map((a) => <option key={a} value={a}>{a}</option>)}
+          </select>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export function DegreePanel({ lang, data, state, update }: Props) {
   const r = degreeReport(state, data)
   const chosen = state.areas ?? []
@@ -50,21 +71,7 @@ export function DegreePanel({ lang, data, state, update }: Props) {
       <h3 id="degree-title">{t(lang, 'deg.title')}</h3>
       <p class="panel-sub">{t(lang, 'deg.sub')}</p>
 
-      <div class="area-pickers">
-        {[0, 1].map((i) => (
-          <div key={i} class="area-picker">
-            <span class="field-label">
-              <label for={`area-${i}`}>{t(lang, 'deg.area', { n: i + 1 })}</label>
-              {i === 0 && <TermLink id="area" lang={lang} />}
-            </span>
-            <select id={`area-${i}`} value={chosen[i] ?? ''} onChange={(e) => update((s) => setArea(s, i, (e.target as HTMLSelectElement).value || null))}
-              disabled={i === 1 && !chosen[0]}>
-              <option value="">{t(lang, 'deg.noArea')}</option>
-              {AREAS.filter((a) => a === chosen[i] || !chosen.includes(a)).map((a) => <option key={a} value={a}>{a}</option>)}
-            </select>
-          </div>
-        ))}
-      </div>
+      <AreaPickers lang={lang} chosen={chosen} update={update} />
 
       {suggestions.length > 0 && (
         <div class="suggest">

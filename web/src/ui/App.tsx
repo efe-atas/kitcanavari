@@ -8,6 +8,7 @@ import { CatalogView } from './catalog/CatalogView'
 import { ChangesView } from './changes/ChangesView'
 import { GlossaryView } from './glossary/GlossaryView'
 import { GuideView } from './guide/GuideView'
+import { RoadmapView } from './roadmap/RoadmapView'
 import { ScheduleView } from './schedule/ScheduleView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { fmtDate } from './format'
@@ -15,9 +16,9 @@ import { Icon, type IconName } from './Icon'
 import { SyncDialog } from './sync/SyncDialog'
 import { SyncStatus } from './sync/SyncStatus'
 
-type Tab = 'catalog' | 'schedule' | 'changes' | 'guide' | 'glossary'
-const TABS: Tab[] = ['catalog', 'schedule', 'changes', 'guide', 'glossary']
-const TAB_ICONS: Record<Tab, IconName> = { catalog: 'catalog', schedule: 'calendar', changes: 'bell', guide: 'guide', glossary: 'glossary' }
+type Tab = 'catalog' | 'schedule' | 'roadmap' | 'changes' | 'guide' | 'glossary'
+const TABS: Tab[] = ['catalog', 'schedule', 'roadmap', 'changes', 'guide', 'glossary']
+const TAB_ICONS: Record<Tab, IconName> = { catalog: 'catalog', schedule: 'calendar', roadmap: 'map', changes: 'bell', guide: 'guide', glossary: 'glossary' }
 const STALE_DAYS = 3
 
 /** "#/glossary/stamm" → tab "glossary", sub "stamm". */
@@ -110,6 +111,9 @@ export function App() {
           <CatalogView data={load.courses} handbook={load.handbook} allModules={route.sub === 'all'} state={state} update={update} />
         )}
         {load.status === 'ready' && tab === 'schedule' && <ScheduleView data={load.courses} state={state} update={update} />}
+        {load.status === 'ready' && tab === 'roadmap' && (
+          <RoadmapView data={load.courses} handbook={load.handbook} state={state} update={update} />
+        )}
         {load.status === 'ready' && tab === 'guide' && <GuideView lang={lang} data={load.courses} />}
         {load.status === 'ready' && tab === 'glossary' && <GlossaryView lang={lang} data={load.courses} focus={route.sub} />}
         {load.status === 'ready' && tab === 'changes' && (

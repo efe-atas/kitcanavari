@@ -5,7 +5,9 @@ import { AREAS, moduleAreas } from '../../logic/degree'
 import { computeEcts } from '../../logic/ects'
 import { emptyFilters, eventModules, filterEvents, type Filters as F } from '../../logic/filter'
 import { emptyModuleFilters, filterModules, moduleRows, type ModuleFilters as MF } from '../../logic/handbook'
-import { addEvent, removeEvent } from '../../store'
+import { roadmapEntries } from '../../logic/roadmap'
+import { DEFAULT_TERMS } from '../../logic/terms'
+import { addEvent, placeModule, removeEvent } from '../../store'
 import type { CoursesFile, Event, HandbookFile, UserState } from '../../types'
 import { fmtDate } from '../format'
 import { TermLink } from '../glossary/GlossaryView'
@@ -143,6 +145,8 @@ export function CatalogView({ data, handbook, allModules, state, update }: Props
       )}
       {showModules && openModule && (
         <ModuleDetail lang={lang} data={data} row={openModule} myAreas={state.areas ?? []} onClose={() => setOpenModuleId(null)}
+          terms={state.roadmap?.terms ?? DEFAULT_TERMS} placedTerm={roadmapEntries(state)[openModule.id]?.term ?? null}
+          onPlace={(term) => update((s) => placeModule(s, openModule.id, term))}
           onOpenEvent={(id) => { setOpenModuleId(null); setOpenId(id); location.hash = '#/catalog' }} />
       )}
     </div>

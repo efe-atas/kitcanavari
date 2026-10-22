@@ -3,7 +3,9 @@ import { t } from '../../i18n'
 import { bucketOptions, moduleKind } from '../../logic/degree'
 import type { ModuleRow } from '../../logic/handbook'
 import type { CoursesFile, Lang } from '../../types'
+import { PRIOR } from '../../logic/terms'
 import { TermLink } from '../glossary/GlossaryView'
+import { termName } from '../roadmap/format'
 import { Icon } from '../Icon'
 
 interface Props {
@@ -13,12 +15,16 @@ interface Props {
   myAreas: string[]
   /** Open one of this term's courses of the module. */
   onOpenEvent: (eventId: string) => void
+  /** Roadmap terms, and the term the module is already in. */
+  terms: string[]
+  placedTerm: string | null
+  onPlace: (term: string) => void
   onClose: () => void
 }
 
 const paragraphs = (text: string) => text.split('\n\n').map((p, i) => <p key={i}>{p}</p>)
 
-export function ModuleDetail({ lang, data, row, myAreas, onOpenEvent, onClose }: Props) {
+export function ModuleDetail({ lang, data, row, myAreas, onOpenEvent, terms, placedTerm, onPlace, onClose }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     ref.current?.focus()
@@ -53,6 +59,20 @@ export function ModuleDetail({ lang, data, row, myAreas, onOpenEvent, onClose }:
         </header>
 
         {!hb && <p class="muted">{t(lang, 'module.notInHandbook')}</p>}
+
+        <div class="detail-actions road-place">
+          <label>
+            {t(lang, 'road.placeIn')}
+            <select value="" onChange={(e) => {
+              const v = (e.target as HTMLSelectElement).value
+              if (v) onPlace(v)
+            }}>
+              <option value="">—</option>
+              {[PRIOR, ...terms].map((term) => <option key={term} value={term}>{termName(lang, term)}</option>)}
+            </select>
+          </label>
+          {placedTerm && <span class="tag tag-area"><Icon name="check" size={12} />{t(lang, 'road.inRoadmap', { term: termName(lang, placedTerm) })}</span>}
+        </div>
 
         <section>
           <h3>{t(lang, 'module.thisTerm')}</h3>
