@@ -61,6 +61,8 @@ export function profileFromState(s: UserState, prev: Profile | null): Profile {
     notes: { ...(s.roadmap?.notes ?? base.notes) },
     weekly,
     lastSeenScrapedAt: s.lastSeenScrapedAt,
+    // Older code never set followed in the state; keep what the profile already had then.
+    followed: s.followed ? s.followed.map((f) => ({ ...f })) : base.followed,
   }
 }
 
@@ -80,5 +82,6 @@ export function stateFromProfile(p: Profile, device: Pick<UserState, 'lang' | 't
   return {
     version: 1, selected, lang: device.lang, lastSeenScrapedAt: p.lastSeenScrapedAt, areas: [...p.areas], theme: device.theme,
     ...(isDefault ? {} : { roadmap: { terms: [...p.terms], modules, notes: { ...p.notes } } }),
+    ...(p.followed.length ? { followed: p.followed.map((f) => ({ ...f })) } : {}),
   }
 }

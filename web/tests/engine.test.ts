@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { SyncEngine, type EngineDeps, type SyncStatus } from '../src/sync/engine'
 import { AuthError, ConflictError, InvalidRemoteError, OfflineError } from '../src/sync/github'
 import { emptyProfile, profileFromState, type Profile } from '../src/sync/profile'
-import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, toggleTheme } from '../src/store'
+import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, toggleFollow, toggleTheme } from '../src/store'
 import type { UserState } from '../src/types'
 import { ev } from './fixtures'
 
@@ -291,5 +291,14 @@ describe('SyncEngine', () => {
     const t = setup(srv)
     await t.engine.start(placeModule(defaultState(), 'M9', 'SS27'))
     expect(t.statuses.at(-1)).toBe('conflict')
+  })
+
+  test('following a career path is saved', async () => {
+    const srv = server(emptyProfile())
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    t.engine.record((s) => toggleFollow(s, 'ml-eng', 'bigtech'), toggleFollow(defaultState(), 'ml-eng', 'bigtech'))
+    await t.fire()
+    expect(srv.s.profile!.followed).toEqual([{ role: 'ml-eng', lens: 'bigtech' }])
   })
 })

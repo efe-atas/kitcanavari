@@ -36,6 +36,8 @@ function isState(x: unknown): x is UserState {
     && (s.theme === undefined || s.theme === 'light' || s.theme === 'dark')
     && (s.areas === undefined || (Array.isArray(s.areas) && s.areas.every((a) => typeof a === 'string')))
     && (s.roadmap === undefined || isRoadmap(s.roadmap))
+    && (s.followed === undefined || (Array.isArray(s.followed)
+      && s.followed.every((f) => !!f && typeof f.role === 'string' && typeof f.lens === 'string')))
     && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'
@@ -310,6 +312,16 @@ export function setNote(s: UserState, id: string, text: string): UserState {
 export function addTerm(s: UserState): UserState {
   const r = roadmapOf(s)
   return { ...s, roadmap: { ...r, terms: [...r.terms, nextTerm(r.terms[r.terms.length - 1])] } }
+}
+
+export const MAX_FOLLOWED = 3
+
+/** Follow or unfollow a career path; a fourth one is not added. */
+export function toggleFollow(s: UserState, role: string, lens: string): UserState {
+  const list = s.followed ?? []
+  const on = list.some((f) => f.role === role && f.lens === lens)
+  if (on) return { ...s, followed: list.filter((f) => !(f.role === role && f.lens === lens)) }
+  return list.length >= MAX_FOLLOWED ? s : { ...s, followed: [...list, { role, lens }] }
 }
 
 export const exportState = (s: UserState): string => JSON.stringify(s, null, 1)

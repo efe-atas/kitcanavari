@@ -215,4 +215,6 @@ export interface UserState {
   /** Colour theme; light when unset. */
   theme?: 'light' | 'dark'
   roadmap?: Roadmap
+  /** Career paths (role × employer lens) the user follows; at most three. */
+  followed?: { role: string; lens: string }[]
 }
