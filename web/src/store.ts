@@ -1,4 +1,6 @@
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { CACHE_KEY, defaultDeps, SyncEngine, type SyncStatus } from './sync/engine'
+import type { SyncConfig } from './sync/github'
 import type { CoursesFile, Event, Lang, UserState } from './types'
 
 export const STORAGE_KEY = 'kitcanavari:v1'
@@ -69,18 +71,99 @@ const safeLocalStorage = (): Storage | null => {
   }
 }
 
-export function useAppState(): [UserState, (fn: (s: UserState) => UserState) => void, boolean] {
+export const SYNC_KEY = 'kitcanavari:sync'
+export const DEFAULT_PROFILE_REPO = 'efe-atas/kitcanavari-me'
+
+export function loadSyncConfig(storage: Storage | null): SyncConfig | null {
+  try {
+    const c = JSON.parse(storage?.getItem(SYNC_KEY) ?? 'null') as Partial<SyncConfig> | null
+    return c && typeof c.owner === 'string' && typeof c.repo === 'string' && typeof c.token === 'string' && c.token
+      ? { owner: c.owner, repo: c.repo, token: c.token } : null
+  } catch {
+    return null
+  }
+}
+
+export function saveSyncConfig(storage: Storage | null, cfg: SyncConfig): void {
+  try {
+    storage?.setItem(SYNC_KEY, JSON.stringify(cfg))
+  } catch {
+    /* the engine still runs for this session */
+  }
+}
+
+/** Forget the token and the profile cache; the local plan (kitcanavari:v1) stays. */
+export function clearSync(storage: Storage | null): void {
+  try {
+    storage?.removeItem(SYNC_KEY)
+    storage?.removeItem(CACHE_KEY)
+  } catch {
+    /* best effort */
+  }
+}
+
+export interface Sync {
+  status: SyncStatus
+  detail?: string
+  config: SyncConfig | null
+  connect: (cfg: SyncConfig) => void
+  disconnect: () => void
+  resolve: (keep: 'local' | 'remote') => void
+  retry: () => void
+}
+
+export function useAppState(): [UserState, (fn: (s: UserState) => UserState) => void, boolean, Sync] {
   const [init] = useState(() => loadState(safeLocalStorage()))
   const [state, setState] = useState(init.state)
   const [persistent, setPersistent] = useState(init.persistent)
-  const update = useCallback((fn: (s: UserState) => UserState) => {
-    setState((prev) => {
-      const next = fn(prev)
-      if (!saveState(safeLocalStorage(), next)) setPersistent(false)
-      return next
-    })
+  const current = useRef(init.state)
+  const engine = useRef<SyncEngine | null>(null)
+  const [config, setConfig] = useState<SyncConfig | null>(() => loadSyncConfig(safeLocalStorage()))
+  const [status, setStatus] = useState<{ status: SyncStatus; detail?: string }>({ status: 'off' })
+
+  const commit = useCallback((next: UserState) => {
+    current.current = next
+    setState(next)
+    if (!saveState(safeLocalStorage(), next)) setPersistent(false)
   }, [])
-  return [state, update, persistent]
+
+  const update = useCallback((fn: (s: UserState) => UserState) => {
+    const next = fn(current.current)
+    commit(next)
+    engine.current?.record(fn, next)
+  }, [commit])
+
+  const startEngine = useCallback((cfg: SyncConfig) => {
+    const e = new SyncEngine(cfg, defaultDeps(safeLocalStorage()),
+      // Remote state never carries this device's language or theme.
+      (s) => { if (engine.current === e) commit({ ...s, lang: current.current.lang, theme: current.current.theme }) },
+      (st, detail) => { if (engine.current === e) setStatus({ status: st, detail }) })
+    engine.current = e
+    void e.start(current.current)
+  }, [commit])
+
+  useEffect(() => {
+    if (config) startEngine(config)
+  }, [])
+
+  const sync: Sync = {
+    ...status,
+    config,
+    connect: (cfg) => {
+      saveSyncConfig(safeLocalStorage(), cfg)
+      setConfig(cfg)
+      startEngine(cfg)
+    },
+    disconnect: () => {
+      engine.current = null
+      clearSync(safeLocalStorage())
+      setConfig(null)
+      setStatus({ status: 'off' })
+    },
+    resolve: (keep) => void engine.current?.resolveConflict(keep),
+    retry: () => void engine.current?.retry(),
+  }
+  return [state, update, persistent, sync]
 }
 
 export const addEvent = (s: UserState, ev: Event): UserState => ({

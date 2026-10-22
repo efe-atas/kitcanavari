@@ -12,6 +12,8 @@ import { ScheduleView } from './schedule/ScheduleView'
 import { ErrorBoundary } from './ErrorBoundary'
 import { fmtDate } from './format'
 import { Icon, type IconName } from './Icon'
+import { SyncDialog } from './sync/SyncDialog'
+import { SyncStatus } from './sync/SyncStatus'
 
 type Tab = 'catalog' | 'schedule' | 'changes' | 'guide' | 'glossary'
 const TABS: Tab[] = ['catalog', 'schedule', 'changes', 'guide', 'glossary']
@@ -31,7 +33,8 @@ type Load =
 
 export function App() {
   const [load, setLoad] = useState<Load>({ status: 'loading' })
-  const [state, update, persistent] = useAppState()
+  const [state, update, persistent, sync] = useAppState()
+  const [syncOpen, setSyncOpen] = useState(false)
   const [route, setRoute] = useState(routeFromHash)
   const { tab } = route
   const lang = state.lang
@@ -83,6 +86,7 @@ export function App() {
           ))}
         </nav>
         <div class="top-actions">
+          <SyncStatus lang={lang} sync={sync} onOpen={() => setSyncOpen(true)} />
           <button type="button" class="icon-button theme-toggle" onClick={() => update(toggleTheme)}
             aria-label={t(lang, theme === 'dark' ? 'theme.light' : 'theme.dark')} title={t(lang, theme === 'dark' ? 'theme.light' : 'theme.dark')}>
             <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={16} />
@@ -113,6 +117,8 @@ export function App() {
         )}
         </ErrorBoundary>
       </main>
+
+      {syncOpen && <SyncDialog lang={lang} sync={sync} onClose={() => setSyncOpen(false)} />}
 
       {load.status === 'ready' && (
         <footer class="footer">

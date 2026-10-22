@@ -14,6 +14,18 @@ KIT course catalog, keeps only courses linked to SPO 2025, and writes `data/cour
 the site (`web/`) to GitHub Pages. If the catalog looks broken (many failures, or a > 30 % drop in
 courses) nothing is written and the workflow fails, so you get an e-mail from GitHub.
 
+## Profile sync (optional)
+
+The plan can live in a private GitHub repo instead of only in one browser, so every device shows the same plan:
+
+1. Create a private repo, e.g. `efe-atas/kitcanavari-me` (it can stay empty; the site writes `profile.json`).
+2. Create a [fine-grained token](https://github.com/settings/personal-access-tokens/new) with access to **only that
+   repo** and the permission *Contents: Read and write*.
+3. On the site, click the cloud button in the top bar, enter `owner/repo` and the token, and press *Connect*.
+
+The token is stored only in that browser's localStorage. Changes are saved about three seconds after you make them,
+each save is a commit, so `git log` in the profile repo is your undo history.
+
 ## Run locally
 
 ```sh

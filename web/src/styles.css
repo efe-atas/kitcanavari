@@ -444,7 +444,9 @@ details > summary { cursor: pointer; }
   .tab-count, .tab-badge { position: absolute; top: 2px; right: calc(50% - 26px); min-width: 18px; line-height: 18px; padding: 0 5px; }
   /* backdrop-filter would make the topbar the containing block of the fixed tab bar */
   .topbar { justify-content: space-between; background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .brand h1 { display: block; }
+  .brand { min-width: 0; }
+  .brand h1 { display: block; overflow: hidden; text-overflow: ellipsis; }
+  .top-actions { flex-shrink: 0; }
   .page-head h2 { font-size: 1.4rem; }
   .filters { padding: 12px; }
   .cards { grid-template-columns: minmax(0, 1fr); }
@@ -777,3 +779,19 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .offered-mark { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; font-size: 0.75rem; font-weight: 600; color: var(--accent); }
 .prose-lines p { white-space: pre-line; }
 .module-events li { padding: 4px 0; }
+
+/* Profile sync */
+.sync-status {
+  display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface-2);
+  color: var(--muted); border-radius: 999px; padding: 4px 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+}
+.sync-status.sync-saved { color: var(--text); }
+.sync-status.sync-auth, .sync-status.sync-error, .sync-status.sync-conflict { color: var(--danger); border-color: var(--danger); }
+.sync-status.sync-offline { color: var(--warn); border-color: var(--warn); }
+.sync-dialog { max-width: 520px; }
+.sync-form { display: grid; gap: 12px; }
+.sync-form .field { display: grid; gap: 4px; font-size: 0.85rem; font-weight: 600; }
+.sync-form input { font: inherit; padding: 8px 10px; border-radius: var(--r-m); border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); }
+.sync-steps { padding-left: 20px; }
+.sync-state { margin: 4px 0 12px; }
+@media (max-width: 640px) { .sync-label { display: none; } .sync-status { padding: 6px; } }
