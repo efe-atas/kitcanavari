@@ -41,6 +41,14 @@ describe('validateCareer', () => {
   })
 })
 
+test('every handbook module is scored', () => {
+  const root = resolve(__dirname, '../../data')
+  const handbook = JSON.parse(readFileSync(`${root}/handbook.json`, 'utf-8')) as { modules: Record<string, unknown> }
+  const skills = existsSync(`${root}/career/skills.json`)
+    ? (JSON.parse(readFileSync(`${root}/career/skills.json`, 'utf-8')) as { modules: Record<string, unknown> }).modules : {}
+  expect(Object.keys(handbook.modules).filter((id) => !(id in skills))).toEqual([])
+})
+
 describe('loadData career', () => {
   afterEach(() => vi.unstubAllGlobals())
   test('missing career files do not fail loading', async () => {

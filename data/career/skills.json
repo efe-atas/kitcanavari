@@ -1,0 +1,2184 @@
+{
+ "meta": {
+  "curatedAt": "2026-10-22",
+  "handbookAsOf": "2026-09-09"
+ },
+ "modules": {
+  "M-ETIT-100449": {
+   "embedded": [
+    2,
+    "Hardware description and simulation in SPICE, VHDL, Verilog and SystemC."
+   ]
+  },
+  "M-ETIT-100456": {
+   "cv": [
+    1,
+    "Optics fundamentals behind imaging systems."
+   ]
+  },
+  "M-ETIT-100462": {
+   "embedded": [
+    2,
+    "Electrical/electronic architectures of vehicles."
+   ],
+   "swe": [
+    1,
+    "Model-based systems development process."
+   ]
+  },
+  "M-ETIT-100537": {
+   "swe": [
+    2,
+    "Software life-cycle models, requirements and DevOps."
+   ],
+   "embedded": [
+    1,
+    "Functional principles of embedded systems."
+   ]
+  },
+  "M-ETIT-101834": {},
+  "M-ETIT-105073": {
+   "swe": [
+    1,
+    "Interdisciplinary product team project."
+   ]
+  },
+  "M-ETIT-105604": {
+   "embedded": [
+    1,
+    "Device physics below the digital hardware level."
+   ]
+  },
+  "M-ETIT-105616": {
+   "formal": [
+    2,
+    "Algebraic coding theory."
+   ],
+   "algo": [
+    1,
+    "Decoding algorithms for codes."
+   ]
+  },
+  "M-ETIT-105617": {
+   "formal": [
+    2,
+    "Modern coding theory and its analysis."
+   ],
+   "algo": [
+    1,
+    "Iterative decoding on graphs."
+   ]
+  },
+  "M-ETIT-105971": {
+   "distsys": [
+    1,
+    "How mobile radio networks work."
+   ]
+  },
+  "M-ETIT-106963": {
+   "embedded": [
+    2,
+    "Automated design of optimised digital circuits."
+   ],
+   "algo": [
+    2,
+    "Graph algorithms and metaheuristics for synthesis."
+   ]
+  },
+  "M-ETIT-107839": {},
+  "M-INFO-100719": {
+   "swe": [
+    2,
+    "Maintaining and evolving long-lived software systems."
+   ]
+  },
+  "M-INFO-100724": {
+   "sysperf": [
+    3,
+    "Parallel GPU programming with CUDA/OpenCL."
+   ],
+   "algo": [
+    1,
+    "Parallel algorithms for GPUs."
+   ]
+  },
+  "M-INFO-100749": {
+   "algo": [
+    2,
+    "Sequence alignment and phylogeny algorithms."
+   ],
+   "data": [
+    1,
+    "Statistical models for biological data."
+   ]
+  },
+  "M-INFO-100750": {
+   "research": [
+    2,
+    "Reading, assessing and presenting current papers."
+   ],
+   "algo": [
+    1,
+    "Bioinformatics algorithms and models."
+   ]
+  },
+  "M-INFO-100784": {
+   "distsys": [
+    2,
+    "Internet architecture, transport protocols and P2P."
+   ]
+  },
+  "M-INFO-100795": {
+   "algo": [
+    3,
+    "Designing, implementing and evaluating efficient algorithms."
+   ],
+   "sysperf": [
+    1,
+    "Practical performance on real machines."
+   ]
+  },
+  "M-INFO-100800": {
+   "distsys": [
+    1,
+    "IoT and sensor network protocols."
+   ],
+   "security": [
+    1,
+    "Privacy risks and protection in the IoE."
+   ],
+   "embedded": [
+    1,
+    "IoT platforms."
+   ]
+  },
+  "M-INFO-100807": {
+   "embedded": [
+    3,
+    "Low-power optimisation of embedded devices."
+   ],
+   "sysperf": [
+    1,
+    "Energy versus performance trade-offs."
+   ]
+  },
+  "M-INFO-100850": {
+   "embedded": [
+    2,
+    "Fault-tolerant digital system design."
+   ],
+   "formal": [
+    1,
+    "Reliability analysis."
+   ]
+  },
+  "M-INFO-100851": {
+   "embedded": [
+    2,
+    "Testing digital circuits."
+   ]
+  },
+  "M-INFO-101567": {
+   "cv": [
+    2,
+    "Graphics and visual computing techniques."
+   ],
+   "sysperf": [
+    2,
+    "Programming modern graphics hardware."
+   ],
+   "swe": [
+    1,
+    "Team project work."
+   ]
+  },
+  "M-INFO-101573": {
+   "swe": [
+    2,
+    "Building and documenting an open-source tool in a team."
+   ],
+   "algo": [
+    1,
+    "Sequence analysis algorithms."
+   ],
+   "data": [
+    1,
+    "Biological data analysis pipelines."
+   ],
+   "research": [
+    1,
+    "Aims at a peer-reviewed publication."
+   ]
+  },
+  "M-INFO-102555": {
+   "robotics": [
+    2,
+    "Modelling human motion and mapping it to robots."
+   ],
+   "research": [
+    1,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-102661": {
+   "embedded": [
+    3,
+    "Hands-on FPGA design in VHDL/Verilog."
+   ]
+  },
+  "M-INFO-102662": {
+   "embedded": [
+    1,
+    "Fault-tolerant hardware."
+   ],
+   "research": [
+    2,
+    "Seminar paper on current research."
+   ]
+  },
+  "M-INFO-102962": {
+   "embedded": [
+    2,
+    "Advanced testing of digital systems."
+   ]
+  },
+  "M-INFO-103306": {
+   "formal": [
+    2,
+    "Following and presenting complex proofs."
+   ],
+   "research": [
+    1,
+    "Presenting mathematics."
+   ]
+  },
+  "M-INFO-103706": {
+   "embedded": [
+    3,
+    "Programming and testing IoT devices."
+   ],
+   "distsys": [
+    1,
+    "Wireless communication and data storage."
+   ]
+  },
+  "M-INFO-104031": {
+   "embedded": [
+    3,
+    "Low-power hardware/software optimisation."
+   ],
+   "sysperf": [
+    2,
+    "System-level resource management."
+   ],
+   "mltheory": [
+    1,
+    "ML to automate optimisation."
+   ]
+  },
+  "M-INFO-104447": {
+   "algo": [
+    2,
+    "Planning and scheduling algorithms."
+   ],
+   "formal": [
+    2,
+    "PDDL modelling and search."
+   ]
+  },
+  "M-INFO-104891": {
+   "distsys": [
+    2,
+    "Current research on decentralised systems."
+   ],
+   "research": [
+    2,
+    "Writing a scientific paper."
+   ],
+   "security": [
+    1,
+    "Security of decentralised systems."
+   ]
+  },
+  "M-INFO-105309": {
+   "swe": [
+    2,
+    "Continuous software engineering practices."
+   ],
+   "research": [
+    2,
+    "Literature search and seminar paper."
+   ]
+  },
+  "M-INFO-105329": {
+   "mltheory": [
+    3,
+    "Convex optimisation behind ML methods."
+   ],
+   "algo": [
+    1,
+    "Optimisation algorithms and their complexity."
+   ]
+  },
+  "M-INFO-105334": {
+   "distsys": [
+    3,
+    "Consensus, consistency and decentralised algorithms."
+   ],
+   "security": [
+    2,
+    "Sybil attacks and adversary models."
+   ],
+   "crypto": [
+    1,
+    "Cryptographic building blocks of decentralised systems."
+   ]
+  },
+  "M-INFO-105408": {
+   "formal": [
+    2,
+    "Quantum state formalism and algorithms."
+   ],
+   "crypto": [
+    1,
+    "Basis for quantum cryptography."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-105452": {
+   "security": [
+    3,
+    "Privacy risks and privacy-enhancing technologies."
+   ],
+   "crypto": [
+    2,
+    "Cryptographic privacy techniques."
+   ]
+  },
+  "M-INFO-105453": {
+   "security": [
+    2,
+    "Implementing security and data protection in apps."
+   ],
+   "swe": [
+    1,
+    "App development."
+   ],
+   "research": [
+    1,
+    "Running user studies."
+   ]
+  },
+  "M-INFO-105585": {
+   "crypto": [
+    3,
+    "Quantum-hard problems and post-quantum cryptosystems."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-105591": {
+   "security": [
+    3,
+    "Threats to Internet operation and protection measures."
+   ],
+   "distsys": [
+    2,
+    "Resilience of networks under attack."
+   ]
+  },
+  "M-INFO-105623": {
+   "mltheory": [
+    3,
+    "RL theory and algorithms."
+   ],
+   "dl": [
+    3,
+    "Deep RL methods and implementation."
+   ],
+   "robotics": [
+    2,
+    "Focus on RL for robotics."
+   ]
+  },
+  "M-INFO-105761": {
+   "crypto": [
+    3,
+    "Secure multiparty computation protocols."
+   ],
+   "research": [
+    2,
+    "Presenting research papers."
+   ]
+  },
+  "M-INFO-105775": {
+   "embedded": [
+    3,
+    "ML under embedded platform constraints."
+   ],
+   "dl": [
+    2,
+    "Neural network compression in practice."
+   ],
+   "sysperf": [
+    1,
+    "Efficient inference."
+   ]
+  },
+  "M-INFO-105780": {
+   "distsys": [
+    2,
+    "Decentralised systems as research objects."
+   ],
+   "security": [
+    2,
+    "Analysing the security of decentralised systems."
+   ],
+   "research": [
+    3,
+    "Scientific and empirical research methods."
+   ]
+  },
+  "M-INFO-105870": {
+   "sysperf": [
+    3,
+    "High-performance computing tools and techniques."
+   ],
+   "data": [
+    2,
+    "Data management and analytics."
+   ],
+   "distsys": [
+    1,
+    "Large-scale computing environments."
+   ]
+  },
+  "M-INFO-105955": {
+   "research": [
+    2,
+    "Applied research in smart-grid systems."
+   ],
+   "data": [
+    1,
+    "Energy data analysis."
+   ],
+   "embedded": [
+    1,
+    "Automation and system technology."
+   ]
+  },
+  "M-INFO-106086": {
+   "algo": [
+    2,
+    "Current algorithm engineering research."
+   ],
+   "research": [
+    3,
+    "Literature search and a scientific seminar paper."
+   ]
+  },
+  "M-INFO-106102": {
+   "formal": [
+    3,
+    "Logic and proofs for cyber-physical systems."
+   ],
+   "robotics": [
+    1,
+    "Modelling and control of CPS."
+   ]
+  },
+  "M-INFO-106190": {
+   "cv": [
+    3,
+    "Optical and algorithmic machine vision."
+   ],
+   "mltheory": [
+    1,
+    "Holistic optimisation."
+   ]
+  },
+  "M-INFO-106237": {
+   "dl": [
+    3,
+    "Deep learning architectures on graphs and networks."
+   ],
+   "mltheory": [
+    3,
+    "Theory of modern deep learning from first principles."
+   ]
+  },
+  "M-INFO-106256": {
+   "formal": [
+    3,
+    "Proof theory, propositions as types."
+   ]
+  },
+  "M-INFO-106302": {
+   "mltheory": [
+    2,
+    "Explainability methods for ML models."
+   ],
+   "dl": [
+    2,
+    "Explaining deep networks in practice."
+   ]
+  },
+  "M-INFO-106303": {
+   "security": [
+    3,
+    "Access control models and architectures."
+   ],
+   "crypto": [
+    1,
+    "Cryptographic access control protocols."
+   ],
+   "distsys": [
+    1,
+    "Access control in decentralised systems."
+   ]
+  },
+  "M-INFO-106344": {
+   "security": [
+    3,
+    "Avoiding and detecting software vulnerabilities."
+   ],
+   "swe": [
+    2,
+    "Security across the development process."
+   ]
+  },
+  "M-INFO-106392": {
+   "mltheory": [
+    2,
+    "Explainable ML research."
+   ],
+   "security": [
+    1,
+    "Security angle of explanations."
+   ],
+   "research": [
+    2,
+    "Seminar paper on current research."
+   ]
+  },
+  "M-INFO-106470": {
+   "data": [
+    3,
+    "Data science pipelines for climate data."
+   ],
+   "mltheory": [
+    2,
+    "Major classes of ML techniques."
+   ],
+   "dl": [
+    2,
+    "Applied deep learning."
+   ]
+  },
+  "M-INFO-106490": {
+   "research": [
+    2,
+    "Literature review and report."
+   ],
+   "data": [
+    1,
+    "AI for energy systems."
+   ]
+  },
+  "M-INFO-106495": {
+   "research": [
+    3,
+    "Reproducing and verifying published results."
+   ],
+   "mltheory": [
+    2,
+    "Explainable and interactive learning."
+   ],
+   "dl": [
+    2,
+    "Hands-on deep learning."
+   ]
+  },
+  "M-INFO-106497": {
+   "research": [
+    2,
+    "Seminar report on XAI research."
+   ],
+   "mltheory": [
+    1,
+    "Explainability methods."
+   ]
+  },
+  "M-INFO-106503": {
+   "embedded": [
+    3,
+    "FPGA neural network accelerator with FINN."
+   ],
+   "dl": [
+    2,
+    "Quantised networks for hardware."
+   ],
+   "sysperf": [
+    2,
+    "Resource-constrained acceleration."
+   ]
+  },
+  "M-INFO-106504": {
+   "robotics": [
+    3,
+    "Modelling, optimisation and control of dynamic systems."
+   ],
+   "mltheory": [
+    1,
+    "Nonlinear optimisation and optimal control."
+   ]
+  },
+  "M-INFO-106608": {
+   "robotics": [
+    2,
+    "Learning for robot perception."
+   ],
+   "mltheory": [
+    2,
+    "Mathematical principles of learning algorithms."
+   ],
+   "cv": [
+    2,
+    "Perception from sensor data."
+   ]
+  },
+  "M-INFO-106626": {
+   "swe": [
+    2,
+    "Engineering self-adaptive software."
+   ],
+   "formal": [
+    2,
+    "Formal runtime analysis for quality assurance."
+   ]
+  },
+  "M-INFO-106627": {
+   "security": [
+    3,
+    "Exploitation techniques and vulnerability research."
+   ],
+   "sysperf": [
+    1,
+    "Low-level systems knowledge."
+   ]
+  },
+  "M-INFO-106644": {
+   "algo": [
+    3,
+    "Fastest known algorithms and fine-grained reductions."
+   ],
+   "formal": [
+    3,
+    "Conditional lower bounds and complexity theory."
+   ]
+  },
+  "M-INFO-106645": {
+   "algo": [
+    2,
+    "Algorithms and complexity papers."
+   ],
+   "formal": [
+    2,
+    "Complexity theory."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-106646": {
+   "robotics": [
+    3,
+    "Motion generation and control of human-centred robots."
+   ],
+   "research": [
+    2,
+    "Reproducing published results."
+   ],
+   "swe": [
+    1,
+    "Team project."
+   ]
+  },
+  "M-INFO-106648": {
+   "robotics": [
+    2,
+    "Motion capture and analysis."
+   ],
+   "data": [
+    1,
+    "Experiment planning and analysis."
+   ],
+   "research": [
+    2,
+    "Scientific project report."
+   ]
+  },
+  "M-INFO-106649": {
+   "robotics": [
+    3,
+    "Humanoid kinematics, dynamics and whole-body control."
+   ],
+   "mltheory": [
+    1,
+    "Motion optimisation and learning."
+   ]
+  },
+  "M-INFO-106650": {
+   "robotics": [
+    3,
+    "Human-robot interaction and social robots."
+   ],
+   "swe": [
+    1,
+    "Software architecture for social robots."
+   ]
+  },
+  "M-INFO-106651": {
+   "research": [
+    2,
+    "Literature research and a scientific talk."
+   ],
+   "robotics": [
+    1,
+    "Robotics topics."
+   ]
+  },
+  "M-INFO-106654": {
+   "crypto": [
+    2,
+    "Cryptography of blockchains."
+   ],
+   "distsys": [
+    2,
+    "Blockchain systems."
+   ],
+   "research": [
+    3,
+    "Developing a research question."
+   ]
+  },
+  "M-INFO-106655": {
+   "data": [
+    3,
+    "Data science methods for energy systems."
+   ],
+   "mltheory": [
+    2,
+    "Probabilistic forecasting and XAI."
+   ]
+  },
+  "M-INFO-106719": {
+   "research": [
+    2,
+    "Discussing and summarising research."
+   ],
+   "data": [
+    1,
+    "ML for climate data."
+   ]
+  },
+  "M-INFO-106784": {
+   "algo": [
+    3,
+    "Deriving and implementing fast algorithms."
+   ],
+   "sysperf": [
+    2,
+    "Efficient implementations."
+   ],
+   "research": [
+    1,
+    "Literature search."
+   ]
+  },
+  "M-INFO-106800": {
+   "dl": [
+    3,
+    "State-of-the-art AI models for weather and climate."
+   ],
+   "data": [
+    2,
+    "Large geoscience datasets."
+   ],
+   "research": [
+    1,
+    "Scientific paper."
+   ]
+  },
+  "M-INFO-106810": {
+   "security": [
+    3,
+    "Applying AI to security and attacks on learning systems."
+   ],
+   "mltheory": [
+    2,
+    "ML evaluation and feature engineering."
+   ]
+  },
+  "M-INFO-106812": {
+   "data": [
+    3,
+    "Bayesian data analysis with MCMC and Stan."
+   ],
+   "mltheory": [
+    2,
+    "Bayesian statistical principles."
+   ]
+  },
+  "M-INFO-106828": {
+   "research": [
+    3,
+    "Independent research project."
+   ]
+  },
+  "M-INFO-106866": {
+   "research": [
+    3,
+    "Contributing to current AI-security research."
+   ],
+   "security": [
+    2,
+    "AI for and against security."
+   ],
+   "mltheory": [
+    2,
+    "Recent ML methods."
+   ]
+  },
+  "M-INFO-106867": {
+   "security": [
+    2,
+    "Learning-based security systems."
+   ],
+   "mltheory": [
+    2,
+    "ML on real security data."
+   ],
+   "dl": [
+    1,
+    "Implementing learning systems."
+   ]
+  },
+  "M-INFO-106868": {
+   "security": [
+    2,
+    "AI in computer security research."
+   ],
+   "mltheory": [
+    1,
+    "ML concepts for security."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-106869": {
+   "security": [
+    2,
+    "AI in computer security research."
+   ],
+   "mltheory": [
+    1,
+    "ML concepts for security."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-106927": {
+   "robotics": [
+    2,
+    "Exoskeletons and assistive robots."
+   ],
+   "research": [
+    2,
+    "Literature research and paper."
+   ]
+  },
+  "M-INFO-106931": {
+   "swe": [
+    3,
+    "Metamodels, model transformations and DSLs."
+   ],
+   "formal": [
+    1,
+    "Theory of model transformation."
+   ]
+  },
+  "M-INFO-106932": {
+   "swe": [
+    3,
+    "Building DSLs, editors and transformations in practice."
+   ]
+  },
+  "M-INFO-106958": {
+   "research": [
+    2,
+    "Critical literature work on AI impact."
+   ]
+  },
+  "M-INFO-106959": {
+   "mltheory": [
+    2,
+    "Choosing and adapting ML models."
+   ],
+   "data": [
+    2,
+    "ML on scientific data."
+   ],
+   "dl": [
+    1,
+    "Applied neural models."
+   ]
+  },
+  "M-INFO-106960": {
+   "algo": [
+    3,
+    "Algorithms on special graph classes."
+   ],
+   "formal": [
+    2,
+    "Graph-theoretic characterisations."
+   ]
+  },
+  "M-INFO-106961": {
+   "algo": [
+    3,
+    "Graph layout algorithms."
+   ],
+   "formal": [
+    1,
+    "Graph theory foundations."
+   ]
+  },
+  "M-INFO-106966": {
+   "swe": [
+    2,
+    "Building a full compiler."
+   ],
+   "sysperf": [
+    3,
+    "Code generation and compiler optimisation."
+   ],
+   "formal": [
+    2,
+    "Semantics and dataflow analysis."
+   ]
+  },
+  "M-INFO-106996": {
+   "security": [
+    3,
+    "Finding and fixing vulnerabilities, x86 exploitation."
+   ],
+   "sysperf": [
+    1,
+    "Assembly-level understanding."
+   ]
+  },
+  "M-INFO-106998": {
+   "security": [
+    3,
+    "In-depth IT security and protection goals."
+   ],
+   "crypto": [
+    2,
+    "Cryptography and game-based security notions."
+   ]
+  },
+  "M-INFO-107027": {
+   "formal": [
+    2,
+    "Current theoretical computer science."
+   ],
+   "research": [
+    3,
+    "Paper review, presentation and report."
+   ]
+  },
+  "M-INFO-107028": {},
+  "M-INFO-107029": {},
+  "M-INFO-107030": {
+   "security": [
+    1,
+    "GDPR and data protection obligations."
+   ]
+  },
+  "M-INFO-107090": {
+   "mltheory": [
+    3,
+    "Sampling methods up to normalizing flows."
+   ],
+   "data": [
+    1,
+    "Evaluating sampling quality."
+   ]
+  },
+  "M-INFO-107113": {
+   "robotics": [
+    2,
+    "Design of exoskeletons and prostheses."
+   ]
+  },
+  "M-INFO-107123": {
+   "robotics": [
+    3,
+    "Humanoid sensorimotor and cognitive abilities."
+   ]
+  },
+  "M-INFO-107130": {
+   "robotics": [
+    2,
+    "Robot sensors and perception."
+   ],
+   "cv": [
+    1,
+    "Visual and tactile sensing."
+   ],
+   "embedded": [
+    1,
+    "Sensor hardware and A/D conversion."
+   ]
+  },
+  "M-INFO-107152": {
+   "robotics": [
+    1,
+    "Humanoid robotics topic."
+   ],
+   "research": [
+    2,
+    "Term paper as a scientific publication."
+   ]
+  },
+  "M-INFO-107155": {
+   "robotics": [
+    3,
+    "Kinematics, grasp and motion planning in code."
+   ],
+   "cv": [
+    1,
+    "Visual perception."
+   ],
+   "swe": [
+    1,
+    "C++/Python team implementation."
+   ]
+  },
+  "M-INFO-107161": {
+   "distsys": [
+    1,
+    "Ubiquitous system architectures."
+   ],
+   "embedded": [
+    1,
+    "Sensing devices."
+   ],
+   "research": [
+    1,
+    "User study methods."
+   ]
+  },
+  "M-INFO-107162": {
+   "robotics": [
+    3,
+    "Kinematics, dynamics, control and planning."
+   ]
+  },
+  "M-INFO-107163": {
+   "dl": [
+    3,
+    "Diffusion models and generative AI for agents."
+   ],
+   "mltheory": [
+    2,
+    "Learning for decision making."
+   ],
+   "research": [
+    3,
+    "Reproducing published results."
+   ]
+  },
+  "M-INFO-107166": {
+   "research": [
+    1,
+    "Evaluating user interfaces."
+   ],
+   "swe": [
+    1,
+    "User interface design."
+   ]
+  },
+  "M-INFO-107167": {
+   "algo": [
+    3,
+    "Parameterised algorithm design."
+   ],
+   "formal": [
+    3,
+    "Parameterised complexity analysis."
+   ]
+  },
+  "M-INFO-107168": {
+   "algo": [
+    3,
+    "Randomised algorithms and data structures."
+   ],
+   "formal": [
+    2,
+    "Probabilistic analysis tools."
+   ],
+   "data": [
+    1,
+    "Probability reasoning."
+   ]
+  },
+  "M-INFO-107169": {
+   "mltheory": [
+    3,
+    "Mathematical foundations of ML."
+   ],
+   "data": [
+    1,
+    "Model selection and evaluation."
+   ]
+  },
+  "M-INFO-107170": {
+   "research": [
+    1,
+    "Participatory design and evaluation methods."
+   ]
+  },
+  "M-INFO-107172": {
+   "algo": [
+    2,
+    "Recent algorithm results."
+   ],
+   "research": [
+    3,
+    "Literature search and seminar paper."
+   ]
+  },
+  "M-INFO-107174": {
+   "dl": [
+    3,
+    "Deep and imitation learning for robots."
+   ],
+   "robotics": [
+    2,
+    "Robot learning."
+   ],
+   "research": [
+    3,
+    "Reproducing published results."
+   ]
+  },
+  "M-INFO-107175": {
+   "dl": [
+    1,
+    "Deep learning for robotics topics."
+   ],
+   "robotics": [
+    1,
+    "Robot learning."
+   ],
+   "research": [
+    2,
+    "Scientific report."
+   ]
+  },
+  "M-INFO-107176": {
+   "nlp": [
+    3,
+    "Building a speech translation system."
+   ],
+   "dl": [
+    2,
+    "Deep learning for translation."
+   ]
+  },
+  "M-INFO-107177": {
+   "nlp": [
+    3,
+    "Building dialogue systems with LLMs."
+   ],
+   "dl": [
+    2,
+    "Applied deep learning."
+   ],
+   "swe": [
+    1,
+    "System development."
+   ]
+  },
+  "M-INFO-107178": {
+   "nlp": [
+    3,
+    "Core NLP problems and techniques."
+   ],
+   "dl": [
+    2,
+    "Neural NLP models."
+   ]
+  },
+  "M-INFO-107179": {
+   "nlp": [
+    2,
+    "Speech-to-speech translation research."
+   ],
+   "research": [
+    2,
+    "Presentations from literature."
+   ]
+  },
+  "M-INFO-107197": {
+   "dl": [
+    3,
+    "Neural network types and training."
+   ],
+   "mltheory": [
+    1,
+    "Learning principles."
+   ]
+  },
+  "M-INFO-107199": {
+   "algo": [
+    3,
+    "Parallel algorithms."
+   ],
+   "sysperf": [
+    2,
+    "Parallel performance."
+   ],
+   "distsys": [
+    1,
+    "Distributed-memory algorithms."
+   ]
+  },
+  "M-INFO-107200": {
+   "algo": [
+    3,
+    "Advanced data structures."
+   ],
+   "formal": [
+    1,
+    "Their analysis."
+   ]
+  },
+  "M-INFO-107201": {
+   "algo": [
+    3,
+    "Graph, geometric, string and external-memory algorithms."
+   ],
+   "formal": [
+    1,
+    "Formalising algorithmic problems."
+   ]
+  },
+  "M-INFO-107202": {
+   "algo": [
+    3,
+    "Text indexing data structures."
+   ],
+   "sysperf": [
+    1,
+    "Space-efficient implementations."
+   ]
+  },
+  "M-INFO-107205": {
+   "sysperf": [
+    2,
+    "Operating systems research."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-107209": {
+   "algo": [
+    2,
+    "How modern SAT solvers work."
+   ],
+   "formal": [
+    2,
+    "Logic and satisfiability."
+   ],
+   "research": [
+    2,
+    "Reading high-influence papers."
+   ]
+  },
+  "M-INFO-107211": {
+   "algo": [
+    3,
+    "Graph partitioning and clustering algorithms."
+   ],
+   "data": [
+    1,
+    "Clustering models and their interpretation."
+   ]
+  },
+  "M-INFO-107212": {
+   "swe": [
+    3,
+    "Variability, feature models and product lines."
+   ]
+  },
+  "M-INFO-107215": {
+   "distsys": [
+    3,
+    "Grid/cloud computing and distributed data."
+   ],
+   "data": [
+    1,
+    "Big data management."
+   ]
+  },
+  "M-INFO-107216": {
+   "security": [
+    2,
+    "Security and privacy research."
+   ],
+   "research": [
+    2,
+    "Literature work and presentation."
+   ]
+  },
+  "M-INFO-107217": {
+   "mltheory": [
+    2,
+    "Interpretability and causality in ML."
+   ],
+   "research": [
+    2,
+    "Scientific report."
+   ]
+  },
+  "M-INFO-107218": {
+   "security": [
+    3,
+    "Secure protocols such as TLS, IPSec and Kerberos."
+   ],
+   "crypto": [
+    2,
+    "Cryptographic building blocks for communication."
+   ],
+   "distsys": [
+    1,
+    "Network architectures."
+   ]
+  },
+  "M-INFO-107228": {
+   "algo": [
+    3,
+    "Geometric algorithms and their analysis."
+   ],
+   "formal": [
+    1,
+    "Mathematical analysis."
+   ]
+  },
+  "M-INFO-107229": {
+   "embedded": [
+    3,
+    "Specifying, synthesising and optimising embedded hardware."
+   ]
+  },
+  "M-INFO-107230": {
+   "embedded": [
+    3,
+    "Architectures and design of embedded SoCs."
+   ]
+  },
+  "M-INFO-107231": {
+   "embedded": [
+    1,
+    "Embedded systems topics."
+   ],
+   "research": [
+    2,
+    "Scientific paper and talk."
+   ]
+  },
+  "M-INFO-107232": {
+   "embedded": [
+    1,
+    "Embedded systems topics."
+   ],
+   "research": [
+    2,
+    "Scientific paper and talk."
+   ]
+  },
+  "M-INFO-107233": {
+   "nlp": [
+    2,
+    "Linguistics and computational linguistics basics."
+   ],
+   "swe": [
+    1,
+    "NLP applied to software engineering."
+   ]
+  },
+  "M-INFO-107234": {
+   "embedded": [
+    2,
+    "Edge and fog computing with sensors."
+   ],
+   "dl": [
+    1,
+    "AI under resource constraints."
+   ],
+   "swe": [
+    1,
+    "Software engineering for sensor apps."
+   ]
+  },
+  "M-INFO-107235": {
+   "swe": [
+    3,
+    "Processes, requirements, architecture and quality."
+   ]
+  },
+  "M-INFO-107236": {
+   "swe": [
+    1,
+    "Software architecture topics."
+   ],
+   "security": [
+    1,
+    "Security and privacy in architecture."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-107237": {
+   "swe": [
+    3,
+    "Component-based architecture and quality."
+   ]
+  },
+  "M-INFO-107238": {
+   "algo": [
+    2,
+    "Encoding and solving combinatorial problems."
+   ],
+   "formal": [
+    2,
+    "SAT and complexity."
+   ],
+   "sysperf": [
+    1,
+    "Efficient solver implementations."
+   ]
+  },
+  "M-INFO-107239": {
+   "swe": [
+    3,
+    "Software testing process and techniques."
+   ]
+  },
+  "M-INFO-107241": {
+   "security": [
+    3,
+    "Hands-on hardware security attacks and defences."
+   ],
+   "embedded": [
+    2,
+    "Hardware-level systems."
+   ],
+   "crypto": [
+    1,
+    "Side channels on crypto implementations."
+   ]
+  },
+  "M-INFO-107242": {
+   "security": [
+    2,
+    "Privacy research topics."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-107243": {
+   "distsys": [
+    3,
+    "Internet routing, transport, SDN and data centre networks."
+   ]
+  },
+  "M-INFO-107245": {
+   "distsys": [
+    1,
+    "Mobile communication systems."
+   ]
+  },
+  "M-INFO-107254": {},
+  "M-INFO-107264": {
+   "algo": [
+    2,
+    "Graph algorithm engineering papers."
+   ],
+   "research": [
+    2,
+    "Paper review and report."
+   ]
+  },
+  "M-INFO-107265": {
+   "embedded": [
+    3,
+    "Hands-on chip design projects."
+   ],
+   "dl": [
+    1,
+    "Hardware neural networks."
+   ]
+  },
+  "M-INFO-107266": {
+   "embedded": [
+    3,
+    "Hands-on chip design projects."
+   ],
+   "dl": [
+    1,
+    "Hardware neural networks."
+   ]
+  },
+  "M-INFO-107353": {
+   "nlp": [
+    2,
+    "Machine translation research."
+   ],
+   "research": [
+    2,
+    "Presentations from literature."
+   ]
+  },
+  "M-INFO-107412": {
+   "security": [
+    2,
+    "Implementing privacy-enhancing technologies."
+   ],
+   "crypto": [
+    1,
+    "Private information retrieval."
+   ],
+   "swe": [
+    1,
+    "Implementation work."
+   ]
+  },
+  "M-INFO-107435": {
+   "crypto": [
+    3,
+    "Universal composability and protocol proofs."
+   ],
+   "formal": [
+    2,
+    "Security proofs."
+   ]
+  },
+  "M-INFO-107436": {
+   "research": [
+    3,
+    "Critical reading and good research practice."
+   ],
+   "robotics": [
+    1,
+    "Robotics research topics."
+   ]
+  },
+  "M-INFO-107448": {
+   "embedded": [
+    2,
+    "Deploying deep learning on hardware."
+   ],
+   "dl": [
+    2,
+    "Model compression and efficiency."
+   ],
+   "sysperf": [
+    2,
+    "Latency, energy and memory optimisation."
+   ]
+  },
+  "M-INFO-107494": {
+   "formal": [
+    3,
+    "Proving theorems in Isabelle/HOL."
+   ]
+  },
+  "M-INFO-107598": {
+   "robotics": [
+    2,
+    "Survey of AI-powered robotics research."
+   ],
+   "research": [
+    1,
+    "Open research directions."
+   ]
+  },
+  "M-INFO-107599": {
+   "algo": [
+    3,
+    "Efficient algorithms beyond worst-case analysis."
+   ],
+   "sysperf": [
+    2,
+    "Efficient implementations and measurements."
+   ],
+   "data": [
+    1,
+    "Analysing measurement data."
+   ]
+  },
+  "M-INFO-107600": {
+   "algo": [
+    3,
+    "Route planning and shortest-path acceleration."
+   ],
+   "sysperf": [
+    2,
+    "Efficient implementation."
+   ],
+   "swe": [
+    1,
+    "Team implementation."
+   ]
+  },
+  "M-INFO-107609": {
+   "robotics": [
+    2,
+    "Mathematical methods for robotics."
+   ],
+   "mltheory": [
+    2,
+    "Computational methods for AI."
+   ]
+  },
+  "M-INFO-107625": {
+   "formal": [
+    2,
+    "Type systems and static analysis."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-INFO-107639": {
+   "formal": [
+    3,
+    "Rigorous analysis of SAT algorithms."
+   ],
+   "algo": [
+    2,
+    "Exponential-time algorithms."
+   ]
+  },
+  "M-INFO-107642": {
+   "crypto": [
+    3,
+    "Lattice-based cryptography."
+   ],
+   "formal": [
+    1,
+    "Security proofs."
+   ]
+  },
+  "M-INFO-107663": {
+   "robotics": [
+    3,
+    "Localisation of vehicles and robots."
+   ],
+   "mltheory": [
+    2,
+    "Probabilistic machine learning tools."
+   ]
+  },
+  "M-INFO-107664": {
+   "formal": [
+    3,
+    "Type system soundness and abstract interpretation."
+   ],
+   "swe": [
+    1,
+    "Program analysis tooling."
+   ]
+  },
+  "M-INFO-107676": {
+   "dl": [
+    3,
+    "Multimodal deep learning systems."
+   ],
+   "nlp": [
+    2,
+    "Language as one modality."
+   ],
+   "cv": [
+    2,
+    "Vision as one modality."
+   ]
+  },
+  "M-INFO-107677": {
+   "swe": [
+    3,
+    "Developing and extending medium to large software systems."
+   ],
+   "research": [
+    1,
+    "Scientifically motivated problems."
+   ]
+  },
+  "M-INFO-107678": {
+   "swe": [
+    3,
+    "Engineering approaches in a real software project."
+   ],
+   "research": [
+    1,
+    "Scientifically motivated problems."
+   ]
+  },
+  "M-INFO-107685": {
+   "swe": [
+    2,
+    "Empirical methods in software engineering."
+   ],
+   "data": [
+    2,
+    "Statistical analysis of studies."
+   ],
+   "research": [
+    2,
+    "Planning and running empirical studies."
+   ]
+  },
+  "M-INFO-107686": {
+   "research": [
+    2,
+    "Introduction to scientific work."
+   ],
+   "data": [
+    1,
+    "Information systems topics."
+   ]
+  },
+  "M-INFO-107728": {
+   "dl": [
+    3,
+    "Behaviour foundation models in practice."
+   ],
+   "robotics": [
+    2,
+    "Robot behaviour learning."
+   ],
+   "research": [
+    3,
+    "Reproducing published results."
+   ]
+  },
+  "M-INFO-107729": {
+   "dl": [
+    1,
+    "Behaviour foundation models."
+   ],
+   "robotics": [
+    1,
+    "Robot learning."
+   ],
+   "research": [
+    2,
+    "Scientific report."
+   ]
+  },
+  "M-INFO-107739": {
+   "swe": [
+    3,
+    "Building advanced developer tools."
+   ],
+   "research": [
+    1,
+    "Scientifically motivated problems."
+   ]
+  },
+  "M-INFO-107816": {
+   "dl": [
+    1,
+    "Neural network topics."
+   ],
+   "research": [
+    2,
+    "Presentations from literature."
+   ]
+  },
+  "M-INFO-107817": {
+   "cv": [
+    2,
+    "Light transport and image synthesis."
+   ],
+   "sysperf": [
+    1,
+    "Efficient rendering."
+   ],
+   "mltheory": [
+    1,
+    "Monte Carlo methods."
+   ]
+  },
+  "M-INFO-107821": {
+   "mltheory": [
+    2,
+    "Hybrid quantum machine learning."
+   ],
+   "formal": [
+    1,
+    "Quantum computing basics."
+   ]
+  },
+  "M-INFO-107829": {
+   "research": [
+    2,
+    "Research methods: literature and presentation."
+   ]
+  },
+  "M-INFO-107830": {
+   "research": [
+    2,
+    "Research methods: literature and presentation."
+   ]
+  },
+  "M-INFO-107831": {
+   "research": [
+    3,
+    "A real research project in a chosen area."
+   ]
+  },
+  "M-INFO-107832": {
+   "research": [
+    3,
+    "A real research project in a chosen area."
+   ]
+  },
+  "M-INFO-107834": {
+   "robotics": [
+    2,
+    "Human-robot interaction."
+   ],
+   "research": [
+    3,
+    "Designing and evaluating empirical user studies."
+   ],
+   "data": [
+    1,
+    "Study evaluation."
+   ]
+  },
+  "M-INFO-107836": {
+   "distsys": [
+    2,
+    "Federated and decentralised learning."
+   ],
+   "mltheory": [
+    2,
+    "Learning algorithms and trade-offs."
+   ],
+   "security": [
+    2,
+    "Attacks and defences."
+   ]
+  },
+  "M-INFO-107843": {
+   "cv": [
+    3,
+    "Advanced deep learning for computer vision."
+   ],
+   "dl": [
+    3,
+    "Domain shift, few data and uncertainty."
+   ]
+  },
+  "M-INFO-107845": {
+   "mltheory": [
+    2,
+    "ML research project."
+   ],
+   "dl": [
+    2,
+    "Implementing learning systems."
+   ],
+   "research": [
+    3,
+    "Planning and running a research project."
+   ]
+  },
+  "M-INFO-107846": {
+   "research": [
+    2,
+    "Academic paper and presentation."
+   ],
+   "mltheory": [
+    1,
+    "ML topics."
+   ]
+  },
+  "M-INFO-107847": {
+   "mltheory": [
+    3,
+    "Bayesian inference and nonlinear filtering."
+   ],
+   "robotics": [
+    2,
+    "Real-time state estimation."
+   ]
+  },
+  "M-INFO-107863": {
+   "algo": [
+    3,
+    "Implementing advanced algorithms under time limits."
+   ],
+   "sysperf": [
+    2,
+    "Estimating and tuning running times."
+   ]
+  },
+  "M-INFO-107865": {
+   "sysperf": [
+    3,
+    "Performance engineering, SIMD and cache-aware C++/Rust."
+   ],
+   "algo": [
+    2,
+    "Algorithm engineering methods."
+   ],
+   "swe": [
+    1,
+    "Production-quality code."
+   ]
+  },
+  "M-INFO-107867": {
+   "algo": [
+    3,
+    "Scalable graph and sparse-matrix algorithms."
+   ],
+   "sysperf": [
+    2,
+    "Parallel implementations."
+   ],
+   "mltheory": [
+    1,
+    "Graph learning."
+   ]
+  },
+  "M-INFO-107897": {
+   "embedded": [
+    3,
+    "Customising processors for performance and power."
+   ],
+   "sysperf": [
+    1,
+    "Performance/power trade-offs."
+   ]
+  },
+  "M-INFO-107906": {
+   "formal": [
+    2,
+    "Semantics of logic programs."
+   ],
+   "swe": [
+    1,
+    "Programming in Datalog and Prolog."
+   ]
+  },
+  "M-INFO-107919": {
+   "research": [
+    3,
+    "Designing and running experimental studies."
+   ],
+   "data": [
+    1,
+    "Analysing study data."
+   ]
+  },
+  "M-INFO-107926": {
+   "mltheory": [
+    1,
+    "State-of-the-art RL algorithms."
+   ],
+   "robotics": [
+    1,
+    "Robot RL."
+   ],
+   "research": [
+    2,
+    "Scientific report."
+   ]
+  },
+  "M-INFO-108019": {},
+  "M-INFO-108020": {
+   "swe": [
+    2,
+    "Contributing to a language implementation."
+   ],
+   "formal": [
+    1,
+    "Language semantics."
+   ],
+   "sysperf": [
+    1,
+    "Implementation techniques."
+   ]
+  },
+  "M-INFO-108043": {
+   "crypto": [
+    3,
+    "Evaluating post-quantum security of schemes."
+   ],
+   "research": [
+    2,
+    "Seminar paper."
+   ]
+  },
+  "M-MACH-106902": {
+   "robotics": [
+    1,
+    "Bio-inspired robot technologies."
+   ],
+   "research": [
+    2,
+    "Literature search and seminar paper."
+   ]
+  },
+  "M-MACH-106903": {
+   "robotics": [
+    2,
+    "Bionic design principles for robots."
+   ]
+  },
+  "M-MACH-106904": {
+   "robotics": [
+    3,
+    "Extending software of mobile robots."
+   ],
+   "cv": [
+    1,
+    "Computer vision and 3D mapping."
+   ],
+   "swe": [
+    1,
+    "Group software project."
+   ]
+  },
+  "M-MACH-106905": {
+   "robotics": [
+    2,
+    "Designing a robotic prototype."
+   ],
+   "embedded": [
+    1,
+    "Mechatronic systems."
+   ]
+  },
+  "M-MACH-107558": {
+   "cv": [
+    3,
+    "Robotic perception and scene understanding."
+   ],
+   "robotics": [
+    2,
+    "Perception pipelines for robots."
+   ],
+   "dl": [
+    2,
+    "ML for perception."
+   ]
+  },
+  "M-MACH-107621": {
+   "robotics": [
+    3,
+    "Navigation, SLAM and mobile manipulation."
+   ],
+   "mltheory": [
+    1,
+    "Learning for decision making."
+   ]
+  },
+  "M-MACH-107806": {
+   "robotics": [
+    3,
+    "Planning and control on a real test vehicle."
+   ],
+   "cv": [
+    2,
+    "Object detection on sensor data."
+   ],
+   "data": [
+    1,
+    "Recording and annotating data."
+   ]
+  },
+  "M-MATH-101336": {
+   "formal": [
+    3,
+    "Proof-based graph theory."
+   ],
+   "algo": [
+    1,
+    "Graph structures behind algorithms."
+   ]
+  },
+  "M-MATH-102950": {
+   "formal": [
+    3,
+    "Combinatorics."
+   ]
+  },
+  "M-MATH-106957": {
+   "formal": [
+    3,
+    "Probabilistic and algebraic combinatorics."
+   ]
+  },
+  "M-WIWI-101503": {
+   "swe": [
+    1,
+    "Prototyping in an innovation project."
+   ]
+  },
+  "M-WIWI-105659": {
+   "data": [
+    3,
+    "End-to-end data science project."
+   ],
+   "mltheory": [
+    2,
+    "Modern ML methods."
+   ],
+   "swe": [
+    1,
+    "Team software project."
+   ]
+  },
+  "M-WIWI-106258": {
+   "data": [
+    1,
+    "Data-driven marketing concepts."
+   ]
+  }
+ }
+}
