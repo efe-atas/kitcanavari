@@ -52,7 +52,7 @@ Kaynak PDF `kit_docs/module_handbook.pdf` yereldir, commit edilmez (`.gitignore`
       "recurrence": "winter",          // winter | summer | each | irregular
       "language": "English",
       "level": 4,
-      "parts": ["Area of Specialization: Human-centred Machine Intelligence", "Elective Studies in Informatics"],
+      "fields": ["Area of Specialization: Human-centred Machine Intelligence", "Elective Studies in Informatics"],  // courses.json ile aynı ad
       "coordinators": ["TT-Prof. Dr. Rudolf Lioutikov", "Prof. Dr. Gerhard Neumann"],
       "bricks": [{ "id": "T-INFO-111255", "title": "Reinforcement Learning", "ects": 6, "term": "WT" }],
       "competenceGoals": "…", "content": "…", "prerequisites": "…", "recommendations": "…"
