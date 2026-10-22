@@ -1,6 +1,7 @@
 // Degree rules of the Computer Science M.Sc., SPO 88-979-H-2025 (module handbook of 09/09/2026, WS 26/27, §1.3, §2, §3).
-import type { CoursesFile, Module, UserState } from '../types'
+import type { CoursesFile, HandbookFile, Module, UserState } from '../types'
 import { chosenModule } from './ects'
+import { roadmapEntries } from './roadmap'
 
 export const RULES = {
   total: 120,
@@ -57,7 +58,7 @@ export const moduleAreas = (m: Pick<Module, 'fields'>): string[] =>
 const MINOR_PREFIX = 'Minor Studies: '
 
 /** Minor subjects a module belongs to, e.g. "Mathematics". */
-export const moduleMinors = (m: Module): string[] =>
+export const moduleMinors = (m: Pick<Module, 'fields'>): string[] =>
   m.fields.filter((f) => f.startsWith(MINOR_PREFIX)).map((f) => f.slice(MINOR_PREFIX.length).trim())
 
 const kindFromTitle = (title: string): Kind | null => {
@@ -112,9 +113,14 @@ export function bucketOf(state: UserState, data: CoursesFile, eventId: string): 
   const mid = entry && ev ? chosenModule(entry, ev) : null
   const m = mid ? data.modules[mid] : null
   if (!m) return null
-  const options = bucketOptions(m)
-  if (entry.countAs && options.includes(entry.countAs)) return entry.countAs
-  return options.find((b) => (state.areas ?? []).includes(b))
+  return defaultBucket(m.fields, state.areas ?? [], entry.countAs ?? null)
+}
+
+/** Where a module counts: a valid explicit choice, else a chosen area, else elective, minor or IQ. */
+export function defaultBucket(fields: string[], chosen: string[], countAs: string | null): Bucket | null {
+  const options = bucketOptions({ fields })
+  if (countAs && options.includes(countAs)) return countAs
+  return options.find((b) => chosen.includes(b))
     ?? (options.includes(ELECTIVE) ? ELECTIVE : options.find((b) => b === MINOR || b === IQ) ?? null)
 }
 
@@ -165,12 +171,25 @@ export function placed(state: UserState, data: CoursesFile): Placed[] {
   return out
 }
 
+/** A module counted towards the degree. */
+export interface DegreeItem {
+  id: string
+  title: string
+  ects: number
+  fields: string[]
+  kind: Kind
+  bucket: Bucket
+}
+
 export function degreeReport(state: UserState, data: CoursesFile): DegreeReport {
-  const chosen = (state.areas ?? []).slice(0, 2)
-  const items = placed(state, data)
-  const withKind = items.map((x) => ({ ...x, kind: moduleKind(data, x.m) }))
-  const sum = (pred: (x: (typeof withKind)[number]) => boolean) =>
-    withKind.filter(pred).reduce((n, x) => n + (x.m.ects ?? 0), 0)
+  const items = placed(state, data).map(({ m, bucket }): DegreeItem =>
+    ({ id: m.id, title: m.title, ects: m.ects ?? 0, fields: m.fields, kind: moduleKind(data, m), bucket }))
+  return reportFromItems(items, state.areas ?? [])
+}
+
+export function reportFromItems(items: DegreeItem[], chosenAreas: string[]): DegreeReport {
+  const chosen = chosenAreas.slice(0, 2)
+  const sum = (pred: (x: DegreeItem) => boolean) => items.filter(pred).reduce((n, x) => n + x.ects, 0)
   const isCs = (b: Bucket) => b !== MINOR && b !== IQ
 
   const areas = chosen.map((area) => ({
@@ -179,11 +198,11 @@ export function degreeReport(state: UserState, data: CoursesFile): DegreeReport 
     lectureCp: sum((x) => x.bucket === area && x.kind === 'lecture'),
     lectureMin: RULES.areaLectureMinReduced[area] ?? RULES.areaLectureMin,
   }))
-  const stammItems = withKind.filter((x) => x.kind === 'stamm' && isCs(x.bucket))
+  const stammItems = items.filter((x) => x.kind === 'stamm' && isCs(x.bucket))
   const r: DegreeReport = {
     areas,
     areaTotal: sum((x) => AREAS.includes(x.bucket)),
-    stamm: { count: stammItems.length, titles: stammItems.map((x) => x.m.title) },
+    stamm: { count: stammItems.length, titles: stammItems.map((x) => x.title) },
     seminarCp: sum((x) => x.kind === 'seminar' && isCs(x.bucket)),
     practicalCp: sum((x) => x.kind === 'practical' && isCs(x.bucket)),
     electiveCp: sum((x) => x.bucket === ELECTIVE),
@@ -193,16 +212,63 @@ export function degreeReport(state: UserState, data: CoursesFile): DegreeReport 
     issues: [],
   }
 
-  const outside = withKind.filter((x) => AREAS.includes(x.bucket) && !chosen.includes(x.bucket))
-  if (chosen.length === 2) for (const x of outside) r.issues.push({ key: 'deg.outsideAreas', params: { title: x.m.title, area: x.bucket } })
+  const outside = items.filter((x) => AREAS.includes(x.bucket) && !chosen.includes(x.bucket))
+  if (chosen.length === 2) for (const x of outside) r.issues.push({ key: 'deg.outsideAreas', params: { title: x.title, area: x.bucket } })
   if (r.seminarCp + r.practicalCp > RULES.spMax) r.issues.push({ key: 'deg.spOver', params: { n: r.seminarCp + r.practicalCp } })
   if (r.areaTotal > RULES.areasMax) r.issues.push({ key: 'deg.areaOver', params: { n: r.areaTotal } })
   if (r.electiveCp > RULES.electiveMax) r.issues.push({ key: 'deg.electiveOver', params: { n: r.electiveCp } })
   if (r.minorCp > RULES.minorMax) r.issues.push({ key: 'deg.minorOver', params: { n: r.minorCp } })
   if (r.stamm.count > RULES.stamm) r.issues.push({ key: 'deg.stammExtra', params: { n: r.stamm.count } })
-  const minors = [...new Set(withKind.filter((x) => x.bucket === MINOR).flatMap((x) => moduleMinors(x.m)))]
+  const minors = [...new Set(items.filter((x) => x.bucket === MINOR).flatMap((x) => moduleMinors(x)))]
   if (minors.length > 1) r.issues.push({ key: 'deg.twoMinors', params: { minors: minors.join(', ') } })
   return r
+}
+
+export interface RoadmapReport {
+  /** Passed modules only. */
+  done: DegreeReport
+  /** Passed and planned. */
+  all: DegreeReport
+  gpa: number | null
+  gradedCp: number
+  /** Roadmap ids found in neither the handbook nor the catalog. */
+  unknown: string[]
+}
+
+/** The whole degree over every term of the roadmap (spec §4). */
+export function roadmapReport(state: UserState, courses: CoursesFile, handbook: HandbookFile | null): RoadmapReport {
+  const chosen = state.areas ?? []
+  const done: DegreeItem[] = []
+  const all: DegreeItem[] = []
+  const unknown: string[] = []
+  let weighted = 0
+  let gradedCp = 0
+  for (const [id, e] of Object.entries(roadmapEntries(state))) {
+    if (e.status !== 'passed' && e.status !== 'planned') continue
+    const info = handbook?.modules[id] ?? courses.modules[id]
+    if (!info) {
+      unknown.push(id)
+      continue
+    }
+    const bucket = defaultBucket(info.fields, chosen, e.countAs)
+    if (info.ects === null || !bucket) continue
+    const item: DegreeItem = { id, title: info.title, ects: info.ects, fields: info.fields, kind: moduleKind(courses, info), bucket }
+    all.push(item)
+    if (e.status === 'passed') {
+      done.push(item)
+      if (e.grade !== null) {
+        weighted += e.grade * info.ects
+        gradedCp += info.ects
+      }
+    }
+  }
+  return {
+    done: reportFromItems(done, chosen),
+    all: reportFromItems(all, chosen),
+    gpa: gradedCp ? Math.round((weighted / gradedCp) * 100) / 100 : null,
+    gradedCp,
+    unknown,
+  }
 }
 
 /** Areas ranked by the credits the current selection could contribute to each, for choosing areas. */
