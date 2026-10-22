@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
 import { defaultState, setLang, toggleTheme, useAppState } from '../store'
-import type { ChangesFile, CoursesFile, Lang, StatusFile } from '../types'
+import type { ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile } from '../types'
 import { pendingAlerts } from '../logic/alerts'
 import { CatalogView } from './catalog/CatalogView'
 import { ChangesView } from './changes/ChangesView'
@@ -27,7 +27,7 @@ const routeFromHash = (): { tab: Tab; sub: string | null } => {
 type Load =
   | { status: 'loading' }
   | { status: 'error'; error: string }
-  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; checkedAt: string }
+  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; checkedAt: string }
 
 export function App() {
   const [load, setLoad] = useState<Load>({ status: 'loading' })
@@ -38,8 +38,9 @@ export function App() {
 
   useEffect(() => {
     loadData()
-      .then(({ courses, changes, status }: { courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null }) =>
-        setLoad({ status: 'ready', courses, changes, checkedAt: status?.checkedAt ?? courses.meta.scrapedAt }))
+      .then(({ courses, changes, status, handbook }: {
+        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null
+      }) => setLoad({ status: 'ready', courses, changes, handbook: handbook ?? null, checkedAt: status?.checkedAt ?? courses.meta.scrapedAt }))
       .catch((e: unknown) => setLoad({ status: 'error', error: e instanceof Error ? e.message : String(e) }))
   }, [])
   useEffect(() => {
@@ -101,7 +102,9 @@ export function App() {
         <ErrorBoundary onReset={() => update(() => defaultState())}>
         {load.status === 'loading' && <p class="empty loading">{t(lang, 'data.loading')}</p>}
         {load.status === 'error' && <p class="banner banner-error">{t(lang, 'data.error', { error: load.error })}</p>}
-        {load.status === 'ready' && tab === 'catalog' && <CatalogView data={load.courses} state={state} update={update} />}
+        {load.status === 'ready' && tab === 'catalog' && (
+          <CatalogView data={load.courses} handbook={load.handbook} allModules={route.sub === 'all'} state={state} update={update} />
+        )}
         {load.status === 'ready' && tab === 'schedule' && <ScheduleView data={load.courses} state={state} update={update} />}
         {load.status === 'ready' && tab === 'guide' && <GuideView lang={lang} data={load.courses} />}
         {load.status === 'ready' && tab === 'glossary' && <GlossaryView lang={lang} data={load.courses} focus={route.sub} />}

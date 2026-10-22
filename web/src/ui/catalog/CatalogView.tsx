@@ -4,17 +4,25 @@ import { findConflicts } from '../../logic/conflicts'
 import { AREAS, moduleAreas } from '../../logic/degree'
 import { computeEcts } from '../../logic/ects'
 import { emptyFilters, eventModules, filterEvents, type Filters as F } from '../../logic/filter'
+import { emptyModuleFilters, filterModules, moduleRows, type ModuleFilters as MF } from '../../logic/handbook'
 import { addEvent, removeEvent } from '../../store'
-import type { CoursesFile, Event, UserState } from '../../types'
+import type { CoursesFile, Event, HandbookFile, UserState } from '../../types'
+import { fmtDate } from '../format'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
 import { EventCard } from './EventCard'
 import { EventDetail } from './EventDetail'
 import { Filters } from './Filters'
+import { ModuleCard } from './ModuleCard'
+import { ModuleDetail } from './ModuleDetail'
+import { ModuleFilters } from './ModuleFilters'
 import { Tree } from './Tree'
 
 interface Props {
   data: CoursesFile
+  handbook: HandbookFile | null
+  /** Show every handbook module instead of this term's courses (route #/catalog/all). */
+  allModules: boolean
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
 }
@@ -32,11 +40,21 @@ export function conflictingIds(data: CoursesFile, state: UserState): Set<string>
   return out
 }
 
-export function CatalogView({ data, state, update }: Props) {
+export function CatalogView({ data, handbook, allModules, state, update }: Props) {
   const { lang } = state
   const [filters, setFilters] = useState<F>(emptyFilters)
   const [openId, setOpenId] = useState<string | null>(null)
   const [treeOpen, setTreeOpen] = useState(false)
+  const [moduleFilters, setModuleFilters] = useState<MF>(emptyModuleFilters)
+  const [openModuleId, setOpenModuleId] = useState<string | null>(null)
+  const rows = useMemo(() => (handbook ? moduleRows(data, handbook) : []), [data, handbook])
+  const moduleList = useMemo(() => filterModules(data, rows, moduleFilters), [data, rows, moduleFilters])
+  const moduleOptions = useMemo(() => ({
+    ects: uniq(rows.map((r) => r.ects)).sort((a, b) => a - b),
+    areas: AREAS.filter((a) => rows.some((r) => moduleAreas(r).includes(a))),
+  }), [rows])
+  const showModules = allModules && !!handbook
+  const openModule = openModuleId ? rows.find((r) => r.id === openModuleId) ?? null : null
 
   const options = useMemo(() => {
     const evs = Object.values(data.events)
@@ -57,8 +75,8 @@ export function CatalogView({ data, state, update }: Props) {
   const ects = useMemo(() => computeEcts(state.selected, data.events, data.modules), [data, state.selected])
 
   return (
-    <div class="catalog">
-      <aside class={`sidebar${treeOpen ? ' open' : ''}`}>
+    <div class={`catalog${showModules ? ' is-modules' : ''}`}>
+      {!showModules && <aside class={`sidebar${treeOpen ? ' open' : ''}`}>
         <h2 class="sidebar-title">{t(lang, 'filter.fields')}</h2>
         <button type="button" class="sidebar-toggle" aria-expanded={treeOpen} onClick={() => setTreeOpen(!treeOpen)}>
           <Icon name="filter" size={16} />
@@ -67,12 +85,36 @@ export function CatalogView({ data, state, update }: Props) {
         <Tree nodes={data.tree} selected={filters.fieldId} allLabel={t(lang, 'filter.allFields')}
           total={Object.keys(data.events).length}
           onSelect={(fieldId) => { setFilters({ ...filters, fieldId }); setTreeOpen(false) }} />
-      </aside>
+      </aside>}
       <section class="results">
         <header class="page-head">
           <h2>{t(lang, 'tab.catalog')}</h2>
-          <p class="result-count">{t(lang, 'catalog.count', { n: list.length })}</p>
+          {handbook && (
+            <div class="mode-switch" role="group" aria-label={t(lang, 'tab.catalog')}>
+              <button type="button" aria-pressed={!showModules} onClick={() => { location.hash = '#/catalog' }}>{t(lang, 'catalog.mode.term')}</button>
+              <button type="button" aria-pressed={showModules} onClick={() => { location.hash = '#/catalog/all' }}>{t(lang, 'catalog.mode.all')}</button>
+            </div>
+          )}
+          <p class="result-count">
+            {showModules ? t(lang, 'catalog.moduleCount', { n: moduleList.length }) : t(lang, 'catalog.count', { n: list.length })}
+          </p>
         </header>
+        {showModules ? (
+          <>
+            <p class="scope-note">
+              <Icon name="check" size={16} />
+              <span>{t(lang, 'catalog.handbookNote', { date: fmtDate(lang, handbook!.meta.asOf) })}</span>
+            </p>
+            <ModuleFilters lang={lang} value={moduleFilters} onChange={setModuleFilters} options={moduleOptions} />
+            {moduleList.length ? (
+              <ul class="cards">
+                {moduleList.map((r) => (
+                  <ModuleCard key={r.id} lang={lang} data={data} row={r} myAreas={state.areas ?? []} onOpen={() => setOpenModuleId(r.id)} />
+                ))}
+              </ul>
+            ) : <p class="empty">{t(lang, 'catalog.empty')}</p>}
+          </>
+        ) : (<>
         <p class="scope-note">
           <Icon name="check" size={16} />
           <span>{t(lang, 'catalog.masterOnly', { spo: data.meta.spo })}<TermLink id="level" lang={lang} /></span>
@@ -86,7 +128,8 @@ export function CatalogView({ data, state, update }: Props) {
             ))}
           </ul>
         ) : <p class="empty">{t(lang, 'catalog.empty')}</p>}
-        {picked > 0 && (
+        </>)}
+        {picked > 0 && !showModules && (
           <div class="dock" role="status">
             <span class="dock-stat"><strong>{picked}</strong> {t(lang, 'dock.courses')}</span>
             <span class="dock-stat"><strong>{ects.total}</strong> ECTS</span>
@@ -97,6 +140,10 @@ export function CatalogView({ data, state, update }: Props) {
       {open && (
         <EventDetail lang={lang} data={data} ev={open} myAreas={state.areas ?? []} inSchedule={!!state.selected[open.id]}
           onToggle={() => toggle(open)} onClose={() => setOpenId(null)} />
+      )}
+      {showModules && openModule && (
+        <ModuleDetail lang={lang} data={data} row={openModule} myAreas={state.areas ?? []} onClose={() => setOpenModuleId(null)}
+          onOpenEvent={(id) => { setOpenModuleId(null); setOpenId(id); location.hash = '#/catalog' }} />
       )}
     </div>
   )

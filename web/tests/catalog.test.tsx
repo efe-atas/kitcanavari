@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/preact'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import { STORAGE_KEY } from '../src/store'
-import { daysAgo, makeChanges, makeCourses } from './appdata'
+import { daysAgo, makeChanges, makeCourses, makeHandbook } from './appdata'
 
 const loadData = vi.fn()
 vi.mock('../src/data', () => ({ loadData: () => loadData() }))
@@ -82,5 +82,37 @@ describe('catalog', () => {
     loadData.mockRejectedValue(new Error('courses.json: HTTP 404'))
     render(<App />)
     await screen.findByText(/Could not load data: courses.json: HTTP 404/)
+  })
+})
+
+describe('all modules mode', () => {
+  beforeEach(() => loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: makeHandbook() }))
+
+  test('switches to all modules and filters by recurrence', async () => {
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'All modules' }))
+    await screen.findByText('Reinforcement Learning')
+    expect(screen.getByText('5 modules')).toBeTruthy()
+    expect(location.hash).toBe('#/catalog/all')
+    fireEvent.click(screen.getByRole('button', { name: 'Summer term only' }))
+    await waitFor(() => expect(screen.queryByText('Reinforcement Learning')).toBeNull())
+    expect(screen.getByText('Seminar: Post-Quantum Cryptography')).toBeTruthy()
+  })
+
+  test('module detail shows handbook text and links to this term\'s event', async () => {
+    location.hash = '#/catalog/all'
+    render(<App />)
+    fireEvent.click(await screen.findByText('Module M3'))
+    await screen.findByText('Goals of Module M3')
+    fireEvent.click(screen.getByRole('button', { name: 'IT Security' }))
+    await screen.findByRole('button', { name: 'Add to schedule' })
+    expect(location.hash).toBe('#/catalog')
+  })
+
+  test('hides the mode switch without a handbook', async () => {
+    loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: null })
+    render(<App />)
+    await screen.findByText('IT Security')
+    expect(screen.queryByRole('button', { name: 'All modules' })).toBeNull()
   })
 })

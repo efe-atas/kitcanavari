@@ -14,7 +14,7 @@ interface Props {
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 const KINDS: Kind[] = ['stamm', 'lecture', 'seminar', 'practical']
 
-function Chips<T extends string | number>({ label, all, chosen, render, onToggle }: {
+export function Chips<T extends string | number>({ label, all, chosen, render, onToggle }: {
   label: string; all: T[]; chosen: T[]; render: (v: T) => string; onToggle: (v: T) => void
 }) {
   if (!all.length) return null
@@ -30,7 +30,7 @@ function Chips<T extends string | number>({ label, all, chosen, render, onToggle
   )
 }
 
-const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v])
+export const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v])
 
 export function Filters({ lang, value, onChange, options }: Props) {
   const set = (patch: Partial<F>) => onChange({ ...value, ...patch })

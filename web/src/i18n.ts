@@ -137,6 +137,21 @@ const tr = {
   'deg.min': 'en az {n}',
   'deg.range': '{a}–{b}',
   'day.Mon': 'Pzt', 'day.Tue': 'Sal', 'day.Wed': 'Çar', 'day.Thu': 'Per', 'day.Fri': 'Cum', 'day.Sat': 'Cmt', 'day.Sun': 'Paz',
+  'catalog.mode.term': 'Bu dönem',
+  'catalog.mode.all': 'Tüm modüller',
+  'catalog.moduleCount': '{n} modül',
+  'catalog.handbookNote': 'Modül el kitabındaki tüm modüller (sürüm {date}). Bu dönem açılanlar işaretli; programa eklemek için modülün bu dönemki dersini aç.',
+  'rec.each': 'Her dönem',
+  'module.offeredNow': 'Bu dönem açık',
+  'module.notInHandbook': 'Bu modül el kitabında yok; bilgiler katalogdan.',
+  'module.coordinators': 'Koordinatörler',
+  'module.bricks': 'Modül parçaları',
+  'module.recommendations': 'Tavsiyeler',
+  'module.thisTerm': 'Bu dönemki dersler',
+  'module.notThisTerm': 'Bu dönem bu modüle bağlı ders yok.',
+  'filter.searchModules': 'Modül adı, kodu veya koordinatör ara…',
+  'filter.recurrence': 'Açılış',
+  'filter.offeredNow': 'Sadece bu dönem açılanlar',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -276,6 +291,21 @@ const en: Record<keyof typeof tr, string> = {
   'deg.min': 'min {n}',
   'deg.range': '{a}–{b}',
   'day.Mon': 'Mon', 'day.Tue': 'Tue', 'day.Wed': 'Wed', 'day.Thu': 'Thu', 'day.Fri': 'Fri', 'day.Sat': 'Sat', 'day.Sun': 'Sun',
+  'catalog.mode.term': 'This term',
+  'catalog.mode.all': 'All modules',
+  'catalog.moduleCount': '{n} modules',
+  'catalog.handbookNote': 'Every module in the module handbook (version {date}). Modules offered this term are marked; to add one to your schedule, open its course for this term.',
+  'rec.each': 'Every term',
+  'module.offeredNow': 'Offered this term',
+  'module.notInHandbook': 'Not in the module handbook; details come from the catalog.',
+  'module.coordinators': 'Coordinators',
+  'module.bricks': 'Module components',
+  'module.recommendations': 'Recommendations',
+  'module.thisTerm': 'Courses this term',
+  'module.notThisTerm': 'No course for this module this term.',
+  'filter.searchModules': 'Search module title, code or coordinator…',
+  'filter.recurrence': 'Offered',
+  'filter.offeredNow': 'Only offered this term',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }

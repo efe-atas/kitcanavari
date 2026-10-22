@@ -765,3 +765,15 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .attendance .note { margin: 0; }
 .tag-minor { background: color-mix(in srgb, var(--t-x) 16%, transparent); color: var(--text); }
 .reqs-after { margin-top: 12px; }
+
+/* All modules (handbook) mode */
+.catalog.is-modules { grid-template-columns: minmax(0, 1fr); }
+.mode-switch { display: flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); margin-right: auto; }
+.mode-switch button {
+  border: 0; background: transparent; padding: 5px 14px; cursor: pointer; font-size: 0.85rem;
+  font-weight: 600; border-radius: 999px; color: var(--muted);
+}
+.mode-switch button[aria-pressed='true'] { background: var(--text); color: var(--surface); }
+.offered-mark { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; font-size: 0.75rem; font-weight: 600; color: var(--accent); }
+.prose-lines p { white-space: pre-line; }
+.module-events li { padding: 4px 0; }
