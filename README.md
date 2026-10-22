@@ -23,6 +23,7 @@ uv venv && uv pip install -e '.[dev]' && .venv/bin/playwright install chromium
 .venv/bin/pytest
 .venv/bin/python -m kit_scraper.run --out ../data            # full run
 .venv/bin/python -m kit_scraper.run --out /tmp/x --limit 10 --root 0x51515308AECE499594589506DFA75784   # quick try
+.venv/bin/python -m kit_scraper.parse_handbook ../kit_docs/module_handbook.pdf --out ../data/handbook.json   # new handbook only, by hand (needs poppler)
 
 # website
 cd web
