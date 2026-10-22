@@ -144,6 +144,25 @@ export interface SelectedEntry {
 
 export type Lang = 'tr' | 'en'
 
+export type ModuleStatus = 'planned' | 'passed' | 'failed' | 'dropped'
+
+/** A module's place in the multi-term roadmap. */
+export interface RoadmapEntry {
+  /** 'WS26', 'SS27', … or 'prior'. */
+  term: string
+  status: ModuleStatus
+  countAs: string | null
+  /** 1.0–4.0 when passed and graded. */
+  grade: number | null
+}
+
+export interface Roadmap {
+  terms: string[]
+  /** Entries the user set; modules of this term's weekly plan are added as planned on top (see roadmapEntries). */
+  modules: Record<string, RoadmapEntry>
+  notes: Record<string, string>
+}
+
 export interface UserState {
   version: 1
   selected: Record<string, SelectedEntry>
@@ -153,4 +172,5 @@ export interface UserState {
   areas?: string[]
   /** Colour theme; light when unset. */
   theme?: 'light' | 'dark'
+  roadmap?: Roadmap
 }

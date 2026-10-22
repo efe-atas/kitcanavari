@@ -1,17 +1,13 @@
 // The synced profile (spec §2.2): what lives in the private repo's profile.json. Device-only settings (lang, theme)
 // stay out of it; the in-memory shape is still UserState, converted both ways here.
-import type { SelectedEntry, UserState } from '../types'
+import { roadmapEntries } from '../logic/roadmap'
+import { CURRENT_TERM, DEFAULT_TERMS } from '../logic/terms'
+import type { ModuleStatus, RoadmapEntry, SelectedEntry, UserState } from '../types'
 
 /** 'WS26', 'SS27', … or 'prior' (passed or recognised before the first term). */
 export type TermId = string
-export type ModuleStatus = 'planned' | 'passed' | 'failed' | 'dropped'
-
-export interface ProfileModule {
-  term: TermId
-  status: ModuleStatus
-  countAs: string | null
-  grade: number | null
-}
+export type { ModuleStatus }
+export type ProfileModule = RoadmapEntry
 
 export type WeeklyEntry = Omit<SelectedEntry, 'countAs'>
 
@@ -26,8 +22,7 @@ export interface Profile {
   notes: Record<string, string>
 }
 
-export const CURRENT_TERM = 'WS26'
-export const DEFAULT_TERMS = ['WS26', 'SS27', 'WS27', 'SS28']
+export { CURRENT_TERM, DEFAULT_TERMS }
 const STATUSES: ModuleStatus[] = ['planned', 'passed', 'failed', 'dropped']
 
 export const emptyProfile = (): Profile => ({
@@ -57,21 +52,34 @@ export function isProfile(x: unknown): x is Profile {
 export function profileFromState(s: UserState, prev: Profile | null): Profile {
   const base = prev ?? emptyProfile()
   const weekly: Record<string, WeeklyEntry> = {}
-  // This term's planned modules mirror the weekly plan; everything else (other terms, passed, …) is kept.
-  const modules = Object.fromEntries(Object.entries(base.modules)
-    .filter(([, m]) => !(m.term === CURRENT_TERM && m.status === 'planned')))
-  for (const [id, { countAs, ...entry }] of Object.entries(s.selected)) {
-    weekly[id] = entry
-    if (entry.moduleId) modules[entry.moduleId] = { term: CURRENT_TERM, status: 'planned', countAs: countAs ?? null, grade: null }
+  for (const [id, { countAs: _countAs, ...entry }] of Object.entries(s.selected)) weekly[id] = entry
+  return {
+    ...base,
+    areas: [...(s.areas ?? [])],
+    terms: [...(s.roadmap?.terms ?? base.terms)],
+    modules: roadmapEntries(s),
+    notes: { ...(s.roadmap?.notes ?? base.notes) },
+    weekly,
+    lastSeenScrapedAt: s.lastSeenScrapedAt,
   }
-  return { ...base, areas: [...(s.areas ?? [])], weekly, modules, lastSeenScrapedAt: s.lastSeenScrapedAt }
 }
 
 export function stateFromProfile(p: Profile, device: Pick<UserState, 'lang' | 'theme'>): UserState {
+  const weeklyModules = new Set(Object.values(p.weekly).map((e) => e.moduleId).filter(Boolean))
+  // An entry is the weekly plan's own (not stored in the roadmap) when it is exactly what the plan implies.
+  const derived = (id: string, m: ProfileModule) =>
+    m.term === CURRENT_TERM && m.status === 'planned' && m.grade === null && weeklyModules.has(id)
   const selected: Record<string, SelectedEntry> = {}
   for (const [id, entry] of Object.entries(p.weekly)) {
-    const countAs = entry.moduleId ? p.modules[entry.moduleId]?.countAs : null
+    const m = entry.moduleId ? p.modules[entry.moduleId] : undefined
+    const countAs = m && derived(entry.moduleId!, m) ? m.countAs : null
     selected[id] = countAs ? { ...entry, countAs } : { ...entry }
   }
-  return { version: 1, selected, lang: device.lang, lastSeenScrapedAt: p.lastSeenScrapedAt, areas: [...p.areas], theme: device.theme }
+  const modules = Object.fromEntries(Object.entries(p.modules).filter(([id, m]) => !derived(id, m)))
+  const isDefault = !Object.keys(modules).length && !Object.keys(p.notes).length
+    && JSON.stringify(p.terms) === JSON.stringify(DEFAULT_TERMS)
+  return {
+    version: 1, selected, lang: device.lang, lastSeenScrapedAt: p.lastSeenScrapedAt, areas: [...p.areas], theme: device.theme,
+    ...(isDefault ? {} : { roadmap: { terms: [...p.terms], modules, notes: { ...p.notes } } }),
+  }
 }

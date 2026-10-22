@@ -17,18 +17,19 @@ describe('profile', () => {
     expect(stateFromProfile(p, { lang: 'tr', theme: 'dark' })).toEqual(s)
   })
 
-  test('keeps other terms, passed modules, notes and followed from the previous profile', () => {
-    const prev: Profile = {
-      ...emptyProfile(), notes: { M9: 'iyi hoca' }, followed: [{ role: 'ml-eng', lens: 'bigtech' }],
-      modules: {
-        M9: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 },
-        M8: { term: 'SS27', status: 'planned', countAs: null, grade: null },
-        OLD: { term: 'WS26', status: 'planned', countAs: null, grade: null },
+  test('roadmap entries, notes and terms come from the state; followed from the previous profile', () => {
+    const prev: Profile = { ...emptyProfile(), followed: [{ role: 'ml-eng', lens: 'bigtech' }], notes: { OLD: 'stale' } }
+    const s: UserState = {
+      ...defaultState(), selected: {},
+      roadmap: {
+        terms: ['WS26', 'SS27'], notes: { M9: 'iyi hoca' },
+        modules: { M9: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 }, M8: { term: 'SS27', status: 'planned', countAs: null, grade: null } },
       },
     }
-    const p = profileFromState({ ...defaultState(), selected: {} }, prev)
+    const p = profileFromState(s, prev)
     expect(Object.keys(p.modules).sort()).toEqual(['M8', 'M9'])
     expect(p.notes).toEqual({ M9: 'iyi hoca' })
+    expect(p.terms).toEqual(['WS26', 'SS27'])
     expect(p.followed).toHaveLength(1)
   })
 

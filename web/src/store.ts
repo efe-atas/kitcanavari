@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import { CACHE_KEY, defaultDeps, SyncEngine, type SyncStatus } from './sync/engine'
 import type { SyncConfig } from './sync/github'
-import type { CoursesFile, Event, Lang, UserState } from './types'
+import { derivedEntries, emptyRoadmap, roadmapEntries } from './logic/roadmap'
+import { nextTerm, PRIOR } from './logic/terms'
+import type { CoursesFile, Event, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
+
+export { roadmapEntries }
 
 export const STORAGE_KEY = 'kitcanavari:v1'
 /** ackFingerprint of an acknowledged event that is no longer in the catalog. */
@@ -12,6 +16,18 @@ const browserLang = (): Lang =>
 
 export const defaultState = (): UserState => ({ version: 1, selected: {}, lang: browserLang(), lastSeenScrapedAt: '' })
 
+const STATUSES: ModuleStatus[] = ['planned', 'passed', 'failed', 'dropped']
+
+function isRoadmap(r: unknown): r is Roadmap {
+  if (!r || typeof r !== 'object' || Array.isArray(r)) return false
+  const m = r as Partial<Roadmap>
+  return Array.isArray(m.terms) && m.terms.every((t) => typeof t === 'string')
+    && !!m.modules && typeof m.modules === 'object' && Object.values(m.modules).every((e) => !!e && typeof e === 'object'
+      && typeof e.term === 'string' && STATUSES.includes(e.status)
+      && (e.countAs === null || typeof e.countAs === 'string') && (e.grade === null || typeof e.grade === 'number'))
+    && !!m.notes && typeof m.notes === 'object' && Object.values(m.notes).every((n) => typeof n === 'string')
+}
+
 function isState(x: unknown): x is UserState {
   if (!x || typeof x !== 'object' || Array.isArray(x)) return false
   const s = x as Partial<UserState>
@@ -19,6 +35,7 @@ function isState(x: unknown): x is UserState {
     && (s.lang === 'tr' || s.lang === 'en') && typeof s.lastSeenScrapedAt === 'string'
     && (s.theme === undefined || s.theme === 'light' || s.theme === 'dark')
     && (s.areas === undefined || (Array.isArray(s.areas) && s.areas.every((a) => typeof a === 'string')))
+    && (s.roadmap === undefined || isRoadmap(s.roadmap))
     && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'
@@ -228,6 +245,54 @@ export function acknowledge(s: UserState, ids: string[], data: CoursesFile): Use
     if (selected[id]) selected[id] = { ...selected[id], ackFingerprint: ev ? ev.fingerprint : REMOVED_ACK }
   }
   return { ...s, selected, lastSeenScrapedAt: data.meta.scrapedAt }
+}
+
+const roadmapOf = (s: UserState): Roadmap => s.roadmap ?? emptyRoadmap()
+
+/** Change one module's entry; a weekly-plan module becomes a stored entry. Unknown modules are left alone. */
+function withEntry(s: UserState, id: string, fn: (e: RoadmapEntry) => RoadmapEntry): UserState {
+  const current = s.roadmap?.modules[id] ?? derivedEntries(s)[id]
+  if (!current) return s
+  const r = roadmapOf(s)
+  return { ...s, roadmap: { ...r, modules: { ...r.modules, [id]: fn(current) } } }
+}
+
+/** Put a module into a term; a module already in the roadmap moves there. */
+export function placeModule(s: UserState, id: string, term: string): UserState {
+  const existing = roadmapEntries(s)[id]
+  const r = roadmapOf(s)
+  const entry: RoadmapEntry = existing
+    ? { ...existing, term }
+    : { term, status: term === PRIOR ? 'passed' : 'planned', countAs: null, grade: null }
+  return { ...s, roadmap: { ...r, modules: { ...r.modules, [id]: entry } } }
+}
+
+export const setStatus = (s: UserState, id: string, status: ModuleStatus): UserState => withEntry(s, id, (e) => ({ ...e, status }))
+
+/** KIT pass grades are 1.0–4.0; anything else is ignored. */
+export const setGrade = (s: UserState, id: string, grade: number | null): UserState =>
+  grade !== null && !(grade >= 1 && grade <= 4) ? s : withEntry(s, id, (e) => ({ ...e, grade }))
+
+export const setEntryCountAs = (s: UserState, id: string, countAs: string | null): UserState =>
+  withEntry(s, id, (e) => ({ ...e, countAs }))
+
+/** Remove a module from the roadmap, and its courses from this term's weekly plan. */
+export function removeFromRoadmap(s: UserState, id: string): UserState {
+  const r = roadmapOf(s)
+  const { [id]: _gone, ...modules } = r.modules
+  const selected = Object.fromEntries(Object.entries(s.selected).filter(([, e]) => e.moduleId !== id))
+  return { ...s, selected, roadmap: { ...r, modules } }
+}
+
+export function setNote(s: UserState, id: string, text: string): UserState {
+  const r = roadmapOf(s)
+  const { [id]: _old, ...notes } = r.notes
+  return { ...s, roadmap: { ...r, notes: text.trim() ? { ...notes, [id]: text } : notes } }
+}
+
+export function addTerm(s: UserState): UserState {
+  const r = roadmapOf(s)
+  return { ...s, roadmap: { ...r, terms: [...r.terms, nextTerm(r.terms[r.terms.length - 1])] } }
 }
 
 export const exportState = (s: UserState): string => JSON.stringify(s, null, 1)
