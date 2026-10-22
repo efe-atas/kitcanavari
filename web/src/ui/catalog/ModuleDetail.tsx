@@ -2,7 +2,9 @@ import { useEffect, useRef } from 'preact/hooks'
 import { t } from '../../i18n'
 import { bucketOptions, moduleKind } from '../../logic/degree'
 import type { ModuleRow } from '../../logic/handbook'
-import type { CoursesFile, Lang } from '../../types'
+import type { CareerData, CoursesFile, Lang, SkillId } from '../../types'
+import { topRoles } from '../../logic/career'
+import { roleTitle } from '../career/model'
 import { PRIOR } from '../../logic/terms'
 import { TermLink } from '../glossary/GlossaryView'
 import { termName } from '../roadmap/format'
@@ -11,6 +13,7 @@ import { Icon } from '../Icon'
 interface Props {
   lang: Lang
   data: CoursesFile
+  career: CareerData | null
   row: ModuleRow
   myAreas: string[]
   /** Open one of this term's courses of the module. */
@@ -24,7 +27,7 @@ interface Props {
 
 const paragraphs = (text: string) => text.split('\n\n').map((p, i) => <p key={i}>{p}</p>)
 
-export function ModuleDetail({ lang, data, row, myAreas, onOpenEvent, terms, placedTerm, onPlace, onClose }: Props) {
+export function ModuleDetail({ lang, data, career, row, myAreas, onOpenEvent, terms, placedTerm, onPlace, onClose }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     ref.current?.focus()
@@ -87,6 +90,26 @@ export function ModuleDetail({ lang, data, row, myAreas, onOpenEvent, terms, pla
             </ul>
           ) : <p class="muted">{t(lang, 'module.notThisTerm')}</p>}
         </section>
+
+        {career && (
+          <section class="module-skills">
+            <h3>{t(lang, 'module.skills')}</h3>
+            {career.skills.modules[row.id] ? (
+              <>
+                <ul class="plain">
+                  {(Object.entries(career.skills.modules[row.id]!) as [SkillId, [number, string]][])
+                    .sort((a, b) => b[1][0] - a[1][0])
+                    .map(([s, [score, reason]]) => (
+                      <li key={s}><span class="tag tag-skill">{t(lang, `skill.${s}`)} {'●'.repeat(score)}{'○'.repeat(3 - score)}</span> {reason}</li>
+                    ))}
+                </ul>
+                {topRoles(row.id, career).length > 0 && (
+                  <p><strong>{t(lang, 'module.topRoles')}:</strong> {topRoles(row.id, career).map((r) => roleTitle(career, r.role, lang)).join(', ')}</p>
+                )}
+              </>
+            ) : <p class="muted">{t(lang, 'module.unscored')}</p>}
+          </section>
+        )}
 
         {places.length > 0 && (
           <section>

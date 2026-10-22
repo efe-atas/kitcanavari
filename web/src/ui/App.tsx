@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
 import { defaultState, setLang, toggleTheme, useAppState } from '../store'
-import type { ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile } from '../types'
+import type { CareerData, ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile } from '../types'
 import { pendingAlerts } from '../logic/alerts'
+import { CareerView } from './career/CareerView'
 import { CatalogView } from './catalog/CatalogView'
 import { ChangesView } from './changes/ChangesView'
 import { GlossaryView } from './glossary/GlossaryView'
@@ -16,9 +17,9 @@ import { Icon, type IconName } from './Icon'
 import { SyncDialog } from './sync/SyncDialog'
 import { SyncStatus } from './sync/SyncStatus'
 
-type Tab = 'catalog' | 'schedule' | 'roadmap' | 'changes' | 'guide' | 'glossary'
-const TABS: Tab[] = ['catalog', 'schedule', 'roadmap', 'changes', 'guide', 'glossary']
-const TAB_ICONS: Record<Tab, IconName> = { catalog: 'catalog', schedule: 'calendar', roadmap: 'map', changes: 'bell', guide: 'guide', glossary: 'glossary' }
+type Tab = 'catalog' | 'schedule' | 'roadmap' | 'career' | 'changes' | 'guide' | 'glossary'
+const TABS: Tab[] = ['catalog', 'schedule', 'roadmap', 'career', 'changes', 'guide', 'glossary']
+const TAB_ICONS: Record<Tab, IconName> = { catalog: 'catalog', schedule: 'calendar', roadmap: 'map', career: 'compass', changes: 'bell', guide: 'guide', glossary: 'glossary' }
 const STALE_DAYS = 3
 
 /** "#/glossary/stamm" → tab "glossary", sub "stamm". */
@@ -30,7 +31,7 @@ const routeFromHash = (): { tab: Tab; sub: string | null } => {
 type Load =
   | { status: 'loading' }
   | { status: 'error'; error: string }
-  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; checkedAt: string }
+  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; career: CareerData | null; checkedAt: string }
 
 export function App() {
   const [load, setLoad] = useState<Load>({ status: 'loading' })
@@ -42,9 +43,12 @@ export function App() {
 
   useEffect(() => {
     loadData()
-      .then(({ courses, changes, status, handbook }: {
-        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null
-      }) => setLoad({ status: 'ready', courses, changes, handbook: handbook ?? null, checkedAt: status?.checkedAt ?? courses.meta.scrapedAt }))
+      .then(({ courses, changes, status, handbook, career }: {
+        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null; career?: CareerData | null
+      }) => setLoad({
+        status: 'ready', courses, changes, handbook: handbook ?? null, career: career ?? null,
+        checkedAt: status?.checkedAt ?? courses.meta.scrapedAt,
+      }))
       .catch((e: unknown) => setLoad({ status: 'error', error: e instanceof Error ? e.message : String(e) }))
   }, [])
   useEffect(() => {
@@ -108,11 +112,14 @@ export function App() {
         {load.status === 'loading' && <p class="empty loading">{t(lang, 'data.loading')}</p>}
         {load.status === 'error' && <p class="banner banner-error">{t(lang, 'data.error', { error: load.error })}</p>}
         {load.status === 'ready' && tab === 'catalog' && (
-          <CatalogView data={load.courses} handbook={load.handbook} allModules={route.sub === 'all'} state={state} update={update} />
+          <CatalogView data={load.courses} handbook={load.handbook} career={load.career} allModules={route.sub === 'all'} state={state} update={update} />
         )}
         {load.status === 'ready' && tab === 'schedule' && <ScheduleView data={load.courses} state={state} update={update} />}
         {load.status === 'ready' && tab === 'roadmap' && (
-          <RoadmapView data={load.courses} handbook={load.handbook} state={state} update={update} />
+          <RoadmapView data={load.courses} handbook={load.handbook} career={load.career} state={state} update={update} />
+        )}
+        {load.status === 'ready' && tab === 'career' && (
+          <CareerView data={load.courses} handbook={load.handbook} career={load.career} state={state} update={update} />
         )}
         {load.status === 'ready' && tab === 'guide' && <GuideView lang={lang} data={load.courses} />}
         {load.status === 'ready' && tab === 'glossary' && <GlossaryView lang={lang} data={load.courses} focus={route.sub} />}

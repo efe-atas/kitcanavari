@@ -23,6 +23,9 @@ export interface ModuleFilters {
   offeredNow: boolean
 }
 
+/** Stand-in when data/handbook.json is missing: rows then come from the catalog only. */
+export const EMPTY_HANDBOOK: HandbookFile = { meta: { source: '', asOf: '', parsedAt: '' }, modules: {} }
+
 export const emptyModuleFilters = (): ModuleFilters => ({ query: '', areas: [], kinds: [], ects: [], recurrence: [], offeredNow: false })
 
 /** Catalog recurrence text ("Each winter term", "Irregular", …) → Recurrence, by the handbook parser's rules. */

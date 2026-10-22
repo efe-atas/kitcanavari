@@ -8,7 +8,7 @@ import { emptyModuleFilters, filterModules, moduleRows, type ModuleFilters as MF
 import { roadmapEntries } from '../../logic/roadmap'
 import { DEFAULT_TERMS } from '../../logic/terms'
 import { addEvent, placeModule, removeEvent } from '../../store'
-import type { CoursesFile, Event, HandbookFile, UserState } from '../../types'
+import type { CareerData, CoursesFile, Event, HandbookFile, UserState } from '../../types'
 import { fmtDate } from '../format'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
@@ -23,6 +23,7 @@ import { Tree } from './Tree'
 interface Props {
   data: CoursesFile
   handbook: HandbookFile | null
+  career: CareerData | null
   /** Show every handbook module instead of this term's courses (route #/catalog/all). */
   allModules: boolean
   state: UserState
@@ -42,7 +43,7 @@ export function conflictingIds(data: CoursesFile, state: UserState): Set<string>
   return out
 }
 
-export function CatalogView({ data, handbook, allModules, state, update }: Props) {
+export function CatalogView({ data, handbook, career, allModules, state, update }: Props) {
   const { lang } = state
   const [filters, setFilters] = useState<F>(emptyFilters)
   const [openId, setOpenId] = useState<string | null>(null)
@@ -111,7 +112,7 @@ export function CatalogView({ data, handbook, allModules, state, update }: Props
             {moduleList.length ? (
               <ul class="cards">
                 {moduleList.map((r) => (
-                  <ModuleCard key={r.id} lang={lang} data={data} row={r} myAreas={state.areas ?? []} onOpen={() => setOpenModuleId(r.id)} />
+                  <ModuleCard key={r.id} lang={lang} data={data} career={career} row={r} myAreas={state.areas ?? []} onOpen={() => setOpenModuleId(r.id)} />
                 ))}
               </ul>
             ) : <p class="empty">{t(lang, 'catalog.empty')}</p>}
@@ -144,7 +145,7 @@ export function CatalogView({ data, handbook, allModules, state, update }: Props
           onToggle={() => toggle(open)} onClose={() => setOpenId(null)} />
       )}
       {showModules && openModule && (
-        <ModuleDetail lang={lang} data={data} row={openModule} myAreas={state.areas ?? []} onClose={() => setOpenModuleId(null)}
+        <ModuleDetail lang={lang} data={data} career={career} row={openModule} myAreas={state.areas ?? []} onClose={() => setOpenModuleId(null)}
           terms={state.roadmap?.terms ?? DEFAULT_TERMS} placedTerm={roadmapEntries(state)[openModule.id]?.term ?? null}
           onPlace={(term) => update((s) => placeModule(s, openModule.id, term))}
           onOpenEvent={(id) => { setOpenModuleId(null); setOpenId(id); location.hash = '#/catalog' }} />

@@ -1,11 +1,12 @@
 import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
 import { roadmapReport } from '../../logic/degree'
-import { moduleRows, type ModuleRow } from '../../logic/handbook'
+import { EMPTY_HANDBOOK, moduleRows, type ModuleRow } from '../../logic/handbook'
 import { derivedEntries, roadmapEntries } from '../../logic/roadmap'
 import { DEFAULT_TERMS, PRIOR } from '../../logic/terms'
 import { addTerm, placeModule } from '../../store'
-import type { CoursesFile, HandbookFile, UserState } from '../../types'
+import type { CareerData, CoursesFile, HandbookFile, UserState } from '../../types'
+import { FollowedBars } from '../career/FollowedBars'
 import { Icon } from '../Icon'
 import { AddModule } from './AddModule'
 import { termName } from './format'
@@ -15,15 +16,14 @@ import { RoadmapEntryCard } from './RoadmapEntryCard'
 interface Props {
   data: CoursesFile
   handbook: HandbookFile | null
+  career: CareerData | null
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
 }
 
-const NO_HANDBOOK: HandbookFile = { meta: { source: '', asOf: '', parsedAt: '' }, modules: {} }
-
-export function RoadmapView({ data, handbook, state, update }: Props) {
+export function RoadmapView({ data, handbook, career, state, update }: Props) {
   const { lang } = state
-  const rows = useMemo(() => moduleRows(data, handbook ?? NO_HANDBOOK), [data, handbook])
+  const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const byId = useMemo(() => new Map<string, ModuleRow>(rows.map((r) => [r.id, r])), [rows])
   const entries = roadmapEntries(state)
   const inSchedule = new Set(Object.keys(derivedEntries(state)))
@@ -63,6 +63,7 @@ export function RoadmapView({ data, handbook, state, update }: Props) {
           <Icon name="plus" size={16} />{t(lang, 'road.addTerm')}
         </button>
       </div>
+      {career && <FollowedBars lang={lang} career={career} rows={rows} state={state} />}
       <RoadmapDegreePanel lang={lang} report={report} state={state} update={update} />
     </div>
   )

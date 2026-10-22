@@ -829,3 +829,36 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .road-place select { width: auto; }
 @media (max-width: 640px) { .road-columns { grid-template-columns: minmax(0, 1fr); } }
 .road-fields input[aria-invalid='true'] { border-color: var(--danger); box-shadow: 0 0 0 1px var(--danger); }
+
+/* Career */
+.fit-scroll { overflow-x: auto; max-width: 100%; margin-bottom: 20px; border: 1px solid var(--line); border-radius: var(--r-m); background: var(--surface); }
+.fit-grid { border-collapse: separate; border-spacing: 4px; min-width: 640px; width: 100%; }
+.fit-grid th { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-align: left; padding: 4px 6px; white-space: nowrap; }
+.fit-grid thead th { text-align: center; }
+.fit-cell {
+  width: 100%; min-width: 72px; display: grid; justify-items: center; gap: 0; padding: 6px 4px; border-radius: 8px; cursor: pointer; position: relative;
+  border: 1px solid var(--line); color: var(--text); font: inherit;
+  background: color-mix(in srgb, var(--accent) calc(var(--fit) * 70%), var(--surface));
+}
+.fit-cell strong { font-size: 0.9rem; }
+.fit-cell .fit-now { font-size: 0.68rem; color: var(--text); opacity: 0.75; }
+.fit-cell.is-picked { outline: 2px solid var(--text); outline-offset: 1px; }
+.fit-star { position: absolute; top: 2px; right: 4px; }
+.path-detail { margin-bottom: 20px; }
+.path-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; flex-wrap: wrap; }
+.path-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; margin-top: 12px; }
+.path-grid h4 { margin: 12px 0 6px; }
+.path-grid h5 { margin: 10px 0 4px; font-size: 0.85rem; }
+.skill-bars { display: grid; gap: 8px; }
+.skill-bars li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; align-items: baseline; }
+.skill-bars .req-bar { grid-column: 1 / -1; }
+.gap-list { display: grid; gap: 10px; padding-left: 18px; }
+.gap-module { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 0.85rem; padding: 2px 0; }
+.salary-list li { font-size: 0.85rem; padding: 2px 0; }
+.salary-list li.is-role { font-weight: 600; }
+.lens-info ul { padding-left: 18px; font-size: 0.88rem; }
+.tag-skill { background: var(--accent-soft, var(--surface-2)); color: var(--text); }
+.module-skills li { padding: 3px 0; font-size: 0.88rem; }
+.followed { margin-bottom: 16px; }
+@media (max-width: 860px) { .path-grid { grid-template-columns: minmax(0, 1fr); } }
+.gap-module .link-button { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
