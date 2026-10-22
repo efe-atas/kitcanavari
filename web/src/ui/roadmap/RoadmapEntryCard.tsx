@@ -25,6 +25,14 @@ const STATUSES: ModuleStatus[] = ['planned', 'passed', 'failed', 'dropped']
 export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule, terms, update }: Props) {
   const [draft, setDraft] = useState(note)
   useEffect(() => setDraft(note), [note])
+  const [gradeBad, setGradeBad] = useState(false)
+  const commitGrade = (raw: string) => {
+    const text = raw.trim().replace(',', '.')
+    const value = text === '' ? null : Number(text)
+    if (value !== null && !(value >= 1 && value <= 4)) return setGradeBad(true)
+    setGradeBad(false)
+    if (value !== entry.grade) update((s) => setGrade(s, id, value))
+  }
   const issue = row ? offeringIssue(row, entry.term) : null
   const kind = row ? moduleKind(data, row) : null
   const places = row ? bucketOptions(row) : []
@@ -56,11 +64,10 @@ export function RoadmapEntryCard({ lang, data, id, entry, row, note, inSchedule,
         {entry.status === 'passed' && (
           <label>
             {t(lang, 'road.grade')}
-            <input type="number" step="0.1" min="1" max="4" inputMode="decimal" value={entry.grade ?? ''}
-              onInput={(e) => {
-                const v = (e.target as HTMLInputElement).value
-                update((s) => setGrade(s, id, v === '' ? null : Number(v)))
-              }} />
+            <input key={String(entry.grade)} type="text" inputMode="decimal" defaultValue={entry.grade === null ? '' : String(entry.grade)}
+              aria-invalid={gradeBad} title={gradeBad ? t(lang, 'road.gradeInvalid') : undefined}
+              onBlur={(e) => commitGrade((e.target as HTMLInputElement).value)}
+              onKeyDown={(e) => e.key === 'Enter' && commitGrade((e.target as HTMLInputElement).value)} />
           </label>
         )}
         {places.length > 1 && (

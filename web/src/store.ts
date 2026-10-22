@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import { CACHE_KEY, defaultDeps, SyncEngine, type SyncStatus } from './sync/engine'
 import type { SyncConfig } from './sync/github'
-import { derivedEntries, emptyRoadmap, roadmapEntries } from './logic/roadmap'
-import { nextTerm, PRIOR } from './logic/terms'
+import { emptyRoadmap, roadmapEntries } from './logic/roadmap'
+import { CURRENT_TERM, nextTerm, PRIOR } from './logic/terms'
 import type { CoursesFile, Event, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
 
 export { roadmapEntries }
@@ -222,7 +222,11 @@ export const setModule = (s: UserState, id: string, moduleId: string | null): Us
 
 export const setCountAs = (s: UserState, id: string, countAs: string | null): UserState => {
   const e = s.selected[id]
-  return e ? { ...s, selected: { ...s.selected, [id]: { ...e, countAs } } } : s
+  if (!e) return s
+  const next = { ...s, selected: { ...s.selected, [id]: { ...e, countAs } } }
+  // A stored roadmap entry of the same module carries the same choice.
+  const stored = e.moduleId ? s.roadmap?.modules[e.moduleId] : undefined
+  return stored ? putEntry(next, e.moduleId!, { ...stored, countAs }) : next
 }
 
 /** Sets area slot `idx` (0 or 1); an empty value clears it. */
@@ -249,22 +253,35 @@ export function acknowledge(s: UserState, ids: string[], data: CoursesFile): Use
 
 const roadmapOf = (s: UserState): Roadmap => s.roadmap ?? emptyRoadmap()
 
-/** Change one module's entry; a weekly-plan module becomes a stored entry. Unknown modules are left alone. */
-function withEntry(s: UserState, id: string, fn: (e: RoadmapEntry) => RoadmapEntry): UserState {
-  const current = s.roadmap?.modules[id] ?? derivedEntries(s)[id]
-  if (!current) return s
+/**
+ * Store a module's entry, unless it is exactly what this term's weekly plan implies: then the plan carries it (its
+ * countAs on the module's events) and nothing is stored. The synced profile makes the same split (stateFromProfile),
+ * so a state behaves the same before and after a sync.
+ */
+function putEntry(s: UserState, id: string, entry: RoadmapEntry): UserState {
   const r = roadmapOf(s)
-  return { ...s, roadmap: { ...r, modules: { ...r.modules, [id]: fn(current) } } }
+  const { [id]: _old, ...modules } = r.modules
+  const events = Object.entries(s.selected).filter(([, e]) => e.moduleId === id)
+  if (events.length && entry.term === CURRENT_TERM && entry.status === 'planned' && entry.grade === null) {
+    const selected = { ...s.selected }
+    for (const [eid, { countAs: _c, ...e }] of events) selected[eid] = entry.countAs ? { ...e, countAs: entry.countAs } : e
+    return { ...s, selected, roadmap: { ...r, modules } }
+  }
+  return { ...s, roadmap: { ...r, modules: { ...modules, [id]: entry } } }
+}
+
+/** Change one module's entry. Unknown modules are left alone. */
+function withEntry(s: UserState, id: string, fn: (e: RoadmapEntry) => RoadmapEntry): UserState {
+  const current = roadmapEntries(s)[id]
+  return current ? putEntry(s, id, fn(current)) : s
 }
 
 /** Put a module into a term; a module already in the roadmap moves there. */
 export function placeModule(s: UserState, id: string, term: string): UserState {
   const existing = roadmapEntries(s)[id]
-  const r = roadmapOf(s)
-  const entry: RoadmapEntry = existing
+  return putEntry(s, id, existing
     ? { ...existing, term }
-    : { term, status: term === PRIOR ? 'passed' : 'planned', countAs: null, grade: null }
-  return { ...s, roadmap: { ...r, modules: { ...r.modules, [id]: entry } } }
+    : { term, status: term === PRIOR ? 'passed' : 'planned', countAs: null, grade: null })
 }
 
 export const setStatus = (s: UserState, id: string, status: ModuleStatus): UserState => withEntry(s, id, (e) => ({ ...e, status }))

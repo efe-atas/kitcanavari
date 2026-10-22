@@ -113,7 +113,8 @@ export function bucketOf(state: UserState, data: CoursesFile, eventId: string): 
   const mid = entry && ev ? chosenModule(entry, ev) : null
   const m = mid ? data.modules[mid] : null
   if (!m) return null
-  return defaultBucket(m.fields, state.areas ?? [], entry.countAs ?? null)
+  // The roadmap entry is the single place a module's choice lives once it is stored there.
+  return defaultBucket(m.fields, state.areas ?? [], roadmapEntries(state)[m.id]?.countAs ?? entry.countAs ?? null)
 }
 
 /** Where a module counts: a valid explicit choice, else a chosen area, else elective, minor or IQ. */

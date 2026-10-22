@@ -828,3 +828,4 @@ button.chip-block:hover { background: color-mix(in srgb, var(--k) 26%, var(--sur
 .road-place label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; }
 .road-place select { width: auto; }
 @media (max-width: 640px) { .road-columns { grid-template-columns: minmax(0, 1fr); } }
+.road-fields input[aria-invalid='true'] { border-color: var(--danger); box-shadow: 0 0 0 1px var(--danger); }

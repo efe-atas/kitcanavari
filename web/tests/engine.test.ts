@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { SyncEngine, type EngineDeps, type SyncStatus } from '../src/sync/engine'
 import { AuthError, ConflictError, InvalidRemoteError, OfflineError } from '../src/sync/github'
 import { emptyProfile, profileFromState, type Profile } from '../src/sync/profile'
-import { addEvent, defaultState, setArea, toggleTheme } from '../src/store'
+import { addEvent, addTerm, defaultState, placeModule, setArea, setNote, toggleTheme } from '../src/store'
 import type { UserState } from '../src/types'
 import { ev } from './fixtures'
 
@@ -272,5 +272,24 @@ describe('SyncEngine', () => {
     expect(t.hasTimer()).toBe(false)
     expect(t.statuses.at(-1)).toBe('saved')
     expect(srv.s.puts).toBe(0)
+  })
+
+  test('notes and added terms are saved', async () => {
+    const srv = server(emptyProfile())
+    const t = setup(srv)
+    await t.engine.start(defaultState())
+    const a = setNote(defaultState(), 'M1', 'iyi hoca')
+    t.engine.record((s) => setNote(s, 'M1', 'iyi hoca'), a)
+    t.engine.record(addTerm, addTerm(a))
+    await t.fire()
+    expect(srv.s.profile!.notes).toEqual({ M1: 'iyi hoca' })
+    expect(srv.s.profile!.terms).toHaveLength(5)
+  })
+
+  test('a roadmap-only local plan is not dropped on first connect', async () => {
+    const srv = server({ ...emptyProfile(), areas: ['Telematics'] })
+    const t = setup(srv)
+    await t.engine.start(placeModule(defaultState(), 'M9', 'SS27'))
+    expect(t.statuses.at(-1)).toBe('conflict')
   })
 })

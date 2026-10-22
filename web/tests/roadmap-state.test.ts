@@ -1,8 +1,11 @@
 import { describe, expect, test } from 'vitest'
 import { roadmapEntries } from '../src/logic/roadmap'
 import {
-  addEvent, addTerm, defaultState, importState, placeModule, removeFromRoadmap, setEntryCountAs, setGrade, setNote, setStatus,
+  addEvent, addTerm, defaultState, importState, placeModule, removeEvent, removeFromRoadmap, setCountAs, setEntryCountAs, setGrade, setNote,
+  setStatus,
 } from '../src/store'
+import { bucketOf } from '../src/logic/degree'
+import { makeCourses } from './appdata'
 import { profileFromState, stateFromProfile } from '../src/sync/profile'
 import { ev } from './fixtures'
 
@@ -67,5 +70,30 @@ describe('roadmap state', () => {
     expect(importState(JSON.stringify({ version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '' }))).not.toBeNull()
     const bad = { version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '', roadmap: { terms: [], modules: { M1: { term: 1 } }, notes: {} } }
     expect(importState(JSON.stringify(bad))).toBeNull()
+  })
+
+  test('countAs stays one value for a weekly module with a stored entry, also after a sync', () => {
+    const data = makeCourses()
+    let s = addEvent({ ...defaultState(), areas: ['Telematics'] }, data.events.sec)
+    s = setStatus(s, 'M3', 'passed')
+    s = setCountAs(s, 'sec', 'elective')
+    expect(roadmapEntries(s).M3.countAs).toBe('elective')
+    expect(bucketOf(s, data, 'sec')).toBe('elective')
+    const back = stateFromProfile(profileFromState(s, null), { lang: 'en' })
+    expect(roadmapEntries(back).M3.countAs).toBe('elective')
+    expect(bucketOf(back, data, 'sec')).toBe('elective')
+  })
+
+  test('an entry equal to the weekly plan is not stored, so local and synced state agree', () => {
+    let s = placeModule(withM1(), 'M1', 'WS26')
+    expect(s.roadmap?.modules.M1).toBeUndefined()
+    s = setStatus(setStatus(s, 'M1', 'failed'), 'M1', 'planned')
+    expect(s.roadmap?.modules.M1).toBeUndefined()
+    s = setEntryCountAs(s, 'M1', 'elective')
+    expect(s.roadmap?.modules.M1).toBeUndefined()
+    expect(s.selected.e1.countAs).toBe('elective')
+    const local = removeEvent(s, 'e1')
+    const synced = removeEvent(stateFromProfile(profileFromState(s, null), { lang: 'en' }), 'e1')
+    expect(roadmapEntries(local)).toEqual(roadmapEntries(synced))
   })
 })

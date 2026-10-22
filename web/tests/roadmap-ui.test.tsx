@@ -44,9 +44,21 @@ describe('roadmap tab', () => {
     setState({ roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: { H1: { term: 'prior', status: 'passed', countAs: null, grade: null } }, notes: {} } })
     render(<App />)
     const prior = await column('Passed before')
-    fireEvent.input(within(prior).getByLabelText('Grade'), { target: { value: '1.3' } })
+    const grade = within(prior).getByLabelText('Grade')
+    fireEvent.input(grade, { target: { value: '1,3' } })
+    fireEvent.blur(grade)
     await screen.findByText('Grade average: 1.3 (6 ECTS graded)')
     expect(saved().roadmap.modules.H1.grade).toBe(1.3)
+  })
+
+  test('an out-of-range grade is flagged and not saved', async () => {
+    setState({ roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: { H1: { term: 'prior', status: 'passed', countAs: null, grade: 2 } }, notes: {} } })
+    render(<App />)
+    const grade = within(await column('Passed before')).getByLabelText('Grade')
+    fireEvent.input(grade, { target: { value: '4.5' } })
+    fireEvent.blur(grade)
+    await waitFor(() => expect(grade.getAttribute('aria-invalid')).toBe('true'))
+    expect(saved().roadmap.modules.H1.grade).toBe(2)
   })
 
   test('status, note and remove', async () => {

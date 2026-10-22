@@ -71,8 +71,7 @@ export function stateFromProfile(p: Profile, device: Pick<UserState, 'lang' | 't
     m.term === CURRENT_TERM && m.status === 'planned' && m.grade === null && weeklyModules.has(id)
   const selected: Record<string, SelectedEntry> = {}
   for (const [id, entry] of Object.entries(p.weekly)) {
-    const m = entry.moduleId ? p.modules[entry.moduleId] : undefined
-    const countAs = m && derived(entry.moduleId!, m) ? m.countAs : null
+    const countAs = entry.moduleId ? p.modules[entry.moduleId]?.countAs : null
     selected[id] = countAs ? { ...entry, countAs } : { ...entry }
   }
   const modules = Object.fromEntries(Object.entries(p.modules).filter(([id, m]) => !derived(id, m)))
