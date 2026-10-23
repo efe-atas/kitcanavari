@@ -14,4 +14,4 @@ export function pointsOf(state: UserState, career: CareerData, rows: ModuleRow[]
 export const roleTitle = (career: CareerData, id: string, lang: Lang) => career.roles.roles.find((r) => r.id === id)?.title[lang] ?? id
 export const lensTitle = (career: CareerData, id: string, lang: Lang) => career.lenses.lenses.find((l) => l.id === id)?.title[lang] ?? id
 export const pathTitle = (career: CareerData, role: string, lens: string, lang: Lang) =>
-  `${roleTitle(career, role, lang)} · ${lensTitle(career, lens, lang)}`
+  role === 'environment' ? lensTitle(career, lens, lang) : `${roleTitle(career, role, lang)}, ${lensTitle(career, lens, lang)}`

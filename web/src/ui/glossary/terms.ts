@@ -44,7 +44,7 @@ const byKind = (kind: string) => (data: CoursesFile, lang: Lang) => {
 export const TERMS: Term[] = [
   // Degree structure
   {
-    id: 'ects', cat: 'structure', term: 'ECTS', aka: 'LP (Leistungspunkte) · CP (credit points)',
+    id: 'ects', cat: 'structure', term: 'ECTS', aka: 'LP (Leistungspunkte), CP (credit points)',
     def: {
       tr: 'Kredi birimi. 1 ECTS yaklaşık 30 saat iş yüküne denk gelir: derse girmek, ödevler ve sınava hazırlık dahil. Yüksek lisans toplam 120 ECTS; bir dönem için tipik yük 30 ECTS. LP ve CP aynı şeyin Almanca ve İngilizce adı.',
       en: 'The credit unit. 1 ECTS is about 30 hours of work, including classes, assignments and exam preparation. The Master’s is 120 ECTS; a typical term is 30. LP and CP are the German and English names for the same thing.',
@@ -62,7 +62,7 @@ export const TERMS: Term[] = [
     related: ['handbook'],
   },
   {
-    id: 'level', cat: 'structure', term: 'Lisans mı, yüksek lisans mı?', aka: 'Bachelor · Master · Level 4',
+    id: 'level', cat: 'structure', term: 'Lisans mı, yüksek lisans mı?', aka: 'Bachelor, Master, Level 4',
     def: {
       tr: 'Bu sitedeki her ders yüksek lisansına sayılır. Veriler çekilirken yalnızca senin yüksek lisans yönetmeliğine (SPO 88-979-H-2025) bağlı modülleri olan dersler alınıyor; lisans dersleri hiç gösterilmiyor. Modül kitabına göre bu modüllerin hepsi "Level 4", yani yüksek lisans seviyesi. KIT kataloğundaki dal adlarında "Bachelor" geçse bile bu geçerli. KIT\'in kendi kataloğunda gezerken ise bir dersin ders sayfasındaki "Degree programs and bricks" kısmında SPO 2025 Master\'ın yazıp yazmadığına bak.',
       en: 'Every course on this site counts for your Master’s. The data keeps only courses whose modules belong to your Master’s regulations (SPO 88-979-H-2025); Bachelor courses are never shown. According to the handbook all of these modules are “Level 4”, i.e. Master level, even when a KIT catalog branch says “Bachelor”. When browsing KIT’s own catalog, check that “Degree programs and bricks” on the course page lists the 2025 Master’s.',
@@ -76,7 +76,7 @@ export const TERMS: Term[] = [
     related: ['spo', 'module', 'proseminar'],
   },
   {
-    id: 'handbook', cat: 'structure', term: 'Modül kitabı', aka: 'Modulhandbuch · Module handbook',
+    id: 'handbook', cat: 'structure', term: 'Modül kitabı', aka: 'Modulhandbuch, Module handbook',
     def: {
       tr: 'Tüm modülleri, içeriklerini, sınav şekillerini ve programın kurallarını anlatan resmî kılavuz. Her dönem güncellenir; o dönemin sürümü bağlayıcıdır. Bu site WS 26/27 için yayımlanan 09.09.2026 tarihli sürümü kullanıyor.',
       en: 'The official guide to every module, its content and exams, and the programme rules. It is updated every term; the current version is binding. This site uses the 09/09/2026 version for WS 26/27.',
@@ -84,7 +84,7 @@ export const TERMS: Term[] = [
     related: ['spo', 'module'],
   },
   {
-    id: 'module', cat: 'structure', term: 'Modül', aka: 'Modul · Module (M-INFO-…)',
+    id: 'module', cat: 'structure', term: 'Modül', aka: 'Modul, Module (M-INFO-…)',
     def: {
       tr: 'Kredinin ait olduğu birim. Bir modül bir ya da birkaç dersten oluşur ve ECTS dersin değil modülün üzerindedir. Bir ders birden fazla modüle bağlı olabilir; o zaman hangi modül için alacağını seçersin.',
       en: 'The unit that carries credits. A module consists of one or more courses, and the ECTS belong to the module, not to the course. A course can belong to several modules; then you choose which one you take it for.',
@@ -93,7 +93,7 @@ export const TERMS: Term[] = [
     related: ['teilleistung', 'ects'],
   },
   {
-    id: 'teilleistung', cat: 'structure', term: 'Teilleistung', aka: 'Partial achievement · Brick (T-INFO-…)',
+    id: 'teilleistung', cat: 'structure', term: 'Teilleistung', aka: 'Partial achievement, Brick (T-INFO-…)',
     def: {
       tr: 'Modülün sınav ya da ödev parçası. Bir modül bir veya birkaç Teilleistung\'dan oluşur; sınava kaydolurken aslında bunlara kaydolursun. Modül sayfalarında sık görülen "See partial achievements (Teilleistung)" yazısı, sınav ve ön koşul bilgisinin bu parçaların sayfasında olduğu anlamına gelir.',
       en: 'The exam or coursework part of a module. A module has one or more of them, and exam registration is really registration for these. “See partial achievements (Teilleistung)” on module pages means the exam and prerequisite details live on those parts’ pages.',
@@ -106,7 +106,7 @@ export const TERMS: Term[] = [
     related: ['module', 'pruefungsleistung', 'studienablaufplan'],
   },
   {
-    id: 'area', cat: 'structure', term: 'Uzmanlık alanı', aka: 'Vertiefungsfach · Area of Specialization',
+    id: 'area', cat: 'structure', term: 'Uzmanlık alanı', aka: 'Vertiefungsfach, Area of Specialization',
     def: {
       tr: 'Derinleştiğin iki konu alanı (ör. Cryptography and Security). İkisinde de en az 15 ECTS, bunun en az 10 ECTS\'i normal ders olmalı (Telematics\'te 8). Bir alanda ilk sınava girdiğinde o alan sabitlenir.',
       en: 'The two subject areas you specialise in (e.g. Cryptography and Security). Each needs at least 15 ECTS, at least 10 of them lectures (8 in Telematics). Your first exam in an area fixes it.',
@@ -115,7 +115,7 @@ export const TERMS: Term[] = [
     related: ['elective', 'stamm', 'vorlesung'],
   },
   {
-    id: 'elective', cat: 'structure', term: 'Seçmeli', aka: 'Wahlbereich · Elective Studies',
+    id: 'elective', cat: 'structure', term: 'Seçmeli', aka: 'Wahlbereich, Elective Studies',
     def: {
       tr: '6–49 ECTS\'lik serbest bölüm. Tüm uzmanlık alanlarının modülleri buraya sayılabilir; seçtiğin iki alanın dışındaki dersler genelde buraya gider.',
       en: 'A free part of 6–49 ECTS. Modules from every area may count here; courses outside your two areas usually go here.',
@@ -123,7 +123,7 @@ export const TERMS: Term[] = [
     related: ['area'],
   },
   {
-    id: 'minor', cat: 'structure', term: 'Yan dal', aka: 'Ergänzungsfach · Minor Studies',
+    id: 'minor', cat: 'structure', term: 'Yan dal', aka: 'Ergänzungsfach, Minor Studies',
     def: {
       tr: 'Bilgisayar bilimi dışından bir komşu alan: Biologically Inspired Robotics, Elektrik, Matematik, Ekonomi ya da Hukuk. Tek bir yan dal seçilir; 9–18 ECTS. 18\'in üstü sayılmaz.',
       en: 'A neighbouring field outside computer science: Biologically Inspired Robotics, Electrical Engineering, Mathematics, Economics or Law. You pick one; 9–18 ECTS, credits above 18 are discarded.',
@@ -131,7 +131,7 @@ export const TERMS: Term[] = [
     related: ['iq'],
   },
   {
-    id: 'iq', cat: 'structure', term: 'Disiplinlerarası yeterlilikler', aka: 'Überfachliche Qualifikationen · Interdisciplinary Qualifications',
+    id: 'iq', cat: 'structure', term: 'Disiplinlerarası yeterlilikler', aka: 'Überfachliche Qualifikationen, Interdisciplinary Qualifications',
     def: {
       tr: 'Soft skill, dil ve toplumsal konular: 2–6 ECTS, notsuz (geçti/kaldı). HoC, FORUM ve Dil Merkezi (SpZ) dersleri sayılır; İngilizce dil sertifikalarının B2 üstü olması gerekir. "Practice of Research (Methods)" modülleri de buraya sayılabilir. Katılım belgesi yetmez; bir sınav ya da ödev gerekir.',
       en: 'Soft skills, languages and societal topics: 2–6 ECTS, pass/fail. Courses from HoC, FORUM and the Language Center (SpZ) count; English certificates must be above B2. The “Practice of Research (Methods)” modules can count here too. A participation certificate is not enough; an exam or coursework is required.',
@@ -149,14 +149,14 @@ export const TERMS: Term[] = [
     related: ['area', 'vorlesung'],
   },
   {
-    id: 'thesis', cat: 'structure', term: 'Master tezi', aka: 'Masterarbeit · Master’s thesis',
+    id: 'thesis', cat: 'structure', term: 'Master tezi', aka: 'Masterarbeit, Master’s thesis',
     def: {
       tr: '30 ECTS\'lik bitirme çalışması; genelde son dönemde yazılır.',
       en: 'The 30 ECTS final project, usually written in the last term.',
     },
   },
   {
-    id: 'zusatz', cat: 'structure', term: 'Ek dersler', aka: 'Zusatzleistungen · Additional modules',
+    id: 'zusatz', cat: 'structure', term: 'Ek dersler', aka: 'Zusatzleistungen, Additional modules',
     def: {
       tr: 'Mezuniyet için gerekmeyen, ilgi için aldığın dersler; en fazla 30 ECTS. Not ortalamasına girmez.',
       en: 'Courses taken beyond the requirements, up to 30 ECTS. They do not count towards your grade.',
@@ -175,7 +175,7 @@ export const TERMS: Term[] = [
     related: ['uebung', 'vue'],
   },
   {
-    id: 'uebung', cat: 'types', term: 'Übung (Ü)', aka: 'Exercise · Practice',
+    id: 'uebung', cat: 'types', term: 'Übung (Ü)', aka: 'Exercise, Practice',
     def: {
       tr: 'Derse eşlik eden alıştırma oturumu: problem çözme, ödevlerin konuşulması. Genelde ayrı bir saatte olur ve aynı modüle aittir; ayrıca kredi getirmez.',
       en: 'The exercise session that accompanies a lecture: problem solving and discussing assignments. It usually has its own time slot and belongs to the same module; it brings no extra credits.',
@@ -184,7 +184,7 @@ export const TERMS: Term[] = [
     related: ['vorlesung', 'vue'],
   },
   {
-    id: 'vue', cat: 'types', term: 'VÜ', aka: 'Vorlesung/Übung · Lecture / Practice',
+    id: 'vue', cat: 'types', term: 'VÜ', aka: 'Vorlesung/Übung, Lecture / Practice',
     def: {
       tr: 'Ders ve alıştırmanın tek bir etkinlikte birleştiği tür. Kartta birden fazla haftalık termin görürsen biri genelde alıştırmadır.',
       en: 'Lecture and exercise combined in one event. If a card shows several weekly slots, one of them is often the exercise.',
@@ -211,7 +211,7 @@ export const TERMS: Term[] = [
     related: ['seminar', 'level'],
   },
   {
-    id: 'praktikum', cat: 'types', term: 'Praktikum (P)', aka: 'Practical course · Lab',
+    id: 'praktikum', cat: 'types', term: 'Praktikum (P)', aka: 'Practical course, Lab',
     def: {
       tr: 'Dönem boyunca süren uygulamalı ders: genellikle takım halinde bir proje, laboratuvar ya da yazılım geliştirme. Şirket stajı değildir. En az 6 ECTS praktikum şart; alanın ders şartına sayılmaz. Kontenjanlar sınırlı olabilir.',
       en: 'A hands-on course over the term, usually a team project, lab work or software development. It is not an internship. At least 6 ECTS are required; practicals do not count towards an area’s lecture minimum. Places may be limited.',
@@ -221,7 +221,7 @@ export const TERMS: Term[] = [
     related: ['seminar', 'pg'],
   },
   {
-    id: 'pg', cat: 'types', term: 'Projektgruppe (Pg)', aka: 'Project group · Research practical',
+    id: 'pg', cat: 'types', term: 'Projektgruppe (Pg)', aka: 'Project group, Research practical',
     def: {
       tr: 'Proje grubu. Bu katalogda "Practice of Research" dersleri bu türde: araştırma yöntemleri ve bir araştırma projesi. Kurallarda praktikum gibi sayılır.',
       en: 'A project group. In this catalog the “Practice of Research” courses use this type: research methods and a research project. The rules treat them as practicals.',
@@ -230,7 +230,7 @@ export const TERMS: Term[] = [
     related: ['praktikum'],
   },
   {
-    id: 'language', cat: 'types', term: 'German/English', aka: 'Ders dili · Course language',
+    id: 'language', cat: 'types', term: 'German/English', aka: 'Ders dili, Course language',
     def: {
       tr: 'Programın tamamen İngilizce ve bu sitedeki tüm modüllerin dili İngilizce. "German/English" modülün değil, KIT kataloğunda o dersin oturumlarının dil bilgisi. Böyle işaretlenenlerin hepsi seminer, praktikum ya da proje grubu. Bu dersler genelde Almanca ve İngilizce yüksek lisans programlarına birlikte açılır; dil gruba göre seçilebilir, seminerlerde rapor ve sunum dili de bazen seçilebilir. Kesin bilgi için dersin ILIAS sayfasına bak ya da hocaya yaz. Dil bilgisi hiç girilmemiş derslerde kartta dil yazmaz. İstersen 120 ECTS\'in en fazla 30\'unu Almanca derslerden alabilirsin, ama onlar bu sitede listelenmiyor.',
       en: 'Your programme is fully in English and every module on this site is English. “German/English” describes the course sessions in KIT’s catalog, not the module. All courses marked this way are seminars, practicals or project groups, typically open to both the German and the English Master’s; the language can depend on the group, and seminar reports and talks sometimes allow either. Check the course’s ILIAS page or ask the lecturer to be sure. Courses with no language entered show none on the card. You may take up to 30 of your 120 ECTS in German courses, but those are not listed on this site.',
@@ -243,7 +243,7 @@ export const TERMS: Term[] = [
     related: ['seminar', 'praktikum', 'ilias'],
   },
   {
-    id: 'attendance', cat: 'types', term: 'Devam zorunluluğu', aka: 'Anwesenheitspflicht · Attendance requirement',
+    id: 'attendance', cat: 'types', term: 'Devam zorunluluğu', aka: 'Anwesenheitspflicht, Attendance requirement',
     def: {
       tr: 'Bir derse belirli oranda katılmanın şart olması. KIT\'te derslerde (Vorlesung) genellikle yoklama alınmaz. Seminer ve praktikumların çoğunda ise devam beklenir: konu ve gruplar ilk buluşmada (kick-off) dağıtılır, sunumlarda bulunman gerekir. Bağlayıcı kural modül kitabında, dersin Teilleistung açıklamasında ya da ders sayfasında yazar; çoğu derste açıkça yazılmaz. Bu site her ders için katalog metninde ve modül açıklamasında geçen ilgili cümleleri bulup ders detayında "Devam ve katılım" bölümünde kaynağıyla gösterir.',
       en: 'Having to attend a course to a certain extent. At KIT, lectures usually take no attendance. Most seminars and practicals do expect it: topics and groups are handed out at the first meeting (kick-off) and you are expected at the talks. The binding rule is in the module handbook (the partial achievement’s description) or on the course page, and is often not stated explicitly. This site finds the relevant sentences in each course and module text and shows them with their source under “Attendance” in the course details.',
@@ -258,7 +258,7 @@ export const TERMS: Term[] = [
     related: ['seminar', 'praktikum', 'teilleistung', 'ilias'],
   },
   {
-    id: 'block', cat: 'types', term: 'Blok ders', aka: 'Blockveranstaltung · Block course',
+    id: 'block', cat: 'types', term: 'Blok ders', aka: 'Blockveranstaltung, Block course',
     def: {
       tr: 'Düzenli haftalık saati olmayan, birkaç güne ya da tek tek tarihlere toplanmış ders. Takvimde haftalık blok olarak görünmez.',
       en: 'A course without a weekly slot, packed into a few days or single dates. It does not appear as a weekly block in the timetable.',
@@ -282,7 +282,7 @@ export const TERMS: Term[] = [
     related: ['ects', 'termin'],
   },
   {
-    id: 'semester', cat: 'time', term: 'WS / SS', aka: 'Wintersemester · Sommersemester',
+    id: 'semester', cat: 'time', term: 'WS / SS', aka: 'Wintersemester, Sommersemester',
     def: {
       tr: 'Kış dönemi (Ekim\'de başlar) ve yaz dönemi (Nisan\'da başlar). Birçok modül yalnızca birinde açılır; "Each winter term" sadece kış, "Irregular" düzensiz demek.',
       en: 'Winter term (starts in October) and summer term (starts in April). Many modules run in only one of them; “Each winter term” means winter only, “Irregular” means not every year.',
@@ -294,7 +294,7 @@ export const TERMS: Term[] = [
     },
   },
   {
-    id: 'termin', cat: 'time', term: 'Termin', aka: 'Appointment · Time slot',
+    id: 'termin', cat: 'time', term: 'Termin', aka: 'Appointment, Time slot',
     def: {
       tr: 'Bir dersin buluştuğu gün ve saat. Bir ders birden fazla termine sahip olabilir (ör. ders salı, alıştırma perşembe). "Programım"da her termini ayrı ayrı açıp kapatabilirsin.',
       en: 'The day and time a course meets. A course can have several (e.g. lecture on Tuesday, exercise on Thursday). In “My schedule” you can switch each one on or off.',
@@ -303,7 +303,7 @@ export const TERMS: Term[] = [
     related: ['rhythm', 'sws'],
   },
   {
-    id: 'rhythm', cat: 'time', term: 'Ritim', aka: 'wöchentlich · 14-täglich · Einzeltermin',
+    id: 'rhythm', cat: 'time', term: 'Ritim', aka: 'wöchentlich, 14-täglich, Einzeltermin',
     def: {
       tr: 'Terminin ne sıklıkla tekrarladığı: haftalık (weekly), iki haftada bir (fortnightly) ya da tek seferlik (single). Tek seferlik tarihler takvimde haftalık blok olarak görünmez.',
       en: 'How often a slot repeats: weekly, fortnightly or once (single). Single dates are not drawn as weekly blocks.',
@@ -315,7 +315,7 @@ export const TERMS: Term[] = [
     related: ['termin', 'block'],
   },
   {
-    id: 'format', cat: 'time', term: 'On-Site / Blended / Online', aka: 'Präsenz · Hybrid',
+    id: 'format', cat: 'time', term: 'On-Site / Blended / Online', aka: 'Präsenz, Hybrid',
     def: {
       tr: 'Dersin nasıl yapıldığı: yüz yüze, karma (bir kısmı çevrimiçi) ya da tamamen çevrimiçi.',
       en: 'How the course is held: in person, blended (partly online) or fully online.',
@@ -388,7 +388,7 @@ export const TERMS: Term[] = [
     related: ['fachschaft'],
   },
   {
-    id: 'fachschaft', cat: 'places', term: 'Fachschaft', aka: 'FSMI · Student representatives',
+    id: 'fachschaft', cat: 'places', term: 'Fachschaft', aka: 'FSMI, Student representatives',
     def: {
       tr: 'Matematik ve Informatik öğrenci temsilciliği. Gayriresmî ama çok faydalı tavsiyeler verir ve oryantasyon haftasını (O-Phase) düzenler.',
       en: 'The mathematics and informatics student body. It gives informal but very useful advice and runs the orientation week (O-Phase).',
@@ -396,7 +396,7 @@ export const TERMS: Term[] = [
     related: ['iss'],
   },
   {
-    id: 'hoc', cat: 'places', term: 'HoC, FORUM, SpZ', aka: 'House of Competence · FORUM · Sprachenzentrum',
+    id: 'hoc', cat: 'places', term: 'HoC, FORUM, SpZ', aka: 'House of Competence, FORUM, Sprachenzentrum',
     def: {
       tr: 'Disiplinlerarası derslerin geldiği yerler: HoC soft skill dersleri, FORUM bilim ve toplum dersleri, SpZ (Dil Merkezi) dil kursları verir.',
       en: 'Where interdisciplinary courses come from: HoC offers soft-skill courses, FORUM science-and-society courses, SpZ (Language Center) language courses.',
@@ -404,7 +404,7 @@ export const TERMS: Term[] = [
     related: ['iq'],
   },
   {
-    id: 'room', cat: 'places', term: 'Raum, Hörsaal, Seminarraum', aka: 'Room · Lecture hall · Seminar room',
+    id: 'room', cat: 'places', term: 'Raum, Hörsaal, Seminarraum', aka: 'Room, Lecture hall, Seminar room',
     def: {
       tr: 'Oda, amfi ve seminer odası. Yerler "bina numarası + oda" şeklinde yazılır: "50.34 Raum 236", 50.34 numaralı binadaki 236 numaralı oda demek. Büyük amfilerin adı vardır (ör. Hertz-Hörsaal).',
       en: 'Room, lecture hall and seminar room. Locations read “building number + room”: “50.34 Raum 236” is room 236 in building 50.34. Large halls have names (e.g. Hertz-Hörsaal).',

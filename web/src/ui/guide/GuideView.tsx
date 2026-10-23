@@ -4,7 +4,6 @@ import type { CoursesFile, Lang } from '../../types'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
 import { CountsFlow } from './CountsFlow'
-import { ExamplePlan } from './ExamplePlan'
 
 /** Glossary entry per rule card, in the order of `copy.*.rules`. */
 const RULE_TERMS: (string | null)[] = ['area', 'stamm', 'seminar', 'elective', 'minor', 'iq', 'module', 'area', null]
@@ -154,12 +153,10 @@ export function GuideView({ lang, data }: { lang: Lang; data: CoursesFile }) {
   return (
     <article class="guide">
       <header class="guide-head">
-        <h2>{c.title}</h2>
         <p class="guide-lead">{c.lead}</p>
         <DegreeBar c={c} />
       </header>
 
-      <ExamplePlan lang={lang} />
       <CountsFlow lang={lang} />
 
       <section class="guide-section">

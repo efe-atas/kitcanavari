@@ -1,40 +1,21 @@
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { DEFAULT_PROFILE_REPO, type Sync } from '../../store'
 import type { Lang } from '../../types'
 import { Icon } from '../Icon'
 
-interface Props {
-  lang: Lang
-  sync: Sync
-  onClose: () => void
-}
-
 const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new'
 
-export function SyncDialog({ lang, sync, onClose }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
+export function SyncForm({ lang, sync }: { lang: Lang; sync: Sync }) {
   const [repo, setRepo] = useState(sync.config ? `${sync.config.owner}/${sync.config.repo}` : DEFAULT_PROFILE_REPO)
   const [token, setToken] = useState('')
-  useEffect(() => {
-    ref.current?.focus()
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
   const repoOk = /^[\w.-]+\/[\w.-]+$/.test(repo.trim())
   const [owner, name] = repo.trim().split('/')
   const valid = repoOk && token.trim().length > 0
   const connected = !!sync.config
 
   return (
-    <div class="detail-backdrop" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div class="detail sync-dialog" role="dialog" aria-modal="true" aria-labelledby="sync-title" tabIndex={-1} ref={ref}>
-        <header class="detail-head">
-          <h2 id="sync-title">{t(lang, 'sync.title')}</h2>
-          <button type="button" class="icon-button" onClick={onClose} aria-label={t(lang, 'event.close')}><Icon name="close" size={20} /></button>
-        </header>
+    <div class="sync-form">
 
         <p class={`sync-state sync-${sync.status}`}>
           <strong>{t(lang, `sync.${sync.status}`)}</strong>
@@ -83,7 +64,6 @@ export function SyncDialog({ lang, sync, onClose }: Props) {
             <button type="submit" class="button" disabled={!valid}>{t(lang, 'sync.connect')}</button>
           </form>
         )}
-      </div>
     </div>
   )
 }

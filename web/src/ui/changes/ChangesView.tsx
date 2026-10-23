@@ -22,7 +22,7 @@ export function ChangesView({ data, changes, state, alerts, update }: Props) {
   return (
     <div class="changes">
       <section>
-        <h2>{t(lang, 'changes.mine')}</h2>
+        <h3>{t(lang, 'changes.mine')}</h3>
         {alerts.length === 0 ? <p class="muted">{t(lang, 'changes.none')}</p> : (
           <>
             {alerts.length > 1 && (
@@ -47,7 +47,7 @@ export function ChangesView({ data, changes, state, alerts, update }: Props) {
       </section>
 
       <section>
-        <h2>{t(lang, 'changes.feed')}</h2>
+        <h3>{t(lang, 'changes.feed')}</h3>
         <div class="feed-filter" role="group">
           <button type="button" class="chip" aria-pressed={!onlyMine} onClick={() => setOnlyMine(false)}>{t(lang, 'changes.all')}</button>
           <button type="button" class="chip" aria-pressed={onlyMine} onClick={() => setOnlyMine(true)}>{t(lang, 'changes.onlyMine')}</button>

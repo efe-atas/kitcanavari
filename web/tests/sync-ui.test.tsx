@@ -30,17 +30,26 @@ function github(status: number | null = null) {
   return { s, f, profile }
 }
 
+/** The sync status button (the sidebar's; phones show the same one in the top bar). */
+const status = async (name: RegExp) => (await screen.findAllByRole('button', { name }))[0]
+
 async function connect() {
-  fireEvent.click(await screen.findByRole('button', { name: /Sync off/ }))
-  fireEvent.input(screen.getByLabelText('Token'), { target: { value: 'github_pat_test' } })
+  fireEvent.click(await status(/Sync off/))
+  fireEvent.input(await screen.findByLabelText('Token'), { target: { value: 'github_pat_test' } })
   fireEvent.click(screen.getByRole('button', { name: 'Connect' }))
+}
+
+/** Add module M3 (two courses this term) on the courses page. */
+async function addCourse() {
+  location.hash = '#/courses/WS26/elective'
+  fireEvent.click(await screen.findByRole('button', { name: 'Add: Module M3' }))
 }
 
 beforeEach(() => {
   vi.useFakeTimers({ shouldAdvanceTime: true })
   localStorage.clear()
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '' }))
-  location.hash = '#/catalog'
+  location.hash = '#/'
   loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: null })
 })
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals() })
@@ -51,13 +60,13 @@ describe('profile sync', () => {
     vi.stubGlobal('fetch', gh.f)
     render(<App />)
     await connect()
-    await screen.findByRole('button', { name: /Saved/ })
+    await status(/Saved/)
     expect(gh.profile().weekly).toEqual({})
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
-    await screen.findByRole('button', { name: /Saving/ })
+    await addCourse()
+    await status(/Saving/)
     await act(async () => { vi.advanceTimersByTime(3000) })
-    await screen.findByRole('button', { name: /Saved/ })
-    expect(Object.keys(gh.profile().weekly)).toHaveLength(1)
+    await status(/Saved/)
+    expect(Object.keys(gh.profile().weekly)).toHaveLength(2)
     expect(JSON.parse(localStorage.getItem('kitcanavari:sync')!).token).toBe('github_pat_test')
   })
 
@@ -65,18 +74,16 @@ describe('profile sync', () => {
     vi.stubGlobal('fetch', github(401).f)
     render(<App />)
     await connect()
-    await screen.findByRole('button', { name: /Token invalid/ })
-    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
-    await waitFor(() => expect(Object.keys(JSON.parse(localStorage.getItem(STORAGE_KEY)!).selected)).toHaveLength(1))
+    await status(/Token invalid/)
+    await addCourse()
+    await waitFor(() => expect(Object.keys(JSON.parse(localStorage.getItem(STORAGE_KEY)!).selected)).toHaveLength(2))
   })
 
   test('without a config the app never calls GitHub', async () => {
     const gh = github()
     vi.stubGlobal('fetch', gh.f)
     render(<App />)
-    await screen.findByText('IT Security')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
+    await addCourse()
     await act(async () => { vi.advanceTimersByTime(5000) })
     expect(gh.s.urls.filter((u) => u.includes('api.github.com'))).toEqual([])
   })
@@ -87,25 +94,24 @@ describe('profile sync', () => {
     vi.stubGlobal('fetch', gh.f)
     render(<App />)
     await connect()
-    await screen.findByRole('button', { name: /Saved/ })
+    await status(/Saved/)
     expect(localStorage.getItem(`${STORAGE_KEY}:backup`)).toBe(before)
     const puts = () => gh.f.mock.calls.filter(([, init]) => (init as RequestInit | undefined)?.method === 'PUT').length
     const afterConnect = puts()
-    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    fireEvent.click(screen.getAllByRole('button', { name: 'Add to schedule' })[0])
-    fireEvent.click(screen.getByRole('button', { name: /Saving/ }))
-    fireEvent.click(screen.getByRole('button', { name: 'Disconnect' }))
+    await addCourse()
+    fireEvent.click(await status(/Saving/))
+    fireEvent.click(await screen.findByRole('button', { name: 'Disconnect' }))
     await act(async () => { vi.advanceTimersByTime(5000) })
     expect(puts()).toBe(afterConnect)
     expect(localStorage.getItem('kitcanavari:profile-cache')).toBeNull()
-    expect(screen.getByRole('button', { name: /Sync off/ })).toBeTruthy()
+    expect(await status(/Sync off/)).toBeTruthy()
   })
 
   test('the repo field needs exactly owner/name', async () => {
     vi.stubGlobal('fetch', github().f)
     render(<App />)
-    fireEvent.click(await screen.findByRole('button', { name: /Sync off/ }))
-    fireEvent.input(screen.getByLabelText('Token'), { target: { value: 't' } })
+    fireEvent.click(await status(/Sync off/))
+    fireEvent.input(await screen.findByLabelText('Token'), { target: { value: 't' } })
     fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'a/b/c' } })
     expect((screen.getByRole('button', { name: 'Connect' }) as HTMLButtonElement).disabled).toBe(true)
     fireEvent.input(screen.getByLabelText('Repo (owner/name)'), { target: { value: 'efe-atas/kitcanavari-me' } })
