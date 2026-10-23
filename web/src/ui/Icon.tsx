@@ -19,6 +19,14 @@ const PATHS = {
   map: 'M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2ZM9 4v14M15 6v14',
   cloud: 'M7 18h10.5a4 4 0 0 0 .4-7.98A6 6 0 0 0 6.2 9.6 4.2 4.2 0 0 0 7 18Z',
   guide: 'M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4V4ZM5 16a4 4 0 0 1 4-4h10M9 8h6',
+  overview: 'M4 13a8 8 0 0 1 16 0M12 13l3.5-3.5M4 17h16',
+  plan: 'M4 5h4v14H4zM10 5h4v9h-4zM16 5h4v6h-4z',
+  book: 'M4 5.5C6.5 4 9.5 4 12 6c2.5-2 5.5-2 8-.5V19c-2.5-1.5-5.5-1.5-8 .5-2.5-2-5.5-2-8-.5V5.5ZM12 6v13.5',
+  briefcase: 'M4 8h16v11H4zM9 8V5h6v3M4 13h16',
+  help: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.01',
+  settings: 'M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M10 15v4',
+  more: 'M5 12a1 1 0 1 0 2 0 1 1 0 1 0-2 0ZM11 12a1 1 0 1 0 2 0 1 1 0 1 0-2 0ZM17 12a1 1 0 1 0 2 0 1 1 0 1 0-2 0Z',
+  chevron: 'M9 6l6 6-6 6',
 } as const
 
 export type IconName = keyof typeof PATHS
@@ -26,7 +34,7 @@ export type IconName = keyof typeof PATHS
 export function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
   return (
     <svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      stroke-width="1.7"stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d={PATHS[name]} />
     </svg>
   )

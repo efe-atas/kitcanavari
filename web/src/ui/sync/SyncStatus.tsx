@@ -5,11 +5,12 @@ import { Icon } from '../Icon'
 
 export function SyncStatus({ lang, sync, onOpen }: { lang: Lang; sync: Sync; onOpen: () => void }) {
   const label = t(lang, `sync.${sync.status}`)
+  // Only states that need the user speak up on phones; "off" and "saved" stay an icon with a name there.
+  const quiet = ['off', 'saved', 'loading'].includes(sync.status)
   return (
-    <button type="button" class={`sync-status sync-${sync.status}`} onClick={onOpen} aria-label={label} title={label}>
+    <button type="button" class={`sync-status sync-${sync.status}${quiet ? ' is-quiet' : ''}`} onClick={onOpen} aria-label={label} title={label}>
       <Icon name="cloud" size={16} />
-      {/* Only states that need the user speak up; "off" and "saved" stay an icon with a name. */}
-      {!['off', 'saved', 'loading'].includes(sync.status) && <span class="sync-label">{label}</span>}
+      <span class="sync-label" aria-hidden="true">{label}</span>
     </button>
   )
 }

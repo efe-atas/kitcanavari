@@ -13,7 +13,7 @@ import { roleTitle } from '../career/model'
 import { fmtSlot } from '../format'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
-import { closePanel } from '../route'
+import { closeCourse } from '../route'
 
 interface Props {
   data: CoursesFile
@@ -192,7 +192,7 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
       )}
 
       {entry && (
-        <button type="button" class="button-danger-quiet" onClick={() => { update((s) => removeFromRoadmap(s, id)); closePanel() }}>
+        <button type="button" class="button-danger-quiet" onClick={() => { update((s) => removeFromRoadmap(s, id)); closeCourse() }}>
           {t(lang, 'detail.remove')}
         </button>
       )}

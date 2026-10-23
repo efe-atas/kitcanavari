@@ -100,7 +100,7 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
                         <span>{c.related}:</span>
                         {t.related.map((id) => {
                           const r = termById(id)
-                          return r ? <a key={id} class="chip" href={`#/info/${id}`}>{r.term}</a> : null
+                          return r ? <a key={id} class="chip" href={`#/help/${id}`}>{r.term}</a> : null
                         })}
                       </p>
                     )}
@@ -120,5 +120,5 @@ export function TermLink({ id, lang }: { id: string; lang: Lang }) {
   const term = termById(id)
   if (!term) return null
   const label = lang === 'tr' ? `${term.term} ne demek?` : `What is ${term.term}?`
-  return <a class="term-link" href={`#/info/${id}`} title={label} aria-label={label}>?</a>
+  return <a class="term-link" href={`#/help/${id}`} title={label} aria-label={label}>?</a>
 }

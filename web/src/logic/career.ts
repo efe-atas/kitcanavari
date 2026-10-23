@@ -23,17 +23,32 @@ export function skillPoints(entries: Record<string, RoadmapEntry>, career: Caree
   return p
 }
 
-/** w'_s = weight(r,s) × mult(l,s), normalised to sum 1. */
+/**
+ * A skill the employer type values but the role does not list (Big Tech's algorithms for an ML engineer, an AI lab's
+ * research) still counts: with LENS_EXTRA × (multiplier − 1) as its raw weight and LENS_TARGET as its target.
+ */
+export const LENS_EXTRA = 0.25
+export const LENS_TARGET = 6
+
+/** w'_s = weight(r,s) × mult(l,s), plus the lens-only skills above, normalised to sum 1. */
 export function lensWeights(role: Role, lens: Lens): Partial<Record<SkillId, number>> {
-  const raw = Object.entries(role.weights).map(([s, w]) => [s, (w ?? 0) * (lens.multipliers[s as SkillId] ?? 1)] as const)
+  const raw: [string, number][] = Object.entries(role.weights).map(([s, w]) => [s, (w ?? 0) * (lens.multipliers[s as SkillId] ?? 1)])
+  for (const [s, m] of Object.entries(lens.multipliers)) {
+    if (!(s in role.weights) && (m ?? 1) > 1) raw.push([s, LENS_EXTRA * ((m ?? 1) - 1)])
+  }
   const total = raw.reduce((n, [, w]) => n + w, 0)
   return Object.fromEntries(raw.map(([s, w]) => [s, total ? w / total : 0]))
 }
 
-const coverage = (p: SkillPoints, role: Role, s: SkillId) => {
-  const target = role.targets[s] ?? 0
+/** The points a role wants in a skill; lens-only skills use LENS_TARGET. */
+export const skillTarget = (role: Role, s: SkillId): number => role.targets[s] ?? (s in role.weights ? 0 : LENS_TARGET)
+
+/** 0–1: how much of the role's target for a skill the points reach. */
+export const skillCoverage = (p: SkillPoints, role: Role, s: SkillId): number => {
+  const target = skillTarget(role, s)
   return target > 0 ? Math.min(1, p[s] / target) : 1
 }
+const coverage = skillCoverage
 
 /** 0–100. */
 export function fit(p: SkillPoints, role: Role, lens: Lens): number {
