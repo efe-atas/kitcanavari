@@ -11747,7 +11747,7 @@
     ]
    ],
    "contentText": "",
-   "fingerprint": "5623836060535fa8",
+   "fingerprint": "abfadb76b247d90e",
    "format": "Blended (On-Site/Online)",
    "id": "0xA8789C226C774BD694EE716255C5B4F0",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3056259&client_id=produktiv",
@@ -11779,8 +11779,27 @@
     "M-INFO-106958"
    ],
    "number": "2400231",
-   "sessions": [],
-   "slots": [],
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "19:00",
+     "room": "50.28 Seminarraum 1",
+     "slot": 0,
+     "start": "17:30"
+    }
+   ],
+   "slots": [
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "19:00",
+     "firstDate": "2026-10-28",
+     "rhythm": "single",
+     "room": "50.28 Seminarraum 1",
+     "start": "17:30"
+    }
+   ],
    "sws": 2.0,
    "title": "Seminar: Critical topics in AI",
    "type": "Seminar (S)",
@@ -17706,7 +17725,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-22T09:10:23Z",
+  "scrapedAt": "2026-10-23T09:07:08Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
