@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks'
 import { loadData } from '../data'
 import { t } from '../i18n'
 import { pendingAlerts } from '../logic/alerts'
-import { defaultState, useAppState } from '../store'
+import { defaultState, setLang, toggleTheme, useAppState } from '../store'
 import type { CareerData, ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile } from '../types'
 import { CareerView } from './career/CareerView'
 import { ChangesView } from './changes/ChangesView'
@@ -42,7 +42,7 @@ const NAV: Record<NavKind, { icon: IconName; page: Page }> = {
   help: { icon: 'help', page: { kind: 'help', id: null } },
   settings: { icon: 'settings', page: { kind: 'settings' } },
 }
-const MAIN: NavKind[] = ['overview', 'plan', 'courses', 'week']
+const MAIN: NavKind[] = ['overview', 'courses', 'plan', 'week']
 const SECONDARY: NavKind[] = ['career', 'changes', 'help']
 
 function currentRoute(): Route {
@@ -55,7 +55,7 @@ function NavItem({ lang, kind, current, badge }: { lang: Lang; kind: NavKind; cu
   const { icon, page } = NAV[kind]
   return (
     <li>
-      <a class="nav-item" href={pageHref(page)} aria-current={current ? 'page' : undefined}>
+      <a class="nav-item" aria-label={t(lang, `nav.${kind}`)} href={pageHref(page)} aria-current={current ? 'page' : undefined}>
         <Icon name={icon} size={18} />
         <span class="nav-label">{t(lang, `nav.${kind}`)}</span>
         {!!badge && <span class="nav-badge" data-testid="changes-badge" aria-label={t(lang, 'top.changes', { n: badge })}>{badge}</span>}
@@ -118,29 +118,21 @@ export function App() {
   return (
     <div class="shell">
       <a class="skip-link" href="#main">{t(lang, 'nav.skip')}</a>
-      <aside class="sidebar">
-        <a class="brand" href="#/">
-          <BrandMark />
-          <span class="brand-name">{t(lang, 'app.short')}</span>
-        </a>
-        <nav class="nav" aria-label={t(lang, 'nav.label')}>
-          <ul class="nav-list">{MAIN.map((k) => <NavItem key={k} lang={lang} kind={k} current={navKind === k} />)}</ul>
-          <ul class="nav-list">
-            {SECONDARY.map((k) => <NavItem key={k} lang={lang} kind={k} current={navKind === k} badge={k === 'changes' ? alerts.length : 0} />)}
-          </ul>
-        </nav>
-        <div class="sidebar-foot">
-          <ul class="nav-list"><NavItem lang={lang} kind="settings" current={navKind === 'settings'} /></ul>
-          <div class="sidebar-status">
+      <header class="app-header">
+        <div class="app-header-inner">
+          <a class="brand" href="#/"><BrandMark /><span class="brand-name">{t(lang, 'app.short')}<small>STUDY PLANNER</small></span></a>
+          <div class="degree-context"><span>KARLSRUHE INSTITUTE OF TECHNOLOGY</span><strong>Computer Science · M.Sc.</strong></div>
+          <div class="header-tools">
+            <button class="locale-control" type="button" onClick={() => update((s) => setLang(s, lang === 'tr' ? 'en' : 'tr'))} aria-label={lang === 'tr' ? 'Switch to English' : 'Türkçeye geç'}>{lang === 'tr' ? 'EN' : 'TR'}</button>
+            <button class="icon-button" type="button" onClick={() => update(toggleTheme)} aria-label={t(lang, theme === 'light' ? 'set.theme.dark' : 'set.theme.light')}><Icon name={theme === 'light' ? 'moon' : 'sun'} size={18} /></button>
             <SyncStatus lang={lang} sync={sync} onOpen={openSettings} />
-            {load.status === 'ready' && <span class="data-age">{t(lang, 'data.age', { date: fmtDate(lang, load.checkedAt) })}</span>}
+            <a class="profile-link" href={pageHref({ kind: 'settings' })} aria-label={t(lang, 'nav.settings')}><Icon name="settings" size={20} /></a>
           </div>
         </div>
-      </aside>
-
-      <header class="mobile-top">
-        <a class="brand" href="#/"><BrandMark /><span class="brand-name">{t(lang, 'app.short')}</span></a>
-        <SyncStatus lang={lang} sync={sync} onOpen={openSettings} />
+        <nav class="desktop-nav" aria-label={t(lang, 'nav.label')}>
+          <ul class="nav-list">{[...MAIN, 'career' as const].map((k) => <NavItem key={k} lang={lang} kind={k} current={navKind === k} />)}</ul>
+          <ul class="nav-list nav-utilities">{(['changes', 'help', 'settings'] as const).map((k) => <NavItem key={k} lang={lang} kind={k} current={navKind === k} badge={k === 'changes' ? alerts.length : 0} />)}</ul>
+        </nav>
       </header>
 
       <main id="main" class="main" tabIndex={-1}>
@@ -152,6 +144,7 @@ export function App() {
           {body}
         </ErrorBoundary>
       </main>
+      <footer class="app-footer"><span>KIT · Computer Science M.Sc. · SPO 2025</span>{load.status === 'ready' && <span>{t(lang, 'data.age', { date: fmtDate(lang, load.checkedAt) })}</span>}</footer>
 
       <nav class="tabbar" aria-label={t(lang, 'nav.label')}>
         {MAIN.map((k) => (

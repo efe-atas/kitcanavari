@@ -50,13 +50,13 @@ describe('overview', () => {
   test('following a career path shows it as the goal', async () => {
     location.hash = '#/career/security:bigtech'
     render(<App />)
-    await screen.findByRole('heading', { name: 'security', level: 2 })
+    await screen.findByRole('heading', { name: 'Big Tech', level: 2 })
     expect(screen.getByRole('link', { name: 'Big Tech' }).getAttribute('aria-current')).toBe('true')
     fireEvent.click(screen.getByRole('button', { name: 'Make it my goal' }))
     await screen.findByRole('button', { name: 'Your goal' })
-    expect(saved().followed).toEqual([{ role: 'security', lens: 'bigtech' }])
+    expect(saved().followed).toEqual([{ role: 'environment', lens: 'bigtech' }])
     location.hash = '#/'
-    await screen.findByRole('link', { name: /security, Big Tech\s*\d+% fit/ })
+    await screen.findByRole('link', { name: /Big Tech\s*\d+% fit/ })
   })
 
   test('without career data there is no goal', async () => {
@@ -68,37 +68,76 @@ describe('overview', () => {
 })
 
 describe('career', () => {
-  test('ranks the jobs by fit and shows the courses that close the gaps', async () => {
-    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.7 } }) })
-    location.hash = '#/career'
+  test('selects only an environment and accepts legacy role links', async () => {
+    location.hash = '#/career/security:bigtech'
     render(<App />)
-    const jobs = await screen.findByRole('region', { name: 'Jobs that fit you best' })
-    const names = within(jobs).getAllByRole('link').map((a) => a.getAttribute('aria-label')!.split(':')[0])
-    expect(names[0]).toBe('ML Engineer')
-    // The best job opens first, with a gap course that can be added to a term.
-    await screen.findByRole('heading', { name: 'ML Engineer', level: 2 })
-    expect(screen.getByText('What this job needs')).toBeTruthy()
+    await screen.findByRole('heading', { name: 'Big Tech', level: 2 })
+    expect(screen.queryByRole('combobox')).toBeNull()
+    expect(screen.queryByRole('region', { name: 'Jobs that fit you best' })).toBeNull()
+    fireEvent.click(screen.getByRole('link', { name: 'startup', exact: true }))
+    await waitFor(() => expect(location.hash).toBe('#/career/startup'))
+    await screen.findByRole('heading', { name: 'startup', level: 2 })
+    expect(screen.getByText('Skills emphasized in this environment')).toBeTruthy()
   })
+
 })
 
 describe('study plan', () => {
+  test('rebuild can remove a current course from both roadmap and weekly timetable', async () => {
+    setState({ areas: AREAS, selected: { sec: { enabledSlots: [0], moduleId: 'M3', ackFingerprint: '' } },
+      ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.7 } }) })
+    location.hash = '#/career/bigtech'
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Prepare course suggestions' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Rebuild for this environment' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Take out of the plan: Module M3' }))
+    expect(inPlan('M3')).toBe(true) // Draft edits do not change the saved plan.
+    expect(screen.getByRole('region', { name: 'Not in this program' }).textContent).toContain('Module M3')
+    fireEvent.click(screen.getByRole('button', { name: /^Update my plan: add \d+, remove 1$/ }))
+    await waitFor(() => expect(inPlan('M3')).toBe(false))
+    expect(saved().selected.sec).toBeUndefined()
+    expect(saved().roadmap.modules.H1).toMatchObject({ status: 'passed', grade: 1.7 })
+  })
+
+  test('exploration and draft generation do not mutate the plan; fill mode preserves future courses', async () => {
+    setState({ areas: AREAS, ...roadmap({ GONE: { term: 'WS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/career/security:bigtech'
+    const original = localStorage.getItem(STORAGE_KEY)
+    render(<App />)
+    const prepare = await screen.findByRole('button', { name: 'Prepare course suggestions' })
+    expect(screen.queryByRole('button', { name: /^Add these/ })).toBeNull()
+    fireEvent.click(prepare)
+    expect(screen.getByRole('button', { name: 'Keep my plan, fill the gaps' }).getAttribute('aria-pressed')).toBe('true')
+    expect(localStorage.getItem(STORAGE_KEY)).toBe(original)
+    expect(screen.queryByRole('region', { name: 'Not in this program' })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: /^Add these/ }))
+    await waitFor(() => expect(saved().roadmap.modules.GONE.term).toBe('WS27'))
+    expect(await screen.findByRole('status')).toBeTruthy()
+  })
+
   test('suggests courses for the remaining terms; taking one out and adding the rest updates the plan', async () => {
     location.hash = '#/career/security:bigtech'
     render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Prepare course suggestions' }))
     const plan = await screen.findByRole('region', { name: 'Suggested courses until graduation' })
     expect(within(plan).getByRole('region', { name: 'SS 28' }).textContent).toContain('Master’s thesis')
     fireEvent.click(within(plan).getByRole('button', { name: 'Take out of the plan: Module M3' }))
     await waitFor(() => expect(within(plan).queryByRole('link', { name: 'Module M3' })).toBeNull())
-    fireEvent.click(within(plan).getByRole('button', { name: /^Update my plan: add \d+, remove 0$/ }))
+    fireEvent.click(within(plan).getByRole('button', { name: /^Add these \d+ courses to my plan$/ }))
     await waitFor(() => expect(saved().roadmap.modules.H2).toMatchObject({ term: 'SS27', status: 'planned' }))
     expect(saved().roadmap.modules.M3).toBeUndefined()
+    expect(screen.getByText('Your plan was updated to this program.')).toBeTruthy()
+    expect(screen.queryByRole('button', { name: /^Add these/ })).toBeNull()
+    expect(screen.getByRole('link', { name: 'Open plan' })).toBeTruthy()
   })
 
   test('rebuilding for a job drops future plans that do not serve it, unless kept', async () => {
     setState({ areas: AREAS, ...roadmap({ GONE: { term: 'WS27', status: 'planned', countAs: null, grade: null } }) })
     location.hash = '#/career/security:bigtech'
     render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Prepare course suggestions' }))
     const plan = await screen.findByRole('region', { name: 'Suggested courses until graduation' })
+    fireEvent.click(within(plan).getByRole('button', { name: 'Rebuild for this environment' }))
     const dropped = within(plan).getByRole('region', { name: 'Not in this program' })
     expect(within(dropped).getByText('GONE')).toBeTruthy()
     fireEvent.click(within(plan).getByRole('button', { name: /^Update my plan: add \d+, remove 1$/ }))
@@ -110,7 +149,9 @@ describe('study plan', () => {
     setState({ areas: AREAS, ...roadmap({ GONE: { term: 'WS27', status: 'planned', countAs: null, grade: null } }) })
     location.hash = '#/career/security:bigtech'
     render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Prepare course suggestions' }))
     const plan = await screen.findByRole('region', { name: 'Suggested courses until graduation' })
+    fireEvent.click(within(plan).getByRole('button', { name: 'Rebuild for this environment' }))
     fireEvent.click(within(plan).getByRole('button', { name: 'Keep' }))
     await waitFor(() => expect(within(plan).queryByRole('region', { name: 'Not in this program' })).toBeNull())
     fireEvent.click(within(plan).getByRole('button', { name: 'Keep my plan, fill the gaps' }))
@@ -123,9 +164,10 @@ describe('study plan', () => {
     setState({})
     location.hash = '#/career/security:bigtech'
     render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Prepare course suggestions' }))
     fireEvent.click(await screen.findByRole('button', { name: 'Pick these two areas' }))
     await waitFor(() => expect(saved().areas).toHaveLength(2))
-    expect(saved().areas).toContain('Cryptography and Security')
+    expect(new Set(saved().areas).size).toBe(2)
   })
 })
 
@@ -239,4 +281,60 @@ test('the menu marks the current page', async () => {
   const nav = (await screen.findAllByRole('navigation', { name: 'Main menu' }))[0]
   expect(within(nav).getByRole('link', { name: 'Plan' }).getAttribute('aria-current')).toBe('page')
   expect(within(nav).getByRole('link', { name: 'Overview' }).getAttribute('aria-current')).toBeNull()
+})
+
+test('catalog confirms an addition and offers the plan as the next destination', async () => {
+  location.hash = '#/courses/SS27/elective'
+  render(<App />)
+  fireEvent.click(await screen.findByRole('button', { name: 'Add: Seminar: Post-Quantum Cryptography' }))
+  const feedback = await screen.findByRole('status')
+  expect(feedback.textContent).toContain('Seminar: Post-Quantum Cryptography added to your plan.')
+  expect(within(feedback).getByRole('link', { name: 'View my plan' }).getAttribute('href')).toBe('#/plan')
+})
+
+test('clearing an empty search restores results without changing the selected term', async () => {
+  location.hash = '#/courses/SS27/elective'
+  render(<App />)
+  const search = await screen.findByRole('searchbox')
+  fireEvent.input(search, { target: { value: 'no matching course 999' } })
+  await screen.findByRole('heading', { name: 'No course here matches these filters.' })
+  const buttons = await screen.findAllByRole('button', { name: 'Reset filters' })
+  fireEvent.click(buttons[0])
+  expect((search as HTMLInputElement).value).toBe('')
+  expect((screen.getByLabelText('Add to term') as HTMLSelectElement).value).toBe('SS27')
+  expect(await screen.findByRole('button', { name: 'Add: Seminar: Post-Quantum Cryptography' })).toBeTruthy()
+})
+
+test('catalog sorting orders the matching courses by credits', async () => {
+  location.hash = '#/courses'
+  const { container } = render(<App />)
+  fireEvent.change(await screen.findByLabelText('Sort'), { target: { value: 'credits' } })
+  await waitFor(() => expect(container.querySelector('.result-title')?.textContent).toBe('Module M3'))
+  const credits = Array.from(container.querySelectorAll('.result-credit strong')).map((el) => Number(el.textContent))
+  expect(credits).toEqual([...credits].sort((a, b) => b - a))
+})
+
+test('agenda keeps the selected events and opens the same course detail', async () => {
+  setState({ areas: AREAS, selected: { sec: { enabledSlots: [0], moduleId: 'M3', ackFingerprint: '' } } })
+  location.hash = '#/week'
+  render(<App />)
+  fireEvent.click(await screen.findByRole('button', { name: 'Agenda', exact: true }))
+  const day = await screen.findByRole('region', { name: 'Friday' })
+  expect(day.textContent).toContain('09:45')
+  fireEvent.click(within(day).getByRole('button', { name: /IT Security/ }))
+  await screen.findByRole('dialog', { name: 'Module M3' })
+  expect(location.hash).toBe('#/week?c=M3')
+})
+
+test('mobile filters preserve the destination when reopened', async () => {
+  location.hash = '#/courses/SS27'
+  render(<App />)
+  const toggle = await screen.findByRole('button', { name: /Refine your selection/ })
+  expect(toggle.getAttribute('aria-expanded')).toBe('false')
+  fireEvent.click(toggle)
+  expect(toggle.getAttribute('aria-expanded')).toBe('true')
+  fireEvent.change(screen.getByLabelText('Add to term'), { target: { value: 'WS27' } })
+  fireEvent.click(toggle)
+  fireEvent.click(toggle)
+  expect((screen.getByLabelText('Add to term') as HTMLSelectElement).value).toBe('WS27')
 })

@@ -97,6 +97,7 @@ export function CountsFlow({ lang }: { lang: Lang }) {
         <div class="panel flow-panel">
           <h4>{c.whatTitle}</h4>
           <p class="note flow-what-lead">{c.whatLead}</p>
+          <div class="table-scroll" role="region" aria-label={c.whatTitle} tabIndex={0}>
           <table class="fill-matrix">
             <thead>
               <tr><th />{c.cols.map((col) => <th key={col} scope="col">{col}</th>)}</tr>
@@ -115,6 +116,7 @@ export function CountsFlow({ lang }: { lang: Lang }) {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </section>

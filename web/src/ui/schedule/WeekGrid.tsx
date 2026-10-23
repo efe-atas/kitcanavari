@@ -94,3 +94,22 @@ export function WeekGrid({ lang, data, state, conflicts, onOpen }: Props) {
     </div>
   )
 }
+
+
+/** A readable alternative to narrow calendar columns, sharing the same event data. */
+export function WeekAgenda({ lang, data, state, conflicts, onOpen }: Props) {
+  const blocks = weeklyBlocks(data, state)
+  const days: Day[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  return <div class="week-agenda">{days.filter((day) => blocks.some((b) => b.day === day)).map((day) =>
+    <section class="agenda-day" key={day} aria-labelledby={`agenda-${day}`}>
+      <h2 id={`agenda-${day}`}>{t(lang, `day.full.${day}`)}</h2>
+      <ul class="plain">{blocks.filter((b) => b.day === day).sort((a, b) => toMinutes(a.start) - toMinutes(b.start)).map((b) => {
+        const ev = data.events[b.eventId]
+        const bad = conflicts.some((c) => blockHasConflict(b, c, ev))
+        return <li key={`${b.eventId}-${b.slotIdx}`}><button type="button" class={`agenda-event${bad ? ' is-conflict' : ''}`} onClick={() => onOpen(b.eventId)}>
+          <span class="agenda-time">{b.start}<small>{b.end}</small></span><span class="agenda-description"><strong>{ev.title}</strong><span>{b.room ?? t(lang, 'v2.roomUnknown')}</span>{bad && <span class="agenda-conflict">{t(lang, 'event.conflict')}</span>}</span>
+        </button></li>
+      })}</ul>
+    </section>
+  )}{blocks.length === 0 && <p class="empty">{t(lang, 'event.noSlots')}</p>}</div>
+}

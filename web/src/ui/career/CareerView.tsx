@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from 'preact/hooks'
+import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
-import { fit, lensWeights, skillCoverage } from '../../logic/career'
+import { environmentRole, fit, lensWeights, skillCoverage } from '../../logic/career'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { MAX_FOLLOWED, setFollow } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, Lens, SkillId, UserState } from '../../types'
 import { Icon } from '../Icon'
 import { pageHref } from '../route'
 import { pathTitle, pointsOf, roleTitle } from './model'
-import { StudyPlan, type PlanMode } from './StudyPlan'
+import { StudyPlan } from './StudyPlan'
 
 interface Props {
   data: CoursesFile
@@ -74,45 +74,44 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
   const { lang } = state
   const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const points = useMemo(() => (career ? pointsOf(state, career, rows) : null), [state, career, rows])
-  const [planMode, setPlanMode] = useState<PlanMode>('rebuild')
-  // On narrow screens the detail sits below the list; bring it into view when a job is picked.
-  useEffect(() => {
-    if (!focus || typeof matchMedia !== 'function' || !matchMedia('(max-width: 960px)').matches) return
-    document.getElementById('job-title')?.scrollIntoView?.({ block: 'start' })
-  }, [focus])
   if (!career || !points) return <p class="empty">{t(lang, 'career.none')}</p>
 
-  const { roles } = career.roles
   const { lenses } = career.lenses
-  const known = (f: { role: string; lens: string }) => roles.some((r) => r.id === f.role) && lenses.some((l) => l.id === f.lens)
+  const known = (f: { role: string; lens: string }) => lenses.some((l) => l.id === f.lens)
   const followed = state.followed ?? []
   const stale = followed.filter((f) => !known(f))
   const unscored = rows.filter((r) => !career.skills.modules[r.id]).length
 
-  // Selected path: the route, else the first followed one; the employer type first, since the ranking depends on it.
-  const [fr, fl] = (focus ?? '').split(':')
-  const firstFollowed = followed.find(known)
-  const lensId = lenses.some((l) => l.id === fl) ? fl
-    : followed.find((f) => f.role === fr && known(f))?.lens ?? firstFollowed?.lens ?? lenses[0].id
+  // New links select an environment directly; old role:lens links retain their environment.
+  const requested = (focus ?? '').split(':').pop()
+  const lensId = lenses.some((l) => l.id === requested) ? requested! : followed.find(known)?.lens ?? lenses[0].id
   const lens = lenses.find((l) => l.id === lensId)!
-  const ranked = roles
-    .map((r) => ({ r, all: fit(points.all, r, lens), now: fit(points.now, r, lens) }))
-    .sort((a, b) => b.all - a.all || b.now - a.now)
-  const roleId = roles.some((r) => r.id === fr) ? fr : firstFollowed?.role ?? ranked[0].r.id
-  const role = roles.find((r) => r.id === roleId)!
-  const href = (r: string, l: string) => pageHref({ kind: 'career', focus: `${r}:${l}` })
+  const role = environmentRole(lens)
+  const roleId = role.id
+  const href = (l: string) => pageHref({ kind: 'career', focus: l })
 
-  const { all, now } = ranked.find((x) => x.r.id === roleId)!
+  const all = fit(points.all, role, lens)
+  const now = fit(points.now, role, lens)
   const weights = (Object.entries(lensWeights(role, lens)) as [SkillId, number][]).filter(([, w]) => w > 0).sort((a, b) => b[1] - a[1])
+  const priorities = weights.filter(([sk]) => skillCoverage(points.all, role, sk) < 1)
+    .sort(([a, wa], [b, wb]) => wb * (1 - skillCoverage(points.all, role, b)) - wa * (1 - skillCoverage(points.all, role, a))).slice(0, 3)
+  const needRow = ([s, w]: [SkillId, number]) => {
+    const c = Math.round(skillCoverage(points.all, role, s) * 100)
+    return <li key={s} class="need">
+      <span class="need-name">{t(lang, `skill.${s}`)}</span>
+      <span class={`need-imp imp-${importance(w)}`}>{t(lang, `cr.imp.${importance(w)}`)}</span>
+      <span class="need-cov">{t(lang, 'cr.covered', { n: c })}</span>
+      <span class="need-bar" aria-hidden="true"><span class={c >= 100 ? 'is-full' : ''} style={{ width: `${c}%` }} /></span>
+    </li>
+  }
   const mult = Object.entries(lens.multipliers) as [SkillId, number][]
   const more = mult.filter(([, m]) => m > 1).sort((a, b) => b[1] - a[1]).map(([sk]) => t(lang, `skill.${sk}`))
   const less = mult.filter(([, m]) => m < 1).sort((a, b) => a[1] - b[1]).map(([sk]) => t(lang, `skill.${sk}`))
-  const isFollowed = followed.some((f) => f.role === roleId && f.lens === lensId)
+  const isFollowed = followed.some((f) => f.lens === lensId)
   const full = !isFollowed && followed.length >= MAX_FOLLOWED
 
   return (
     <div class="career">
-      {unscored > 0 && <p class="banner banner-warn">{t(lang, 'career.unscored', { n: unscored })}</p>}
       {stale.length > 0 && (
         <div class="banner banner-warn">
           <p>{t(lang, 'career.stale')}</p>
@@ -132,96 +131,85 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
       )}
 
       <div class="career-grid">
-        <section class="jobs-card" aria-labelledby="jobs-title">
-          <header class="jobs-head">
-            <h2 id="jobs-title">{t(lang, 'cr.jobs')}</h2>
-            <p class="jobs-for">{t(lang, 'cr.jobsFor', { lens: lens.title[lang] })}</p>
-          </header>
-          <p class="jobs-legend">
-            <span><i class="key key-now" aria-hidden="true" />{t(lang, 'cr.keyNow')}</span>
-            <span><i class="key key-all" aria-hidden="true" />{t(lang, 'cr.keyAll')}</span>
-          </p>
-          {ranked.every((x) => x.all === 0) && <p class="jobs-empty">{t(lang, 'cr.emptyPlan')}</p>}
-          <ol class="plain job-list">
-            {ranked.map(({ r, all: a, now: n }) => {
-              const goal = followed.some((f) => f.role === r.id && known(f))
-              return (
-                <li key={r.id}>
-                  <a class="job" href={href(r.id, lensId)}
-                    aria-current={r.id === roleId ? 'true' : undefined}
-                    aria-label={`${r.title[lang]}: ${t(lang, 'cr.fitLabel', { all: a, now: n })}${goal ? `, ${t(lang, 'cr.goal')}` : ''}`}>
-                    <span class="job-name">{r.title[lang]}{goal && <span class="goal-badge">{t(lang, 'cr.goal')}</span>}</span>
-                    <span class="job-fit"><strong>{a}%</strong></span>
-                    <FitBar now={n} all={a} />
-                  </a>
-                </li>
-              )
-            })}
-          </ol>
+        <section class="environment-picker" aria-labelledby="lens-pick-label">
+          <h2 id="lens-pick-label">{t(lang, 'cr.employer')}</h2>
+          <p>{t(lang, 'cx.environmentOnly')}</p>
+          <nav class="lens-options" aria-labelledby="lens-pick-label">
+            {lenses.map((l) => <a key={l.id} class="chip" href={href(l.id)} aria-current={l.id === lensId ? 'true' : undefined}>{l.title[lang]}</a>)}
+          </nav>
         </section>
 
         <section class="job-detail" aria-labelledby="job-title">
+          <div class="career-brief">
           <header class="job-head">
             <div class="job-head-text">
+              <p class="career-eyebrow">{t(lang, isFollowed ? 'cr.isGoal' : 'cx.environmentLabel')}</p>
               <h2 id="job-title">{role.title[lang]}</h2>
               <p class="job-summary">{role.summary[lang]}</p>
+              <p class="career-browse-note">{t(lang, 'cx.browsing')}</p>
             </div>
             <button type="button" class={isFollowed ? 'button-quiet' : 'button'} disabled={full} aria-pressed={isFollowed}
-              onClick={() => update((s) => setFollow(s, roleId, lensId, !isFollowed))}>
+              onClick={() => update((s) => isFollowed ? { ...s, followed: (s.followed ?? []).filter((f) => f.lens !== lensId) } : setFollow(s, roleId, lensId, true))}>
               {isFollowed ? <><Icon name="check" size={16} />{t(lang, 'cr.isGoal')}</> : t(lang, 'cr.makeGoal')}
             </button>
           </header>
           {full && <p class="note">{t(lang, 'career.followLimit')}</p>}
 
-          <div class="lens-pick">
-            <span class="lens-label" id="lens-pick-label">{t(lang, 'cr.employer')}</span>
-            <nav class="lens-options" aria-labelledby="lens-pick-label">
-              {lenses.map((l) => (
-                <a key={l.id} class="chip" href={href(roleId, l.id)} aria-current={l.id === lensId ? 'true' : undefined}>{l.title[lang]}</a>
-              ))}
-            </nav>
-            {(more.length > 0 || less.length > 0) && (
+
+          </div>
+          <div class="career-environment">
+            <div class="career-fit" aria-label={t(lang, 'cr.fit')}>
+              <div class="career-fit-values">
+                <p><span>{t(lang, 'cr.keyNow')}</span><strong>{now}<small>%</small></strong></p>
+                <span class="career-fit-arrow" aria-hidden="true">→</span>
+                <p><span>{t(lang, 'cx.withPlan')}</span><strong>{all}<small>%</small></strong></p>
+              </div>
+              <FitBar now={now} all={all} />
+              <p class="career-fit-note">{t(lang, 'cx.fitNote')}</p>
+            </div>
+          </div>
+          <nav class="career-jumps" aria-label={t(lang, 'cx.sections')}>
+            <button type="button" onClick={() => document.getElementById('career-skills')?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}><span>01</span>{t(lang, 'cx.skills')}<span aria-hidden="true">↓</span></button>
+            <button type="button" onClick={() => document.getElementById('career-program')?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })}><span>02</span>{t(lang, 'cx.program')}<span aria-hidden="true">↓</span></button>
+          </nav>
+          <div class="detail-cols" id="career-skills">
+            <div class="detail-main">
+              <section aria-labelledby="needs-title">
+                <p class="career-eyebrow">01 / {t(lang, 'cx.skills')}</p>
+                <h3 id="needs-title">{t(lang, 'cr.needs')}</h3>
+                <p class="career-section-lead">{t(lang, 'cx.skillsLead')}</p>
+                {priorities.length ? <ul class="plain need-list">{priorities.map(needRow)}</ul> : <p class="career-section-lead">{t(lang, 'cx.covered')}</p>}
+                <details class="career-all-skills">
+                  <summary>{t(lang, 'cx.allSkills', { n: weights.length })}</summary>
+                  <ul class="plain need-list">{weights.map(needRow)}</ul>
+                </details>
+              </section>
+            </div>
+            <aside class="career-context">
+              <p class="career-eyebrow">{t(lang, 'cr.employer')}</p>
+              <h3>{lens.title[lang]}</h3>
               <p class="lens-effect">
                 {more.length > 0 && <span>{t(lang, 'cr.lensMore2', { lens: lens.title[lang], skills: more.join(', ') })}</span>}
                 {less.length > 0 && <span>{t(lang, 'cr.lensLess', { skills: less.join(', ') })}</span>}
               </p>
-            )}
+              <details class="career-market">
+                <summary>{t(lang, 'cx.market')}</summary>
+                <LensInfo lang={lang} career={career} lens={lens} role={roleId} />
+              </details>
+            </aside>
           </div>
-
-          <div class="fit-summary">
-            <p class="fit-number"><strong>{all}%</strong><span>{t(lang, 'cr.fit')}</span></p>
-            <FitBar now={now} all={all} />
-            <p class="fit-sentence">{t(lang, 'cr.fitSentence', { now, all, lens: lens.title[lang] })}</p>
-          </div>
-
-          <StudyPlan key={`${roleId}:${lensId}`} data={data} handbook={handbook} career={career} role={role} lens={lens} rows={rows}
-            state={state} update={update} mode={planMode} onMode={setPlanMode} />
-
-          <div class="detail-cols">
-            <div class="detail-main">
-              <section aria-labelledby="needs-title">
-                <h3 id="needs-title">{t(lang, 'cr.needs')}</h3>
-                <ul class="plain need-list">
-                  {weights.map(([s, w]) => {
-                    const c = Math.round(skillCoverage(points.all, role, s) * 100)
-                    const imp = importance(w)
-                    return (
-                      <li key={s} class="need">
-                        <span class="need-name">{t(lang, `skill.${s}`)}</span>
-                        <span class={`need-imp imp-${imp}`}>{t(lang, `cr.imp.${imp}`)}</span>
-                        <span class="need-cov">{t(lang, 'cr.covered', { n: c })}</span>
-                        <span class="need-bar" aria-hidden="true"><span class={c >= 100 ? 'is-full' : ''} style={{ width: `${c}%` }} /></span>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </section>
-            </div>
-            <LensInfo lang={lang} career={career} lens={lens} role={roleId} />
+          <div id="career-program" class="career-program">
+            <p class="career-eyebrow">02 / {t(lang, 'cx.program')}</p>
+            <StudyPlan key={`${roleId}:${lensId}`} data={data} handbook={handbook} career={career} role={role} lens={lens} rows={rows}
+              state={state} update={update} />
           </div>
         </section>
       </div>
-      <p class="plan-note">{t(lang, 'cr.method')}</p>
+      <details class="career-method">
+        <summary>{t(lang, 'cx.method')}</summary>
+        <p>{t(lang, 'cx.environmentMethod')}</p>
+        {unscored > 0 && <p>{t(lang, 'career.unscored', { n: unscored })}</p>}
+      </details>
     </div>
   )
 }

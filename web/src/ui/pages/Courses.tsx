@@ -13,7 +13,7 @@ import { fmtSlot } from '../format'
 import { Icon } from '../Icon'
 import { rowLabel } from '../plan/labels'
 import { termName } from '../roadmap/format'
-import { courseHref } from '../route'
+import { courseHref, pageHref } from '../route'
 import { PageHead } from './PageHead'
 
 interface Props {
@@ -40,6 +40,9 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
   const [query, setQuery] = useState('')
   const [kinds, setKinds] = useState<Kind[]>(filter ? [filter] : [])
   const [offeredOnly, setOfferedOnly] = useState(true)
+  const [added, setAdded] = useState<string | null>(null)
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const [sort, setSort] = useState('recommended')
   const [limit, setLimit] = useState(PAGE)
   const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const entries = roadmapEntries(state)
@@ -69,9 +72,9 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
         return { r, fits, issue, score: goalScore(r.id) }
       })
       .filter((x) => !offeredOnly || x.issue === null)
-    out.sort((a, b) => Number(b.fits) - Number(a.fits) || b.score - a.score || a.r.title.localeCompare(b.r.title))
+    out.sort((a, b) => Number(b.fits) - Number(a.fits) || (sort === 'credits' ? (b.r.ects ?? 0) - (a.r.ects ?? 0) : sort === 'name' ? 0 : b.score - a.score) || a.r.title.localeCompare(b.r.title))
     return out
-  }, [rows, q, kinds, offeredOnly, bucket, term, data, weights])
+  }, [rows, q, kinds, offeredOnly, bucket, term, data, weights, sort])
   const fitting = ranked.filter((x) => x.fits)
   const others = ranked.filter((x) => !x.fits)
 
@@ -90,11 +93,11 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
       : []
     const dots = weights && score > 0 ? Math.min(3, Math.max(1, Math.round(score))) : 0
     return (
-      <li key={r.id} class="result">
+      <li key={r.id} class="result"><span class="result-symbol" aria-hidden="true"><Icon name={kind === 'seminar' ? 'briefcase' : kind === 'practical' ? 'compass' : 'book'} size={22} /></span>
         <div class="result-main">
           <a class="result-title" href={courseHref(r.id)}>{r.title}</a>
           <span class="result-meta">
-            {r.ects !== null && <span class="result-ects">{r.ects} ECTS</span>}
+
             {kind !== 'lecture' && <span class={`tag tag-${kind}`}>{t(lang, `kind.${kind}`)}</span>}
             {issue && <span class="tag tag-warn">{t(lang, `road.warn.${issue}`)}</span>}
             {conflictsWith(r) && <span class="tag tag-danger"><Icon name="alert" size={12} />{t(lang, 'event.conflict')}</span>}
@@ -103,11 +106,12 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
           </span>
           {slots.length > 0 && <span class="result-times">{slots.map((s) => fmtSlot(lang, s)).join('; ')}</span>}
         </div>
+        <span class="result-credit"><strong>{r.ects ?? '—'}</strong><small>ECTS</small></span>
         {placed
           ? <a class="result-placed" href={courseHref(r.id)}><Icon name="check" size={14} />{t(lang, 'add.inPlan', { term: termName(lang, placed.term) })}</a>
           : (
             <button type="button" class="button-quiet add-button" aria-label={`${t(lang, 'add.add')}: ${r.title}`}
-              onClick={() => update((s) => addModuleToTerm(s, data, handbook, r.id, term, row ?? undefined))}>
+              onClick={() => { update((s) => addModuleToTerm(s, data, handbook, r.id, term, row ?? undefined)); setAdded(r.title) }}>
               <Icon name="plus" size={14} />{t(lang, 'add.add')}
             </button>
           )}
@@ -115,12 +119,24 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
     )
   }
 
-  const toggle = (k: Kind) => setKinds(kinds.includes(k) ? kinds.filter((x) => x !== k) : [...kinds, k])
+  const toggle = (k: Kind) => { setKinds(kinds.includes(k) ? kinds.filter((x) => x !== k) : [...kinds, k]); setLimit(PAGE) }
+  const resetFilters = () => { setQuery(''); setKinds([]); setRow(null); setOfferedOnly(true); setLimit(PAGE) }
   return (
     <div class="courses">
-      <PageHead title={t(lang, 'nav.courses')} lead={t(lang, 'page.courses.lead', { n: rows.length })} />
+      <PageHead title={t(lang, 'nav.courses')} lead={t(lang, 'page.courses.lead', { n: rows.length })}>
+        <a class="button-quiet" href={pageHref({ kind: 'plan' })}><Icon name="plan" size={16} />{t(lang, 'journey.viewPlan')}</a>
+      </PageHead>
 
+      <div class="catalog-workspace">
+        <label class="search-wrap">
+          <Icon name="search" />
+          <input type="search" class="search" value={query} placeholder={t(lang, 'add.search')} aria-label={t(lang, 'add.search')}
+            onInput={(e) => { setQuery((e.target as HTMLInputElement).value); setLimit(PAGE) }} />
+        </label>
+      <button type="button" class="mobile-filter-toggle button-quiet" aria-expanded={filtersOpen} aria-controls="catalog-filters" onClick={() => setFiltersOpen(!filtersOpen)}><Icon name="filter" size={16} />{t(lang, 'v2.filters')}<span>{termName(lang, term)}</span></button>
+      <aside id="catalog-filters" class={`catalog-sidebar${filtersOpen ? ' is-open' : ''}`}>
       <section class="finder" aria-label={t(lang, 'cs.filters')}>
+        <h2><Icon name="filter" size={18} />{t(lang, 'v2.filters')}</h2>
         <div class="finder-target">
           <label class="field">
             <span>{t(lang, 'cs.term')}</span>
@@ -136,11 +152,7 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
             </select>
           </label>
         </div>
-        <label class="search-wrap">
-          <Icon name="search" />
-          <input type="search" class="search" value={query} placeholder={t(lang, 'add.search')} aria-label={t(lang, 'add.search')}
-            onInput={(e) => { setQuery((e.target as HTMLInputElement).value); setLimit(PAGE) }} />
-        </label>
+
         <div class="finder-filters">
           <fieldset class="chips">
             <legend class="sr-only">{t(lang, 'filter.kind')}</legend>
@@ -156,10 +168,15 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
           )}
         </div>
       </section>
-
-      <p class="result-count" aria-live="polite">{t(lang, 'cs.count', { n: fitting.length })}</p>
+      <div class="catalog-destination"><Icon name="plan" size={22} /><span>{t(lang, 'v2.destination')}</span><strong>{termName(lang, term)}</strong><a href={pageHref({ kind: 'plan' })}>{t(lang, 'journey.viewPlan')}<Icon name="arrow" size={16} /></a></div>
+      </aside>
+      <section class="catalog-results" aria-label={t(lang, 'nav.courses')}>
+      <div class="results-heading"><label class="sort-control"><span>{t(lang, 'v2.sort')}</span><select value={sort} onChange={(e) => setSort((e.target as HTMLSelectElement).value)}><option value="recommended">{t(lang, 'v2.recommended')}</option><option value="name">{t(lang, 'v2.byName')}</option><option value="credits">{t(lang, 'v2.byCredits')}</option></select></label><p class="result-count" aria-live="polite">{t(lang, 'cs.count', { n: fitting.length })}</p>
+        {(query || kinds.length > 0 || row || !offeredOnly) && <button class="button-quiet" type="button" onClick={resetFilters}>{t(lang, 'filter.reset')}</button>}
+      </div>
+      {added && <div class="selection-feedback" role="status"><Icon name="check" size={18} /><span>{t(lang, 'journey.added', { title: added })}</span><a href={pageHref({ kind: 'plan' })}>{t(lang, 'journey.viewPlan')}<Icon name="chevron" size={14} /></a></div>}
       {fitting.length ? <ul class="plain results">{fitting.slice(0, limit).map(item)}</ul>
-        : <p class="empty">{t(lang, 'add.noneFit')}</p>}
+        : <div class="empty-results"><Icon name="search" size={24} /><h2>{t(lang, 'add.noneFit')}</h2><p>{t(lang, 'journey.noResults')}</p><button type="button" class="button-quiet" onClick={resetFilters}>{t(lang, 'filter.reset')}</button></div>}
       {fitting.length > limit && (
         <button type="button" class="button-quiet more-button" onClick={() => setLimit(limit + PAGE)}>{t(lang, 'add.more', { n: fitting.length - limit })}</button>
       )}
@@ -169,6 +186,8 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
           <ul class="plain results">{others.slice(0, PAGE).map(item)}</ul>
         </details>
       )}
+      </section>
+      </div>
     </div>
   )
 }

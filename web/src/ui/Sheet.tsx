@@ -1,5 +1,5 @@
 import type { ComponentChildren } from 'preact'
-import { useEffect, useRef } from 'preact/hooks'
+import { useLayoutEffect, useRef } from 'preact/hooks'
 import { Icon } from './Icon'
 
 interface Props {
@@ -18,7 +18,7 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, sum
 export function Sheet({ title, closeLabel, onClose, children }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const opener = document.activeElement as HTMLElement | null
     heading.current?.focus()
     document.body.classList.add('has-sheet')

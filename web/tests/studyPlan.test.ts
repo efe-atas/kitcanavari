@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { describe, expect, test } from 'vitest'
 import { EMPTY_HANDBOOK, moduleRows } from '../src/logic/handbook'
 import { AREAS as ALL_AREAS, RULES } from '../src/logic/degree'
-import { lensWeights } from '../src/logic/career'
+import { environmentRole, lensWeights } from '../src/logic/career'
 import { proposeStudyPlan, TERM_CAP } from '../src/logic/studyPlan'
 import { offeringIssue } from '../src/logic/terms'
 import type { CareerData, CoursesFile, HandbookFile, UserState } from '../src/types'
@@ -13,6 +13,17 @@ import { makeCareer } from './careerdata'
 const state = (extra: Partial<UserState> = {}): UserState =>
   ({ version: 1, selected: {}, lang: 'en', lastSeenScrapedAt: '', ...extra })
 const AREAS = ['Human-centred Machine Intelligence', 'Cryptography and Security']
+
+describe('environment preparation', () => {
+  test('uses environment priorities without selecting a job', () => {
+    const lens = { ...makeCareer().lenses.lenses[0], multipliers: { algo: 1.5, swe: 1.2, research: 0.5 } }
+    const profile = environmentRole(lens)
+    expect(profile.id).toBe('environment')
+    expect(Object.keys(profile.weights).sort()).toEqual(['algo', 'swe'])
+    expect(profile.targets).toEqual({ algo: 6, swe: 6 })
+    expect(lensWeights(profile, lens).algo).toBeGreaterThan(lensWeights(profile, lens).swe!)
+  })
+})
 
 describe('lensWeights', () => {
   test('a skill the employer type values counts even when the role does not list it', () => {
@@ -56,6 +67,28 @@ describe('proposeStudyPlan (fixtures)', () => {
     // The tiny catalog cannot meet every rule; those are reported, not hidden.
     expect(p.missing).toContain('stamm')
     expect(p.after).toBeGreaterThanOrEqual(p.before)
+  })
+
+  test('rebuild keeps a retained course in its original valid semester', () => {
+    const s = state({ areas: AREAS, roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: {
+      M3: { term: 'WS27', status: 'planned', countAs: null, grade: null },
+    }, notes: {} } })
+    const p = proposeStudyPlan({ state: s, courses, handbook, career, role, lens, rows, rebuild: true })
+    expect(p.picks.find((x) => x.id === 'M3')).toMatchObject({ was: 'WS27', term: 'WS27' })
+  })
+
+  test('rebuild reconsiders current timetable courses but preserves passed and explicitly kept courses', () => {
+    const s = state({ areas: AREAS, selected: { sec: { enabledSlots: [0], moduleId: 'M3', ackFingerprint: '' } },
+      roadmap: { terms: ['WS26', 'SS27', 'WS27', 'SS28'], modules: {
+        H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.7 },
+      }, notes: {} } })
+    const args = { state: s, courses, handbook, career, role, lens, rows, exclude: new Set(['M3']) }
+    expect(proposeStudyPlan(args).dropped).toEqual([])
+    const rebuilt = proposeStudyPlan({ ...args, rebuild: true })
+    expect(rebuilt.dropped).toContain('M3')
+    expect(rebuilt.dropped).not.toContain('H1')
+    expect(rebuilt.picks.map((p) => p.id)).not.toContain('H1')
+    expect(proposeStudyPlan({ ...args, rebuild: true, keep: new Set(['M3']) }).dropped).not.toContain('M3')
   })
 
   test('excluded modules stay out', () => {

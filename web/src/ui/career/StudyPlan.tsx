@@ -4,7 +4,7 @@ import { AREAS, defaultBucket } from '../../logic/degree'
 import type { ModuleRow } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
 import { proposeStudyPlan, TERM_CAP } from '../../logic/studyPlan'
-import { addModuleToTerm, placeModule, removeFromRoadmap, setArea, setEntryCountAs } from '../../store'
+import { addModuleToTerm, removeFromRoadmap, setArea, setEntryCountAs } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, Lens, Role, UserState } from '../../types'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
@@ -27,11 +27,23 @@ interface Props {
 
 const bucketLabel = (lang: Lang, b: string) => (AREAS.includes(b) ? b : t(lang, `bucket.${b}`))
 
+/** Browsing a career does not generate or change a study program. */
+export function StudyPlan(props: Omit<Props, 'mode' | 'onMode'>) {
+  const [started, setStarted] = useState(false)
+  const [mode, setMode] = useState<PlanMode>('fill')
+  if (started) return <GeneratedStudyPlan {...props} mode={mode} onMode={setMode} />
+  return <section class="study-plan career-start" aria-labelledby="sp-title">
+    <h3 id="sp-title">{t(props.state.lang, 'sp.title')}</h3>
+    <p>{t(props.state.lang, 'cx.prepareLead')}</p>
+    <button type="button" class="button" onClick={() => setStarted(true)}>{t(props.state.lang, 'cx.prepare')}</button>
+  </section>
+}
+
 /**
- * The remaining terms as a full program for this job: built around passed and current courses, either rebuilding the
- * future plan (what stays, what is added, what goes) or only filling its gaps; applied in one step.
+ * The remaining terms as a full program for this job: built around passed courses, either rebuilding the
+ * plan (what stays, what is added, what goes) or only filling its gaps; applied in one step.
  */
-export function StudyPlan({ data, handbook, career, role, lens, rows, state, update, mode, onMode }: Props) {
+function GeneratedStudyPlan({ data, handbook, career, role, lens, rows, state, update, mode, onMode }: Props) {
   const { lang } = state
   const [exclude, setExclude] = useState<Set<string>>(new Set())
   const [keep, setKeep] = useState<Set<string>>(new Set())
@@ -65,9 +77,13 @@ export function StudyPlan({ data, handbook, career, role, lens, rows, state, upd
     update((s) => {
       let next = plan.dropped.reduce((acc, id) => removeFromRoadmap(acc, id), s)
       for (const p of plan.picks) {
-        next = p.was ? placeModule(next, p.id, p.term) : addModuleToTerm(next, data, handbook, p.id, p.term)
+        if (p.was && p.was !== p.term) {
+          // A course moved to another term must leave this term's weekly timetable.
+          next = { ...next, selected: Object.fromEntries(Object.entries(next.selected).filter(([, e]) => e.moduleId !== p.id)) }
+        }
+        next = addModuleToTerm(next, data, handbook, p.id, p.term)
         const fields = (handbook?.modules[p.id] ?? data.modules[p.id])?.fields ?? []
-        if (defaultBucket(fields, areas, null) !== p.bucket) next = setEntryCountAs(next, p.id, p.bucket)
+        if (defaultBucket(fields, areas, roadmapEntries(next)[p.id]?.countAs ?? null) !== p.bucket) next = setEntryCountAs(next, p.id, p.bucket)
       }
       return next
     })
@@ -75,7 +91,16 @@ export function StudyPlan({ data, handbook, career, role, lens, rows, state, upd
     setExclude(new Set())
     setKeep(new Set())
   }
-  // Courses the plan builds around in each term: passed/current ones, and (fill mode or kept) future ones.
+  if (applied) return <section class="study-plan career-complete" aria-labelledby="sp-title">
+    <h3 id="sp-title">{t(lang, 'sp.title')}</h3>
+    <p class="sp-done" role="status"><Icon name="check" size={20} />{t(lang, 'sp.applied')}</p>
+    <p>{t(lang, 'cx.appliedLead')}</p>
+    <div class="career-complete-actions">
+      <a class="button" href={pageHref({ kind: 'plan' })}>{t(lang, 'sp.openPlan')}</a>
+      <button type="button" class="button-quiet" onClick={() => { onMode('fill'); setApplied(false) }}>{t(lang, 'cx.again')}</button>
+    </div>
+  </section>
+  // Courses the plan builds around in each term: passed ones, and (fill mode or kept) planned ones.
   const fixed = (term: string) => Object.entries(entries)
     .filter(([id, e]) => e.term === term && (e.status === 'planned' || e.status === 'passed') && !plan.picks.some((p) => p.id === id) && !plan.dropped.includes(id))
 
@@ -85,19 +110,17 @@ export function StudyPlan({ data, handbook, career, role, lens, rows, state, upd
         <h3 id="sp-title">{t(lang, 'sp.title')}</h3>
         <p class="sp-lead">{t(lang, rebuild ? 'sp.leadRebuild' : 'sp.leadFill')}</p>
         <div class="segmented sp-mode" role="group" aria-label={t(lang, 'sp.mode')}>
-          <button type="button" aria-pressed={rebuild} onClick={() => { onMode('rebuild'); setApplied(false) }}>{t(lang, 'sp.mode.rebuild')}</button>
           <button type="button" aria-pressed={!rebuild} onClick={() => { onMode('fill'); setApplied(false) }}>{t(lang, 'sp.mode.fill')}</button>
+          <button type="button" aria-pressed={rebuild} onClick={() => { onMode('rebuild'); setApplied(false) }}>{t(lang, 'sp.mode.rebuild')}</button>
         </div>
       </header>
 
-      {applied && !changes ? (
-        <p class="sp-done"><Icon name="check" size={16} />{t(lang, 'sp.applied')} <a href={pageHref({ kind: 'plan' })}>{t(lang, 'sp.openPlan')}</a></p>
-      ) : !changes ? (
-        <p class="sp-done"><Icon name="check" size={16} />{t(lang, rebuild ? 'sp.nothingRebuild' : 'sp.nothing')}</p>
-      ) : null}
+      {!changes && <p class="sp-done">{t(lang, rebuild ? 'sp.nothingRebuild' : 'sp.nothing')}</p>}
+      <p class="career-preview-note">{t(lang, 'cx.preview')}</p>
 
       <dl class="sp-summary">
         <div><dt>{t(lang, 'sp.addedCount')}</dt><dd><strong>{added.length}</strong> · {added.reduce((n, p) => n + p.ects, 0)} ECTS</dd></div>
+        {moved.length > 0 && <div><dt>{t(lang, 'cx.moved')}</dt><dd><strong>{moved.length}</strong></dd></div>}
         {rebuild && <div><dt>{t(lang, 'sp.droppedCount')}</dt><dd><strong>{plan.dropped.length}</strong></dd></div>}
         <div><dt>{t(lang, 'sp.fit')}</dt><dd><strong>{plan.before}% → {plan.after}%</strong></dd></div>
         <div><dt>{t(lang, 'sp.rules')}</dt><dd>{plan.missing.length ? <strong class="sp-warn">{t(lang, 'sp.rulesOpen', { n: plan.missing.length })}</strong> : <strong class="sp-ok">{t(lang, 'sp.rulesOk')}</strong>}</dd></div>

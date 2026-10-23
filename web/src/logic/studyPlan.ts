@@ -1,8 +1,8 @@
 // A whole study plan for a career path: the remaining terms filled with modules that first meet every degree
 // rule (Stammmodul, both areas, seminar, practical, elective, 90 ECTS) and, within each rule, add the most to the
 // chosen role seen through the chosen employer lens. The last remaining term is left for the thesis.
-// In rebuild mode, modules planned for future terms are open to change: kept when the path still wants them, else
-// listed as dropped; passed modules and the current term stay as they are.
+// In rebuild mode, modules planned for all terms are open to change: kept when the path still wants them, else
+// listed as dropped; passed modules and explicitly kept courses stay as they are.
 import type { CareerData, CoursesFile, HandbookFile, Lens, Role, SkillId, UserState } from '../types'
 import { fit, lensWeights, skillPoints, skillTarget, type SkillPoints } from './career'
 import {
@@ -11,7 +11,7 @@ import {
 } from './degree'
 import type { ModuleRow } from './handbook'
 import { roadmapEntries } from './roadmap'
-import { CURRENT_TERM, DEFAULT_TERMS, offeringIssue, remainingTerms, termOrder } from './terms'
+import { DEFAULT_TERMS, offeringIssue, remainingTerms } from './terms'
 
 /** Why a module is in the plan: the rule it fills, or 'career' when it only adds fit. */
 export type PickReason = 'stamm' | 'area' | 'seminar' | 'practical' | 'elective' | 'career'
@@ -44,7 +44,7 @@ export interface StudyPlan {
   iqLeft: number
   /** Areas are not chosen: the plan needs them first; these two fit the path best. */
   needsAreas: string[] | null
-  /** Rebuild mode: future planned modules the new plan leaves out. */
+  /** Rebuild mode: planned modules the new plan leaves out. */
   dropped: string[]
 }
 
@@ -61,9 +61,9 @@ interface Args {
   rows: ModuleRow[]
   /** Modules the user took out of the proposal. */
   exclude?: Set<string>
-  /** Reconsider modules planned for future terms instead of building around them. */
+  /** Reconsider all planned modules instead of building around them. */
   rebuild?: boolean
-  /** Rebuild mode: future planned modules the user wants to keep whatever the plan says. */
+  /** Rebuild mode: planned modules the user wants to keep whatever the plan says. */
   keep?: Set<string>
 }
 
@@ -71,8 +71,8 @@ const isCs = (b: Bucket | null) => !!b && b !== MINOR && b !== IQ
 
 export function proposeStudyPlan({ state, courses, handbook, career, role, lens, rows, exclude = new Set(), rebuild = false, keep = new Set() }: Args): StudyPlan {
   const all = roadmapEntries(state)
-  const open = (id: string) => rebuild && !keep.has(id) && all[id]?.status === 'planned' && termOrder(all[id].term) > termOrder(CURRENT_TERM)
-  /** What the plan builds around: everything, or (rebuild) all but the open future plans. */
+  const open = (id: string) => rebuild && !keep.has(id) && all[id]?.status === 'planned'
+  /** What the plan builds around: everything, or (rebuild) all but the open plans. */
   const entries = Object.fromEntries(Object.entries(all).filter(([id]) => !open(id)))
   const ectsOf = new Map(rows.map((r) => [r.id, r.ects]))
   const ects = (id: string) => ectsOf.get(id) ?? null
@@ -137,7 +137,13 @@ export function proposeStudyPlan({ state, courses, handbook, career, role, lens,
     const sp = () => kindCp('seminar') + kindCp('practical')
     const stamm = () => items.filter((x) => x.kind === 'stamm' && isCs(x.bucket)).length
     const kindOf = (r: ModuleRow) => moduleKind(courses, r)
-    const termFor = (r: ModuleRow) => courseTerms.find((t) => offeringIssue(r, t) === null && load[t] + (r.ects ?? 0) <= TERM_CAP) ?? null
+    const termFor = (r: ModuleRow) => {
+      // Rebuilding may select an existing course again. Keep its semester when it still fits.
+      const previous = open(r.id) ? all[r.id].term : null
+      const options = previous && courseTerms.includes(previous)
+        ? [previous, ...courseTerms.filter((t) => t !== previous)] : courseTerms
+      return options.find((t) => offeringIssue(r, t) === null && load[t] + (r.ects ?? 0) <= TERM_CAP) ?? null
+    }
     /** A CS bucket for a module: an area with room (fewest credits first), else elective with room. */
     const roomIn = (r: ModuleRow, prefer?: Bucket): Bucket | null => {
       const opts = bucketOptions(r)
@@ -170,8 +176,8 @@ export function proposeStudyPlan({ state, courses, handbook, career, role, lens,
         const term = termFor(r)
         const bucket = term ? roomIn(r, prefer?.(r)) : null
         if (!term || !bucket) continue
-        // A module already in the plan wins near-ties, so the plan changes only where the path really differs.
-        const g = gain(points, r) * (open(r.id) ? 1.05 : 1)
+        // Rebuild scores existing and new courses equally.
+        const g = gain(points, r)
         if (!best || g > best.g || (g === best.g && (r.ects ?? 0) > (best.r.ects ?? 0))) best = { r, term, bucket, g }
       }
       if (!best) return false

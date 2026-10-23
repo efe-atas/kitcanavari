@@ -55,6 +55,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
   return (
     <div class="plan">
       <PageHead title={t(lang, 'nav.plan')} lead={t(lang, 'page.plan.lead')}>
+        <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={16} />{t(lang, 'pl.add')}</a>
         <button type="button" class="button-quiet" onClick={() => update(addTerm)}><Icon name="plus" size={16} />{t(lang, 'road.addTerm')}</button>
       </PageHead>
 
@@ -67,19 +68,21 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
       )}
 
       <div class="lanes">
-        {matrix.columns.map((term) => {
+        {[...matrix.columns.filter((term) => term !== PRIOR), PRIOR].map((term, index) => {
           const list = items(term)
           const cp = matrix.colTotals[term] ?? 0
           const isNow = term === CURRENT_TERM
           return (
             <section key={term} class={`lane${isNow ? ' is-now' : ''}${term === PRIOR ? ' is-prior' : ''}`} aria-labelledby={`lane-${term}`}>
-              <header class="lane-head">
+              <header class="lane-head"><span class="semester-number">{term === PRIOR ? '↶' : String(index + 1).padStart(2, '0')}</span>
                 <h2 id={`lane-${term}`}>{termName(lang, term)}</h2>
                 {isNow && <span class="now-badge">{t(lang, 'pl.now')}</span>}
                 <span class={`lane-cp${cp > HEAVY ? ' is-heavy' : ''}`}>
                   <strong>{cp}</strong> ECTS{cp > HEAVY && <span class="lane-heavy">, {t(lang, 'pl.heavy', { n: RULES.semesterTarget })}</span>}
                 </span>
+                <div class="workload-meter" role="img" aria-label={`${cp} / ${RULES.semesterTarget} ECTS`}><span style={{ width: `${Math.min(100, cp / RULES.semesterTarget * 100)}%` }} /></div>
               </header>
+              <div class="lane-content">
               {list.length > 0
                 ? <ul class="plain lane-list">{list.map((it) => <CourseCard key={it.id} lang={lang} state={state} item={it} />)}</ul>
                 : <p class="lane-empty">{t(lang, term === PRIOR ? 'pl.priorEmpty' : 'pl.empty')}</p>}
@@ -89,6 +92,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
                   <Icon name="plus" size={16} />{t(lang, 'pl.add')}
                 </a>
                 {isNow && <a class="lane-link" href={pageHref({ kind: 'week' })}><Icon name="calendar" size={16} />{t(lang, 'plan.week')}</a>}
+              </div>
               </div>
             </section>
           )

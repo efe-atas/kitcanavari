@@ -1,7 +1,7 @@
 /*
- * Studienbuch: a degree counted in credits. Forest ink for what is done, amber for what is still open, a dark
- * sidebar as the binding. One family (Schibsted Grotesk) with tabular figures; the credit ruler on the overview
- * is the one loud element.
+ * KIT study workspace: forest actions, quiet paper surfaces and shared type.
+ * Navigation follows discovery → semester planning → weekly schedule.
+ * Degree requirements remain available below the student's current work.
  */
 :root {
   --paper: #eef0ea;

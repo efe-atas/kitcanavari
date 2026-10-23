@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { exportState, importState, setLang, toggleTheme, type Sync } from '../../store'
 import type { CoursesFile, Lang, UserState } from '../../types'
@@ -19,6 +19,7 @@ interface Props {
 
 export function Settings({ lang, state, update, sync, checkedAt, data }: Props) {
   const theme = state.theme ?? 'light'
+  const importInput = useRef<HTMLInputElement>(null)
   const [importError, setImportError] = useState(false)
   const onImport = async (e: Event) => {
     const file = (e.target as HTMLInputElement).files?.[0]
@@ -55,10 +56,6 @@ export function Settings({ lang, state, update, sync, checkedAt, data }: Props) 
         </div>
       </section>
 
-      <section class="settings-card" aria-labelledby="set-sync">
-        <h2 id="set-sync">{t(lang, 'sync.title')}</h2>
-        <SyncForm lang={lang} sync={sync} />
-      </section>
 
       <section class="settings-card" aria-labelledby="set-backup">
         <h2 id="set-backup">{t(lang, 'set.backup')}</h2>
@@ -67,12 +64,15 @@ export function Settings({ lang, state, update, sync, checkedAt, data }: Props) 
           <button type="button" class="button-quiet" onClick={() => download('kit-plan.json', exportState(state), 'application/json')}>
             <Icon name="download" size={16} />{t(lang, 'schedule.export')}
           </button>
-          <label class="button-quiet">
-            <Icon name="upload" size={16} />{t(lang, 'schedule.import')}
-            <input type="file" accept="application/json,.json" aria-label={t(lang, 'schedule.import')} hidden onChange={onImport} />
-          </label>
+          <button class="button-quiet" type="button" onClick={() => importInput.current?.click()}><Icon name="upload" size={16} />{t(lang, 'schedule.import')}</button>
+          <input ref={importInput} type="file" accept="application/json,.json" aria-label={t(lang, 'schedule.import')} hidden onChange={onImport} />
         </div>
         {importError && <p class="note note-warn" role="alert">{t(lang, 'schedule.importError')}</p>}
+      </section>
+
+      <section class="settings-card" aria-labelledby="set-sync">
+        <h2 id="set-sync">{t(lang, 'sync.title')}</h2>
+        <SyncForm lang={lang} sync={sync} />
       </section>
 
       <section class="settings-card" aria-labelledby="set-data">

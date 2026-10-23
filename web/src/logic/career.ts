@@ -97,3 +97,20 @@ export function topRoles(moduleId: string, career: CareerData): { role: string; 
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
 }
+
+/** Environment-level preparation: only the environment's emphasized skills, with the shared six-point target.
+ * No occupation is silently selected. Legacy role-specific scoring remains available to course references.
+ */
+export function environmentRole(lens: Lens): Role {
+  const emphasized = (Object.entries(lens.multipliers) as [SkillId, number][]).filter(([, m]) => m > 1).map(([s]) => s)
+  const skills = emphasized.length ? emphasized : SKILLS
+  return {
+    id: 'environment', title: lens.title,
+    summary: {
+      tr: 'Beceri öncelikleri ve ders önerileri, seçtiğin çalışma ortamına göre hazırlanır.',
+      en: 'Skill priorities and course suggestions are based on your chosen work environment.',
+    },
+    weights: Object.fromEntries(skills.map((s) => [s, 1 / skills.length])),
+    targets: Object.fromEntries(skills.map((s) => [s, LENS_TARGET])),
+  }
+}

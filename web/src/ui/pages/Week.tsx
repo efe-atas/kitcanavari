@@ -1,4 +1,4 @@
-import { useMemo } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { findConflicts } from '../../logic/conflicts'
 import { buildIcs } from '../../logic/ics'
@@ -10,7 +10,7 @@ import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
 import { courseHref, pageHref } from '../route'
 import { UnscheduledList } from '../schedule/UnscheduledList'
-import { WeekGrid } from '../schedule/WeekGrid'
+import { WeekAgenda, WeekGrid } from '../schedule/WeekGrid'
 import { PageHead } from './PageHead'
 
 interface Props {
@@ -22,6 +22,7 @@ interface Props {
 /** This term's week: the timetable, clashes, and the calendar file. */
 export function Week({ data, state }: Props) {
   const { lang } = state
+  const [view, setView] = useState<'grid' | 'agenda'>(() => typeof matchMedia === 'function' && matchMedia('(max-width: 640px)').matches ? 'agenda' : 'grid')
   const conflicts = useMemo(() => findConflicts(state.selected, data.events), [data, state.selected])
   const ids = Object.keys(state.selected)
   const title = (id: string) => data.events[id]?.title ?? state.selected[id]?.title ?? id
@@ -33,6 +34,7 @@ export function Week({ data, state }: Props) {
   return (
     <div class="week-page">
       <PageHead title={t(lang, 'nav.week')} lead={t(lang, 'page.week.lead', { term: termName(lang, CURRENT_TERM) })}>
+        <a class="button-quiet" href={pageHref({ kind: 'plan' })}><Icon name="plan" size={16} />{t(lang, 'journey.viewPlan')}</a>
         {ids.length > 0 && (
           <button type="button" class="button-quiet" onClick={() => download('kit-schedule.ics', buildIcs(state.selected, data.events, data.meta.scrapedAt), 'text/calendar')}>
             <Icon name="download" size={16} />{t(lang, 'schedule.ics')}
@@ -59,7 +61,10 @@ export function Week({ data, state }: Props) {
           </ul>
         </section>
       )}
-      {ids.length > 0 && <WeekGrid lang={lang} data={data} state={state} conflicts={conflicts} onOpen={open} />}
+      {ids.length > 0 && <>
+        <div class="schedule-toolbar"><div class="segmented" role="group" aria-label={t(lang, 'v2.scheduleView')}><button type="button" aria-pressed={view === 'grid'} onClick={() => setView('grid')}><Icon name="calendar" size={16} />{t(lang, 'v2.weekGrid')}</button><button type="button" aria-pressed={view === 'agenda'} onClick={() => setView('agenda')}><Icon name="catalog" size={16} />{t(lang, 'v2.agenda')}</button></div><span>{termName(lang, CURRENT_TERM)}</span></div>
+        {view === 'grid' ? <div class="schedule-scroll"><WeekGrid lang={lang} data={data} state={state} conflicts={conflicts} onOpen={open} /></div> : <WeekAgenda lang={lang} data={data} state={state} conflicts={conflicts} onOpen={open} />}
+      </>}
       <UnscheduledList lang={lang} data={data} state={state} onOpen={open} />
     </div>
   )

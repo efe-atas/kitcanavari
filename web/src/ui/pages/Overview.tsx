@@ -1,6 +1,6 @@
 import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
-import { fit } from '../../logic/career'
+import { environmentRole, fit } from '../../logic/career'
 import { AREAS, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { matrixCells, type CellItem, type Matrix, type RowId } from '../../logic/matrix'
@@ -8,7 +8,7 @@ import { nextTerm } from '../../logic/nextSteps'
 import { CURRENT_TERM } from '../../logic/terms'
 import { setArea } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../../types'
-import { pathTitle, pointsOf } from '../career/model'
+import { pointsOf } from '../career/model'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
 import { rowLabel } from '../plan/labels'
@@ -33,17 +33,8 @@ function CreditRuler({ lang, passed, planned }: { lang: Lang; passed: number; pl
   const q = Math.min(passed + planned, modules)
   const marks = Array.from({ length: RULES.total }, (_, i) => (i < p ? 'passed' : i < q ? 'planned' : i < modules ? 'open' : 'thesis'))
   return (
-    <div class="ruler-wrap">
-      <div class="ruler" role="img" aria-label={t(lang, 'ov.rulerLabel', { passed: p, planned: q - p, open: modules - q, thesis: RULES.thesis })}>
-        {marks.map((m, i) => <i key={i} class={`mark is-${m}${i % 10 === 9 ? ' is-tenth' : ''}`} />)}
-      </div>
-      <div class="ruler-scale" aria-hidden="true">
-        <span style={{ left: '0%' }}>0</span>
-        <span style={{ left: '25%' }}>30</span>
-        <span style={{ left: '50%' }}>60</span>
-        <span class="ruler-thesis" style={{ left: '75%' }}>{t(lang, 'ov.thesisMark')}</span>
-        <span style={{ left: '100%' }}>120</span>
-      </div>
+    <div class="credit-map" role="img" aria-label={t(lang, 'ov.rulerLabel', { passed: p, planned: q - p, open: modules - q, thesis: RULES.thesis })}>
+      {marks.map((m, i) => <i key={i} class={`credit-unit is-${m}`} />)}
     </div>
   )
 }
@@ -143,38 +134,54 @@ export function Overview({ data, handbook, career, state, update }: Props) {
 
   const goal = useMemo(() => {
     if (!career) return null
-    const f = (state.followed ?? []).find((x) => career.roles.roles.some((r) => r.id === x.role) && career.lenses.lenses.some((l) => l.id === x.lens))
+    const f = (state.followed ?? []).find((x) => career.lenses.lenses.some((l) => l.id === x.lens))
     if (!f) return { title: null, n: 0, href: pageHref({ kind: 'career', focus: null }) }
     const rows = moduleRows(data, handbook ?? EMPTY_HANDBOOK)
-    const n = fit(pointsOf(state, career, rows).all, career.roles.roles.find((r) => r.id === f.role)!, career.lenses.lenses.find((l) => l.id === f.lens)!)
-    return { title: pathTitle(career, f.role, f.lens, lang), n, href: pageHref({ kind: 'career', focus: `${f.role}:${f.lens}` }) }
+    const n = fit(pointsOf(state, career, rows).all, environmentRole(career.lenses.lenses.find((l) => l.id === f.lens)!), career.lenses.lenses.find((l) => l.id === f.lens)!)
+    return { title: career.lenses.lenses.find((l) => l.id === f.lens)!.title[lang], n, href: pageHref({ kind: 'career', focus: f.lens }) }
   }, [career, state, data, handbook, lang])
 
   return (
     <div class="overview">
-      <PageHead title={t(lang, 'nav.overview')} lead={t(lang, 'page.overview.lead')} />
-
-      <section class="ledger" aria-labelledby="ledger-title">
-        <h2 id="ledger-title" class="sr-only">{t(lang, 'ov.credits')}</h2>
-        <div class="ledger-top">
-          <p class="ledger-total"><strong>{report.all.total}</strong><span>{t(lang, 'ov.of', { n: RULES.total })}</span></p>
-          {report.gpa !== null && (
-            <p class="ledger-gpa"><strong>{fmtNum(lang, report.gpa)}</strong><span>{t(lang, 'plan.gpa', { cp: report.gradedCp })}</span></p>
-          )}
-        </div>
-        <CreditRuler lang={lang} passed={passed} planned={planned} />
-        <ul class="plain ledger-legend">
-          <li><i class="mark is-passed" aria-hidden="true" />{t(lang, 'ov.legend.passed', { n: passed })}</li>
-          <li><i class="mark is-planned" aria-hidden="true" />{t(lang, 'ov.legend.planned', { n: planned })}</li>
-          <li><i class="mark is-open" aria-hidden="true" />{t(lang, 'ov.legend.open', { n: open })}</li>
-          <li><i class="mark is-thesis" aria-hidden="true" />{t(lang, 'ov.legend.thesis', { n: RULES.thesis })}</li>
-        </ul>
-      </section>
-
-      <div class="overview-grid">
+      <PageHead title={t(lang, 'nav.overview')} lead={t(lang, 'v2.homeLead')}>
+        <span class="term-stamp"><span class="status-dot" />{termName(lang, CURRENT_TERM)}</span>
+      </PageHead>
+      <div class="home-stage">
+        <section class="semester-surface" aria-labelledby="now-title">
+          <header class="surface-heading"><div><h2 id="now-title">{t(lang, 'ov.thisTerm', { term: termName(lang, CURRENT_TERM) })}</h2><p>{t(lang, 'v2.termCount', { n: now.length })}</p></div><Icon name="calendar" size={24} /></header>
+          {now.length ? <>
+            <ul class="plain semester-course-list">
+              {now.map((it, i) => <li key={it.id}><span class="course-index">{String(i + 1).padStart(2, '0')}</span><a href={courseHref(it.id)}><strong>{it.title ?? it.id}</strong><span>{rowLabel(lang, state, it.row)}</span></a><span class="semester-credit">{it.ects ?? '?'} <small>ECTS</small></span></li>)}
+            </ul>
+            <div class="semester-bottom"><a class="button" href={pageHref({ kind: 'week' })}>{t(lang, 'ov.openWeek')}<Icon name="arrow" size={16} /></a><a class="text-action" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}>{t(lang, 'pl.add')}<Icon name="plus" size={16} /></a></div>
+          </> : <div class="semester-empty">
+            <div class="empty-calendar" aria-hidden="true"><Icon name="calendar" size={32} /></div>
+            <h3>{t(lang, 'v2.emptyTitle')}</h3><p>{t(lang, 'v2.emptyLead')}</p>
+            <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}>{t(lang, 'v2.exploreCourses')}<Icon name="arrow" size={17} /></a>
+          </div>}
+        </section>
+        <section class="degree-surface" aria-labelledby="ledger-title">
+          <div class="surface-heading"><h2 id="ledger-title">{t(lang, 'ov.credits')}</h2><Icon name="overview" size={22} /></div>
+          <div class="degree-total"><strong>{report.all.total}</strong><span>/ {RULES.total}<small>ECTS</small></span></div>
+          <CreditRuler lang={lang} passed={passed} planned={planned} />
+          <ul class="plain credit-key"><li><i class="is-passed" />{t(lang, 'ov.legend.passed', { n: passed })}</li><li><i class="is-planned" />{t(lang, 'ov.legend.planned', { n: planned })}</li><li><i class="is-open" />{t(lang, 'ov.legend.open', { n: open })}</li><li><i class="is-thesis" />{t(lang, 'ov.legend.thesis', { n: RULES.thesis })}</li></ul>
+          {report.gpa !== null && <p class="degree-gpa">{t(lang, 'plan.gpa', { cp: report.gradedCp })}<strong>{fmtNum(lang, report.gpa)}</strong></p>}
+          <a class="degree-link" href={pageHref({ kind: 'plan' })}>{t(lang, 'journey.viewPlan')}<Icon name="arrow" size={16} /></a>
+        </section>
+      </div>
+      <div class="home-details">
+        <section class="specialization-surface" aria-labelledby="foundation-title">
+          <header class="surface-heading"><div><h2 id="foundation-title">{t(lang, 'journey.areas')}</h2><p>{t(lang, 'v2.areaLead')}</p></div><Icon name="compass" size={22} /></header>
+          <div class="specialization-fields">{([0, 1] as const).map((slot) => <label class="field" key={slot}><span><b>0{slot + 1}</b>{t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')}</span><AreaSelect lang={lang} state={state} slot={slot} update={update} label={t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')} /></label>)}</div>
+          <a class="text-action" href={pageHref({ kind: 'help', id: 'guide' })}>{t(lang, 'journey.rules')}<Icon name="arrow" size={15} /></a>
+        </section>
+        {goal && <section class="career-entry" aria-labelledby="goal-title"><Icon name="briefcase" size={24} /><h2 id="goal-title">{t(lang, 'ov.goal')}</h2>{goal.title ? <a class="goal-link" href={goal.href}><span class="goal-name">{goal.title}</span><span class="goal-fit"><strong>{goal.n}%</strong> {t(lang, 'ov.goalFit')}</span></a> : <p>{t(lang, 'v2.careerLead')}</p>}<a class="text-action" href={goal.href}>{t(lang, 'v2.explorePaths')}<Icon name="arrow" size={16} /></a></section>}
+      </div>
+      <details class="degree-audit" open={report.all.total > 0}>
+        <summary><div><h2>{t(lang, 'ov.reqs')}</h2><p>{t(lang, 'v2.auditLead')}</p></div><span>{reqs.length - missing} / {reqs.length}<Icon name="chevron" size={20} /></span></summary>
         <section class="reqs-card" aria-labelledby="reqs-title">
           <header class="section-head">
-            <h2 id="reqs-title">{t(lang, 'ov.reqs')}</h2>
+            <h2 id="reqs-title" class="sr-only">{t(lang, 'ov.reqs')}</h2>
             <p class={missing ? 'reqs-count is-missing' : 'reqs-count'}>
               {missing ? t(lang, 'ov.missing', { n: missing, total: reqs.length }) : t(lang, 'step.done')}
             </p>
@@ -195,7 +202,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
                   </span>
                 )}
                 <div class="req-body">
-                  {r.area !== undefined && <AreaSelect lang={lang} state={state} slot={r.area} update={update} label={r.label} />}
+                  {r.area !== undefined && <span class="req-area">{state.areas?.[r.area] ?? t(lang, 'ov.pickArea')}</span>}
                   {!r.done && <span class="req-rule">{r.rule}</span>}
                   {r.gap && <span class="req-gap">{r.gap}</span>}
                 </div>
@@ -215,56 +222,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
             </ul>
           )}
         </section>
-
-        <div class="overview-side">
-          <section class="side-card" aria-labelledby="now-title">
-            <header class="section-head">
-              <h2 id="now-title">{t(lang, 'ov.thisTerm', { term: termName(lang, CURRENT_TERM) })}</h2>
-              <p class="side-total"><strong>{matrix.colTotals[CURRENT_TERM] ?? 0}</strong> ECTS</p>
-            </header>
-            {now.length ? (
-              <ul class="plain now-list">
-                {now.map((it) => (
-                  <li key={it.id}>
-                    <a href={courseHref(it.id)} class="now-item">
-                      <span class="now-title">{it.title ?? it.id}</span>
-                      <span class="now-meta">{rowLabel(lang, state, it.row)}</span>
-                    </a>
-                    <span class="now-ects">{it.ects ?? '?'}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : <p class="empty-inline">{t(lang, 'ov.nowEmpty')}</p>}
-            <div class="side-actions">
-              {now.length
-                ? <a class="button-quiet" href={pageHref({ kind: 'week' })}><Icon name="calendar" size={16} />{t(lang, 'ov.openWeek')}</a>
-                : (
-                  <a class="button-quiet" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}>
-                    <Icon name="plus" size={16} />{t(lang, 'ov.addNow')}
-                  </a>
-                )}
-            </div>
-          </section>
-
-          {goal && (
-            <section class="side-card goal-card" aria-labelledby="goal-title">
-              <h2 id="goal-title">{t(lang, 'ov.goal')}</h2>
-              {goal.title ? (
-                <a class="goal-link" href={goal.href}>
-                  <span class="goal-name">{goal.title}</span>
-                  <span class="goal-fit"><strong>{goal.n}%</strong> {t(lang, 'ov.goalFit')}</span>
-                  <span class="goal-bar" aria-hidden="true"><span style={{ width: `${goal.n}%` }} /></span>
-                </a>
-              ) : (
-                <>
-                  <p class="side-text">{t(lang, 'ov.goalNone')}</p>
-                  <a class="button-quiet" href={goal.href}><Icon name="briefcase" size={16} />{t(lang, 'top.goalPick')}</a>
-                </>
-              )}
-            </section>
-          )}
-        </div>
-      </div>
+      </details>
     </div>
   )
 }
