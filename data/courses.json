@@ -10869,7 +10869,7 @@
    "fingerprint": "f291a34ded7e0821",
    "format": "On-Site",
    "id": "0x9E0235BD715A40DA905CFC3C6D955654",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3062375&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x9E0235BD715A40DA905CFC3C6D955654&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -17725,7 +17725,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-23T09:07:08Z",
+  "scrapedAt": "2026-10-25T08:57:47Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
