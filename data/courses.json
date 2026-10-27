@@ -4975,7 +4975,7 @@
      "1.9 Elective Studies in Computer Science"
     ]
    ],
-   "contentText": "The lecture focuses on the role of empirical research in software engineering. It introduces the most commonly used empirical methods and highlights common sources of error in empirical studies. The course also covers the statistical methods used to analyze and present data. A range of scientific publications is used to illustrate the concepts and demonstrate their practical application.\n\nLearning Objectives:\n\nUpon completion of the course, students should be able to:\n\nDescribe empirical methodologies in software engineering, identify potential sources of error, and explain strategies for avoiding them.\n\nExplain and apply statistical analysis methods.\n\nAnalyze and evaluate empirical studies.\n\nProvide and explain examples of empirical studies in software engineering.\n\nPlan and conduct empirical studies.\n\nRecommendations / Prerequisites: Basic knowledge of statistics is recommended.",
+   "contentText": "The lecture focuses on the role of empirical research in software engineering. It introduces the most commonly used empirical methods and highlights common sources of error in empirical studies. The course also covers the statistical methods used to analyze and present data. A range of scientific publications is used to illustrate the concepts and demonstrate their practical application.\n\nLearning Objectives:\n\nUpon completion of the course, students should be able to:\n\nDescribe empirical methodologies in software engineering, identify potential sources of error, and explain strategies for avoiding them.\n\nExplain and apply statistical analysis methods.\n\nAnalyze and evaluate empirical studies.\n\nProvide and explain examples of empirical studies in software engineering.\n\nPlan and conduct empirical studies.\n\nRecommendations / Prerequisites: Basic knowledge of statistics is recommended. Please note that the following requirement must be met before taking the exam: All exercises must be completed and discussed during the scheduled sessions.",
    "fingerprint": "e2f5daed892554e9",
    "format": "On-Site",
    "id": "0x37B1BA43881D47218FD18E5DF3EC63C0",
@@ -7292,7 +7292,7 @@
    "fingerprint": "3dcb9e5c8ab1c6fb",
    "format": "On-Site",
    "id": "0x5B0E237392EC49D991ED4FD1DFB12BBC",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3064526&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x5B0E237392EC49D991ED4FD1DFB12BBC&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -9780,7 +9780,7 @@
    "fingerprint": "f8c96c4ac0b5763d",
    "format": "On-Site",
    "id": "0x93504EA110CF48EAA2CB5E40F5D33B51",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3065841&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x93504EA110CF48EAA2CB5E40F5D33B51&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -9878,7 +9878,7 @@
     ]
    ],
    "contentText": "Neural networks are applied in a variety of domains, even critical application scenarios in transportation and medicine. Important aspects of accelerating neural networks in various application domains are performance, latency, reliability, and energy footprint. Dedicated hardware can have advantages in all of these domains over a traditional CPU and also GPU implementations. In this regard, Field-Programmable Gate Arrays (FPGAs; reconfigurable hardware) have shown to be an efficient and versatile solution for accelerating quantized neural networks, which are compact representations of neural network models. Their benefits are proven by the use in Microsoft Azure ML, Amazon AWS and other cloud platforms. This module will teach students how to implement neural networks on reconfigurable hardware using an established framework, and also looks into relevant practical details when optimizing the network for hardware deployment.",
-   "fingerprint": "7a8313b4a9ecf296",
+   "fingerprint": "c1b8c5ae61ff1ce9",
    "format": "On-Site",
    "id": "0x94165D680F3C4EA4BA431CA82BC128F7",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3048554&client_id=produktiv",
@@ -9888,6 +9888,10 @@
     {
      "name": "Prof. Dr. Mehdi Baradaran Tahoori",
      "unit": "KIT Department of Informatics (INFORMATIK) , Institut für Technische Informatik (ITEC)"
+    },
+    {
+     "name": "Huashuangyang Xu",
+     "unit": "ITEC Tahoori (ITEC)"
     }
    ],
    "moduleIds": [
@@ -17725,7 +17729,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-25T08:57:47Z",
+  "scrapedAt": "2026-10-27T09:47:00Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",

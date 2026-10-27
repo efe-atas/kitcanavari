@@ -1,6 +1,27 @@
 {
  "entries": [
   {
+   "at": "2026-10-27T09:47:00Z",
+   "eventId": "0x37B1BA43881D47218FD18E5DF3EC63C0",
+   "eventTitle": "Empirical Software Engineering",
+   "kind": "content_changed",
+   "summary": "Description updated"
+  },
+  {
+   "after": [
+    "Huashuangyang Xu",
+    "Prof. Dr. Mehdi Baradaran Tahoori"
+   ],
+   "at": "2026-10-27T09:47:00Z",
+   "before": [
+    "Prof. Dr. Mehdi Baradaran Tahoori"
+   ],
+   "eventId": "0x94165D680F3C4EA4BA431CA82BC128F7",
+   "eventTitle": "Practical Course: Neural Network Acceleration on FPGAs",
+   "kind": "lecturers_changed",
+   "summary": "Lecturers: Prof. Dr. Mehdi Baradaran Tahoori → Huashuangyang Xu, Prof. Dr. Mehdi Baradaran Tahoori"
+  },
+  {
    "at": "2026-10-23T09:07:08Z",
    "eventId": "0xA8789C226C774BD694EE716255C5B4F0",
    "eventTitle": "Seminar: Critical topics in AI",
