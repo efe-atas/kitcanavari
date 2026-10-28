@@ -1,6 +1,38 @@
 {
  "entries": [
   {
+   "at": "2026-10-28T10:22:31Z",
+   "eventId": "0x066D053413A34C368741946F2902B963",
+   "eventTitle": "Ubiquitous Computing",
+   "kind": "room_changed",
+   "summary": "Room 07.07 SR 222 → 50.34 Raum -102 (UG)"
+  },
+  {
+   "at": "2026-10-28T10:22:31Z",
+   "eventId": "0x1C58A50EEE03461F8A0535F902846F52",
+   "eventTitle": "Geometric Deep Learning",
+   "kind": "session_removed",
+   "summary": "Session 2026-10-28 11:30 removed"
+  },
+  {
+   "after": [
+    "Julian Stieß",
+    "Prof. Dr.-Ing. Marvin Künnemann-Goos",
+    "Tim Janik Junginger"
+   ],
+   "at": "2026-10-28T10:22:31Z",
+   "before": [
+    "Geri Gokaj",
+    "Julian Stieß",
+    "Prof. Dr. Peter Sanders",
+    "Prof. Dr.-Ing. Marvin Künnemann-Goos"
+   ],
+   "eventId": "0x43473167369C4CB38854BCB2A597028D",
+   "eventTitle": "Algorithms II",
+   "kind": "lecturers_changed",
+   "summary": "Lecturers: Geri Gokaj, Julian Stieß, Prof. Dr. Peter Sanders, Prof. Dr.-Ing. Marvin Künnemann-Goos → Julian Stieß, Prof. Dr.-Ing. Marvin Künnemann-Goos, Tim Janik Junginger"
+  },
+  {
    "at": "2026-10-27T09:47:00Z",
    "eventId": "0x37B1BA43881D47218FD18E5DF3EC63C0",
    "eventTitle": "Empirical Software Engineering",

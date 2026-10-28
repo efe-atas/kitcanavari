@@ -220,7 +220,7 @@
     ]
    ],
    "contentText": "In the practical part of the lecture, students deepen their understanding of ubiquitous systems through the practical application of the knowledge base of the lecture. To this end, students design and develop their own appliance and test it. The aim is to have gone through the steps towards a prototypical and possibly marketable appliance.\n\nDescription:\n\nThe lecture provides an overview of concepts, theories, and methods of ubiquitous information technology (ubiquitous computing).\n\nBased on the appliance concept, students then develop their own appliance in the exercise. The necessary technical and methodological basics such as hardware for ubiquitous systems, software for ubiquitous systems, principles of context recognition for ubiquitous systems, networking of ubiquitous systems, and design principles such as design thinking are discussed. Methods of design and testing for human-machine interaction and human-machine interfaces developed in ubiquitous computing are explained in detail. An introduction to the economic aspects of a ubiquitous system is also provided.\n\nIn the practical part of the lecture, students deepen their understanding of ubiquitous systems by applying the knowledge gained in the lecture. Students design and develop their own appliance and test it. The aim is to go through the steps towards a prototypical and potentially marketable appliance.\n\nCourse content:\n\nThe lecture provides an overview of concepts, theories, and methods of ubiquitous information technology (ubiquitous computing). Based on the appliance concept, students then design their own appliances in the exercise, plan the construction, and then develop them. The necessary technical and methodological basics such as hardware for ubiquitous systems, software for ubiquitous systems, principles of context recognition for ubiquitous systems, networking of ubiquitous systems, and design of ubiquitous systems (e.g., design thinking) and topics related to the development of miniature electronics and 3D printing are discussed. Methods of design and testing for human-machine interaction and human-machine interfaces developed in ubiquitous computing are also explained. There is also an introduction to the economic aspects of a ubiquitous system.\n\nIn the practical part of the lecture, understanding of ubiquitous systems is deepened through practical application of the knowledge base of the lecture. Students design and develop their own devices, including electronics and programming, and test them. The goal is to go through the steps toward a prototypical and potentially marketable appliance.\n\nWorkload:\n\nThe total workload for this learning unit is approximately 150 hours (5.0 credits).\n\nActivity\n\nWorkload\n\nAttendance time: Attendance at lectures\n\n15 x 90 min\n\n22 h 30 min\n\nAttendance time: Attendance at exercises\n\n15 x 45 min\n\n11 h 15 min\n\nPreparation/follow-up for lectures and exercises\n\n15 x 90 min\n\n22 h 30 min\n\nDevelop a self-developed concept for an information appliance.\n\n33 hours 45 min\n\nGo through the slide set twice.\n\n2 x 12 hours\n\n24 hours\n\nPrepare for the exam.\n\n36 hours\n\nTOTAL\n\n150 hours\n\nWorkload for the learning unit “Ubiquitous Information Technologies”\n\nLearning objectives:\n\nThe aim of the lecture is to impart knowledge about the fundamentals and advanced methods and techniques of ubiquitous computing. After completing the lecture, students will be able to\n\nReproduce and discuss the knowledge they have acquired about existing ubiquitous computing systems.\n\nEvaluate general knowledge about ubiquitous systems and apply statements and principles to special cases.\n\nevaluate and assess different methods for design processes and user studies, and select suitable methods for developing new solutions.\n\ninvent, plan, design, build (electronics, software, 3D printing) and evaluate new ubiquitous systems for use in everyday or industrial process environments, and assess the costs and technical implications.",
-   "fingerprint": "29949cb833ccf3e1",
+   "fingerprint": "a08607886dfc2f42",
    "format": null,
    "id": "0x066D053413A34C368741946F2902B963",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3059217&client_id=produktiv",
@@ -361,7 +361,7 @@
      "cancelled": false,
      "date": "2026-10-28",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -369,7 +369,7 @@
      "cancelled": false,
      "date": "2026-11-04",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -377,7 +377,7 @@
      "cancelled": false,
      "date": "2026-11-11",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -385,7 +385,7 @@
      "cancelled": false,
      "date": "2026-11-18",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -393,7 +393,7 @@
      "cancelled": false,
      "date": "2026-11-25",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -401,7 +401,7 @@
      "cancelled": false,
      "date": "2026-12-02",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -409,7 +409,7 @@
      "cancelled": false,
      "date": "2026-12-09",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -417,7 +417,7 @@
      "cancelled": false,
      "date": "2026-12-16",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -425,7 +425,7 @@
      "cancelled": false,
      "date": "2026-12-23",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -433,7 +433,7 @@
      "cancelled": false,
      "date": "2027-01-13",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -441,7 +441,7 @@
      "cancelled": false,
      "date": "2027-01-20",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -449,7 +449,7 @@
      "cancelled": false,
      "date": "2027-01-27",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -457,7 +457,7 @@
      "cancelled": false,
      "date": "2027-02-03",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -465,7 +465,7 @@
      "cancelled": false,
      "date": "2027-02-10",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     },
@@ -473,7 +473,7 @@
      "cancelled": false,
      "date": "2027-02-17",
      "end": "09:30",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "08:00"
     }
@@ -494,7 +494,7 @@
      "end": "09:30",
      "firstDate": "2026-10-28",
      "rhythm": "weekly",
-     "room": "07.07 SR 222",
+     "room": "50.34 Raum -102 (UG)",
      "start": "08:00"
     }
    ],
@@ -3313,7 +3313,7 @@
     ]
    ],
    "contentText": "This is an advanced course that provides students with both theoretical and practical insights into modern deep learning\n\nIn particular, we focus on a novel theoretical framework for understanding deep neural networks with tools from geometry and group theory\n\nThis enables a methodical approach to Deep Learning: starting from first principles of symmetry and invariance, we derive different network architectures for analyzing unstructured sets, grids, graphs, and manifolds\n\nTopics of the course include: group theory, graph neural networks, convolutional neural networks, applications of geometric deep learning in diverse fields such as geometry processing, molecular dynamics, social networks, game playing (computer Go), processing of text and speech, as well as applications in medicine\n\nRequirements: strong mathematical abstraction skills , foundations of machine learning, group theory, linear algebra",
-   "fingerprint": "613647cf591f1e35",
+   "fingerprint": "398cf0baba4666b4",
    "format": "On-Site",
    "id": "0x1C58A50EEE03461F8A0535F902846F52",
    "iliasUrl": null,
@@ -3334,14 +3334,6 @@
    ],
    "number": "2400179",
    "sessions": [
-    {
-     "cancelled": false,
-     "date": "2026-10-28",
-     "end": "13:00",
-     "room": "50.34 Raum 301",
-     "slot": 0,
-     "start": "11:30"
-    },
     {
      "cancelled": false,
      "date": "2026-11-04",
@@ -3577,10 +3569,10 @@
    ],
    "slots": [
     {
-     "count": 15,
+     "count": 14,
      "day": "Wed",
      "end": "13:00",
-     "firstDate": "2026-10-28",
+     "firstDate": "2026-11-04",
      "rhythm": "weekly",
      "room": "50.34 Raum 301",
      "start": "11:30"
@@ -5910,17 +5902,13 @@
     ]
    ],
    "contentText": "This module is designed to provide students with the basic theoretical and practical aspects of algorithm design, analysis, and engineering. It teaches general methods for designing and analyzing algorithms for basic algorithmic problems, as well as the basic principles of general algorithmic methods such as approximation algorithms, linear programming, randomized algorithms, parallel algorithms, and parameterized algorithms.\n\nThe student has an in-depth insight into the theoretical and practical aspects of algorithms and is able to identify and formally formulate algorithmic problems in various application areas. Furthermore, they know advanced algorithms and data structures from the areas of graph algorithms, algorithmic geometry, string matching, algebraic algorithms, combinatorial optimization, and external memory algorithms. They are able to independently understand algorithms they are unfamiliar with, associate them with the above areas, apply them, determine their running time, evaluate them, and select appropriate algorithms for given applications. Furthermore, the student is able to adapt existing algorithms to related problems. In addition to algorithms for concrete problems, the student knows advanced techniques of algorithmic design. This includes parameterized algorithms, approximation algorithms, online algorithms, randomized algorithms, parallel algorithms, linear programming, and algorithm engineering techniques. For given algorithms, the student is able to identify techniques used to better understand these algorithms. In addition, they are able to select appropriate techniques for a given problem and use them to design their own algorithms.",
-   "fingerprint": "0110d7901c432b65",
+   "fingerprint": "15f723aad8fcd0c6",
    "format": "On-Site",
    "id": "0x43473167369C4CB38854BCB2A597028D",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057194&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x43473167369C4CB38854BCB2A597028D&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
-    {
-     "name": "Prof. Dr. Peter Sanders",
-     "unit": "Institut für Theoretische Informatik (ITI) , ITI Sanders (ITI)"
-    },
     {
      "name": "Prof. Dr.-Ing. Marvin Künnemann-Goos",
      "unit": "KIT Department of Informatics (INFORMATIK) , ITI Künnemann"
@@ -5930,7 +5918,7 @@
      "unit": "ITI Künnemann"
     },
     {
-     "name": "Geri Gokaj",
+     "name": "Tim Janik Junginger",
      "unit": "ITI Künnemann"
     }
    ],
@@ -17729,7 +17717,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-27T09:47:00Z",
+  "scrapedAt": "2026-10-28T10:22:31Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
