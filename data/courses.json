@@ -3083,7 +3083,7 @@
    "fingerprint": "217477e269faa5c5",
    "format": "On-Site",
    "id": "0x1A162997EE8B404897063B24955701F9",
-   "iliasUrl": null,
+   "iliasUrl": "https://klausur.ilias.studium.kit.edu/goto.php?target=crs_3783&client_id=klausur",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x1A162997EE8B404897063B24955701F9&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -3316,7 +3316,7 @@
    "fingerprint": "398cf0baba4666b4",
    "format": "On-Site",
    "id": "0x1C58A50EEE03461F8A0535F902846F52",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3069412&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x1C58A50EEE03461F8A0535F902846F52&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -5141,7 +5141,7 @@
    "fingerprint": "f0a3daf31c974bdb",
    "format": "Blended (On-Site/Online)",
    "id": "0x395AA1451F8240FD9D67E603DED59BF7",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3070871&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x395AA1451F8240FD9D67E603DED59BF7&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "German/English",
    "lecturers": [
@@ -10318,7 +10318,7 @@
    "fingerprint": "3cab376b877a0d27",
    "format": "On-Site",
    "id": "0x9ADFF7F563DC490D97512CAE6D57E83B",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3069932&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x9ADFF7F563DC490D97512CAE6D57E83B&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": "English",
    "lecturers": [
@@ -17717,7 +17717,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-28T10:22:31Z",
+  "scrapedAt": "2026-10-29T10:43:06Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
