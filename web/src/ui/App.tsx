@@ -61,7 +61,7 @@ function currentRoute(): Route {
 
 /** The theme to show: the user's choice, else the system's, kept up to date when the system switches. */
 function useResolvedTheme(choice: UserState['theme']): 'light' | 'dark' {
-  const query = typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null
+  const [query] = useState(() => (typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null))
   const [systemDark, setSystemDark] = useState(() => !!query?.matches)
   useEffect(() => {
     if (!query) return

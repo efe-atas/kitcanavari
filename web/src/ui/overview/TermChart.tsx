@@ -6,6 +6,9 @@ import { PRIOR } from '../../logic/terms'
 import type { Lang } from '../../types'
 import { termName } from '../roadmap/format'
 
+/** Room under the columns for the term labels (matches .chart-plot's padding-bottom). */
+const AXIS = 28
+
 /**
  * Credits per term as columns: passed at the base, planned on top, the usual 30 ECTS as a reference line.
  * Every value is also in the table below the chart.
@@ -26,7 +29,7 @@ export function TermChart({ lang, terms }: { lang: Lang; terms: TermLoad[] }) {
         <li><i class="is-target" />{t(lang, 'chart.target', { n: RULES.semesterTarget })}</li>
       </ul>
       <div class="chart-plot" role="list" aria-label={t(lang, 'chart.title')}>
-        <span class="chart-target" style={{ bottom: pct(RULES.semesterTarget) }} aria-hidden="true"><span>{RULES.semesterTarget}</span></span>
+        <span class="chart-target" style={{ bottom: `calc(${AXIS}px + (100% - ${AXIS}px) * ${RULES.semesterTarget / top})` }} aria-hidden="true"><span>{RULES.semesterTarget}</span></span>
         {cols.map((c) => (
           <div key={c.term} class={`chart-col${hover === c.term ? ' is-hover' : ''}${c.cp > RULES.semesterTarget + 6 ? ' is-heavy' : ''}`} role="listitem"
             tabIndex={0} aria-label={label(c)} onPointerEnter={() => setHover(c.term)} onPointerLeave={() => setHover(null)}

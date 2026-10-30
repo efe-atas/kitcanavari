@@ -105,6 +105,17 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
   const total = Object.values(matrix.colTotals).reduce((n, x) => n + x, 0)
   useEffect(() => { try { localStorage.setItem(VIEW_KEY, view) } catch { /* private mode */ } }, [view])
   useEffect(() => () => document.body.classList.remove('is-dragging-course'), [])
+  useEffect(() => {
+    // An open move menu closes when the user clicks elsewhere or presses Escape, like any menu.
+    const closeAll = (except?: EventTarget | null) => document.querySelectorAll<HTMLDetailsElement>('details.move-menu[open]').forEach((d) => {
+      if (!(except instanceof Node && d.contains(except))) d.removeAttribute('open')
+    })
+    const onDown = (e: PointerEvent) => closeAll(e.target)
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeAll() }
+    document.addEventListener('pointerdown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => { document.removeEventListener('pointerdown', onDown); document.removeEventListener('keydown', onKey) }
+  }, [])
 
   const move = (id: string, term: string) => {
     const from = roadmapEntries(state)[id]?.term
