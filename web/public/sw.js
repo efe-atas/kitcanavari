@@ -1,8 +1,11 @@
 // Offline support: the app shell and the last catalog data stay available without a connection.
 // Pages and data go to the network first (the catalog changes daily), hashed build assets come from the cache.
-const VERSION = 'v3-1'
+const VERSION = 'v3-2'
 const SHELL = `kit-shell-${VERSION}`
+const ASSETS = 'kit-assets'
 const DATA = 'kit-data'
+/** Hashed build files kept for offline use; older ones are dropped as new builds arrive. */
+const MAX_ASSETS = 24
 const PRECACHE = ['./', './index.html', './favicon.svg', './manifest.webmanifest', './icon-192.png']
 
 self.addEventListener('install', (event) => {
@@ -34,11 +37,15 @@ async function networkFirst(request, cacheName, fallback) {
 }
 
 async function cacheFirst(request) {
-  const cache = await caches.open(SHELL)
+  const cache = await caches.open(ASSETS)
   const hit = await cache.match(request)
   if (hit) return hit
   const response = await fetch(request)
-  if (response.ok) await cache.put(request, response.clone())
+  if (response.ok) {
+    await cache.put(request, response.clone())
+    const keys = await cache.keys()
+    for (const old of keys.slice(0, Math.max(0, keys.length - MAX_ASSETS))) await cache.delete(old)
+  }
   return response
 }
 
