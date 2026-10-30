@@ -20,8 +20,10 @@ import { Overview } from './pages/Overview'
 import { PageHead } from './pages/PageHead'
 import { PlanBoard } from './pages/PlanBoard'
 import { Settings } from './pages/Settings'
+import { Shared } from './pages/Shared'
 import { Week } from './pages/Week'
 import { closeCourse, pageHref, parseHash, type Page, type Route } from './route'
+import { ShareDialog } from './ShareDialog'
 import { Sheet } from './Sheet'
 import { SyncStatus } from './sync/SyncStatus'
 import { applyUpdate, UPDATE_EVENT } from '../pwa'
@@ -104,6 +106,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   const [route, setRoute] = useState<Route>(currentRoute)
   const [palette, setPalette] = useState(false)
   const [shortcuts, setShortcuts] = useState(false)
+  const [sharing, setSharing] = useState(false)
   const toast = useToast()
   const lang = state.lang
   const theme = useResolvedTheme(state.theme)
@@ -145,7 +148,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   useEffect(() => { if (typeof window.scrollTo === 'function') window.scrollTo(0, 0) }, [route.page.kind])
 
   const go = useCallback((kind: NavKind) => { location.hash = pageHref(NAV[kind].page) }, [])
-  const open = palette || shortcuts
+  const open = palette || shortcuts || sharing
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'k') {
@@ -178,7 +181,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   const alerts = useMemo(() => (load.status === 'ready' ? pendingAlerts(state, load.courses, load.changes) : []), [load, state])
   const ageDays = load.status === 'ready' ? Math.floor((Date.now() - Date.parse(load.checkedAt)) / 86400_000) : 0
   const { page } = route
-  const navKind: NavKind | 'more' = page.kind === 'more' ? 'more' : page.kind
+  const navKind: NavKind | 'more' = page.kind === 'more' ? 'more' : page.kind === 'shared' ? 'plan' : page.kind
   const openSettings = () => go('settings')
   const switchTheme = () => update((s) => setTheme(s, theme === 'dark' ? 'light' : 'dark'))
   const switchLang = () => update((s) => setLang(s, lang === 'tr' ? 'en' : 'tr'))
@@ -195,6 +198,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
       run: () => download('kit-schedule.ics', buildIcs(state.selected, load.courses.events, load.courses.meta.scrapedAt), 'text/calendar'),
     }] : []),
     { id: 'backup', label: t(lang, 'schedule.export'), icon: 'download', keywords: 'backup yedek json export', run: () => download('kit-plan.json', exportState(state), 'application/json') },
+    { id: 'share', label: t(lang, 'share.title'), icon: 'share', keywords: 'share paylaş link bağlantı', run: () => setSharing(true) },
     { id: 'print', label: t(lang, 'cmd.print'), icon: 'print', keywords: 'pdf print yazdır', run: () => { location.hash = pageHref({ kind: 'plan' }); setTimeout(() => window.print(), 400) } },
     { id: 'shortcuts', label: t(lang, 'cmd.shortcuts'), icon: 'keyboard', keywords: 'keyboard klavye', run: () => setShortcuts(true) },
   ]
@@ -220,6 +224,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
       case 'help': return <Help lang={lang} data={data} id={page.id} />
       case 'settings': return <Settings lang={lang} state={state} update={update} sync={sync} checkedAt={load.checkedAt} data={data} shortcuts={shortcutList} />
       case 'more': return <More lang={lang} alerts={alerts.length} />
+      case 'shared': return <Shared key={page.code} code={page.code} data={data} handbook={handbook} state={state} update={update} />
     }
   })()
 
@@ -288,6 +293,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
         <CommandPalette lang={lang} data={load.courses} handbook={load.handbook} state={state} pages={pages} actions={actions} onClose={() => setPalette(false)} />
       )}
       {shortcuts && <ShortcutsDialog lang={lang} shortcuts={shortcutList} onClose={() => setShortcuts(false)} />}
+      {sharing && <ShareDialog lang={lang} state={state} onClose={() => setSharing(false)} />}
     </div>
   )
 }

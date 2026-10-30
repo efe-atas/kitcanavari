@@ -212,3 +212,41 @@ describe('outlook and settings', () => {
     expect(document.documentElement.dataset.theme).toBe('dark')
   })
 })
+
+describe('sharing a plan', () => {
+  test('the plan page gives a link; opening it shows the plan read-only and can adopt it', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 }, H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/plan'
+    render(<App />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Share' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Share plan' })
+    const link = within(dialog).getByLabelText('Link') as HTMLInputElement
+    expect(link.value).toMatch(/#\/shared\/1~/)
+    expect(link.value).not.toContain(',13') // grades stay out by default
+    fireEvent.click(within(dialog).getByRole('checkbox', { name: 'Include my grades' }))
+    expect((within(dialog).getByLabelText('Link') as HTMLInputElement).value).toContain(',13')
+    const hash = link.value.slice(link.value.indexOf('#'))
+    fireEvent.keyDown(window, { key: 'Escape' })
+
+    // Someone else opens it.
+    localStorage.clear()
+    setState({ areas: [], starred: ['M1'] })
+    cleanup()
+    location.hash = hash
+    render(<App />)
+    await screen.findByRole('heading', { name: 'Shared plan', level: 1 })
+    expect(within(screen.getByRole('region', { name: 'SS 27' })).getByText('Seminar: Post-Quantum Cryptography')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Use as my plan' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Yes, use it' }))
+    await waitFor(() => expect(saved().roadmap.modules.H2).toMatchObject({ term: 'SS27' }))
+    expect(saved().areas).toEqual(AREAS)
+    expect(saved().starred).toEqual(['M1'])
+    await screen.findByRole('heading', { name: 'Plan', level: 1 })
+  })
+
+  test('a broken link says so', async () => {
+    location.hash = '#/shared/nonsense'
+    render(<App />)
+    await screen.findByText(/This link could not be read/)
+  })
+})

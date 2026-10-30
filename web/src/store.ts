@@ -412,6 +412,19 @@ export function restoreModule(s: UserState, id: string, snap: ModuleSnapshot): U
   }
 }
 
+/**
+ * Make a shared plan your own: its areas, terms and modules replace yours (this term's planned modules join the weekly
+ * timetable); your notes, shortlist, goals and device settings stay.
+ */
+export function adoptPlan(s: UserState, courses: CoursesFile, plan: { areas: string[]; terms: string[]; modules: Record<string, RoadmapEntry> }): UserState {
+  let next: UserState = { ...s, selected: {}, areas: [...plan.areas], roadmap: { terms: [...plan.terms], modules: {}, notes: { ...(s.roadmap?.notes ?? {}) } } }
+  for (const [id, e] of Object.entries(plan.modules)) {
+    if (e.term === CURRENT_TERM && e.status === 'planned') next = withWeeklyEvents(next, courses, id)
+    next = putEntry(next, id, { ...e })
+  }
+  return next
+}
+
 export const exportState = (s: UserState): string => JSON.stringify(s, null, 1)
 
 export function importState(json: string): UserState | null {

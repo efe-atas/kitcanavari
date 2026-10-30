@@ -7,6 +7,7 @@ import { CURRENT_TERM, PRIOR } from '../../logic/terms'
 import { addTerm, moveModule, restoreModule, snapshotModule } from '../../store'
 import type { CoursesFile, HandbookFile, Lang, UserState } from '../../types'
 import { Icon } from '../Icon'
+import { ShareDialog } from '../ShareDialog'
 import { rowLabel } from '../plan/labels'
 import { termName } from '../roadmap/format'
 import { courseHref, pageHref } from '../route'
@@ -97,6 +98,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
   const toast = useToast()
   const [view, setView] = useState<View>(savedView)
   const [over, setOver] = useState<string | null>(null)
+  const [sharing, setSharing] = useState(false)
   const matrix = useMemo(() => matrixCells(state, data, handbook), [state, data, handbook])
   const items = (term: string) => ROW_ORDER.flatMap((row) => (matrix.cells[row][term] ?? []).map((it) => ({ ...it, row })))
   const columns = [...matrix.columns.filter((term) => term !== PRIOR), PRIOR]
@@ -123,6 +125,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
           <button type="button" aria-pressed={view === 'list'} onClick={() => setView('list')}><Icon name="list" size={16} />{t(lang, 'pl.view.list')}</button>
           <button type="button" aria-pressed={view === 'board'} onClick={() => setView('board')}><Icon name="columns" size={16} />{t(lang, 'pl.view.board')}</button>
         </div>
+        <button type="button" class="button-quiet" onClick={() => setSharing(true)}><Icon name="share" size={16} />{t(lang, 'share.short')}</button>
         <button type="button" class="button-quiet plan-print" onClick={() => window.print()}><Icon name="print" size={16} />{t(lang, 'pl.print')}</button>
         <button type="button" class="button-quiet" onClick={() => update(addTerm)}><Icon name="plus" size={16} />{t(lang, 'road.addTerm')}</button>
         <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={16} />{t(lang, 'pl.add')}</a>
@@ -189,6 +192,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
         })}
       </div>
       <p class="plan-note">{t(lang, 'plan.thesis')}</p>
+      {sharing && <ShareDialog lang={lang} state={state} onClose={() => setSharing(false)} />}
     </div>
   )
 }

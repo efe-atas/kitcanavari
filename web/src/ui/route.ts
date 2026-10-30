@@ -13,6 +13,7 @@ export type Page =
   | { kind: 'help'; id: string | null }
   | { kind: 'settings' }
   | { kind: 'more' }
+  | { kind: 'shared'; code: string }
 
 export interface Route {
   page: Page
@@ -37,6 +38,7 @@ function pageOf(head: string, a?: string, b?: string, c?: string): Page | null {
     case 'help': return { kind: 'help', id: a || null }
     case 'settings': return { kind: 'settings' }
     case 'more': return { kind: 'more' }
+    case 'shared': return { kind: 'shared', code: a ?? '' }
     default: return null
   }
 }
@@ -82,6 +84,7 @@ export function pageHref(p: Page): string {
     }
     case 'career': return p.focus ? `#/career/${p.focus}` : '#/career'
     case 'help': return p.id ? `#/help/${p.id}` : '#/help'
+    case 'shared': return `#/shared/${p.code}`
     default: return `#/${p.kind}`
   }
 }
