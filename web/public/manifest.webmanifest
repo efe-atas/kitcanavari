@@ -1,0 +1,23 @@
+{
+  "name": "KIT Planım — CS M.Sc. study planner",
+  "short_name": "KIT Planım",
+  "description": "Plan the KIT Computer Science Master term by term, build your weekly timetable and follow catalog changes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f3",
+  "theme_color": "#2453d6",
+  "lang": "tr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Haftam / My week", "url": "./#/week" },
+    { "name": "Ders kataloğu / Courses", "url": "./#/courses" },
+    { "name": "Dönem planı / Plan", "url": "./#/plan" }
+  ]
+}

@@ -13,6 +13,8 @@ import './styles/career.css'
 import './styles/help.css'
 import './styles/pages.css'
 import './styles/print.css'
+import { registerServiceWorker } from './pwa'
 import { App } from './ui/App'
 
 render(<App />, document.getElementById('app')!)
+registerServiceWorker()

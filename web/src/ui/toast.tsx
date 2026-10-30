@@ -9,6 +9,8 @@ export interface ToastInput {
   /** A link in the toast, e.g. to the plan. */
   link?: { label: string; href: string }
   tone?: 'default' | 'success' | 'warn'
+  /** Stays until closed or acted on (e.g. a new version is ready). */
+  persistent?: boolean
 }
 
 interface Toast extends ToastInput {
@@ -43,7 +45,7 @@ export function ToastProvider({ closeLabel, children }: { closeLabel: string; ch
 function ToastView({ toast, closeLabel, onClose }: { toast: Toast; closeLabel: string; onClose: () => void }) {
   const [paused, setPaused] = useState(false)
   useEffect(() => {
-    if (paused) return
+    if (paused || toast.persistent) return
     const timer = setTimeout(onClose, SHOW_MS)
     return () => clearTimeout(timer)
   }, [paused])

@@ -24,6 +24,7 @@ import { Week } from './pages/Week'
 import { closeCourse, pageHref, parseHash, type Page, type Route } from './route'
 import { Sheet } from './Sheet'
 import { SyncStatus } from './sync/SyncStatus'
+import { applyUpdate, UPDATE_EVENT } from '../pwa'
 import { ToastProvider, useToast } from './toast'
 
 const STALE_DAYS = 3
@@ -124,6 +125,22 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
   useEffect(() => { document.documentElement.lang = lang }, [lang])
+  const [online, setOnline] = useState(() => typeof navigator === 'undefined' || navigator.onLine !== false)
+  useEffect(() => {
+    const on = () => setOnline(true)
+    const off = () => setOnline(false)
+    window.addEventListener('online', on)
+    window.addEventListener('offline', off)
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off) }
+  }, [])
+  useEffect(() => {
+    const onUpdate = (e: Event) => {
+      const worker = (e as CustomEvent<ServiceWorker>).detail
+      toast({ message: t(lang, 'pwa.update'), persistent: true, action: { label: t(lang, 'pwa.reload'), run: () => applyUpdate(worker) } })
+    }
+    window.addEventListener(UPDATE_EVENT, onUpdate)
+    return () => window.removeEventListener(UPDATE_EVENT, onUpdate)
+  }, [lang])
   // A new page starts at the top, like any other site.
   useEffect(() => { if (typeof window.scrollTo === 'function') window.scrollTo(0, 0) }, [route.page.kind])
 
@@ -234,6 +251,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
 
       <main id="main" class="main" tabIndex={-1}>
         {!persistent && <p class="banner banner-warn">{t(lang, 'storage.off')}</p>}
+        {!online && <p class="banner banner-offline" role="status"><Icon name="cloud" size={16} />{t(lang, 'pwa.offline')}</p>}
         {load.status === 'ready' && ageDays > STALE_DAYS && <p class="banner banner-warn">{t(lang, 'data.stale', { days: ageDays })}</p>}
         <ErrorBoundary onReset={() => update(() => defaultState())}>
           {load.status === 'loading' && <PageSkeleton label={t(lang, 'data.loading')} />}

@@ -686,6 +686,9 @@ const tr = {
   'nav.help.short': 'Yardım',
   'nav.settings.short': 'Ayarlar',
   'today.soon': 'Sıradakiler',
+  'pwa.update': 'Yeni bir sürüm hazır.',
+  'pwa.reload': 'Yenile',
+  'pwa.offline': 'Çevrimdışısın: en son indirilen katalog gösteriliyor, değişikliklerin bu cihazda saklanıyor.',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -1374,6 +1377,9 @@ const en: Record<keyof typeof tr, string> = {
   'nav.help.short': 'Help',
   'nav.settings.short': 'Settings',
   'today.soon': 'Coming up',
+  'pwa.update': 'A new version is ready.',
+  'pwa.reload': 'Reload',
+  'pwa.offline': 'You are offline: showing the last downloaded catalog; your changes are kept on this device.',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }
