@@ -250,3 +250,24 @@ describe('sharing a plan', () => {
     await screen.findByText(/This link could not be read/)
   })
 })
+
+describe('changes', () => {
+  test('the feed names each kind of change and can keep to times, rooms and cancellations', async () => {
+    const at = new Date().toISOString().replace(/\.\d+Z$/, 'Z')
+    loadData.mockResolvedValue({
+      courses: makeCourses(), handbook: makeHandbook(), career: makeCareer(),
+      changes: { entries: [
+        { at, eventId: 'sec', eventTitle: 'IT Security', kind: 'room_changed', summary: 'Room A → Room B' },
+        { at, eventId: 'gpu', eventTitle: 'Practical course GPU-Computing', kind: 'lecturers_changed', summary: 'Lecturers: X → Y' },
+      ] },
+    })
+    location.hash = '#/changes'
+    render(<App />)
+    const feed = await screen.findByRole('region', { name: 'Catalog changes (last 90 days)' })
+    expect(within(feed).getByText('Room changed')).toBeTruthy()
+    expect(within(feed).getByText('Lecturers changed')).toBeTruthy()
+    fireEvent.click(within(feed).getByRole('checkbox', { name: 'Only times, rooms and cancellations' }))
+    await waitFor(() => expect(within(feed).queryByText('Lecturers changed')).toBeNull())
+    expect(within(feed).getByRole('link', { name: 'IT Security' }).getAttribute('href')).toBe('#/changes?c=M3')
+  })
+})

@@ -708,6 +708,18 @@ const tr = {
   'share.adopted': 'Paylaşılan plan artık senin planın.',
   'gpa.short': 'Ortalama',
   'share.areas': 'Uzmanlık alanları',
+  'change.added': 'Yeni ders',
+  'change.removed': 'Kaldırıldı',
+  'change.slot_changed': 'Saat değişti',
+  'change.room_changed': 'Derslik değişti',
+  'change.session_cancelled': 'Oturum iptal',
+  'change.session_added': 'Ek oturum',
+  'change.session_removed': 'Oturum kaldırıldı',
+  'change.content_changed': 'Açıklama değişti',
+  'change.lecturers_changed': 'Hocalar değişti',
+  'change.modules_changed': 'Modüller değişti',
+  'changes.filter': 'Değişiklikleri süz',
+  'changes.onlySchedule': 'Sadece saat, derslik ve iptaller',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -1418,6 +1430,18 @@ const en: Record<keyof typeof tr, string> = {
   'share.adopted': 'The shared plan is now your plan.',
   'gpa.short': 'Average',
   'share.areas': 'Areas of specialization',
+  'change.added': 'New course',
+  'change.removed': 'Removed',
+  'change.slot_changed': 'Time changed',
+  'change.room_changed': 'Room changed',
+  'change.session_cancelled': 'Session cancelled',
+  'change.session_added': 'Session added',
+  'change.session_removed': 'Session removed',
+  'change.content_changed': 'Description changed',
+  'change.lecturers_changed': 'Lecturers changed',
+  'change.modules_changed': 'Modules changed',
+  'changes.filter': 'Filter changes',
+  'changes.onlySchedule': 'Only times, rooms and cancellations',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }
