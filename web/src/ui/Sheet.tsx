@@ -44,10 +44,10 @@ export function Sheet({ title, closeLabel, onClose, children }: Props) {
     <div class="sheet-layer">
       <div class="sheet-backdrop" onClick={onClose} aria-hidden="true" />
       <div class="sheet" ref={ref} role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-        <header class="sheet-head">
+        <div class="sheet-head">
           <h2 id="sheet-title" tabIndex={-1} ref={heading}>{title}</h2>
           <button type="button" class="icon-button" onClick={onClose} aria-label={closeLabel}><Icon name="close" size={20} /></button>
-        </header>
+        </div>
         <div class="sheet-body">{children}</div>
       </div>
     </div>

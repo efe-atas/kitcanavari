@@ -77,3 +77,9 @@ Yeni hedefler `role: environment` ile mevcut depolama şemasını kullanır. Esk
 ## Baştan kurma kapsamı
 
 “Bu ortama göre baştan kur” mevcut dönem dahil tüm planlı dersleri yeniden değerlendirir. Yalnızca geçilmiş dersler ve kullanıcının açıkça koruduğu dersler sabittir. Önceden planlanmış derslere puan avantajı verilmez; uygun olanlar yeniden seçilebilir. Uygulama sırasında çıkarılan veya başka döneme taşınan dersler haftalık programdan da kaldırılır. Taslak düzenlemek kayıtlı programı değiştirmez. Güncel doğrulama: 199 test ve üretim derlemesi.
+
+## v3: günlük kullanım ve hız (2026-10-30)
+
+Yolculuğa beşinci bir soru eklendi: **Bugün ne var?** Genel bakış artık günün oturumlarıyla açılır (şimdi, sırada, iptal) ve sıradaki üç oturumu gösterir; Haftam gerçek takvim haftalarıyla gezilir. Planlama tarafında ders kartları dönemler arasında sürüklenir, her ekleme/taşıma/çıkarma geri alınabilir ve Ctrl/⌘ K her derse, sayfaya ve eyleme tek kutudan ulaştırır. Favoriler katalog ile plan arasında "henüz karar vermedim" durumunu taşır; plan bir bağlantıyla salt okunur paylaşılır.
+
+Görsel sistemde yazı ölçeği büyütüldü (gövde 15 px, en küçük etiket 11 px), üst bar tek satıra indi, tema sistemi izleyebilir. Ayrıntılar ve kararlar: `docs/superpowers/specs/2026-10-30-v3-design.md`.

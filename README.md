@@ -6,6 +6,23 @@ a course you picked changes (time, room, cancelled session).
 
 Your schedule lives only in your browser (localStorage); use *Export* to back it up or move it to another device.
 
+## What it does
+
+- **Overview:** today's sessions in real dates (live, next, cancelled), the 120-credit ledger, every degree
+  requirement with what is missing, a graduation outlook (the term your modules reach 90 ECTS, then the thesis) and
+  a grade calculator.
+- **Courses:** search all 211 modules; filter by kind, area of specialization, free weekdays, "fits my week" and
+  your shortlist; add to any term with one click (and undo it).
+- **Plan:** terms as a list or a board; drag a course to another term or use its move menu; print it or save it as
+  PDF; share it as a link that opens read-only (grades only if you choose).
+- **My week:** the timetable in real calendar weeks, with block dates, cancellations, clashes per date and an
+  `.ics` export.
+- **Career:** pick a work environment and get skill gaps and a full course proposal that respects the degree rules.
+- **Quick search:** `Ctrl/⌘ K` (or `/`) reaches any course, page or action; `G` then a letter jumps between pages;
+  `?` lists the shortcuts.
+- **Installable and offline:** add it to your home screen; without a connection it shows the last downloaded
+  catalog. Turkish and English, light, dark or system theme.
+
 ## How the data stays fresh
 
 `.github/workflows/scrape.yml` runs every day: a Playwright scraper (`scraper/`) reads the public
@@ -44,6 +61,7 @@ npm test
 npm run dev      # serves ../data via the web/public/data symlink
 ```
 
-Design and plan: `docs/superpowers/specs/`, `docs/superpowers/plans/`. Fallback for scraping on a Mac: `ops/README.md`.
+Design and plan: `docs/superpowers/specs/` (latest: `2026-10-30-v3-design.md`), `docs/superpowers/plans/`.
+Fallback for scraping on a Mac: `ops/README.md`.
 
 This is an unofficial student project and is not affiliated with KIT.

@@ -28,10 +28,10 @@ type Updater = (s: UserState) => UserState
 interface Cache { profile: Profile; sha: string | null; dirty: boolean }
 
 /** The parts of a profile a user edits; used to tell a real local plan from an empty one. */
-const planOf = (p: Profile) => JSON.stringify([p.weekly, p.areas, p.modules, p.terms, p.notes, p.followed])
+const planOf = (p: Profile) => JSON.stringify([p.weekly, p.areas, p.modules, p.terms, p.notes, p.followed, p.starred ?? []])
 const isEmptyPlan = (s: UserState) => !Object.keys(s.selected).length && !(s.areas ?? []).length
   && !Object.keys(s.roadmap?.modules ?? {}).length && !Object.keys(s.roadmap?.notes ?? {}).length
-  && !(s.followed ?? []).length
+  && !(s.followed ?? []).length && !(s.starred ?? []).length
 
 export class SyncEngine {
   private cfg: SyncConfig

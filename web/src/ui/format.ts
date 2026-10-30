@@ -1,6 +1,7 @@
 import { t } from '../i18n'
 import { moduleAreas, moduleKind, moduleMinors, type Kind } from '../logic/degree'
 import { eventModules } from '../logic/filter'
+import { FORTNIGHTLY } from '../logic/ics'
 import type { CoursesFile, Event, Lang, Slot } from '../types'
 
 export function ectsLabel(data: CoursesFile, ev: Event): string | null {
@@ -19,10 +20,17 @@ export function fmtDate(lang: Lang, iso: string): string {
   })
 }
 
+/** "fortnightly" → "iki haftada bir"; a rhythm the catalog words some other way stays as it is. */
+export function rhythmLabel(lang: Lang, rhythm: string): string {
+  const key = `rhythm.${FORTNIGHTLY.test(rhythm) ? 'fortnightly' : rhythm}`
+  const label = t(lang, key)
+  return label === key ? rhythm : label
+}
+
 export function fmtSlot(lang: Lang, s: Slot): string {
   if (s.rhythm === 'single' && s.firstDate) return `${fmtDate(lang, s.firstDate)} ${s.start ?? ''}–${s.end ?? ''}`
-  if (!s.day) return s.rhythm
-  const rhythm = s.rhythm === 'weekly' ? '' : ` (${s.rhythm})`
+  if (!s.day) return rhythmLabel(lang, s.rhythm)
+  const rhythm = s.rhythm === 'weekly' ? '' : ` (${rhythmLabel(lang, s.rhythm)})`
   const time = s.start && s.end ? ` ${s.start}–${s.end}` : ''
   return `${t(lang, `day.${s.day}`)}${time}${rhythm}`
 }

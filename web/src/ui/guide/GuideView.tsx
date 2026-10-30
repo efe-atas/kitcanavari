@@ -160,7 +160,7 @@ export function GuideView({ lang, data }: { lang: Lang; data: CoursesFile }) {
       <CountsFlow lang={lang} />
 
       <section class="guide-section">
-        <h3>{c.rulesTitle}</h3>
+        <h2>{c.rulesTitle}</h2>
         <dl class="rules">
           {c.rules.map(([k, v], i) => (
             <div key={k} class="rule">
@@ -172,17 +172,17 @@ export function GuideView({ lang, data }: { lang: Lang; data: CoursesFile }) {
       </section>
 
       <section class="guide-section">
-        <h3>{c.termTitle(data.meta.term)}</h3>
+        <h2>{c.termTitle(data.meta.term)}</h2>
         <div class="term-grid">
           <div class="panel">
-            <h4>{c.stammOffered}</h4>
+            <h3>{c.stammOffered}</h3>
             <ul class="plain stamm-list">
               {stamm.map((m) => <li key={m.id}><span>{m.title}</span><span class="muted">{m.ects} ECTS</span></li>)}
             </ul>
             <p class="note">{c.stammNote}</p>
           </div>
           <div class="panel">
-            <h4>{c.areaTable}</h4>
+            <h3>{c.areaTable}</h3>
             <table class="area-table">
               <thead><tr><th>{c.colArea}</th><th>{c.colModules}</th><th>{c.colLecture}</th></tr></thead>
               <tbody>
@@ -199,21 +199,21 @@ export function GuideView({ lang, data }: { lang: Lang; data: CoursesFile }) {
       </section>
 
       <section class="guide-section">
-        <h3>{c.tacticsTitle}</h3>
+        <h2>{c.tacticsTitle}</h2>
         <ul class="tactics">
           {c.tactics.map((x) => <li key={x}><Icon name="check" size={16} /><span>{x}</span></li>)}
         </ul>
       </section>
 
       <section class="guide-section">
-        <h3>{c.stepsTitle}</h3>
+        <h2>{c.stepsTitle}</h2>
         <ol class="steps">
           {c.steps.map(([k, v]) => <li key={k}><strong>{k}</strong><span>{v}</span></li>)}
         </ol>
       </section>
 
       <section class="guide-section sources">
-        <h3>{c.sourcesTitle}</h3>
+        <h2>{c.sourcesTitle}</h2>
         <ul class="plain">
           <li><a class="ext-link" href={HANDBOOK} target="_blank" rel="noopener">{c.handbook}<Icon name="external" size={14} /></a></li>
           <li><a class="ext-link" href={FAQ} target="_blank" rel="noopener">{c.faq}<Icon name="external" size={14} /></a></li>

@@ -20,6 +20,8 @@ export interface Profile {
   lastSeenScrapedAt: string
   followed: { role: string; lens: string }[]
   notes: Record<string, string>
+  /** Shortlisted modules; profiles written before 2026-10-30 have none. */
+  starred?: string[]
 }
 
 export { CURRENT_TERM, DEFAULT_TERMS }
@@ -47,6 +49,7 @@ export function isProfile(x: unknown): x is Profile {
       && (e.title === undefined || typeof e.title === 'string'))
     && Array.isArray(p.followed) && p.followed.every((f) => isObj(f) && typeof f.role === 'string' && typeof f.lens === 'string')
     && isObj(p.notes) && Object.values(p.notes).every((n) => typeof n === 'string')
+    && (p.starred === undefined || isStrings(p.starred))
 }
 
 export function profileFromState(s: UserState, prev: Profile | null): Profile {
@@ -63,6 +66,7 @@ export function profileFromState(s: UserState, prev: Profile | null): Profile {
     lastSeenScrapedAt: s.lastSeenScrapedAt,
     // Older code never set followed in the state; keep what the profile already had then.
     followed: s.followed ? s.followed.map((f) => ({ ...f })) : base.followed,
+    ...(s.starred ? { starred: [...s.starred] } : base.starred ? { starred: [...base.starred] } : {}),
   }
 }
 
@@ -83,5 +87,6 @@ export function stateFromProfile(p: Profile, device: Pick<UserState, 'lang' | 't
     version: 1, selected, lang: device.lang, lastSeenScrapedAt: p.lastSeenScrapedAt, areas: [...p.areas], theme: device.theme,
     ...(isDefault ? {} : { roadmap: { terms: [...p.terms], modules, notes: { ...p.notes } } }),
     ...(p.followed.length ? { followed: p.followed.map((f) => ({ ...f })) } : {}),
+    ...(p.starred?.length ? { starred: [...p.starred] } : {}),
   }
 }
