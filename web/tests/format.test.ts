@@ -17,3 +17,9 @@ test('a one-date clash does not mark an unrelated weekly block', () => {
   expect(blockHasConflict(block, { ...clash, date: '2026-10-23' }, e)).toBe(true)
   expect(blockHasConflict(block, { ...clash, date: undefined }, e)).toBe(true)
 })
+
+test('rhythms are translated, unknown ones are kept', () => {
+  expect(fmtSlot('tr', slot('Wed', '09:45', '11:15', 'fortnightly'))).toBe('Çar 09:45–11:15 (iki haftada bir)')
+  expect(fmtSlot('en', slot('Wed', '09:45', '11:15', 'biweekly'))).toBe('Wed 09:45–11:15 (fortnightly)')
+  expect(fmtSlot('en', slot(null, null, null, 'every full moon'))).toBe('every full moon')
+})

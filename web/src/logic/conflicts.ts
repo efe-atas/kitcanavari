@@ -59,3 +59,17 @@ export function findConflicts(selected: Record<string, SelectedEntry>, events: R
   }
   return out
 }
+
+/**
+ * Would adding these courses (a module's events this term) clash with the weekly timetable? Clashes among the courses
+ * themselves (a lecture and its alternative exercise groups) do not count: they are the module's own choice.
+ */
+export function addConflicts(selected: Record<string, SelectedEntry>, events: Record<string, Event>, moduleId: string,
+  eventIds: string[]): Conflict[] {
+  const fresh = eventIds.filter((id) => events[id] && !selected[id])
+  if (!fresh.length) return []
+  const trial = { ...selected }
+  for (const id of fresh) trial[id] = { enabledSlots: events[id].slots.map((_, i) => i), moduleId, ackFingerprint: '' }
+  const mine = new Set(eventIds)
+  return findConflicts(trial, events).filter((c) => mine.has(c.a) !== mine.has(c.b) && (fresh.includes(c.a) || fresh.includes(c.b)))
+}

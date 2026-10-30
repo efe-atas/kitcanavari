@@ -1,6 +1,9 @@
 import type { Event, SelectedEntry } from '../types'
 import { activeSessions } from './time'
 
+/** The catalog says 'fortnightly'; older data and tests say 'biweekly'. */
+export const FORTNIGHTLY = /^(biweekly|fortnightly)$/i
+
 const escape = (s: string) => s.replace(/\\/g, '\\\\').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n')
 const stamp = (date: string, time: string) => `${date.replace(/-/g, '')}T${time.replace(':', '')}00`
 
@@ -41,7 +44,7 @@ export function buildIcs(selected: Record<string, SelectedEntry>, events: Record
       // No individual dates published: fall back to the weekly series.
       ev.slots.forEach((s, i) => {
         if (!entry.enabledSlots.includes(i) || !s.day || !s.start || !s.end || !s.firstDate || s.rhythm === 'single') return
-        const rule = ['FREQ=WEEKLY', ...(s.rhythm === 'biweekly' ? ['INTERVAL=2'] : []), ...(s.count ? [`COUNT=${s.count}`] : [])]
+        const rule = ['FREQ=WEEKLY', ...(FORTNIGHTLY.test(s.rhythm) ? ['INTERVAL=2'] : []), ...(s.count ? [`COUNT=${s.count}`] : [])]
         lines.push(
           'BEGIN:VEVENT',
           `UID:${id}-slot${i}@kitcanavari`,

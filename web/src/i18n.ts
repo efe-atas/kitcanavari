@@ -548,6 +548,10 @@ const tr = {
   'sp.keep': 'Tut',
   'sp.applyRebuild': 'Planımı güncelle: {a} ekle, {d} çıkar',
   'sp.reset': 'Değişikliklerimi sıfırla',
+  'rhythm.weekly': 'haftalık',
+  'rhythm.fortnightly': 'iki haftada bir',
+  'rhythm.block': 'blok',
+  'rhythm.single': 'tek seferlik',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -1098,6 +1102,10 @@ const en: Record<keyof typeof tr, string> = {
   'sp.keep': 'Keep',
   'sp.applyRebuild': 'Update my plan: add {a}, remove {d}',
   'sp.reset': 'Reset my changes',
+  'rhythm.weekly': 'weekly',
+  'rhythm.fortnightly': 'fortnightly',
+  'rhythm.block': 'block',
+  'rhythm.single': 'one-off',
 }
 
 export const dictionaries: Record<Lang, Record<string, string>> = { tr, en }

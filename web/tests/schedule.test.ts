@@ -120,3 +120,25 @@ describe('buildIcs', () => {
     expect(buildIcs(sel('a'), { a }, '2026-10-20T04:00:00Z')).toContain(String.raw`A\, B\; C`)
   })
 })
+
+describe('fortnightly courses and module conflicts', () => {
+  test('a fortnightly series without dates repeats every other week in the calendar file', async () => {
+    const { buildIcs } = await import('../src/logic/ics')
+    const e = ev('f', [{ ...slot('Wed', '09:45', '11:15', 'fortnightly'), firstDate: '2026-10-21', count: 7 }])
+    expect(buildIcs(sel('f'), { f: e }, '2026-10-30T10:43:22Z')).toContain('RRULE:FREQ=WEEKLY;INTERVAL=2;COUNT=7')
+  })
+
+  test('a module whose own groups overlap does not clash with an empty timetable', async () => {
+    const { addConflicts } = await import('../src/logic/conflicts')
+    const events = {
+      lec: ev('lec', [slot('Mon', '09:45', '11:15')], { moduleIds: ['MX'] }),
+      ex: ev('ex', [slot('Mon', '09:45', '11:15')], { moduleIds: ['MX'] }),
+      other: ev('other', [slot('Mon', '10:00', '11:30')], { moduleIds: ['MY'] }),
+    }
+    expect(addConflicts({}, events, 'MX', ['lec', 'ex'])).toEqual([])
+    const clash = addConflicts(sel('other'), events, 'MX', ['lec', 'ex'])
+    expect(clash.map((c) => [c.a, c.b].sort().join('+')).sort()).toEqual(['ex+other', 'lec+other'])
+    // Already in the timetable: adding it again adds no new clash.
+    expect(addConflicts(sel('other', 'lec', 'ex'), events, 'MX', ['lec', 'ex'])).toEqual([])
+  })
+})

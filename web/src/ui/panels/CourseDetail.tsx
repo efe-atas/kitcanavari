@@ -6,7 +6,7 @@ import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
 import { DEFAULT_TERMS, offeringIssue, PRIOR } from '../../logic/terms'
 import {
-  addModuleToTerm, placeModule, removeFromRoadmap, setEntryCountAs, setGrade, setNote, setStatus, toggleSlot,
+  addModuleToTerm, moveModule, removeFromRoadmap, setEntryCountAs, setGrade, setNote, setStatus, toggleSlot,
 } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, ModuleStatus, SkillId, UserState } from '../../types'
 import { roleTitle } from '../career/model'
@@ -97,7 +97,7 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
             )}
             <label>
               {t(lang, 'road.move')}
-              <select value={entry.term} onChange={(e) => update((s) => placeModule(s, id, (e.target as HTMLSelectElement).value))}>
+              <select value={entry.term} onChange={(e) => update((s) => moveModule(s, data, id, (e.target as HTMLSelectElement).value))}>
                 {[PRIOR, ...terms].map((term) => <option key={term} value={term}>{termName(lang, term)}</option>)}
               </select>
             </label>

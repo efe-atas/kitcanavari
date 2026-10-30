@@ -280,12 +280,37 @@ function withEntry(s: UserState, id: string, fn: (e: RoadmapEntry) => RoadmapEnt
   return current ? putEntry(s, id, fn(current)) : s
 }
 
+/** This term's courses of a module join the weekly timetable (all their slots on); ones already there stay as they are. */
+function withWeeklyEvents(s: UserState, courses: CoursesFile, id: string): UserState {
+  const selected = { ...s.selected }
+  for (const ev of Object.values(courses.events)) {
+    if (!ev.moduleIds.includes(id) || selected[ev.id]) continue
+    selected[ev.id] = { enabledSlots: ev.slots.map((_, i) => i), moduleId: id, ackFingerprint: ev.fingerprint, title: ev.title }
+  }
+  return { ...s, selected }
+}
+
+const withoutWeeklyEvents = (s: UserState, id: string): UserState =>
+  ({ ...s, selected: Object.fromEntries(Object.entries(s.selected).filter(([, e]) => e.moduleId !== id)) })
+
 /** Put a module into a term; a module already in the roadmap moves there. */
 export function placeModule(s: UserState, id: string, term: string): UserState {
   const existing = roadmapEntries(s)[id]
   return putEntry(s, id, existing
     ? { ...existing, term }
     : { term, status: term === PRIOR ? 'passed' : 'planned', countAs: null, grade: null })
+}
+
+/**
+ * Move a module to another term (or add it there). The weekly timetable is the current term's: a module that leaves
+ * the term takes its courses out of it, a planned one that arrives brings them in, as adding it would.
+ */
+export function moveModule(s: UserState, courses: CoursesFile, id: string, term: string): UserState {
+  const existing = roadmapEntries(s)[id]
+  if (existing?.term === term) return s
+  let next = term === CURRENT_TERM && (existing?.status ?? 'planned') === 'planned' ? withWeeklyEvents(s, courses, id) : s
+  next = placeModule(next, id, term)
+  return term === CURRENT_TERM ? next : withoutWeeklyEvents(next, id)
 }
 
 export const setStatus = (s: UserState, id: string, status: ModuleStatus): UserState => withEntry(s, id, (e) => ({ ...e, status }))
@@ -301,8 +326,7 @@ export const setEntryCountAs = (s: UserState, id: string, countAs: string | null
 export function removeFromRoadmap(s: UserState, id: string): UserState {
   const r = roadmapOf(s)
   const { [id]: _gone, ...modules } = r.modules
-  const selected = Object.fromEntries(Object.entries(s.selected).filter(([, e]) => e.moduleId !== id))
-  return { ...s, selected, roadmap: { ...r, modules } }
+  return { ...withoutWeeklyEvents(s, id), roadmap: { ...r, modules } }
 }
 
 export function setNote(s: UserState, id: string, text: string): UserState {
@@ -325,15 +349,7 @@ export function addTerm(s: UserState): UserState {
  */
 export function addModuleToTerm(s: UserState, courses: CoursesFile, handbook: HandbookFile | null, id: string, term: string,
   row?: RowId): UserState {
-  let next = s
-  if (term === CURRENT_TERM) {
-    const selected = { ...next.selected }
-    for (const ev of Object.values(courses.events)) {
-      if (!ev.moduleIds.includes(id) || selected[ev.id]) continue
-      selected[ev.id] = { enabledSlots: ev.slots.map((_, i) => i), moduleId: id, ackFingerprint: ev.fingerprint, title: ev.title }
-    }
-    next = { ...next, selected }
-  }
+  let next = term === CURRENT_TERM ? withWeeklyEvents(s, courses, id) : s
   next = placeModule(next, id, term)
   const bucket = row ? rowBucket(next, row) : null
   const fields = (handbook?.modules[id] ?? courses.modules[id])?.fields

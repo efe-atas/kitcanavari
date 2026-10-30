@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { lensWeights } from '../../logic/career'
-import { findConflicts } from '../../logic/conflicts'
+import { addConflicts } from '../../logic/conflicts'
 import { bucketOptions, moduleKind, type Kind } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows, type ModuleRow } from '../../logic/handbook'
 import { rowBucket, type RowId } from '../../logic/matrix'
@@ -78,12 +78,7 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
   const fitting = ranked.filter((x) => x.fits)
   const others = ranked.filter((x) => !x.fits)
 
-  const conflictsWith = (r: ModuleRow) => {
-    if (term !== CURRENT_TERM || !r.eventIds.length) return false
-    const trial = { ...state.selected }
-    for (const id of r.eventIds) if (!trial[id]) trial[id] = { enabledSlots: data.events[id].slots.map((_, i) => i), moduleId: r.id, ackFingerprint: '' }
-    return findConflicts(trial, data.events).some((c) => r.eventIds.includes(c.a) || r.eventIds.includes(c.b))
-  }
+  const conflictsWith = (r: ModuleRow) => term === CURRENT_TERM && addConflicts(state.selected, data.events, r.id, r.eventIds).length > 0
 
   const item = ({ r, issue, score }: (typeof ranked)[number]) => {
     const kind = moduleKind(data, r)
