@@ -23,7 +23,7 @@
 .degree-block span { font-size: var(--fs-xs); font-weight: 600; overflow-wrap: anywhere; hyphens: auto; }
 .degree-block small { font-size: var(--fs-2xs); color: var(--muted); }
 .block-area { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.block-area small, .block-thesis small { color: inherit; opacity: .8; }
+.block-area small, .block-thesis small { color: inherit; opacity: .92; }
 .block-elective { background: var(--accent-soft); }
 .block-thesis { background: var(--panel); border-color: var(--panel); color: var(--panel-ink); }
 .rules { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 0; }

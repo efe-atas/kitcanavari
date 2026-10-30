@@ -2,7 +2,7 @@
 @media print {
   :root, :root[data-theme='dark'] {
     --bg: #fff; --surface: #fff; --surface-2: #f4f4f4; --surface-3: #e8e8e8; --ink: #000; --ink-2: #222; --muted: #444; --faint: #666;
-    --line: #ccc; --line-strong: #999; --accent: #1a40b0; --accent-soft: #eef2ff; --positive: #0d6b40; --positive-soft: #e6f4ec;
+    --line: #ccc; --line-strong: #999; --accent: #0f5f56; --accent-soft: #e3f4f1; --positive: #0d6b40; --positive-soft: #e6f4ec;
     --shadow-sm: none; --shadow-md: none; --shadow-lg: none; color-scheme: light;
   }
   @page { margin: 14mm 12mm; }

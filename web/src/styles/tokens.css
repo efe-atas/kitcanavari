@@ -1,46 +1,46 @@
 /*
  * KIT Planım v3 design tokens.
- * One accent (cobalt) for actions and "now", green only for what is done, amber only for what is missing,
+ * One accent (KIT teal) for actions and "now", green only for what is done, amber only for what is missing,
  * red only for clashes and removal. Course types keep their own hues in the calendar.
  * The theme follows the system unless the user picks one (index.html sets data-theme before first paint).
  */
 :root {
-  --bg: #f4f5f3;
+  --bg: #f5f5f3;
   --surface: #ffffff;
-  --surface-2: #f0f2ef;
-  --surface-3: #e6e9e6;
-  --overlay: rgb(14 20 26 / 0.46);
-  --ink: #141b22;
-  --ink-2: #33404c;
-  --muted: #525d68;
-  --faint: #646e78;
-  --line: #e1e5e1;
-  --line-strong: #c8cfcb;
+  --surface-2: #f0f0ee;
+  --surface-3: #e6e6e3;
+  --overlay: rgb(12 12 14 / 0.5);
+  --ink: #18181b;
+  --ink-2: #3f3f46;
+  --muted: #52525b;
+  --faint: #66666e;
+  --line: #e4e4e1;
+  --line-strong: #cfcfcb;
 
-  --accent: #2453d6;
-  --accent-strong: #1a40b0;
-  --accent-soft: #e9efff;
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --accent-soft: #e3f4f1;
   --accent-ink: #ffffff;
-  --positive: #17784d;
-  --positive-soft: #e2f3e9;
+  --positive: #137538;
+  --positive-soft: #e6f4ea;
   --warn: #8a5300;
   --warn-soft: #fcefd6;
   --danger: #bf271c;
   --danger-soft: #fde7e4;
 
-  /* The credit panel and other "ledger" surfaces stay dark in both themes. */
-  --panel: #16212e;
-  --panel-2: #1e2c3b;
-  --panel-ink: #f2f6fa;
-  --panel-muted: #a8b6c4;
-  --panel-line: #33465a;
-  --panel-passed: #8fdcb8;
-  --panel-planned: #8fb3f6;
-  --panel-open: #3d5064;
+  /* The credit panel and other "ledger" surfaces stay near-black in both themes. */
+  --panel: #18181b;
+  --panel-2: #232327;
+  --panel-ink: #fafafa;
+  --panel-muted: #a1a1aa;
+  --panel-line: #3a3a40;
+  --panel-passed: #5eead4;
+  --panel-planned: #1f8075;
+  --panel-open: #34343a;
 
-  /* Chart fills, validated for colour-vision deficiency and contrast against the card surface. */
-  --viz-passed: #1f8a5b;
-  --viz-planned: #2453d6;
+  /* Chart fills: one teal ramp, passed darker than planned; validated (ordinal) against the card surface. */
+  --viz-passed: #0f5f56;
+  --viz-planned: #2fae9c;
 
   /* Course types: lecture, exercise, practical, seminar, other. */
   --t-v: #2f62d0;
@@ -69,9 +69,9 @@
   --r-xl: 20px;
   --r-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgb(16 24 40 / 0.05);
-  --shadow-md: 0 1px 2px rgb(16 24 40 / 0.04), 0 6px 16px -4px rgb(16 24 40 / 0.1);
-  --shadow-lg: 0 2px 6px rgb(16 24 40 / 0.06), 0 24px 56px -16px rgb(16 24 40 / 0.32);
+  --shadow-sm: 0 1px 2px rgb(12 12 14 / 0.05);
+  --shadow-md: 0 1px 2px rgb(12 12 14 / 0.04), 0 6px 16px -4px rgb(12 12 14 / 0.1);
+  --shadow-lg: 0 2px 6px rgb(12 12 14 / 0.06), 0 24px 56px -16px rgb(12 12 14 / 0.32);
   --ring: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -84,36 +84,36 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #0d1218;
-  --surface: #141b23;
-  --surface-2: #1a232d;
-  --surface-3: #222d39;
-  --overlay: rgb(0 0 0 / 0.6);
-  --ink: #e8edf2;
-  --ink-2: #c3cdd7;
-  --muted: #a0acb8;
-  --faint: #808d9a;
-  --line: #25303b;
-  --line-strong: #394655;
+  --bg: #0a0a0b;
+  --surface: #141416;
+  --surface-2: #1b1b1e;
+  --surface-3: #242428;
+  --overlay: rgb(0 0 0 / 0.7);
+  --ink: #ededef;
+  --ink-2: #c8c8cd;
+  --muted: #a1a1aa;
+  --faint: #8b8b93;
+  --line: #26262a;
+  --line-strong: #3a3a40;
 
-  --accent: #8fb0ff;
-  --accent-strong: #b4caff;
-  --accent-soft: #1d2b4a;
-  --accent-ink: #0d1218;
-  --positive: #6fd2a4;
-  --positive-soft: #143324;
+  --accent: #2dd4bf;
+  --accent-strong: #5eead4;
+  --accent-soft: #0d2e2a;
+  --accent-ink: #04201d;
+  --positive: #4ade80;
+  --positive-soft: #0f2a1a;
   --warn: #f0b860;
-  --warn-soft: #34280f;
+  --warn-soft: #2e230d;
   --danger: #ff857a;
-  --danger-soft: #3b1c19;
+  --danger-soft: #34191a;
 
-  --panel: #18242f;
-  --panel-2: #1f2e3c;
-  --panel-line: #344a5e;
-  --viz-passed: #33a06f;
-  --viz-planned: #5d87ea;
+  --panel: #111113;
+  --panel-2: #1c1c20;
+  --panel-line: #2e2e33;
+  --viz-passed: #3cc9b5;
+  --viz-planned: #21857a;
 
-  --t-v: #7ea5ff;
+  --t-v: #8aaeff;
   --t-u: #4fd1c5;
   --t-p: #f2a650;
   --t-s: #b493ff;
