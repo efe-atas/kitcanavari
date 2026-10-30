@@ -81,7 +81,7 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
       {groups.length === 0 && <p class="empty">{c.empty}</p>}
       {groups.map((g) => (
         <section key={g.k} class="term-group">
-          <h3>{CATEGORIES[g.k][lang]}</h3>
+          {embedded ? <h2>{CATEGORIES[g.k][lang]}</h2> : <h3>{CATEGORIES[g.k][lang]}</h3>}
           <dl class="terms">
             {g.terms.map((t) => {
               const fact = t.count?.(data, lang)

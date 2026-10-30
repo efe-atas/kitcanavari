@@ -253,7 +253,7 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
           <div class="results-heading">
             <p class="result-count" aria-live="polite">{t(lang, 'cs.count', { n: fitting.length })}</p>
             <label class="sort-control"><span>{t(lang, 'v2.sort')}</span>
-              <select value={sort} onChange={(e) => setSort((e.target as HTMLSelectElement).value)}>
+              <select value={sort} aria-label={t(lang, 'v2.sort')} onChange={(e) => setSort((e.target as HTMLSelectElement).value)}>
                 <option value="recommended">{t(lang, 'v2.recommended')}</option><option value="name">{t(lang, 'v2.byName')}</option><option value="credits">{t(lang, 'v2.byCredits')}</option>
               </select>
             </label>

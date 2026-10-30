@@ -42,7 +42,7 @@
 .more-text span { color: var(--muted); font-size: var(--fs-sm); }
 
 .changes { display: grid; gap: 36px; max-width: 900px; }
-.changes h3 { margin-bottom: 14px; font-size: var(--fs-lg); }
+.changes h2 { margin-bottom: 14px; font-size: var(--fs-lg); }
 .changes-actions { margin-bottom: 12px; }
 .alert-list, .feed { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .alert {
@@ -59,7 +59,7 @@
 .feed-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 16px; }
 .feed-switch { margin-left: 8px; }
 .feed-day + .feed-day { margin-top: 18px; }
-.feed-day h4 { margin-bottom: 8px; color: var(--muted); font-size: var(--fs-xs); font-weight: 650; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.feed-day h3 { margin-bottom: 8px; color: var(--muted); font-size: var(--fs-xs); font-weight: 650; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .feed { gap: 0; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); overflow: hidden; }
 .feed li { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: baseline; gap: 14px; padding: 14px 20px; font-size: var(--fs-sm); }
 .feed li + li { border-top: 1px solid var(--line); }

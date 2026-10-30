@@ -185,7 +185,7 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
                 </details>
               </section>
             </div>
-            <aside class="career-context">
+            <div class="career-context">
               <p class="career-eyebrow">{t(lang, 'cr.employer')}</p>
               <h3>{lens.title[lang]}</h3>
               <p class="lens-effect">
@@ -196,7 +196,7 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
                 <summary>{t(lang, 'cx.market')}</summary>
                 <LensInfo lang={lang} career={career} lens={lens} role={roleId} />
               </details>
-            </aside>
+            </div>
           </div>
           <div id="career-program" class="career-program">
             <p class="career-eyebrow">02 / {t(lang, 'cx.program')}</p>

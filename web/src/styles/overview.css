@@ -200,7 +200,7 @@
   position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: end; gap: 8px;
   height: 180px; margin-top: 8px; padding-bottom: 28px; border-bottom: 1px solid var(--line-strong);
 }
-.chart-target { position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px solid var(--ink-2); opacity: .55; pointer-events: none; }
+.chart-target { position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px solid color-mix(in srgb, var(--ink-2) 55%, transparent); pointer-events: none; }
 .chart-target span { position: absolute; right: 0; top: -18px; color: var(--ink-2); font-size: var(--fs-2xs); font-weight: 650; }
 .chart-col { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; outline-offset: 4px; cursor: default; }
 .chart-stack { position: relative; display: flex; flex-direction: column; gap: 2px; width: min(24px, 70%); min-height: 0; }

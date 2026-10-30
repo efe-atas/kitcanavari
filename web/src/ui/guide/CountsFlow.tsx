@@ -15,6 +15,7 @@ const copy = {
     yes: 'Evet', no: 'Hayır',
     whatTitle: 'Neyi doldurur?',
     whatLead: 'Alan toplamına her tür sayılır, ama alanın 10 ECTS\'lik ders şartına sadece normal dersler sayılır.',
+    kindCol: 'Ders türü',
     cols: ['Kova toplamı', 'Alanın ders şartı (10)', 'Stammmodul (4)', 'Seminer + praktikum (12–18)'],
     rows: [
       ['lecture', 'Normal ders', [true, true, false, false]],
@@ -37,6 +38,7 @@ const copy = {
     yes: 'Yes', no: 'No',
     whatTitle: 'What does it fill?',
     whatLead: 'Every kind counts towards a bucket’s total, but only lectures count towards an area’s 10 ECTS of lectures.',
+    kindCol: 'Course kind',
     cols: ['Bucket total', 'Area lectures (10)', 'Advanced mandatory (4)', 'Seminars + practicals (12–18)'],
     rows: [
       ['lecture', 'Lecture', [true, true, false, false]],
@@ -61,12 +63,12 @@ export function CountsFlow({ lang }: { lang: Lang }) {
   const c = copy[lang]
   return (
     <section class="guide-section" aria-labelledby="flow-title">
-      <h3 id="flow-title">{c.title}</h3>
+      <h2 id="flow-title">{c.title}</h2>
       <p class="guide-note">{c.lead}</p>
 
       <div class="flow-grid">
         <div class="panel flow-panel">
-          <h4>{c.whereTitle}</h4>
+          <h3>{c.whereTitle}</h3>
           <div class="flow">
             <Box kind="start" title={c.start[0]} text={c.start[1]} />
             <div class="flow-arrow" aria-hidden="true" />
@@ -95,12 +97,12 @@ export function CountsFlow({ lang }: { lang: Lang }) {
         </div>
 
         <div class="panel flow-panel">
-          <h4>{c.whatTitle}</h4>
+          <h3>{c.whatTitle}</h3>
           <p class="note flow-what-lead">{c.whatLead}</p>
           <div class="table-scroll" role="region" aria-label={c.whatTitle} tabIndex={0}>
           <table class="fill-matrix">
             <thead>
-              <tr><th />{c.cols.map((col) => <th key={col} scope="col">{col}</th>)}</tr>
+              <tr><th scope="col"><span class="sr-only">{c.kindCol}</span></th>{c.cols.map((col) => <th key={col} scope="col">{col}</th>)}</tr>
             </thead>
             <tbody>
               {c.rows.map(([kind, label, cells]) => (

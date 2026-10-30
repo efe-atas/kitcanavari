@@ -37,7 +37,7 @@ export function ChangesView({ data, changes, state, alerts, update }: Props) {
   return (
     <div class="changes">
       <section aria-labelledby="changes-mine">
-        <h3 id="changes-mine">{t(lang, 'changes.mine')}</h3>
+        <h2 id="changes-mine">{t(lang, 'changes.mine')}</h2>
         {alerts.length === 0 ? <p class="changes-calm"><Icon name="check" size={16} />{t(lang, 'changes.none')}</p> : (
           <>
             {alerts.length > 1 && (
@@ -71,7 +71,7 @@ export function ChangesView({ data, changes, state, alerts, update }: Props) {
       </section>
 
       <section aria-labelledby="changes-feed">
-        <h3 id="changes-feed">{t(lang, 'changes.feed')}</h3>
+        <h2 id="changes-feed">{t(lang, 'changes.feed')}</h2>
         <div class="feed-filter" role="group" aria-label={t(lang, 'changes.filter')}>
           <button type="button" class="chip" aria-pressed={!onlyMine} onClick={() => setOnlyMine(false)}>{t(lang, 'changes.all')}</button>
           <button type="button" class="chip" aria-pressed={onlyMine} onClick={() => setOnlyMine(true)}>{t(lang, 'changes.onlyMine')}</button>
@@ -79,7 +79,7 @@ export function ChangesView({ data, changes, state, alerts, update }: Props) {
         </div>
         {feed.length === 0 ? <p class="muted">{t(lang, 'changes.feedEmpty')}</p> : days.map((day) => (
           <div key={day} class="feed-day">
-            <h4><time dateTime={day}>{fmtDate(lang, day)}</time></h4>
+            <h3><time dateTime={day}>{fmtDate(lang, day)}</time></h3>
             <ul class="feed">
               {feed.filter((c) => c.at.startsWith(day)).map((c, i) => {
                 const mid = moduleOf(c.eventId)

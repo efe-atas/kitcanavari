@@ -26,10 +26,10 @@ export function ShareDialog({ lang, state, onClose }: { lang: Lang; state: UserS
   }
   return (
     <Overlay label={t(lang, 'share.title')} onClose={onClose} class="share-dialog">
-      <header class="shortcuts-head">
+      <div class="shortcuts-head">
         <h2>{t(lang, 'share.title')}</h2>
         <button type="button" class="icon-button" onClick={onClose} aria-label={t(lang, 'event.close')}><Icon name="close" size={18} /></button>
-      </header>
+      </div>
       <p class="share-lead">{t(lang, 'share.lead')}</p>
       <label class="field">
         {t(lang, 'share.link')}

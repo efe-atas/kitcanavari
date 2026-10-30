@@ -145,11 +145,11 @@ export interface Shortcut {
 export function ShortcutsDialog({ lang, shortcuts, onClose }: { lang: Lang; shortcuts: Shortcut[]; onClose: () => void }) {
   return (
     <Overlay label={t(lang, 'cmd.shortcuts')} onClose={onClose} class="shortcuts">
-      <header class="shortcuts-head">
+      <div class="shortcuts-head">
         <h2>{t(lang, 'cmd.shortcuts')}</h2>
         <button type="button" class="icon-button" onClick={onClose} aria-label={t(lang, 'event.close')}><Icon name="close" size={18} /></button>
-      </header>
-      <ul class="plain shortcut-list">
+      </div>
+      <ul class="plain shortcut-list" tabIndex={0} aria-label={t(lang, 'cmd.shortcuts')}>
         {shortcuts.map((s) => (
           <li key={s.label}><span>{s.label}</span><span>{s.keys.map((k, i) => <kbd key={i}>{k}</kbd>)}</span></li>
         ))}
