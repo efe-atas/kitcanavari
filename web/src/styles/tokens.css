@@ -5,38 +5,38 @@
  * The theme follows the system unless the user picks one (index.html sets data-theme before first paint).
  */
 :root {
-  --bg: #f5f5f3;
-  --surface: #ffffff;
-  --surface-2: #f0f0ee;
-  --surface-3: #e6e6e3;
-  --overlay: rgb(12 12 14 / 0.5);
-  --ink: #18181b;
-  --ink-2: #3f3f46;
-  --muted: #52525b;
-  --faint: #66666e;
-  --line: #e4e4e1;
-  --line-strong: #cfcfcb;
+  --bg: #f6f3ec;
+  --surface: #fffdf8;
+  --surface-2: #f1ede4;
+  --surface-3: #e7e1d5;
+  --overlay: rgb(31 29 26 / 0.45);
+  --ink: #1f1d1a;
+  --ink-2: #3d3933;
+  --muted: #57524a;
+  --faint: #635d53;
+  --line: #e6e0d4;
+  --line-strong: #cfc7b8;
 
   --accent: #0f766e;
   --accent-strong: #115e59;
-  --accent-soft: #e3f4f1;
+  --accent-soft: #e4f1ec;
   --accent-ink: #ffffff;
   --positive: #137538;
-  --positive-soft: #e6f4ea;
+  --positive-soft: #e5f2e3;
   --warn: #8a5300;
   --warn-soft: #fcefd6;
   --danger: #bf271c;
   --danger-soft: #fde7e4;
 
-  /* The credit panel and other "ledger" surfaces stay near-black in both themes. */
-  --panel: #18181b;
-  --panel-2: #232327;
-  --panel-ink: #fafafa;
-  --panel-muted: #a1a1aa;
-  --panel-line: #3a3a40;
+  /* The credit panel and other "ledger" surfaces stay dark in both themes (green-black on the cream light theme). */
+  --panel: #1f2a28;
+  --panel-2: #2a3835;
+  --panel-ink: #f6f3ec;
+  --panel-muted: #b3bdb8;
+  --panel-line: #3b4a46;
   --panel-passed: #5eead4;
-  --panel-planned: #1f8075;
-  --panel-open: #34343a;
+  --panel-planned: #2a9d8f;
+  --panel-open: #3a4744;
 
   /* Chart fills: one teal ramp, passed darker than planned; validated (ordinal) against the card surface. */
   --viz-passed: #0f5f56;
@@ -69,9 +69,9 @@
   --r-xl: 20px;
   --r-pill: 999px;
 
-  --shadow-sm: 0 1px 2px rgb(12 12 14 / 0.05);
-  --shadow-md: 0 1px 2px rgb(12 12 14 / 0.04), 0 6px 16px -4px rgb(12 12 14 / 0.1);
-  --shadow-lg: 0 2px 6px rgb(12 12 14 / 0.06), 0 24px 56px -16px rgb(12 12 14 / 0.32);
+  --shadow-sm: 0 1px 2px rgb(45 38 28 / 0.05);
+  --shadow-md: 0 1px 2px rgb(45 38 28 / 0.04), 0 6px 16px -4px rgb(45 38 28 / 0.1);
+  --shadow-lg: 0 2px 6px rgb(45 38 28 / 0.06), 0 24px 56px -16px rgb(45 38 28 / 0.32);
   --ring: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -110,6 +110,10 @@
   --panel: #111113;
   --panel-2: #1c1c20;
   --panel-line: #2e2e33;
+  --panel-ink: #fafafa;
+  --panel-muted: #a1a1aa;
+  --panel-planned: #1f8075;
+  --panel-open: #34343a;
   --viz-passed: #3cc9b5;
   --viz-planned: #21857a;
 

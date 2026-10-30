@@ -1,6 +1,6 @@
 // Offline support: the app shell and the last catalog data stay available without a connection.
 // Pages and data go to the network first (the catalog changes daily), hashed build assets come from the cache.
-const VERSION = 'v3-3'
+const VERSION = 'v3-4'
 const SHELL = `kit-shell-${VERSION}`
 const ASSETS = 'kit-assets'
 const DATA = 'kit-data'

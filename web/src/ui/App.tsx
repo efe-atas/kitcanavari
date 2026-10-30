@@ -72,7 +72,7 @@ function useResolvedTheme(choice: UserState['theme']): 'light' | 'dark' {
   const theme = choice ?? (systemDark ? 'dark' : 'light')
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0a0a0b' : '#f5f5f3')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0a0a0b' : '#f6f3ec')
   }, [theme])
   return theme
 }
