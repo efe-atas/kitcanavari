@@ -652,7 +652,7 @@
     ]
    ],
    "contentText": "",
-   "fingerprint": "abb686336ff654e4",
+   "fingerprint": "a20ffc502336fbd2",
    "format": "On-Site",
    "id": "0x09CBAC2F5895467AAF286633E81AE5C9",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3038394&client_id=produktiv",
@@ -670,6 +670,10 @@
     {
      "name": "Nathanael Sandy",
      "unit": "Institut für Programmstrukturen und Datenorganisation (IPD) , IPD Erdweg"
+    },
+    {
+     "name": "Martijn Cornelis Ben Voorwinden",
+     "unit": "Institut für Programmstrukturen und Datenorganisation (IPD)"
     }
    ],
    "moduleIds": [
@@ -6398,7 +6402,7 @@
     ]
    ],
    "contentText": "The module introduces algorithmic and computational foundations for the analysis and learning of large-scale graph-structured data. A central theme is the interpretation of graph computations as sparse operators and the resulting interplay between graph algorithms, sparse linear algebra, and modern parallel architectures.\n\nThe course revisits classical graph algorithms from the perspective of propagation processes and sparse computations. It covers sparse matrix representations and kernels, graph algorithms based on sparse linear algebra, iterative methods, and spectral techniques. Advanced algorithmic topics include sparse matrix-matrix multiplication, graph coarsening, multilevel methods, and sparsification.\n\nBuilding on these foundations, the course investigates the design and implementation of scalable graph and sparse matrix algorithms. Topics include parallel graph algorithms, performance engineering for sparse computations, graph partitioning, and communication-efficient computation.\n\nFinally, the course introduces graph learning methods and relates them to the concepts developed throughout the module. Graph neural networks are studied as parameterized sparse propagation operators, with a particular focus on their computational characteristics.",
-   "fingerprint": "43346b1ba9ca1680",
+   "fingerprint": "1b3f4b7c37a6b3db",
    "format": "On-Site",
    "id": "0x4A110AF46A0B4EDEA2FB064CFA000AE1",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3047931&client_id=produktiv",
@@ -6534,6 +6538,246 @@
      "room": "50.34 Raum 301",
      "slot": 0,
      "start": "14:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-10-29",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-05",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-12",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-19",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-26",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-03",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-10",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-17",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-07",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-14",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-21",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-28",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-04",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-11",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-18",
+     "end": "11:15",
+     "room": "50.34 Raum 131",
+     "slot": 1,
+     "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-10-30",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-06",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-13",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-20",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-27",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-04",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-11",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-18",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-08",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-15",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-22",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-29",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-05",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-12",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-19",
+     "end": "13:00",
+     "room": "50.34 Raum 236",
+     "slot": 2,
+     "start": "11:30"
     }
    ],
    "slots": [
@@ -6545,6 +6789,24 @@
      "rhythm": "weekly",
      "room": "50.34 Raum 301",
      "start": "14:00"
+    },
+    {
+     "count": 15,
+     "day": "Thu",
+     "end": "11:15",
+     "firstDate": "2026-10-29",
+     "rhythm": "weekly",
+     "room": "50.34 Raum 131",
+     "start": "09:45"
+    },
+    {
+     "count": 15,
+     "day": "Fri",
+     "end": "13:00",
+     "firstDate": "2026-10-30",
+     "rhythm": "weekly",
+     "room": "50.34 Raum 236",
+     "start": "11:30"
     }
    ],
    "sws": 3.0,
@@ -16123,7 +16385,7 @@
     ]
    ],
    "contentText": "The lecture \"Distributed Computing\" provides an introduction to the world of distributed computing with a focus on the fundamentals and technologies of Grid and Cloud computing as well as the handling of Big Data. The lecture combines theory and application with the help of relevant application examples and common methods from science and business.\n\nFirst, an introduction to the main characteristics of distributed systems is given. Then the topic of grid computing is discussed in more detail and the close relationship between Grid Computing and distributed data management is illustrated using the example of the WLCG, the infrastructure for distributing, storing and analyzing data from the particle accelerator at CERN. The topic of Cloud Computing is then discussed and contrasted with the previous section. After defining basic terms and concepts, virtualization is presented as one of the basic technologies of cloud computing; finally, common architectures, services and components in the cloud environment are discussed using examples and in general.\n\nIn the further course of the lecture, common procedures for authorization and authentication in distributed environments are discussed. The lecture includes a description of the basics of Authentication and Authorization Infrastructures (AAI) as well as different technologies, such as certificate or token-based procedures.\n\nIn a further thematic block, concepts for the management of large or distributed data are presented. Common tools and frameworks are discussed, as well as the life cycle of data, its metadata and data storage.\n\nFinally, the topics of the lecture, grid computing, big data and cloud computing, are reflected and linked and different paradigms for data analysis are presented. Corresponding examples are introduced for each of the topics.\n\n-----------\n\nSuccess is assessed in the form of a written examination/e-exam (usually lasting 60 minutes) in accordance with Section 4 (2) No. 1 SPO. Depending on the number of participants, it will be announced six weeks before the examination (§ 6 Para. 3 SPO) whether the assessment will take place - in the form of an oral examination in accordance with § 4 Para. 2 No. 2 SPO or - in the form of a written examination/e-exam in accordance with § 4 Para. 2 No. 1 SPO .\n\n120 h / semester, of which 30 h attendance time and 90 h self-study due to the complexity of the subject matter",
-   "fingerprint": "279f5a4beb07bfd6",
+   "fingerprint": "fa71d62903a8f0bc",
    "format": "On-Site",
    "id": "0xE94B51161A6F433FB957268ECF3B31C1",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3013363&client_id=produktiv",
@@ -16152,7 +16414,7 @@
      "cancelled": false,
      "date": "2026-10-28",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16160,7 +16422,7 @@
      "cancelled": false,
      "date": "2026-11-04",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16168,7 +16430,7 @@
      "cancelled": false,
      "date": "2026-11-11",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16176,7 +16438,7 @@
      "cancelled": false,
      "date": "2026-11-18",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16184,7 +16446,7 @@
      "cancelled": false,
      "date": "2026-11-25",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16192,7 +16454,7 @@
      "cancelled": false,
      "date": "2026-12-02",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16200,7 +16462,7 @@
      "cancelled": false,
      "date": "2026-12-09",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16208,7 +16470,7 @@
      "cancelled": false,
      "date": "2026-12-16",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16216,7 +16478,7 @@
      "cancelled": false,
      "date": "2026-12-23",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16224,7 +16486,7 @@
      "cancelled": false,
      "date": "2027-01-13",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16232,7 +16494,7 @@
      "cancelled": false,
      "date": "2027-01-20",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16240,7 +16502,7 @@
      "cancelled": false,
      "date": "2027-01-27",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16248,7 +16510,7 @@
      "cancelled": false,
      "date": "2027-02-03",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16256,7 +16518,7 @@
      "cancelled": false,
      "date": "2027-02-10",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -16264,7 +16526,7 @@
      "cancelled": false,
      "date": "2027-02-17",
      "end": "13:00",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "slot": 0,
      "start": "11:30"
     }
@@ -16276,7 +16538,7 @@
      "end": "13:00",
      "firstDate": "2026-10-28",
      "rhythm": "weekly",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "50.34 Raum -101 (UG)",
      "start": "11:30"
     }
    ],
@@ -17717,7 +17979,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-29T10:43:06Z",
+  "scrapedAt": "2026-10-30T10:43:22Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",

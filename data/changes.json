@@ -1,6 +1,38 @@
 {
  "entries": [
   {
+   "after": [
+    "Hannes Greule",
+    "Martijn Cornelis Ben Voorwinden",
+    "Nathanael Sandy",
+    "Prof. Dr. Sebastian Erdweg"
+   ],
+   "at": "2026-10-30T10:43:22Z",
+   "before": [
+    "Hannes Greule",
+    "Nathanael Sandy",
+    "Prof. Dr. Sebastian Erdweg"
+   ],
+   "eventId": "0x09CBAC2F5895467AAF286633E81AE5C9",
+   "eventTitle": "Programming Language Design and Implementation",
+   "kind": "lecturers_changed",
+   "summary": "Lecturers: Hannes Greule, Nathanael Sandy, Prof. Dr. Sebastian Erdweg → Hannes Greule, Martijn Cornelis Ben Voorwinden, Nathanael Sandy, Prof. Dr. Sebastian Erdweg"
+  },
+  {
+   "at": "2026-10-30T10:43:22Z",
+   "eventId": "0x4A110AF46A0B4EDEA2FB064CFA000AE1",
+   "eventTitle": "Scalable Graph and Sparse Matrix Algorithms for Learning",
+   "kind": "slot_changed",
+   "summary": "Mon 14:00–17:30 → Fri 11:30–13:00, Mon 14:00–17:30, Thu 09:45–11:15"
+  },
+  {
+   "at": "2026-10-30T10:43:22Z",
+   "eventId": "0xE94B51161A6F433FB957268ECF3B31C1",
+   "eventTitle": "Distributed Computing",
+   "kind": "room_changed",
+   "summary": "Room 50.34 Raum -102 (UG) → 50.34 Raum -101 (UG)"
+  },
+  {
    "at": "2026-10-28T10:22:31Z",
    "eventId": "0x066D053413A34C368741946F2902B963",
    "eventTitle": "Ubiquitous Computing",
