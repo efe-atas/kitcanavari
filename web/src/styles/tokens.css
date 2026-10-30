@@ -1,0 +1,129 @@
+/*
+ * KIT Planım v3 design tokens.
+ * One accent (cobalt) for actions and "now", green only for what is done, amber only for what is missing,
+ * red only for clashes and removal. Course types keep their own hues in the calendar.
+ * The theme follows the system unless the user picks one (index.html sets data-theme before first paint).
+ */
+:root {
+  --bg: #f4f5f3;
+  --surface: #ffffff;
+  --surface-2: #f0f2ef;
+  --surface-3: #e6e9e6;
+  --overlay: rgb(14 20 26 / 0.46);
+  --ink: #141b22;
+  --ink-2: #33404c;
+  --muted: #5d6974;
+  --faint: #8a949d;
+  --line: #e1e5e1;
+  --line-strong: #c8cfcb;
+
+  --accent: #2453d6;
+  --accent-strong: #1a40b0;
+  --accent-soft: #e9efff;
+  --accent-ink: #ffffff;
+  --positive: #17784d;
+  --positive-soft: #e2f3e9;
+  --warn: #8a5300;
+  --warn-soft: #fcefd6;
+  --danger: #bf271c;
+  --danger-soft: #fde7e4;
+
+  /* The credit panel and other "ledger" surfaces stay dark in both themes. */
+  --panel: #16212e;
+  --panel-2: #1e2c3b;
+  --panel-ink: #f2f6fa;
+  --panel-muted: #a8b6c4;
+  --panel-line: #33465a;
+  --panel-passed: #8fdcb8;
+  --panel-planned: #8fb3f6;
+  --panel-open: #3d5064;
+
+  /* Chart fills, validated for colour-vision deficiency and contrast against the card surface. */
+  --viz-passed: #1f8a5b;
+  --viz-planned: #2453d6;
+
+  /* Course types: lecture, exercise, practical, seminar, other. */
+  --t-v: #2f62d0;
+  --t-u: #0f8a80;
+  --t-p: #c0650e;
+  --t-s: #7a4fc9;
+  --t-x: #687280;
+  --type: var(--t-x);
+
+  --font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+  --fs-2xs: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13.5px;
+  --fs-md: 15px;
+  --fs-lg: 17px;
+  --fs-xl: 21px;
+  --fs-2xl: 26px;
+  --fs-3xl: 34px;
+  --fs-display: 60px;
+
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(16 24 40 / 0.05);
+  --shadow-md: 0 1px 2px rgb(16 24 40 / 0.04), 0 6px 16px -4px rgb(16 24 40 / 0.1);
+  --shadow-lg: 0 2px 6px rgb(16 24 40 / 0.06), 0 24px 56px -16px rgb(16 24 40 / 0.32);
+  --ring: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --frame: 1280px;
+  --gutter: 40px;
+  --header-h: 64px;
+  --tabbar-h: 68px;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0d1218;
+  --surface: #141b23;
+  --surface-2: #1a232d;
+  --surface-3: #222d39;
+  --overlay: rgb(0 0 0 / 0.6);
+  --ink: #e8edf2;
+  --ink-2: #c3cdd7;
+  --muted: #98a5b2;
+  --faint: #6f7c89;
+  --line: #25303b;
+  --line-strong: #394655;
+
+  --accent: #8fb0ff;
+  --accent-strong: #b4caff;
+  --accent-soft: #1d2b4a;
+  --accent-ink: #0d1218;
+  --positive: #6fd2a4;
+  --positive-soft: #143324;
+  --warn: #f0b860;
+  --warn-soft: #34280f;
+  --danger: #ff857a;
+  --danger-soft: #3b1c19;
+
+  --panel: #18242f;
+  --panel-2: #1f2e3c;
+  --panel-line: #344a5e;
+  --viz-passed: #33a06f;
+  --viz-planned: #5d87ea;
+
+  --t-v: #7ea5ff;
+  --t-u: #4fd1c5;
+  --t-p: #f2a650;
+  --t-s: #b493ff;
+  --t-x: #9aa3b4;
+
+  --shadow-sm: 0 0 0 1px rgb(255 255 255 / 0.02);
+  --shadow-md: 0 0 0 1px rgb(255 255 255 / 0.03), 0 8px 20px -6px rgb(0 0 0 / 0.55);
+  --shadow-lg: 0 0 0 1px rgb(255 255 255 / 0.04), 0 28px 64px -16px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
+}
+
+@media (max-width: 1100px) { :root { --gutter: 28px; } }
+@media (max-width: 640px) { :root { --gutter: 16px; --fs-3xl: 28px; --fs-display: 48px; --header-h: 56px; } }

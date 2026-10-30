@@ -319,7 +319,7 @@ test('agenda keeps the selected events and opens the same course detail', async 
   location.hash = '#/week'
   render(<App />)
   fireEvent.click(await screen.findByRole('button', { name: 'Agenda', exact: true }))
-  const day = await screen.findByRole('region', { name: 'Friday' })
+  const day = await screen.findByRole('region', { name: /^Friday\b/ })
   expect(day.textContent).toContain('09:45')
   fireEvent.click(within(day).getByRole('button', { name: /IT Security/ }))
   await screen.findByRole('dialog', { name: 'Module M3' })

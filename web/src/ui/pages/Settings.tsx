@@ -1,10 +1,11 @@
 import { useRef, useState } from 'preact/hooks'
 import { t } from '../../i18n'
-import { exportState, importState, setLang, toggleTheme, type Sync } from '../../store'
+import { exportState, importState, setLang, setTheme, type Sync } from '../../store'
 import type { CoursesFile, Lang, UserState } from '../../types'
 import { download } from '../download'
 import { fmtDate } from '../format'
 import { Icon } from '../Icon'
+import type { Shortcut } from '../palette/CommandPalette'
 import { SyncForm } from '../sync/SyncForm'
 import { PageHead } from './PageHead'
 
@@ -15,10 +16,11 @@ interface Props {
   sync: Sync
   checkedAt: string
   data: CoursesFile
+  shortcuts: Shortcut[]
 }
 
-export function Settings({ lang, state, update, sync, checkedAt, data }: Props) {
-  const theme = state.theme ?? 'light'
+export function Settings({ lang, state, update, sync, checkedAt, data, shortcuts }: Props) {
+  const theme = state.theme ?? 'system'
   const importInput = useRef<HTMLInputElement>(null)
   const [importError, setImportError] = useState(false)
   const onImport = async (e: Event) => {
@@ -47,9 +49,9 @@ export function Settings({ lang, state, update, sync, checkedAt, data }: Props) 
         <div class="setting-row">
           <span class="setting-label" id="set-theme">{t(lang, 'set.theme')}</span>
           <div class="segmented" role="group" aria-labelledby="set-theme">
-            {(['light', 'dark'] as const).map((x) => (
-              <button key={x} type="button" aria-pressed={theme === x} onClick={() => theme !== x && update(toggleTheme)}>
-                <Icon name={x === 'light' ? 'sun' : 'moon'} size={16} />{t(lang, `set.theme.${x}`)}
+            {(['system', 'light', 'dark'] as const).map((x) => (
+              <button key={x} type="button" aria-pressed={theme === x} onClick={() => update((s) => setTheme(s, x === 'system' ? null : x))}>
+                <Icon name={x === 'light' ? 'sun' : x === 'dark' ? 'moon' : 'monitor'} size={16} />{t(lang, `set.theme.${x}`)}
               </button>
             ))}
           </div>
@@ -73,6 +75,14 @@ export function Settings({ lang, state, update, sync, checkedAt, data }: Props) 
       <section class="settings-card" aria-labelledby="set-sync">
         <h2 id="set-sync">{t(lang, 'sync.title')}</h2>
         <SyncForm lang={lang} sync={sync} />
+      </section>
+
+      <section class="settings-card" aria-labelledby="set-keys">
+        <h2 id="set-keys">{t(lang, 'cmd.shortcuts')}</h2>
+        <p class="settings-text">{t(lang, 'set.keysText')}</p>
+        <ul class="plain shortcut-list">
+          {shortcuts.map((x) => <li key={x.label}><span>{x.label}</span><span>{x.keys.map((k, i) => <kbd key={i}>{k}</kbd>)}</span></li>)}
+        </ul>
       </section>
 
       <section class="settings-card" aria-labelledby="set-data">

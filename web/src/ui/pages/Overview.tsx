@@ -1,16 +1,21 @@
 import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
 import { environmentRole, fit } from '../../logic/career'
-import { AREAS, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
+import { AREAS, moduleKind, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
+import { forecast, gradeOutlook } from '../../logic/insights'
 import { matrixCells, type CellItem, type Matrix, type RowId } from '../../logic/matrix'
 import { nextTerm } from '../../logic/nextSteps'
+import { roadmapEntries } from '../../logic/roadmap'
 import { CURRENT_TERM } from '../../logic/terms'
-import { setArea } from '../../store'
+import { setArea, setStar } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../../types'
 import { pointsOf } from '../career/model'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
+import { Outlook } from '../overview/Outlook'
+import { TermChart } from '../overview/TermChart'
+import { longDate, TodayCard, useNow } from '../overview/TodayCard'
 import { rowLabel } from '../plan/labels'
 import { termName } from '../roadmap/format'
 import { courseHref, pageHref } from '../route'
@@ -120,82 +125,95 @@ function AreaSelect({ lang, state, slot, update, label }: { lang: Lang; state: U
 
 export function Overview({ data, handbook, career, state, update }: Props) {
   const { lang } = state
+  const now = useNow()
   const report = useMemo(() => roadmapReport(state, data, handbook), [state, data, handbook])
   const matrix = useMemo(() => matrixCells(state, data, handbook), [state, data, handbook])
+  const outlook = useMemo(() => ({ forecast: forecast(state, data, handbook), grades: gradeOutlook(state, data, handbook) }), [state, data, handbook])
+  const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const reqs = requirements(lang, state, report, matrix)
   const target = nextTerm(state)
   const passed = report.done.total
   const planned = report.all.total - passed
   const open = Math.max(0, RULES.total - RULES.thesis - report.all.total)
   const missing = reqs.filter((r) => !r.done).length
+  const areasMissing = (state.areas ?? []).length < 2
+  const entries = roadmapEntries(state)
 
-  const now: (CellItem & { row: RowId })[] = (Object.keys(matrix.cells) as RowId[])
+  const nowItems: (CellItem & { row: RowId })[] = (Object.keys(matrix.cells) as RowId[])
     .flatMap((row) => (matrix.cells[row][CURRENT_TERM] ?? []).map((it) => ({ ...it, row })))
+  const termCp = nowItems.filter((it) => it.status === 'passed' || it.status === 'planned').reduce((n, it) => n + (it.ects ?? 0), 0)
 
   const goal = useMemo(() => {
     if (!career) return null
     const f = (state.followed ?? []).find((x) => career.lenses.lenses.some((l) => l.id === x.lens))
     if (!f) return { title: null, n: 0, href: pageHref({ kind: 'career', focus: null }) }
-    const rows = moduleRows(data, handbook ?? EMPTY_HANDBOOK)
-    const n = fit(pointsOf(state, career, rows).all, environmentRole(career.lenses.lenses.find((l) => l.id === f.lens)!), career.lenses.lenses.find((l) => l.id === f.lens)!)
-    return { title: career.lenses.lenses.find((l) => l.id === f.lens)!.title[lang], n, href: pageHref({ kind: 'career', focus: f.lens }) }
-  }, [career, state, data, handbook, lang])
+    const lens = career.lenses.lenses.find((l) => l.id === f.lens)!
+    const n = fit(pointsOf(state, career, rows).all, environmentRole(lens), lens)
+    return { title: lens.title[lang], n, href: pageHref({ kind: 'career', focus: f.lens }) }
+  }, [career, state, rows, lang])
+  const starred = (state.starred ?? []).map((id) => rows.find((r) => r.id === id)).filter((r): r is (typeof rows)[number] => !!r)
+
+  const areasCard = (
+    <section class={`card areas-card${areasMissing ? ' is-setup' : ''}`} aria-labelledby="foundation-title">
+      <header class="card-head">
+        <div>
+          {areasMissing && <p class="eyebrow">{t(lang, 'ov.setupEyebrow')}</p>}
+          <h2 id="foundation-title">{t(lang, 'journey.areas')}</h2>
+          <p>{t(lang, 'v2.areaLead')}</p>
+        </div>
+        <Icon name="compass" size={22} />
+      </header>
+      <div class="specialization-fields">{([0, 1] as const).map((slot) => (
+        <label class="field" key={slot}><span>{t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')}</span>
+          <AreaSelect lang={lang} state={state} slot={slot} update={update} label={t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')} /></label>
+      ))}</div>
+      <a class="text-action" href={pageHref({ kind: 'help', id: 'guide' })}>{t(lang, 'journey.rules')}<Icon name="arrow" size={15} /></a>
+    </section>
+  )
 
   return (
     <div class="overview">
-      <PageHead title={t(lang, 'nav.overview')} lead={t(lang, 'v2.homeLead')}>
-        <span class="term-stamp"><span class="status-dot" />{termName(lang, CURRENT_TERM)}</span>
+      <PageHead title={t(lang, now.minutes < 11 * 60 ? 'ov.hello.morning' : now.minutes < 18 * 60 ? 'ov.hello.day' : 'ov.hello.evening')} lead={t(lang, 'ov.lead', { date: longDate(lang, now.date), term: termName(lang, CURRENT_TERM) })}>
+        <a class="button-quiet" href={pageHref({ kind: 'week' })}><Icon name="calendar" size={16} />{t(lang, 'nav.week')}</a>
+        <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={16} />{t(lang, 'pl.add')}</a>
       </PageHead>
-      <div class="home-stage">
-        <section class="semester-surface" aria-labelledby="now-title">
-          <header class="surface-heading"><div><h2 id="now-title">{t(lang, 'ov.thisTerm', { term: termName(lang, CURRENT_TERM) })}</h2><p>{t(lang, 'v2.termCount', { n: now.length })}</p></div><Icon name="calendar" size={24} /></header>
-          {now.length ? <>
-            <ul class="plain semester-course-list">
-              {now.map((it, i) => <li key={it.id}><span class="course-index">{String(i + 1).padStart(2, '0')}</span><a href={courseHref(it.id)}><strong>{it.title ?? it.id}</strong><span>{rowLabel(lang, state, it.row)}</span></a><span class="semester-credit">{it.ects ?? '?'} <small>ECTS</small></span></li>)}
-            </ul>
-            <div class="semester-bottom"><a class="button" href={pageHref({ kind: 'week' })}>{t(lang, 'ov.openWeek')}<Icon name="arrow" size={16} /></a><a class="text-action" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}>{t(lang, 'pl.add')}<Icon name="plus" size={16} /></a></div>
-          </> : <div class="semester-empty">
-            <div class="empty-calendar" aria-hidden="true"><Icon name="calendar" size={32} /></div>
-            <h3>{t(lang, 'v2.emptyTitle')}</h3><p>{t(lang, 'v2.emptyLead')}</p>
-            <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}>{t(lang, 'v2.exploreCourses')}<Icon name="arrow" size={17} /></a>
-          </div>}
-        </section>
-        <section class="degree-surface" aria-labelledby="ledger-title">
-          <div class="surface-heading"><h2 id="ledger-title">{t(lang, 'ov.credits')}</h2><Icon name="overview" size={22} /></div>
+
+      {areasMissing && areasCard}
+
+      <div class="dashboard">
+        <div class="dash-today"><TodayCard lang={lang} data={data} state={state} /></div>
+
+        <section class="degree-surface dash-credits" aria-labelledby="ledger-title">
+          <div class="surface-heading"><h2 id="ledger-title">{t(lang, 'ov.credits')}</h2><Icon name="overview" size={20} /></div>
           <div class="degree-total"><strong>{report.all.total}</strong><span>/ {RULES.total}<small>ECTS</small></span></div>
           <CreditRuler lang={lang} passed={passed} planned={planned} />
           <ul class="plain credit-key"><li><i class="is-passed" />{t(lang, 'ov.legend.passed', { n: passed })}</li><li><i class="is-planned" />{t(lang, 'ov.legend.planned', { n: planned })}</li><li><i class="is-open" />{t(lang, 'ov.legend.open', { n: open })}</li><li><i class="is-thesis" />{t(lang, 'ov.legend.thesis', { n: RULES.thesis })}</li></ul>
-          {report.gpa !== null && <p class="degree-gpa">{t(lang, 'plan.gpa', { cp: report.gradedCp })}<strong>{fmtNum(lang, report.gpa)}</strong></p>}
+          {report.gpa !== null && <p class="degree-gpa"><span>{t(lang, 'plan.gpa', { cp: report.gradedCp })}</span><strong>{fmtNum(lang, report.gpa)}</strong></p>}
           <a class="degree-link" href={pageHref({ kind: 'plan' })}>{t(lang, 'journey.viewPlan')}<Icon name="arrow" size={16} /></a>
         </section>
-      </div>
-      <div class="home-details">
-        <section class="specialization-surface" aria-labelledby="foundation-title">
-          <header class="surface-heading"><div><h2 id="foundation-title">{t(lang, 'journey.areas')}</h2><p>{t(lang, 'v2.areaLead')}</p></div><Icon name="compass" size={22} /></header>
-          <div class="specialization-fields">{([0, 1] as const).map((slot) => <label class="field" key={slot}><span><b>0{slot + 1}</b>{t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')}</span><AreaSelect lang={lang} state={state} slot={slot} update={update} label={t(lang, slot === 0 ? 'plan.area1' : 'plan.area2')} /></label>)}</div>
-          <a class="text-action" href={pageHref({ kind: 'help', id: 'guide' })}>{t(lang, 'journey.rules')}<Icon name="arrow" size={15} /></a>
-        </section>
-        {goal && <section class="career-entry" aria-labelledby="goal-title"><Icon name="briefcase" size={24} /><h2 id="goal-title">{t(lang, 'ov.goal')}</h2>{goal.title ? <a class="goal-link" href={goal.href}><span class="goal-name">{goal.title}</span><span class="goal-fit"><strong>{goal.n}%</strong> {t(lang, 'ov.goalFit')}</span></a> : <p>{t(lang, 'v2.careerLead')}</p>}<a class="text-action" href={goal.href}>{t(lang, 'v2.explorePaths')}<Icon name="arrow" size={16} /></a></section>}
-      </div>
-      <details class="degree-audit" open={report.all.total > 0}>
-        <summary><div><h2>{t(lang, 'ov.reqs')}</h2><p>{t(lang, 'v2.auditLead')}</p></div><span>{reqs.length - missing} / {reqs.length}<Icon name="chevron" size={20} /></span></summary>
-        <section class="reqs-card" aria-labelledby="reqs-title">
-          <header class="section-head">
-            <h2 id="reqs-title" class="sr-only">{t(lang, 'ov.reqs')}</h2>
-            <p class={missing ? 'reqs-count is-missing' : 'reqs-count'}>
-              {missing ? t(lang, 'ov.missing', { n: missing, total: reqs.length }) : t(lang, 'step.done')}
-            </p>
+
+        <section class="card reqs-card dash-reqs" aria-labelledby="reqs-title">
+          <header class="card-head">
+            <div>
+              <h2 id="reqs-title">{t(lang, 'ov.reqs')}</h2>
+              <p>{t(lang, 'v2.auditLead')}</p>
+            </div>
+            <span class={`reqs-score${missing ? ' is-missing' : ''}`}><strong>{reqs.length - missing}</strong> / {reqs.length}</span>
           </header>
+          <p class={missing ? 'reqs-count is-missing' : 'reqs-count'}>
+            {missing ? t(lang, 'ov.missing', { n: missing, total: reqs.length }) : t(lang, 'step.done')}
+          </p>
           <ul class="plain req-list">
             {reqs.map((r) => (
               <li key={r.id} class={`req-row${r.done ? ' is-done' : ' is-missing'}`}>
-                <span class="req-mark" aria-hidden="true">{r.done ? <Icon name="check" size={14} /> : null}</span>
+                <span class="req-mark" aria-hidden="true">{r.done ? <Icon name="check" size={12} /> : null}</span>
                 <span class="req-label">{r.label}{r.term && <TermLink id={r.term} lang={lang} />}</span>
                 <span class="req-value"><strong>{r.have}</strong> / {r.need}
                   <span class="sr-only">{r.done ? t(lang, 'ov.met') : t(lang, 'ov.notMet')}</span></span>
+                <span class={`meter req-meter${r.done ? ' is-done' : ''}`} aria-hidden="true"><span style={{ width: `${Math.min(100, r.need ? (r.have / r.need) * 100 : 100)}%` }} /></span>
                 {!r.done && r.add && (
                   <span class="req-action">
-                    <a class="button-quiet" href={pageHref({ kind: 'courses', term: target, row: r.add.row, filter: r.add.kind ?? null })}
+                    <a class="button-ghost is-small" href={pageHref({ kind: 'courses', term: target, row: r.add.row, filter: r.add.kind ?? null })}
                       aria-label={`${r.add.label}: ${r.label}`}>
                       <Icon name="plus" size={14} />{r.add.label}
                     </a>
@@ -222,7 +240,71 @@ export function Overview({ data, handbook, career, state, update }: Props) {
             </ul>
           )}
         </section>
-      </details>
+
+        <div class="dash-outlook"><Outlook lang={lang} forecast={outlook.forecast} grades={outlook.grades} /></div>
+
+        <section class="card term-card dash-term" aria-labelledby="now-title">
+          <header class="card-head">
+            <div><h2 id="now-title">{t(lang, 'ov.thisTerm', { term: termName(lang, CURRENT_TERM) })}</h2><p>{t(lang, 'ov.termSummary', { n: nowItems.length, cp: termCp })}</p></div>
+            <Icon name="calendar" size={22} />
+          </header>
+          {nowItems.length ? (
+            <ul class="plain semester-course-list">
+              {nowItems.map((it) => (
+                <li key={it.id}>
+                  <a href={courseHref(it.id)}><strong>{it.title ?? it.id}</strong><span>{rowLabel(lang, state, it.row)}</span></a>
+                  <span class="semester-credit">{it.ects ?? '?'}<small> ECTS</small></span>
+                </li>
+              ))}
+            </ul>
+          ) : <p class="card-empty">{t(lang, 'v2.emptyLead')}</p>}
+          <div class="card-foot">
+            <a class="text-action" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={15} />{t(lang, 'pl.add')}</a>
+            <a class="text-action" href={pageHref({ kind: 'plan' })}>{t(lang, 'journey.viewPlan')}<Icon name="arrow" size={15} /></a>
+          </div>
+        </section>
+
+        <section class="card chart-card dash-chart" aria-labelledby="chart-title">
+          <header class="card-head">
+            <div><h2 id="chart-title">{t(lang, 'chart.title')}</h2><p>{t(lang, 'chart.lead')}</p></div>
+            <Icon name="trend" size={22} />
+          </header>
+          <TermChart lang={lang} terms={outlook.forecast.terms} />
+        </section>
+
+        {!areasMissing && <div class="dash-areas">{areasCard}</div>}
+
+        <div class="dash-side">
+          {goal && (
+            <section class="card career-entry" aria-labelledby="goal-title">
+              <header class="card-head"><h2 id="goal-title">{t(lang, 'ov.goal')}</h2><Icon name="briefcase" size={22} /></header>
+              {goal.title ? <a class="goal-link" href={goal.href}><span class="goal-name">{goal.title}</span><span class="goal-fit"><strong>{goal.n}%</strong> {t(lang, 'ov.goalFit')}</span>
+                <span class="meter" aria-hidden="true"><span style={{ width: `${goal.n}%` }} /></span></a> : <p>{t(lang, 'v2.careerLead')}</p>}
+              <a class="text-action" href={goal.href}>{t(lang, 'v2.explorePaths')}<Icon name="arrow" size={15} /></a>
+            </section>
+          )}
+          <section class="card shortlist-card" aria-labelledby="star-title">
+            <header class="card-head"><div><h2 id="star-title">{t(lang, 'star.title')}</h2><p>{t(lang, starred.length ? 'star.lead' : 'star.empty')}</p></div><Icon name="star" size={22} /></header>
+            {starred.length > 0 && (
+              <ul class="plain shortlist">
+                {starred.slice(0, 6).map((r) => {
+                  const kind = moduleKind(data, r)
+                  const e = entries[r.id]
+                  return (
+                    <li key={r.id}>
+                      <a href={courseHref(r.id)}><strong>{r.title}</strong>
+                        <span>{r.ects ?? '?'} ECTS{kind !== 'lecture' ? ` · ${t(lang, `kind.${kind}`)}` : ''}{e ? ` · ${t(lang, 'add.inPlan', { term: termName(lang, e.term) })}` : ''}</span></a>
+                      <button type="button" class="icon-button star-toggle is-on" aria-pressed="true" aria-label={t(lang, 'star.remove', { title: r.title })}
+                        onClick={() => update((s) => setStar(s, r.id, false))}><Icon name="star" size={17} filled /></button>
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+            <a class="text-action" href={`${pageHref({ kind: 'courses', term: null, row: null, filter: null })}?starred=1`}>{t(lang, starred.length ? 'star.all' : 'star.browse')}<Icon name="arrow" size={15} /></a>
+          </section>
+        </div>
+      </div>
     </div>
   )
 }

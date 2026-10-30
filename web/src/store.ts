@@ -5,7 +5,7 @@ import { emptyRoadmap, roadmapEntries } from './logic/roadmap'
 import { CURRENT_TERM, nextTerm, PRIOR, termOrder } from './logic/terms'
 import { defaultBucket } from './logic/degree'
 import { rowBucket, type RowId } from './logic/matrix'
-import type { CoursesFile, Event, HandbookFile, Lang, ModuleStatus, Roadmap, RoadmapEntry, UserState } from './types'
+import type { CoursesFile, Event, HandbookFile, Lang, ModuleStatus, Roadmap, RoadmapEntry, SelectedEntry, UserState } from './types'
 
 export { roadmapEntries }
 
@@ -40,6 +40,7 @@ function isState(x: unknown): x is UserState {
     && (s.roadmap === undefined || isRoadmap(s.roadmap))
     && (s.followed === undefined || (Array.isArray(s.followed)
       && s.followed.every((f) => !!f && typeof f.role === 'string' && typeof f.lens === 'string')))
+    && (s.starred === undefined || (Array.isArray(s.starred) && s.starred.every((id) => typeof id === 'string')))
     && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'
@@ -245,6 +246,12 @@ export const setLang = (s: UserState, lang: Lang): UserState => ({ ...s, lang })
 
 export const toggleTheme = (s: UserState): UserState => ({ ...s, theme: s.theme === 'dark' ? 'light' : 'dark' })
 
+/** A fixed theme, or none to follow the system. */
+export function setTheme(s: UserState, theme: 'light' | 'dark' | null): UserState {
+  const { theme: _old, ...rest } = s
+  return theme ? { ...rest, theme } : rest
+}
+
 export function acknowledge(s: UserState, ids: string[], data: CoursesFile): UserState {
   const selected = { ...s.selected }
   for (const id of ids) {
@@ -369,6 +376,40 @@ export function setFollow(s: UserState, role: string, lens: string, on: boolean)
   if (on === has) return s
   if (!on) return { ...s, followed: list.filter((f) => !(f.role === role && f.lens === lens)) }
   return list.length >= MAX_FOLLOWED ? s : { ...s, followed: [...list, { role, lens }] }
+}
+
+/** Star (on) or unstar a module. Takes the wanted end state, like setFollow, so a sync replay cannot flip it. */
+export function setStar(s: UserState, id: string, on: boolean): UserState {
+  const list = s.starred ?? []
+  if (list.includes(id) === on) return s
+  return { ...s, starred: on ? [...list, id] : list.filter((x) => x !== id) }
+}
+
+/** Everything the plan holds about one module: its stored entry, its courses in the weekly timetable, its note. */
+export interface ModuleSnapshot {
+  entry: RoadmapEntry | null
+  events: Record<string, SelectedEntry>
+  note: string | null
+}
+
+export function snapshotModule(s: UserState, id: string): ModuleSnapshot {
+  return {
+    entry: s.roadmap?.modules[id] ?? null,
+    events: Object.fromEntries(Object.entries(s.selected).filter(([, e]) => e.moduleId === id)),
+    note: s.roadmap?.notes[id] ?? null,
+  }
+}
+
+/** Put a module back exactly as a snapshot had it (the undo of adding, moving or removing it). */
+export function restoreModule(s: UserState, id: string, snap: ModuleSnapshot): UserState {
+  const r = roadmapOf(s)
+  const { [id]: _entry, ...modules } = r.modules
+  const { [id]: _note, ...notes } = r.notes
+  const selected = { ...Object.fromEntries(Object.entries(s.selected).filter(([, e]) => e.moduleId !== id)), ...snap.events }
+  return {
+    ...s, selected,
+    roadmap: { ...r, modules: snap.entry ? { ...modules, [id]: snap.entry } : modules, notes: snap.note !== null ? { ...notes, [id]: snap.note } : notes },
+  }
 }
 
 export const exportState = (s: UserState): string => JSON.stringify(s, null, 1)

@@ -6,7 +6,7 @@ import type { RowId } from '../logic/matrix'
 export type Page =
   | { kind: 'overview' }
   | { kind: 'plan' }
-  | { kind: 'courses'; term: string | null; row: RowId | null; filter: Kind | null }
+  | { kind: 'courses'; term: string | null; row: RowId | null; filter: Kind | null; starred?: boolean }
   | { kind: 'week' }
   | { kind: 'career'; focus: string | null }
   | { kind: 'changes' }
@@ -63,8 +63,10 @@ function legacy(head: string, a?: string, b?: string, c?: string): string | null
 export function parseHash(hash: string): { route: Route; redirect?: string } {
   const [path, query = ''] = hash.replace(/^#\/?/, '').split('?')
   const [head = '', a, b, c] = path.split('/').map(decodeURIComponent)
-  const course = new URLSearchParams(query).get('c')
+  const params = new URLSearchParams(query)
+  const course = params.get('c')
   const page = pageOf(head, a, b, c)
+  if (page?.kind === 'courses' && params.get('starred') === '1') page.starred = true
   if (page) return { route: { page, course } }
   const to = legacy(head, a, b, c) ?? '#/'
   return { route: parseHash(to).route, redirect: to }

@@ -217,4 +217,6 @@ export interface UserState {
   roadmap?: Roadmap
   /** Career paths (role × employer lens) the user follows; at most three. */
   followed?: { role: string; lens: string }[]
+  /** Modules the user keeps an eye on (shortlist), newest last. */
+  starred?: string[]
 }
