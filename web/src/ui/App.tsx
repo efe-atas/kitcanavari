@@ -309,13 +309,11 @@ function PageSkeleton({ label }: { label: string }) {
 }
 
 function BrandMark() {
-  // A credit ruler: three bars of growing length, the last one still open.
+  // A fan of five rays opening from one corner: the terms of the degree, each one a step further.
   return (
     <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-      <rect width="32" height="32" rx="9" fill="currentColor" />
-      <rect x="8" y="9" width="10" height="3" rx="1.5" fill="var(--accent-ink)" />
-      <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="var(--accent-ink)" />
-      <rect x="8" y="20" width="16" height="3" rx="1.5" fill="none" stroke="var(--accent-ink)" stroke-width="1.2" />
+      <rect width="32" height="32" rx="8" fill="currentColor" />
+      <path d="M9.5 26L26 26A20 20 0 0 0 25.41 21.16L9.4 25.15A3.5 3.5 0 0 1 9.5 26ZM9.31 24.86L24.91 19.49A20 20 0 0 0 22.77 15.11L8.94 24.09A3.5 3.5 0 0 1 9.31 24.86ZM8.76 23.85L21.76 13.69A20 20 0 0 0 18.31 10.24L8.15 23.24A3.5 3.5 0 0 1 8.76 23.85ZM7.91 23.06L16.89 9.23A20 20 0 0 0 12.51 7.09L7.14 22.69A3.5 3.5 0 0 1 7.91 23.06ZM6.85 22.6L10.84 6.59A20 20 0 0 0 6 6L6 22.5A3.5 3.5 0 0 1 6.85 22.6Z" fill="var(--accent-ink)" />
     </svg>
   )
 }
