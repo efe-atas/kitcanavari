@@ -188,17 +188,17 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   const navKind: NavKind | 'more' = page.kind === 'more' ? 'more' : page.kind === 'shared' ? 'plan' : page.kind
   const openSettings = () => go('settings')
   const switchTheme = () => update((s) => setTheme(s, theme === 'dark' ? 'light' : 'dark'))
-  // The header button steps through the languages: TR → EN → DE → TR.
+  // The header button switches between Turkish and English.
   const nextLang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]
   const switchLang = () => update((s) => setLang(s, nextLang))
-  const langName = (l: Lang) => ({ tr: 'Türkçe', en: 'English', de: 'Deutsch' })[l]
+  const langName = (l: Lang) => ({ tr: 'Türkçe', en: 'English' })[l]
 
   const pages: PaletteCommand[] = (Object.keys(NAV) as NavKind[]).map((k) => ({
     id: k, label: t(lang, `nav.${k}`), icon: NAV[k].icon, hint: `G ${NAV[k].key.toUpperCase()}`, keywords: t(lang, `page.${k}.lead`), run: () => go(k),
   }))
   const actions: PaletteCommand[] = load.status !== 'ready' ? [] : [
     { id: 'theme', label: t(lang, theme === 'dark' ? 'theme.toLight' : 'theme.toDark'), icon: theme === 'dark' ? 'sun' : 'moon', keywords: 'theme tema dark light', run: switchTheme },
-    ...LANGS.filter((l) => l !== lang).map((l) => ({ id: `lang-${l}`, label: langName(l), icon: 'globe' as IconName, keywords: 'language dil sprache', run: () => update((s) => setLang(s, l)) })),
+    ...LANGS.filter((l) => l !== lang).map((l) => ({ id: `lang-${l}`, label: langName(l), icon: 'globe' as IconName, keywords: 'language dil', run: () => update((s) => setLang(s, l)) })),
     { id: 'term', label: t(lang, 'road.addTerm'), icon: 'plus', keywords: 'semester dönem term', run: () => { update(addTerm); toast({ message: t(lang, 'toast.termAdded'), link: { label: t(lang, 'journey.viewPlan'), href: pageHref({ kind: 'plan' }) } }) } },
     ...(Object.keys(state.selected).length ? [{
       id: 'ics', label: t(lang, 'schedule.ics'), icon: 'download' as IconName, keywords: 'ics calendar takvim',

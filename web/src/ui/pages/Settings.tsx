@@ -41,7 +41,7 @@ export function Settings({ lang, state, update, sync, checkedAt, data, shortcuts
         <div class="setting-row">
           <span class="setting-label" id="set-lang">{t(lang, 'set.lang')}</span>
           <div class="segmented" role="group" aria-labelledby="set-lang">
-            {(['tr', 'en', 'de'] as Lang[]).map((l) => (
+            {(['tr', 'en'] as Lang[]).map((l) => (
               <button key={l} type="button" aria-pressed={lang === l} onClick={() => update((s) => setLang(s, l))}>{t(lang, `set.lang.${l}`)}</button>
             ))}
           </div>

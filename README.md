@@ -28,7 +28,7 @@ Your schedule lives only in your browser (localStorage); use *Export* to back it
 - **Quick search:** `Ctrl/⌘ K` (or `/`) reaches any course, page or action; `G` then a letter jumps between pages;
   `?` lists the shortcuts.
 - **Installable and offline:** add it to your home screen; without a connection it shows the last downloaded
-  catalog. Turkish, English and German; light, dark or system theme.
+  catalog. Turkish and English; light, dark or system theme.
 
 ## How the data stays fresh
 
