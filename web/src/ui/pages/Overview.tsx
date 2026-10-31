@@ -1,10 +1,10 @@
-import { useMemo } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { fit } from '../../logic/career'
 import { pathRole } from '../../logic/careerPlus'
 import { AREAS, moduleKind, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
-import { forecast, gradeOutlook } from '../../logic/insights'
+import { forecast, gradeOutlook, projectedAverage } from '../../logic/insights'
 import { matrixCells, type CellItem, type Matrix, type RowId } from '../../logic/matrix'
 import { nextTerm } from '../../logic/nextSteps'
 import { roadmapEntries } from '../../logic/roadmap'
@@ -14,6 +14,7 @@ import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../
 import { pathTitle, pointsOf } from '../career/model'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
+import { DeadlineForm, DeadlineList, upcoming } from '../deadlines/Deadlines'
 import { Outlook } from '../overview/Outlook'
 import { TermChart } from '../overview/TermChart'
 import { longDate, TodayCard, useNow } from '../overview/TodayCard'
@@ -129,7 +130,8 @@ export function Overview({ data, handbook, career, state, update }: Props) {
   const now = useNow()
   const report = useMemo(() => roadmapReport(state, data, handbook), [state, data, handbook])
   const matrix = useMemo(() => matrixCells(state, data, handbook), [state, data, handbook])
-  const outlook = useMemo(() => ({ forecast: forecast(state, data, handbook), grades: gradeOutlook(state, data, handbook) }), [state, data, handbook])
+  const outlook = useMemo(() => ({ forecast: forecast(state, data, handbook), grades: gradeOutlook(state, data, handbook), projected: projectedAverage(state, data, handbook) }), [state, data, handbook])
+  const [adding, setAdding] = useState(false)
   const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const reqs = requirements(lang, state, report, matrix)
   const target = nextTerm(state)
@@ -243,7 +245,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
           )}
         </section>
 
-        <div class="dash-outlook"><Outlook lang={lang} forecast={outlook.forecast} grades={outlook.grades} /></div>
+        <div class="dash-outlook"><Outlook lang={lang} forecast={outlook.forecast} grades={outlook.grades} projected={outlook.projected} /></div>
 
         <section class="card term-card dash-term" aria-labelledby="now-title">
           <header class="card-head">
@@ -277,6 +279,17 @@ export function Overview({ data, handbook, career, state, update }: Props) {
         {!areasMissing && <div class="dash-areas">{areasCard}</div>}
 
         <div class="dash-side">
+          <section class="card deadlines-card" aria-labelledby="dl-title">
+            <header class="card-head">
+              <div><h2 id="dl-title">{t(lang, 'dl.cardTitle')}</h2><p>{t(lang, 'dl.cardLead')}</p></div>
+              <button type="button" class="icon-button" aria-expanded={adding} aria-label={t(lang, 'dl.add')} onClick={() => setAdding(!adding)}><Icon name={adding ? 'close' : 'plus'} size={18} /></button>
+            </header>
+            {adding && <DeadlineForm lang={lang} update={update} onDone={() => setAdding(false)}
+              modules={Object.keys(entries).map((id) => ({ id, title: rows.find((r) => r.id === id)?.title ?? id })).sort((a, b) => a.title.localeCompare(b.title))} />}
+            {upcoming(state.deadlines ?? [], now.date).length
+              ? <DeadlineList lang={lang} list={upcoming(state.deadlines ?? [], now.date).slice(0, 5)} update={update} today={now.date} />
+              : !adding && <p class="card-empty">{t(lang, 'dl.empty')}</p>}
+          </section>
           {goal && (
             <section class="card career-entry" aria-labelledby="goal-title">
               <header class="card-head"><h2 id="goal-title">{t(lang, 'ov.goal')}</h2><Icon name="briefcase" size={22} /></header>

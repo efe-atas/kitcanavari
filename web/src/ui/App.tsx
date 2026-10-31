@@ -195,7 +195,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
     { id: 'term', label: t(lang, 'road.addTerm'), icon: 'plus', keywords: 'semester dönem term', run: () => { update(addTerm); toast({ message: t(lang, 'toast.termAdded'), link: { label: t(lang, 'journey.viewPlan'), href: pageHref({ kind: 'plan' }) } }) } },
     ...(Object.keys(state.selected).length ? [{
       id: 'ics', label: t(lang, 'schedule.ics'), icon: 'download' as IconName, keywords: 'ics calendar takvim',
-      run: () => download('kit-schedule.ics', buildIcs(state.selected, load.courses.events, load.courses.meta.scrapedAt), 'text/calendar'),
+      run: () => download('kit-schedule.ics', buildIcs(state.selected, load.courses.events, load.courses.meta.scrapedAt, state.deadlines), 'text/calendar'),
     }] : []),
     { id: 'backup', label: t(lang, 'schedule.export'), icon: 'download', keywords: 'backup yedek json export', run: () => download('kit-plan.json', exportState(state), 'application/json') },
     { id: 'share', label: t(lang, 'share.title'), icon: 'share', keywords: 'share paylaş link bağlantı', run: () => setSharing(true) },

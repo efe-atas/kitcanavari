@@ -302,3 +302,46 @@ describe('career tools', () => {
     expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).toContain('Reinforcement Learning (1.3)')
   })
 })
+
+describe('dates, expected grades, reviews and comparing plans', () => {
+  test('a date added on the overview shows as coming up and goes into the calendar file', async () => {
+    vi.useFakeTimers({ now: new Date('2026-10-28T09:00:00Z'), shouldAdvanceTime: true })
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'WS27', status: 'planned', countAs: null, grade: null } }) })
+    render(<App />)
+    const card = await screen.findByRole('region', { name: 'Exams and deadlines' })
+    fireEvent.click(within(card).getByRole('button', { name: 'Add date' }))
+    fireEvent.input(within(card).getByLabelText('What'), { target: { value: 'RL exam' } })
+    fireEvent.input(within(card).getByLabelText('Date'), { target: { value: '2026-10-30' } })
+    fireEvent.change(within(card).getByLabelText('Course'), { target: { value: 'H1' } })
+    fireEvent.click(within(card).getAllByRole('button', { name: 'Add date' }).at(-1)!)
+    await waitFor(() => expect(saved().deadlines).toMatchObject([{ title: 'RL exam', date: '2026-10-30', moduleId: 'H1', kind: 'exam' }]))
+    expect(within(card).getByText(/in 2 days/)).toBeTruthy()
+    const { buildIcs } = await import('../src/logic/ics')
+    expect(buildIcs({}, {}, '2026-10-28T00:00:00Z', saved().deadlines)).toContain('DTSTART;VALUE=DATE:20261030')
+  })
+
+  test('the course sheet takes an expected grade and a review; the outlook projects the average', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 }, H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/?c=H2'
+    render(<App />)
+    const sheet = await screen.findByRole('dialog', { name: 'Seminar: Post-Quantum Cryptography' })
+    fireEvent.change(within(sheet).getByLabelText('Expected grade'), { target: { value: '2.3' } })
+    await waitFor(() => expect(saved().expected).toEqual({ H2: 2.3 }))
+    fireEvent.click(within(sheet).getByRole('button', { name: 'Difficulty 4/5' }))
+    fireEvent.click(within(sheet).getByRole('button', { name: 'Yes' }))
+    await waitFor(() => expect(saved().reviews.H2).toMatchObject({ difficulty: 4, recommend: true }))
+    fireEvent.keyDown(window, { key: 'Escape' })
+    const outlook = await screen.findByRole('region', { name: 'Graduation' })
+    // (1.3 × 6 + 2.3 × 3) / 9 = 1.63 → 1.6
+    expect(within(outlook).getByText(/Projected average with your expected grades \(3 ECTS\)/).textContent).toContain('1.6')
+  })
+
+  test('a shared plan is compared with mine', async () => {
+    setState({ areas: AREAS, ...roadmap({ H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/shared/1~4.1~WS26.SS27.WS27.SS28~xH2,1,p.xH1,2,p'
+    render(<App />)
+    const cmp = await screen.findByRole('region', { name: 'Compared with your plan' })
+    expect(within(cmp).getByRole('link', { name: 'Seminar: Post-Quantum Cryptography' })).toBeTruthy()
+    expect(within(cmp).getByRole('link', { name: 'Reinforcement Learning' })).toBeTruthy()
+  })
+})

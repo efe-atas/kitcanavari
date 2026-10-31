@@ -4,6 +4,7 @@ import { addDays, berlinNow, clashes, defaultWeek, mondayOf, occKey, occurrences
 import { findConflicts } from '../../logic/conflicts'
 import { buildIcs } from '../../logic/ics'
 import { CURRENT_TERM } from '../../logic/terms'
+import { weeklyHours } from '../../logic/insights'
 import type { CoursesFile, Lang, UserState } from '../../types'
 import { download } from '../download'
 import { fmtDate } from '../format'
@@ -48,6 +49,9 @@ export function Week({ data, state }: Props) {
     if (mid) location.hash = courseHref(mid)
   }
   const thisWeek = mondayOf(now.date) === week
+  // Workload of this term's modules in the timetable, each module once.
+  const termEcts = [...new Set(Object.values(state.selected).map((e) => e.moduleId).filter((m): m is string => !!m))]
+    .reduce((n, id) => n + (data.modules[id]?.ects ?? 0), 0)
   const cancelled = occ.filter((o) => o.cancelled)
   const hours = occ.filter((o) => !o.cancelled).reduce((n, o) => {
     const [h1, m1] = o.start.split(':').map(Number)
@@ -60,7 +64,7 @@ export function Week({ data, state }: Props) {
       <PageHead title={t(lang, 'nav.week')} lead={t(lang, 'page.week.lead', { term: termName(lang, CURRENT_TERM) })}>
         <a class="button-quiet" href={pageHref({ kind: 'plan' })}><Icon name="plan" size={16} />{t(lang, 'journey.viewPlan')}</a>
         {ids.length > 0 && (
-          <button type="button" class="button-quiet" onClick={() => download('kit-schedule.ics', buildIcs(state.selected, data.events, data.meta.scrapedAt), 'text/calendar')}>
+          <button type="button" class="button-quiet" onClick={() => download('kit-schedule.ics', buildIcs(state.selected, data.events, data.meta.scrapedAt, state.deadlines), 'text/calendar')}>
             <Icon name="download" size={16} />{t(lang, 'schedule.ics')}
           </button>
         )}
@@ -83,6 +87,7 @@ export function Week({ data, state }: Props) {
             <p class="week-stats">
               <span>{t(lang, 'wk.sessions', { n: occ.filter((o) => !o.cancelled).length })}</span>
               <span>{t(lang, 'wk.hours', { h: Math.round(hours / 6) / 10 })}</span>
+              {termEcts > 0 && <span class="week-load" title={t(lang, 'wk.loadHint', { ects: termEcts })}>{t(lang, 'wk.load', { h: weeklyHours(termEcts) })}</span>}
               {weekClashes.length > 0 && <span class="is-bad"><Icon name="alert" size={14} />{t(lang, 'wk.clashes', { n: weekClashes.length })}</span>}
               {cancelled.length > 0 && <span class="is-warn">{t(lang, 'wk.cancelled', { n: cancelled.length })}</span>}
             </p>

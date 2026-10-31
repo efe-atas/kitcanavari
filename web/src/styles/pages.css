@@ -92,3 +92,41 @@
 .shared-meta { color: var(--muted); font-size: var(--fs-xs); }
 .shared-term li.status-passed .shared-title { color: var(--positive); }
 .shared-term li.status-failed .shared-title, .shared-term li.status-dropped .shared-title { color: var(--muted); text-decoration: line-through; }
+
+/* Dates the user entered */
+.deadline-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; margin-bottom: 12px; padding: 14px; border-radius: var(--r-md); background: var(--surface-2); }
+.deadline-form .dl-title, .deadline-form .dl-course { grid-column: 1 / -1; }
+.deadline-form .button { justify-self: start; }
+input[type='date'], input[type='time'] { min-height: 42px; padding: 8px 10px; border-radius: var(--r-md); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font-size: var(--fs-sm); width: 100%; }
+.deadline-list { display: grid; }
+.deadline { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.deadline:first-child { border-top: 0; }
+.deadline-when { display: grid; font-size: var(--fs-xs); line-height: 1.3; }
+.deadline-when strong { font-weight: 650; }
+.deadline-when span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.deadline-what { display: grid; min-width: 0; }
+.deadline-what a, .deadline-what > span { overflow: hidden; color: var(--ink); font-size: var(--fs-sm); font-weight: 600; text-decoration: none; text-overflow: ellipsis; white-space: nowrap; }
+.deadline-what small { color: var(--muted); font-size: var(--fs-xs); }
+.deadline.is-soon .deadline-what small { color: var(--warn); font-weight: 650; }
+.deadline.kind-exam .deadline-when strong { color: var(--accent); }
+.detail-add-date > summary { padding: 6px 0; color: var(--accent); font-size: var(--fs-sm); }
+.whatif-projected { color: var(--ink-2); font-size: var(--fs-sm); }
+.whatif-projected strong { color: var(--accent); font-size: var(--fs-lg); }
+.week-load { color: var(--ink-2); font-weight: 600; }
+
+/* Review */
+.review { gap: 12px; }
+.review-scale { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; font-size: var(--fs-sm); }
+.review-scale .segmented > button { min-width: 38px; padding: 0 10px; }
+.shared-review { color: var(--accent); font-size: var(--fs-xs); font-weight: 600; }
+
+/* Shared plan compared with mine */
+.shared-compare { margin-bottom: 20px; }
+.compare-stats { display: flex; flex-wrap: wrap; gap: 12px 36px; margin: 0 0 16px; }
+.compare-stats dt { color: var(--muted); font-size: var(--fs-xs); }
+.compare-stats dd { margin: 2px 0 0; font-size: var(--fs-xl); font-weight: 650; }
+.compare-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.compare-cols h3 { margin-bottom: 8px; font-size: var(--fs-sm); }
+.compare-list { display: grid; gap: 4px; font-size: var(--fs-sm); }
+.compare-list a { color: var(--ink); font-weight: 600; text-decoration: none; }
+@media (max-width: 640px) { .compare-cols, .deadline-form { grid-template-columns: minmax(0, 1fr); } }

@@ -1,4 +1,4 @@
-import type { Event, SelectedEntry } from '../types'
+import type { Deadline, Event, SelectedEntry } from '../types'
 import { activeSessions } from './time'
 
 /** The catalog says 'fortnightly'; older data and tests say 'biweekly'. */
@@ -34,7 +34,7 @@ const BERLIN = [
   'END:VTIMEZONE',
 ]
 
-export function buildIcs(selected: Record<string, SelectedEntry>, events: Record<string, Event>, scrapedAt: string): string {
+export function buildIcs(selected: Record<string, SelectedEntry>, events: Record<string, Event>, scrapedAt: string, deadlines: Deadline[] = []): string {
   const dtstamp = scrapedAt.replace(/[-:]/g, '').replace(/\.\d+/, '')
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//kitcanavari//schedule//EN', 'CALSCALE:GREGORIAN', ...BERLIN]
   for (const [id, entry] of Object.entries(selected)) {
@@ -73,6 +73,14 @@ export function buildIcs(selected: Record<string, SelectedEntry>, events: Record
         'END:VEVENT',
       )
     }
+  }
+  for (const d of deadlines) {
+    // Dates the user entered: a whole day, or one hour from the given time.
+    const day = d.date.replace(/-/g, '')
+    const when = d.time
+      ? [`DTSTART;TZID=Europe/Berlin:${stamp(d.date, d.time)}`, `DTEND;TZID=Europe/Berlin:${stamp(d.date, `${String(Math.min(23, Number(d.time.slice(0, 2)) + 1)).padStart(2, '0')}:${d.time.slice(3)}`)}`]
+      : [`DTSTART;VALUE=DATE:${day}`]
+    lines.push('BEGIN:VEVENT', `UID:deadline-${d.id}@kitcanavari`, `DTSTAMP:${dtstamp}`, ...when, `SUMMARY:${escape(d.title)}`, 'END:VEVENT')
   }
   lines.push('END:VCALENDAR')
   return lines.flatMap(fold).join('\r\n') + '\r\n'

@@ -6,15 +6,16 @@ import { Icon } from './Icon'
 import { Overlay } from './Overlay'
 
 /** The link to a read-only copy of the plan, with grades left out unless the user wants them in. */
-export function shareUrl(state: UserState, withGrades: boolean): string {
-  return `${location.href.replace(/#.*$/, '')}#/shared/${encodePlan(state, withGrades)}`
+export function shareUrl(state: UserState, withGrades: boolean, withReviews = false): string {
+  return `${location.href.replace(/#.*$/, '')}#/shared/${encodePlan(state, withGrades, withReviews)}`
 }
 
 export function ShareDialog({ lang, state, onClose }: { lang: Lang; state: UserState; onClose: () => void }) {
   const [grades, setGrades] = useState(false)
+  const [reviews, setReviews] = useState(false)
   const [copied, setCopied] = useState(false)
   const field = useRef<HTMLInputElement>(null)
-  const url = shareUrl(state, grades)
+  const url = shareUrl(state, grades, reviews)
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(url)
@@ -36,6 +37,9 @@ export function ShareDialog({ lang, state, onClose }: { lang: Lang; state: UserS
         <input ref={field} type="text" readOnly value={url} onFocus={(e) => (e.target as HTMLInputElement).select()} />
       </label>
       <label class="switch"><input type="checkbox" checked={grades} onChange={(e) => { setGrades((e.target as HTMLInputElement).checked); setCopied(false) }} />{t(lang, 'share.grades')}</label>
+      {Object.keys(state.reviews ?? {}).length > 0 && (
+        <label class="switch"><input type="checkbox" checked={reviews} onChange={(e) => { setReviews((e.target as HTMLInputElement).checked); setCopied(false) }} />{t(lang, 'share.reviews')}</label>
+      )}
       <div class="share-actions">
         <button type="button" class="button" onClick={copy}><Icon name={copied ? 'check' : 'copy'} size={16} />{t(lang, copied ? 'share.copied' : 'share.copy')}</button>
         <a class="button-quiet" href={url} target="_blank" rel="noopener"><Icon name="external" size={16} />{t(lang, 'share.preview')}</a>
