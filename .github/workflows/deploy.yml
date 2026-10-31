@@ -56,6 +56,9 @@ jobs:
           mkdir -p web/dist/data
           cp data/*.json web/dist/data/
           if [ -d data/career ]; then cp -r data/career web/dist/data/; fi
+          if [ -f data/next/courses.json ]; then mkdir -p web/dist/data/next && cp data/next/courses.json web/dist/data/next/; fi
+          # Smaller downloads: the JSON is written pretty-printed; serve it compact.
+          for f in $(find web/dist/data -name '*.json'); do python3 -c "import json,sys; p=sys.argv[1]; d=json.load(open(p)); json.dump(d, open(p,'w'), separators=(',',':'), ensure_ascii=False)" "$f"; done
 
       - uses: actions/upload-pages-artifact@v3
         if: steps.data.outputs.ok == 'true'

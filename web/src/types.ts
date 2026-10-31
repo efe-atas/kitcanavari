@@ -219,4 +219,42 @@ export interface UserState {
   followed?: { role: string; lens: string }[]
   /** Modules the user keeps an eye on (shortlist), newest last. */
   starred?: string[]
+  /** Exam dates, registration deadlines and other dates the user entered. */
+  deadlines?: Deadline[]
+  /** Saved alternative plans ("what if"), compared side by side. */
+  scenarios?: Scenario[]
+  /** Grades the user expects in planned modules (1.0–4.0), apart from real grades. */
+  expected?: Record<string, number>
+  /** The user's own review of a module. */
+  reviews?: Record<string, Review>
+}
+
+export type DeadlineKind = 'exam' | 'registration' | 'deadline' | 'other'
+
+export interface Deadline {
+  id: string
+  /** Module the date belongs to, if any. */
+  moduleId: string | null
+  title: string
+  /** YYYY-MM-DD */
+  date: string
+  /** HH:MM, or null for the whole day. */
+  time: string | null
+  kind: DeadlineKind
+}
+
+export interface Scenario {
+  id: string
+  name: string
+  areas: string[]
+  roadmap: Roadmap
+}
+
+export interface Review {
+  /** 1 (easy) – 5 (hard) */
+  difficulty: number | null
+  /** 1 (light) – 5 (heavy) */
+  workload: number | null
+  recommend: boolean | null
+  text: string
 }

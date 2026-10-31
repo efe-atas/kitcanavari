@@ -9,19 +9,26 @@ Your schedule lives only in your browser (localStorage); use *Export* to back it
 ## What it does
 
 - **Overview:** today's sessions in real dates (live, next, cancelled), the 120-credit ledger, every degree
-  requirement with what is missing, a graduation outlook (the term your modules reach 90 ECTS, then the thesis) and
-  a grade calculator.
+  requirement with what is missing, a graduation outlook (the term your modules reach 90 ECTS, then the thesis), a
+  grade calculator with expected grades, upcoming exams and deadlines, and how fresh the catalog is.
 - **Courses:** search all 211 modules; filter by kind, area of specialization, free weekdays, "fits my week" and
-  your shortlist; add to any term with one click (and undo it).
+  your shortlist; add to any term with one click (and undo it); suggestions for the chosen term that fill open
+  requirements.
 - **Plan:** terms as a list or a board; drag a course to another term or use its move menu; print it or save it as
-  PDF; share it as a link that opens read-only (grades only if you choose).
+  PDF; share it as a link that opens read-only (grades and course reviews only if you choose) and compare a
+  friend's plan with yours; warnings when a recommended prerequisite comes later; save alternative plans as
+  scenarios and compare their credits, workload and fit side by side.
 - **My week:** the timetable in real calendar weeks, with block dates, cancellations, clashes per date and an
-  `.ics` export.
-- **Career:** pick a work environment and get skill gaps and a full course proposal that respects the degree rules.
+  `.ics` export; weekly contact hours and estimated workload; a preview of next term's timetable once KIT publishes it.
+- **Course sheet:** your own exam dates and deadlines, an expected grade, and a private review (difficulty,
+  workload, would recommend).
+- **Career:** pick a work environment and optionally a role; skill gaps and profile, fit per term, courses that close
+  gaps, lecturers to approach, a job-ad matcher, CV coursework lines and a full course proposal that respects the
+  degree rules.
 - **Quick search:** `Ctrl/⌘ K` (or `/`) reaches any course, page or action; `G` then a letter jumps between pages;
   `?` lists the shortcuts.
 - **Installable and offline:** add it to your home screen; without a connection it shows the last downloaded
-  catalog. Turkish and English, light, dark or system theme.
+  catalog. Turkish and English; light, dark or system theme.
 
 ## How the data stays fresh
 
@@ -30,6 +37,10 @@ KIT course catalog, keeps only courses linked to SPO 2025, and writes `data/cour
 `data/changes.json` (a 90-day change log). If anything changed, it commits the data and redeploys
 the site (`web/`) to GitHub Pages. If the catalog looks broken (many failures, or a > 30 % drop in
 courses) nothing is written and the workflow fails, so you get an e-mail from GitHub.
+
+Next term's timetable: once KIT opens the catalog for the coming term, set the repository variables
+`NEXT_TERM_GUID` (the catalog's `tguid` for that term) and `NEXT_TERM` (for example `SS 27`). The daily run then
+also writes `data/next/courses.json`, and *My week* shows a preview. A failure there never blocks the current data.
 
 ## Profile sync (optional)
 

@@ -1,18 +1,20 @@
-import { useMemo } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
-import { environmentRole, fit } from '../../logic/career'
+import { fit } from '../../logic/career'
+import { pathRole } from '../../logic/careerPlus'
 import { AREAS, moduleKind, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
-import { forecast, gradeOutlook } from '../../logic/insights'
+import { forecast, gradeOutlook, projectedAverage } from '../../logic/insights'
 import { matrixCells, type CellItem, type Matrix, type RowId } from '../../logic/matrix'
 import { nextTerm } from '../../logic/nextSteps'
 import { roadmapEntries } from '../../logic/roadmap'
 import { CURRENT_TERM } from '../../logic/terms'
 import { setArea, setStar } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../../types'
-import { pointsOf } from '../career/model'
+import { pathTitle, pointsOf } from '../career/model'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
+import { DeadlineForm, DeadlineList, upcoming } from '../deadlines/Deadlines'
 import { Outlook } from '../overview/Outlook'
 import { TermChart } from '../overview/TermChart'
 import { longDate, TodayCard, useNow } from '../overview/TodayCard'
@@ -27,9 +29,11 @@ interface Props {
   career: CareerData | null
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
+  /** When the scraper last checked the catalog. */
+  checkedAt?: string
 }
 
-const fmtNum = (lang: Lang, n: number) => String(n).replace('.', lang === 'tr' ? ',' : '.')
+const fmtNum = (lang: Lang, n: number) => String(n).replace('.', lang === 'en' ? '.' : ',')
 
 /** 120 marks, one per ECTS: passed, planned, still open, and the thesis at the end. */
 function CreditRuler({ lang, passed, planned }: { lang: Lang; passed: number; planned: number }) {
@@ -123,12 +127,13 @@ function AreaSelect({ lang, state, slot, update, label }: { lang: Lang; state: U
   )
 }
 
-export function Overview({ data, handbook, career, state, update }: Props) {
+export function Overview({ data, handbook, career, state, update, checkedAt }: Props) {
   const { lang } = state
   const now = useNow()
   const report = useMemo(() => roadmapReport(state, data, handbook), [state, data, handbook])
   const matrix = useMemo(() => matrixCells(state, data, handbook), [state, data, handbook])
-  const outlook = useMemo(() => ({ forecast: forecast(state, data, handbook), grades: gradeOutlook(state, data, handbook) }), [state, data, handbook])
+  const outlook = useMemo(() => ({ forecast: forecast(state, data, handbook), grades: gradeOutlook(state, data, handbook), projected: projectedAverage(state, data, handbook) }), [state, data, handbook])
+  const [adding, setAdding] = useState(false)
   const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
   const reqs = requirements(lang, state, report, matrix)
   const target = nextTerm(state)
@@ -148,8 +153,9 @@ export function Overview({ data, handbook, career, state, update }: Props) {
     const f = (state.followed ?? []).find((x) => career.lenses.lenses.some((l) => l.id === x.lens))
     if (!f) return { title: null, n: 0, href: pageHref({ kind: 'career', focus: null }) }
     const lens = career.lenses.lenses.find((l) => l.id === f.lens)!
-    const n = fit(pointsOf(state, career, rows).all, environmentRole(lens), lens)
-    return { title: lens.title[lang], n, href: pageHref({ kind: 'career', focus: f.lens }) }
+    const n = fit(pointsOf(state, career, rows).all, pathRole(career, f.role, lens), lens)
+    const hasRole = career.roles.roles.some((r) => r.id === f.role)
+    return { title: pathTitle(career, hasRole ? f.role : 'environment', f.lens, lang), n, href: pageHref({ kind: 'career', focus: hasRole ? `${f.role}:${f.lens}` : f.lens }) }
   }, [career, state, rows, lang])
   const starred = (state.starred ?? []).map((id) => rows.find((r) => r.id === id)).filter((r): r is (typeof rows)[number] => !!r)
 
@@ -174,6 +180,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
   return (
     <div class="overview">
       <PageHead title={t(lang, now.minutes < 11 * 60 ? 'ov.hello.morning' : now.minutes < 18 * 60 ? 'ov.hello.day' : 'ov.hello.evening')} lead={t(lang, 'ov.lead', { date: longDate(lang, now.date), term: termName(lang, CURRENT_TERM) })}>
+        {checkedAt && <DataHealth lang={lang} checkedAt={checkedAt} />}
         <a class="button-quiet" href={pageHref({ kind: 'week' })}><Icon name="calendar" size={16} />{t(lang, 'nav.week')}</a>
         <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={16} />{t(lang, 'pl.add')}</a>
       </PageHead>
@@ -241,7 +248,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
           )}
         </section>
 
-        <div class="dash-outlook"><Outlook lang={lang} forecast={outlook.forecast} grades={outlook.grades} /></div>
+        <div class="dash-outlook"><Outlook lang={lang} forecast={outlook.forecast} grades={outlook.grades} projected={outlook.projected} /></div>
 
         <section class="card term-card dash-term" aria-labelledby="now-title">
           <header class="card-head">
@@ -275,6 +282,17 @@ export function Overview({ data, handbook, career, state, update }: Props) {
         {!areasMissing && <div class="dash-areas">{areasCard}</div>}
 
         <div class="dash-side">
+          <section class="card deadlines-card" aria-labelledby="dl-title">
+            <header class="card-head">
+              <div><h2 id="dl-title">{t(lang, 'dl.cardTitle')}</h2><p>{t(lang, 'dl.cardLead')}</p></div>
+              <button type="button" class="icon-button" aria-expanded={adding} aria-label={t(lang, 'dl.add')} onClick={() => setAdding(!adding)}><Icon name={adding ? 'close' : 'plus'} size={18} /></button>
+            </header>
+            {adding && <DeadlineForm lang={lang} update={update} onDone={() => setAdding(false)}
+              modules={Object.keys(entries).map((id) => ({ id, title: rows.find((r) => r.id === id)?.title ?? id })).sort((a, b) => a.title.localeCompare(b.title))} />}
+            {upcoming(state.deadlines ?? [], now.date).length
+              ? <DeadlineList lang={lang} list={upcoming(state.deadlines ?? [], now.date).slice(0, 5)} update={update} today={now.date} />
+              : !adding && <p class="card-empty">{t(lang, 'dl.empty')}</p>}
+          </section>
           {goal && (
             <section class="card career-entry" aria-labelledby="goal-title">
               <header class="card-head"><h2 id="goal-title">{t(lang, 'ov.goal')}</h2><Icon name="briefcase" size={22} /></header>
@@ -306,5 +324,17 @@ export function Overview({ data, handbook, career, state, update }: Props) {
         </div>
       </div>
     </div>
+  )
+}
+
+/** How fresh the catalog data is: checked daily; after 3 days something is wrong with the scraper. */
+function DataHealth({ lang, checkedAt }: { lang: Lang; checkedAt: string }) {
+  const hours = Math.max(0, Math.round((Date.now() - Date.parse(checkedAt)) / 3600_000))
+  const level = hours > 7 * 24 ? 'old' : hours > 3 * 24 ? 'stale' : 'fresh'
+  const ago = hours < 1 ? t(lang, 'hl.justNow') : hours < 48 ? t(lang, 'hl.hours', { n: hours }) : t(lang, 'hl.days', { n: Math.floor(hours / 24) })
+  return (
+    <a class={`data-chip is-${level}`} href={pageHref({ kind: 'settings' })} title={t(lang, `hl.${level}`)}>
+      <span class="status-dot" aria-hidden="true" />{t(lang, 'hl.label', { ago })}<span class="sr-only"> · {t(lang, `hl.${level}`)}</span>
+    </a>
   )
 }

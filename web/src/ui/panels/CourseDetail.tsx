@@ -8,18 +8,21 @@ import { AREAS, bucketOptions, defaultBucket, moduleKind } from '../../logic/deg
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
 import { similarModules } from '../../logic/search'
+import { prereqLinks } from '../../logic/advisor'
+import { termOrder } from '../../logic/terms'
 import { CURRENT_TERM, DEFAULT_TERMS, offeringIssue, PRIOR } from '../../logic/terms'
 import {
-  addModuleToTerm, moveModule, removeFromRoadmap, restoreModule, setEntryCountAs, setGrade, setNote, setStar, setStatus,
+  addModuleToTerm, moveModule, removeFromRoadmap, restoreModule, setEntryCountAs, setExpected, setGrade, setNote, setReview, setStar, setStatus,
   snapshotModule, toggleSlot,
 } from '../../store'
-import type { CareerData, CoursesFile, Event, HandbookFile, ModuleStatus, SkillId, UserState } from '../../types'
+import type { CareerData, CoursesFile, Event, HandbookFile, ModuleStatus, Review, SkillId, UserState } from '../../types'
 import { roleTitle } from '../career/model'
 import { fmtDate, fmtSlot } from '../format'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
 import { closeCourse, courseHref } from '../route'
 import { useToast } from '../toast'
+import { DeadlineForm, DeadlineList } from '../deadlines/Deadlines'
 
 interface Props {
   data: CoursesFile
@@ -31,6 +34,9 @@ interface Props {
 }
 
 const STATUSES: ModuleStatus[] = ['planned', 'passed', 'failed', 'dropped']
+/** KIT grade steps. */
+const GRADES = [1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0]
+const EMPTY_REVIEW: Review = { difficulty: null, workload: null, recommend: null, text: '' }
 const HINT_ICON: Record<Hint['kind'], 'alert' | 'calendar' | 'users'> = { required: 'alert', kickoff: 'calendar', registration: 'users' }
 
 export function courseTitle(data: CoursesFile, handbook: HandbookFile | null, id: string): string {
@@ -146,6 +152,16 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
                 {[PRIOR, ...terms].map((term) => <option key={term} value={term}>{termName(lang, term)}</option>)}
               </select>
             </label>
+            {entry.status === 'planned' && (
+              <label class="field">
+                {t(lang, 'detail.expected')}
+                <select value={state.expected?.[id] != null ? String(state.expected[id]) : ''}
+                  onChange={(e) => { const v = (e.target as HTMLSelectElement).value; update((s) => setExpected(s, id, v ? Number(v) : null)) }}>
+                  <option value="">—</option>
+                  {GRADES.map((g) => <option key={g} value={String(g)}>{g.toFixed(1).replace('.', lang === 'en' ? '.' : ',')}</option>)}
+                </select>
+              </label>
+            )}
             {places.length > 1 && (
               <label class="field">
                 {t(lang, 'road.countAs')}
@@ -185,6 +201,39 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
           {clash && <p class="note note-warn"><Icon name="alert" size={14} />{t(lang, 'detail.clash')}</p>}
         </section>
       )}
+
+      <section class="detail-section">
+        <h3>{t(lang, 'dl.cardTitle')}</h3>
+        {(state.deadlines ?? []).some((d) => d.moduleId === id) && (
+          <DeadlineList lang={lang} list={(state.deadlines ?? []).filter((d) => d.moduleId === id)} update={update} today={today} linkCourses={false} />
+        )}
+        <details class="detail-add-date"><summary>{t(lang, 'dl.addFor')}</summary><DeadlineForm lang={lang} update={update} moduleId={id} /></details>
+      </section>
+
+      {(() => {
+        const l = prereqLinks(rows).get(id)
+        if (!l) return null
+        const all = roadmapEntries(state)
+        const state_ = (o: string) => {
+          const e = all[o]
+          if (!e || !(e.status === 'planned' || e.status === 'passed')) return 'missing'
+          if (e.status === 'passed') return 'passed'
+          return entry && termOrder(e.term) >= termOrder(entry.term) ? 'late' : 'planned'
+        }
+        return (
+          <section class="detail-section">
+            <h3>{t(lang, 'pre.title')}</h3>
+            <ul class="plain prereq-list">
+              {l.before.map((o) => (
+                <li key={o} class={`is-${state_(o)}`}><a href={courseHref(o)}>{rows.find((r) => r.id === o)?.title ?? o}</a><span>{t(lang, `pre.state.${state_(o)}`)}</span></li>
+              ))}
+              {l.excludes.map((o) => (
+                <li key={o} class={all[o] ? 'is-late' : 'is-passed'}><a href={courseHref(o)}>{rows.find((r) => r.id === o)?.title ?? o}</a><span>{t(lang, all[o] ? 'pre.state.excluded' : 'pre.state.notCombined')}</span></li>
+              ))}
+            </ul>
+          </section>
+        )
+      })()}
 
       {places.length > 0 && (
         <section class="detail-section">
@@ -303,6 +352,8 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
         </section>
       )}
 
+      <ReviewEditor lang={lang} review={state.reviews?.[id] ?? EMPTY_REVIEW} onChange={(r) => update((s) => setReview(s, id, r))} />
+
       {(hb?.competenceGoals || hb?.content || hb?.prerequisites || hb?.recommendations || desc?.exam || desc?.workload) && (
         <details class="handbook-text">
           <summary>{t(lang, 'detail.handbook')}</summary>
@@ -320,5 +371,42 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
         </button>
       )}
     </div>
+  )
+}
+
+/** The user's own take on a course: difficulty, workload, would they recommend it, a few words. */
+function ReviewEditor({ lang, review, onChange }: { lang: UserState['lang']; review: Review; onChange: (r: Review) => void }) {
+  const [text, setText] = useState(review.text)
+  useEffect(() => setText(review.text), [review.text])
+  const scale = (key: 'difficulty' | 'workload') => (
+    <div class="review-scale" role="group" aria-label={t(lang, `rv.${key}`)}>
+      <span>{t(lang, `rv.${key}`)}</span>
+      <div class="segmented">
+        {[1, 2, 3, 4, 5].map((n) => (
+          <button key={n} type="button" aria-pressed={review[key] === n} aria-label={`${t(lang, `rv.${key}`)} ${n}/5`}
+            onClick={() => onChange({ ...review, [key]: review[key] === n ? null : n })}>{n}</button>
+        ))}
+      </div>
+    </div>
+  )
+  return (
+    <section class="detail-section review">
+      <h3>{t(lang, 'rv.title')}</h3>
+      {scale('difficulty')}
+      {scale('workload')}
+      <div class="review-scale" role="group" aria-label={t(lang, 'rv.recommend')}>
+        <span>{t(lang, 'rv.recommend')}</span>
+        <div class="segmented">
+          {([true, false] as const).map((v) => (
+            <button key={String(v)} type="button" aria-pressed={review.recommend === v}
+              onClick={() => onChange({ ...review, recommend: review.recommend === v ? null : v })}>{t(lang, v ? 'rv.yes' : 'rv.no')}</button>
+          ))}
+        </div>
+      </div>
+      <label class="field">{t(lang, 'rv.text')}
+        <textarea rows={2} value={text} placeholder={t(lang, 'rv.textHint')} onInput={(e) => setText((e.target as HTMLTextAreaElement).value)}
+          onBlur={() => text !== review.text && onChange({ ...review, text })} />
+      </label>
+    </section>
   )
 }

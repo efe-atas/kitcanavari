@@ -1,45 +1,14 @@
-// Degree rules of the Computer Science M.Sc., SPO 88-979-H-2025 (module handbook of 09/09/2026, WS 26/27, §1.3, §2, §3).
+// Degree rules: checks over the program definition in src/program.ts.
 import type { CoursesFile, HandbookFile, Module, UserState } from '../types'
 import { chosenModule } from './ects'
 import { roadmapEntries } from './roadmap'
+import { PROGRAM } from '../program'
 
-export const RULES = {
-  total: 120,
-  thesis: 30,
-  areaMin: 15,
-  areaLectureMin: 10,
-  areaLectureMinReduced: { Telematics: 8 } as Record<string, number>,
-  areasMax: 73,
-  stamm: 4,
-  seminarMin: 3,
-  practicalMin: 6,
-  spMin: 12,
-  spMax: 18,
-  electiveMin: 6,
-  electiveMax: 49,
-  minorMin: 9,
-  minorMax: 18,
-  iqMin: 2,
-  iqMax: 6,
-  semesterTarget: 30,
-}
-
-/** Handbook Figure 2 (09/09/2026). Matched by id, and by title in case a module gets a new id. */
-const STAMM_IDS = new Set([
-  'M-INFO-107201', 'M-INFO-100818', 'M-INFO-100856', 'M-INFO-100799', 'M-INFO-107166', 'M-INFO-106998',
-  'M-INFO-107169', 'M-INFO-107676', 'M-INFO-107162', 'M-INFO-107235', 'M-INFO-107243',
-])
-const STAMM_TITLES = [
-  'Algorithms II', 'Computer Architecture', 'Computer Graphics', 'Formal Systems', 'Human Computer Interaction', 'IT Security',
-  'Machine Learning - Foundations and Algorithms', 'Multimodal Artificial Intelligence', 'Robotics I - Introduction to Robotics',
-  'Software Engineering II', 'Telematics',
-]
-
-export const AREAS = [
-  'Algorithm Engineering', 'Cryptography and Security', 'Data Science', 'Design of Embedded Systems and Computer Architectures',
-  'Human-centred Machine Intelligence', 'Robotics and Automation', 'Software Engineering and Compiler Construction',
-  'Telematics', 'Theoretical Foundations',
-]
+/** The rules, Stammmodul list and areas come from the program definition (src/program.ts). */
+export const RULES = PROGRAM.rules
+const STAMM_IDS = new Set(PROGRAM.stammIds)
+const STAMM_TITLES = PROGRAM.stammTitles
+export const AREAS = PROGRAM.areas
 
 export type Kind = 'stamm' | 'seminar' | 'practical' | 'lecture'
 /** Where a module's credits go: an area name, or one of these. */

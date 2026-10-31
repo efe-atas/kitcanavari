@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import { loadData } from '../data'
+import { LANGS } from '../locale'
 import { t } from '../i18n'
 import { pendingAlerts } from '../logic/alerts'
 import { buildIcs } from '../logic/ics'
 import { addTerm, defaultState, exportState, setLang, setTheme, useAppState } from '../store'
 import type { CareerData, ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile, UserState } from '../types'
-import { CareerView } from './career/CareerView'
 import { ChangesView } from './changes/ChangesView'
 import { download } from './download'
 import { ErrorBoundary } from './ErrorBoundary'
@@ -14,7 +14,6 @@ import { Icon, type IconName } from './Icon'
 import { CommandPalette, ShortcutsDialog, type PaletteCommand, type Shortcut } from './palette/CommandPalette'
 import { CourseDetail, courseTitle } from './panels/CourseDetail'
 import { Courses } from './pages/Courses'
-import { Help } from './pages/Help'
 import { More } from './pages/More'
 import { Overview } from './pages/Overview'
 import { PageHead } from './pages/PageHead'
@@ -28,13 +27,18 @@ import { Sheet } from './Sheet'
 import { SyncStatus } from './sync/SyncStatus'
 import { applyUpdate, UPDATE_EVENT } from '../pwa'
 import { ToastProvider, useToast } from './toast'
+import { lazyComponent } from './lazy'
+
+// Career and help are the heaviest pages and most visits never open them: their code loads on first use.
+const CareerView = lazyComponent(() => import('./career/CareerView').then((m) => m.CareerView), () => <PageSkeleton label="…" />)
+const Help = lazyComponent(() => import('./pages/Help').then((m) => m.Help), () => <PageSkeleton label="…" />)
 
 const STALE_DAYS = 3
 
 type Load =
   | { status: 'loading' }
   | { status: 'error'; error: string }
-  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; career: CareerData | null; checkedAt: string }
+  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; career: CareerData | null; next: CoursesFile | null; checkedAt: string }
 
 type NavKind = 'overview' | 'plan' | 'courses' | 'week' | 'career' | 'changes' | 'help' | 'settings'
 
@@ -114,10 +118,10 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
 
   useEffect(() => {
     loadData()
-      .then(({ courses, changes, status, handbook, career }: {
-        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null; career?: CareerData | null
+      .then(({ courses, changes, status, handbook, career, next }: {
+        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null; career?: CareerData | null; next?: CoursesFile | null
       }) => setLoad({
-        status: 'ready', courses, changes, handbook: handbook ?? null, career: career ?? null,
+        status: 'ready', courses, changes, handbook: handbook ?? null, career: career ?? null, next: next ?? null,
         checkedAt: status?.checkedAt ?? courses.meta.scrapedAt,
       }))
       .catch((e: unknown) => setLoad({ status: 'error', error: e instanceof Error ? e.message : String(e) }))
@@ -184,18 +188,21 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   const navKind: NavKind | 'more' = page.kind === 'more' ? 'more' : page.kind === 'shared' ? 'plan' : page.kind
   const openSettings = () => go('settings')
   const switchTheme = () => update((s) => setTheme(s, theme === 'dark' ? 'light' : 'dark'))
-  const switchLang = () => update((s) => setLang(s, lang === 'tr' ? 'en' : 'tr'))
+  // The header button switches between Turkish and English.
+  const nextLang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]
+  const switchLang = () => update((s) => setLang(s, nextLang))
+  const langName = (l: Lang) => ({ tr: 'Türkçe', en: 'English' })[l]
 
   const pages: PaletteCommand[] = (Object.keys(NAV) as NavKind[]).map((k) => ({
     id: k, label: t(lang, `nav.${k}`), icon: NAV[k].icon, hint: `G ${NAV[k].key.toUpperCase()}`, keywords: t(lang, `page.${k}.lead`), run: () => go(k),
   }))
   const actions: PaletteCommand[] = load.status !== 'ready' ? [] : [
     { id: 'theme', label: t(lang, theme === 'dark' ? 'theme.toLight' : 'theme.toDark'), icon: theme === 'dark' ? 'sun' : 'moon', keywords: 'theme tema dark light', run: switchTheme },
-    { id: 'lang', label: lang === 'tr' ? 'Switch to English' : 'Türkçeye geç', icon: 'globe', keywords: 'language dil', run: switchLang },
+    ...LANGS.filter((l) => l !== lang).map((l) => ({ id: `lang-${l}`, label: langName(l), icon: 'globe' as IconName, keywords: 'language dil', run: () => update((s) => setLang(s, l)) })),
     { id: 'term', label: t(lang, 'road.addTerm'), icon: 'plus', keywords: 'semester dönem term', run: () => { update(addTerm); toast({ message: t(lang, 'toast.termAdded'), link: { label: t(lang, 'journey.viewPlan'), href: pageHref({ kind: 'plan' }) } }) } },
     ...(Object.keys(state.selected).length ? [{
       id: 'ics', label: t(lang, 'schedule.ics'), icon: 'download' as IconName, keywords: 'ics calendar takvim',
-      run: () => download('kit-schedule.ics', buildIcs(state.selected, load.courses.events, load.courses.meta.scrapedAt), 'text/calendar'),
+      run: () => download('kit-schedule.ics', buildIcs(state.selected, load.courses.events, load.courses.meta.scrapedAt, state.deadlines), 'text/calendar'),
     }] : []),
     { id: 'backup', label: t(lang, 'schedule.export'), icon: 'download', keywords: 'backup yedek json export', run: () => download('kit-plan.json', exportState(state), 'application/json') },
     { id: 'share', label: t(lang, 'share.title'), icon: 'share', keywords: 'share paylaş link bağlantı', run: () => setSharing(true) },
@@ -214,11 +221,11 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
     if (load.status !== 'ready') return null
     const { courses: data, handbook, career, changes } = load
     switch (page.kind) {
-      case 'overview': return <Overview data={data} handbook={handbook} career={career} state={state} update={update} />
-      case 'plan': return <PlanBoard data={data} handbook={handbook} state={state} update={update} />
+      case 'overview': return <Overview data={data} handbook={handbook} career={career} state={state} update={update} checkedAt={load.checkedAt} />
+      case 'plan': return <PlanBoard data={data} handbook={handbook} career={career} state={state} update={update} />
       case 'courses': return <Courses key={`${page.term}/${page.row}/${page.filter}`} data={data} handbook={handbook} career={career} state={state}
         update={update} term={page.term} row={page.row} filter={page.filter} starred={page.starred} />
-      case 'week': return <Week data={data} state={state} update={update} />
+      case 'week': return <Week data={data} next={load.next} state={state} update={update} />
       case 'career': return <><PageHead title={t(lang, 'nav.career')} lead={t(lang, 'page.career.lead')} /><CareerView data={data} handbook={handbook} career={career} focus={page.focus} state={state} update={update} /></>
       case 'changes': return <><PageHead title={t(lang, 'nav.changes')} lead={t(lang, 'page.changes.lead')} /><ChangesView data={data} changes={changes} state={state} alerts={alerts} update={update} /></>
       case 'help': return <Help lang={lang} data={data} id={page.id} />
@@ -246,7 +253,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
               <Icon name="bell" size={19} />{alerts.length > 0 && <span class="count-badge" data-testid="changes-badge" aria-hidden="true">{alerts.length}</span>}
             </a>
             <a class="icon-button header-help" href={pageHref(NAV.help.page)} aria-label={t(lang, 'nav.help')} aria-current={navKind === 'help' ? 'page' : undefined}><Icon name="help" size={19} /></a>
-            <button class="locale-control" type="button" onClick={switchLang} aria-label={lang === 'tr' ? 'Switch to English' : 'Türkçeye geç'}>{lang === 'tr' ? 'EN' : 'TR'}</button>
+            <button class="locale-control" type="button" onClick={switchLang} aria-label={langName(nextLang)} title={langName(nextLang)}>{nextLang.toUpperCase()}</button>
             <button class="icon-button" type="button" onClick={switchTheme} aria-label={t(lang, theme === 'light' ? 'theme.toDark' : 'theme.toLight')}><Icon name={theme === 'light' ? 'moon' : 'sun'} size={19} /></button>
             <SyncStatus lang={lang} sync={sync} onOpen={openSettings} />
             <a class="icon-button profile-link" href={pageHref(NAV.settings.page)} aria-label={t(lang, 'nav.settings')} aria-current={navKind === 'settings' ? 'page' : undefined}><Icon name="settings" size={19} /></a>

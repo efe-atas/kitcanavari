@@ -82,7 +82,7 @@ describe('shortlist', () => {
     await waitFor(() => expect(saved().starred).toEqual(['H1']))
     expect(screen.getByRole('button', { name: 'Remove from shortlist: Reinforcement Learning' }).getAttribute('aria-pressed')).toBe('true')
     fireEvent.click(screen.getByRole('checkbox', { name: /Only my shortlist/ }))
-    await waitFor(() => expect(screen.getAllByRole('link', { name: /Reinforcement Learning|Post-Quantum|Module M/ }).map((a) => a.textContent)).toEqual(['Reinforcement Learning']))
+    await waitFor(() => expect([...document.querySelectorAll('.results .result-title')].map((a) => a.textContent)).toEqual(['Reinforcement Learning']))
     location.hash = '#/'
     const card = await screen.findByRole('region', { name: 'Shortlist' })
     expect(within(card).getByRole('link', { name: /Reinforcement Learning/ })).toBeTruthy()
@@ -269,5 +269,122 @@ describe('changes', () => {
     fireEvent.click(within(feed).getByRole('checkbox', { name: 'Only times, rooms and cancellations' }))
     await waitFor(() => expect(within(feed).queryByText('Lecturers changed')).toBeNull())
     expect(within(feed).getByRole('link', { name: 'IT Security' }).getAttribute('href')).toBe('#/changes?c=M3')
+  })
+})
+
+describe('career tools', () => {
+  test('ranks environments, closes a gap with a course, lists lecturers, reads a job ad and writes CV lines', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 } }) })
+    location.hash = '#/career/security:bigtech'
+    render(<App />)
+    await screen.findByRole('heading', { name: 'security · Big Tech', level: 2 })
+    // Every environment shows the plan's fit.
+    const picker = screen.getByRole('navigation', { name: 'Where do you want to work?' })
+    expect(within(picker).getAllByRole('link')).toHaveLength(6)
+    expect(within(picker).getByRole('link', { name: 'Big Tech' }).textContent).toMatch(/\d+%/)
+    // A gap lists courses that close it; adding one puts it in the plan.
+    const gaps = screen.getByRole('list', { name: 'Courses that close the Security gap' })
+    fireEvent.click(within(gaps).getByRole('button', { name: /^Add: / }))
+    // M3 is offered this term: it lands in the weekly timetable as well.
+    await waitFor(() => expect(Object.values(saved().selected as Record<string, { moduleId: string }>).some((e) => e.moduleId === 'M3')).toBe(true))
+    // Lecturers.
+    expect(screen.getByRole('region', { name: 'Who to write to in this field' }).textContent).toContain('Prof. Coordinator')
+    // Job ad.
+    fireEvent.input(screen.getByLabelText('Job ad text'), { target: { value: 'Penetration testing and cryptography for our cloud.' } })
+    const ad = screen.getByRole('region', { name: 'Compare a job ad with your plan' })
+    expect(within(ad).getByText('Security')).toBeTruthy()
+    expect(within(ad).getByText('penetration')).toBeTruthy()
+    // CV lines in English, grades only when asked.
+    const cv = screen.getByRole('region', { name: 'Coursework for your CV and LinkedIn' })
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).toContain('Reinforcement Learning')
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).not.toContain('(1.3)')
+    fireEvent.click(within(cv).getByRole('checkbox', { name: 'Include grades' }))
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).toContain('Reinforcement Learning (1.3)')
+  })
+})
+
+describe('dates, expected grades, reviews and comparing plans', () => {
+  test('a date added on the overview shows as coming up and goes into the calendar file', async () => {
+    vi.useFakeTimers({ now: new Date('2026-10-28T09:00:00Z'), shouldAdvanceTime: true })
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'WS27', status: 'planned', countAs: null, grade: null } }) })
+    render(<App />)
+    const card = await screen.findByRole('region', { name: 'Exams and deadlines' })
+    fireEvent.click(within(card).getByRole('button', { name: 'Add date' }))
+    fireEvent.input(within(card).getByLabelText('What'), { target: { value: 'RL exam' } })
+    fireEvent.input(within(card).getByLabelText('Date'), { target: { value: '2026-10-30' } })
+    fireEvent.change(within(card).getByLabelText('Course'), { target: { value: 'H1' } })
+    fireEvent.click(within(card).getAllByRole('button', { name: 'Add date' }).at(-1)!)
+    await waitFor(() => expect(saved().deadlines).toMatchObject([{ title: 'RL exam', date: '2026-10-30', moduleId: 'H1', kind: 'exam' }]))
+    expect(within(card).getByText(/in 2 days/)).toBeTruthy()
+    const { buildIcs } = await import('../src/logic/ics')
+    expect(buildIcs({}, {}, '2026-10-28T00:00:00Z', saved().deadlines)).toContain('DTSTART;VALUE=DATE:20261030')
+  })
+
+  test('the course sheet takes an expected grade and a review; the outlook projects the average', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 }, H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/?c=H2'
+    render(<App />)
+    const sheet = await screen.findByRole('dialog', { name: 'Seminar: Post-Quantum Cryptography' })
+    fireEvent.change(within(sheet).getByLabelText('Expected grade'), { target: { value: '2.3' } })
+    await waitFor(() => expect(saved().expected).toEqual({ H2: 2.3 }))
+    fireEvent.click(within(sheet).getByRole('button', { name: 'Difficulty 4/5' }))
+    fireEvent.click(within(sheet).getByRole('button', { name: 'Yes' }))
+    await waitFor(() => expect(saved().reviews.H2).toMatchObject({ difficulty: 4, recommend: true }))
+    fireEvent.keyDown(window, { key: 'Escape' })
+    const outlook = await screen.findByRole('region', { name: 'Graduation' })
+    // (1.3 × 6 + 2.3 × 3) / 9 = 1.63 → 1.6
+    expect(within(outlook).getByText(/Projected average with your expected grades \(3 ECTS\)/).textContent).toContain('1.6')
+  })
+
+  test('a shared plan is compared with mine', async () => {
+    setState({ areas: AREAS, ...roadmap({ H2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/shared/1~4.1~WS26.SS27.WS27.SS28~xH2,1,p.xH1,2,p'
+    render(<App />)
+    const cmp = await screen.findByRole('region', { name: 'Compared with your plan' })
+    expect(within(cmp).getByRole('link', { name: 'Seminar: Post-Quantum Cryptography' })).toBeTruthy()
+    expect(within(cmp).getByRole('link', { name: 'Reinforcement Learning' })).toBeTruthy()
+  })
+})
+
+describe('scenarios and suggestions', () => {
+  test('save a scenario, change the plan, compare, and load it back', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/plan'
+    render(<App />)
+    const panel = await screen.findByRole('region', { name: 'Scenarios: what if' })
+    fireEvent.input(within(panel).getByLabelText('Scenario name'), { target: { value: 'RL first' } })
+    fireEvent.click(within(panel).getByRole('button', { name: 'Save current plan' }))
+    await waitFor(() => expect(saved().scenarios).toHaveLength(1))
+    location.hash = '#/plan?c=H1'
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Remove from plan' }))
+    await waitFor(() => expect(saved().roadmap.modules.H1).toBeUndefined())
+    const table = within(screen.getByRole('region', { name: 'Scenarios: what if' })).getByRole('table')
+    expect(within(table).getByRole('rowheader', { name: 'RL first' })).toBeTruthy()
+    fireEvent.click(within(table).getByRole('button', { name: 'Load scenario: RL first' }))
+    await waitFor(() => expect(saved().roadmap.modules.H1).toMatchObject({ term: 'SS27' }))
+  })
+
+  test('the catalog suggests courses for the chosen term', async () => {
+    location.hash = '#/courses/SS27'
+    render(<App />)
+    const sug = await screen.findByRole('region', { name: 'Suggested for SS 27' })
+    expect(within(sug).getByRole('link', { name: 'Seminar: Post-Quantum Cryptography' })).toBeTruthy()
+    expect(sug.textContent).toContain('seminar missing')
+  })
+})
+
+describe('next term preview', () => {
+  test('the week page shows the next term when its catalog is published', async () => {
+    const { termIdOf } = await import('../src/ui/schedule/NextTerm')
+    expect(termIdOf('SS 27')).toBe('SS27')
+    expect(termIdOf('WS 27/28')).toBe('WS27')
+    const next = makeCourses()
+    next.meta.term = 'SS 27'
+    loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: makeHandbook(), career: makeCareer(), next })
+    setState({ areas: AREAS, selected: gpuSelected, ...roadmap({ M2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/week'
+    render(<App />)
+    const preview = await screen.findByRole('region', { name: 'Next term preview: SS 27' })
+    expect(within(preview).getAllByRole('button', { name: /Practical Course Machine Learning/ }).length).toBeGreaterThan(0)
   })
 })

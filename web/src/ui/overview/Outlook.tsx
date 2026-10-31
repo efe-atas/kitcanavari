@@ -6,11 +6,11 @@ import type { Lang } from '../../types'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
 
-const grade = (lang: Lang, n: number) => n.toFixed(1).replace('.', lang === 'tr' ? ',' : '.')
+const grade = (lang: Lang, n: number) => n.toFixed(1).replace('.', lang === 'en' ? '.' : ',')
 const TARGETS = Array.from({ length: 31 }, (_, i) => Math.round((1 + i * 0.1) * 10) / 10)
 
 /** When the degree is likely done, and what the remaining grades need to be for a target average. */
-export function Outlook({ lang, forecast: f, grades: g }: { lang: Lang; forecast: Forecast; grades: GradeOutlook }) {
+export function Outlook({ lang, forecast: f, grades: g, projected }: { lang: Lang; forecast: Forecast; grades: GradeOutlook; projected: { average: number; cp: number; expectedCp: number } | null }) {
   const modules = RULES.total - RULES.thesis
   const [target, setTarget] = useState(() => (g.average !== null ? Math.max(1, Math.floor(g.average * 10) / 10) : 2.0))
   const need = neededAverage(g, target)
@@ -55,7 +55,10 @@ export function Outlook({ lang, forecast: f, grades: g }: { lang: Lang; forecast
           {need.kind === 'out-of-reach' && t(lang, 'gpa.outOfReach')}
           {need.kind === 'nothing-left' && t(lang, 'gpa.nothingLeft')}
         </p>
-        <p class="whatif-note">{t(lang, 'gpa.note')}</p>
+        {projected && (
+          <p class="whatif-projected">{t(lang, 'gpa.projected', { cp: projected.expectedCp })} <strong>{grade(lang, Math.floor(projected.average * 10 + 1e-9) / 10)}</strong></p>
+        )}
+        <p class="whatif-note">{t(lang, projected ? 'gpa.noteExpected' : 'gpa.note')}</p>
       </div>
     </section>
   )

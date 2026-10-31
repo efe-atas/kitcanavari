@@ -1,3 +1,4 @@
+import { locale } from '../../locale'
 import { useEffect, useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { addDays, berlinNow, occurrences, phaseOf, type Occurrence } from '../../logic/calendar'
@@ -11,7 +12,7 @@ import { courseHref, pageHref } from '../route'
 /** "Cuma, 30 Ekim" / "Friday, 30 October". */
 export function longDate(lang: Lang, iso: string, withYear = false): string {
   const [y, m, d] = iso.split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', {
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale(lang), {
     weekday: 'long', day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}), timeZone: 'UTC',
   })
 }
@@ -19,7 +20,7 @@ export function longDate(lang: Lang, iso: string, withYear = false): string {
 /** "Pzt 2 Kas" / "Mon 2 Nov". */
 export function shortDay(lang: Lang, iso: string): string {
   const [y, m, d] = iso.split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale(lang), { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' })
 }
 
 /** "in 25 min", "in 2 h 10 min". */

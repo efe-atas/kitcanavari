@@ -1,3 +1,4 @@
+import { locale } from '../locale'
 import { t } from '../i18n'
 import { moduleAreas, moduleKind, moduleMinors, type Kind } from '../logic/degree'
 import { eventModules } from '../logic/filter'
@@ -15,7 +16,7 @@ const fmtNum = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1))
 
 export function fmtDate(lang: Lang, iso: string): string {
   const [y, m, d] = iso.slice(0, 10).split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', {
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale(lang), {
     day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC',
   })
 }

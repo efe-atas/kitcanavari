@@ -101,3 +101,28 @@ export function neededAverage(o: GradeOutlook, target: number): Needed {
   if (need < 1) return { kind: 'out-of-reach' }
   return { kind: 'need', grade: Math.floor(need * 10 + 1e-9) / 10 }
 }
+
+/** Weeks over which a term's workload spreads: about 15 lecture weeks and 4 weeks of exam preparation. */
+export const TERM_WEEKS = 19
+/** 1 ECTS is about 30 hours of work (KIT module handbook). */
+export const HOURS_PER_ECTS = 30
+
+/** Hours per week a set of modules asks for on average, contact time and self-study together. */
+export const weeklyHours = (ects: number) => Math.round((ects * HOURS_PER_ECTS) / TERM_WEEKS)
+
+/** Average with expected grades filled in for planned modules that have one (real grades always win). */
+export function projectedAverage(state: UserState, courses: CoursesFile, handbook: HandbookFile | null): { average: number; cp: number; expectedCp: number } | null {
+  let weighted = 0
+  let cp = 0
+  let expectedCp = 0
+  for (const [id, e] of Object.entries(roadmapEntries(state))) {
+    const ects = (handbook?.modules[id] ?? courses.modules[id])?.ects
+    if (!ects) continue
+    const grade = e.status === 'passed' ? e.grade : e.status === 'planned' ? state.expected?.[id] ?? null : null
+    if (grade === null || grade === undefined) continue
+    weighted += grade * ects
+    cp += ects
+    if (e.status === 'planned') expectedCp += ects
+  }
+  return cp && expectedCp ? { average: weighted / cp, cp, expectedCp } : null
+}

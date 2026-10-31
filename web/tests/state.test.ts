@@ -22,6 +22,12 @@ const courses = (events: CoursesFile['events'], scrapedAt = '2026-10-21T04:00:00
   ({ meta: { scrapedAt, term: 'WS 26/27', termGuid: '', spo: '', warnings: [] }, tree: [], events, modules: {} })
 
 describe('store', () => {
+  test('a saved German interface opens in English, keeping the plan', () => {
+    const raw = JSON.stringify({ version: 1, selected: {}, lang: 'de', lastSeenScrapedAt: 'x', starred: ['M1'] })
+    const r = loadState(memStorage({ [STORAGE_KEY]: raw }))
+    expect(r.state.lang).toBe('en')
+    expect(r.state.starred).toEqual(['M1'])
+  })
   test('loadState returns default on corrupt json', () => {
     const r = loadState(memStorage({ [STORAGE_KEY]: '{not json' }))
     expect(r.state.selected).toEqual({})

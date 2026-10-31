@@ -1,10 +1,11 @@
 // Term ids of the roadmap ("WS26" = winter 2026/27, "SS27" = summer 2027, "prior" = before the first term) and the
 // offering warnings of spec §4: a warning, never a block.
 import type { ModuleRow } from './handbook'
+import { PROGRAM } from '../program'
 
 /** The term this catalog scrape is for. */
-export const CURRENT_TERM = 'WS26'
-export const DEFAULT_TERMS = ['WS26', 'SS27', 'WS27', 'SS28']
+export const CURRENT_TERM = PROGRAM.currentTerm
+export const DEFAULT_TERMS = PROGRAM.defaultTerms
 export const PRIOR = 'prior'
 
 const TERM_RE = /^(WS|SS)(\d{2})$/

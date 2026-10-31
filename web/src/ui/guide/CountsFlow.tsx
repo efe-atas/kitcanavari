@@ -1,3 +1,4 @@
+import { cl } from '../../locale'
 import type { Lang } from '../../types'
 import { Icon } from '../Icon'
 
@@ -60,7 +61,7 @@ function Box({ kind, title, text }: { kind: 'start' | 'question' | 'end'; title:
 }
 
 export function CountsFlow({ lang }: { lang: Lang }) {
-  const c = copy[lang]
+  const c = copy[cl(lang)]
   return (
     <section class="guide-section" aria-labelledby="flow-title">
       <h2 id="flow-title">{c.title}</h2>

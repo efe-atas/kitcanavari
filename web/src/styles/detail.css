@@ -69,3 +69,9 @@
 .handbook-text h4 { margin: 12px 0 6px; font-size: var(--fs-sm); }
 .handbook-text .prose { max-width: 68ch; color: var(--ink-2); font-size: var(--fs-sm); line-height: 1.65; }
 .detail-remove { justify-self: start; }
+.prereq-list { display: grid; gap: 6px; }
+.prereq-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 8px 12px; border-radius: var(--r-md); background: var(--surface-2); font-size: var(--fs-sm); }
+.prereq-list a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.prereq-list span { font-size: var(--fs-xs); color: var(--muted); }
+.prereq-list .is-passed span, .prereq-list .is-planned span { color: var(--positive); }
+.prereq-list .is-late span { color: var(--warn); font-weight: 650; }

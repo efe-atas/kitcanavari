@@ -1,3 +1,4 @@
+import { locale } from '../../locale'
 import { t } from '../../i18n'
 import { occKey, type Occurrence } from '../../logic/calendar'
 import { toMinutes } from '../../logic/time'
@@ -23,7 +24,7 @@ interface Props {
 
 const dayNum = (lang: Lang, iso: string) => {
   const [y, m, d] = iso.split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale(lang), { day: 'numeric', month: 'short', timeZone: 'UTC' })
 }
 
 /**

@@ -1,3 +1,4 @@
+import { cl } from '../../locale'
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import type { CoursesFile, Lang } from '../../types'
 import { Icon } from '../Icon'
@@ -27,7 +28,7 @@ const copy = {
 const norm = (s: string) => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '')
 
 export function GlossaryView({ lang, data, focus, embedded = false }: { lang: Lang; data: CoursesFile; focus: string | null; embedded?: boolean }) {
-  const c = copy[lang]
+  const c = copy[cl(lang)]
   const [query, setQuery] = useState('')
   const [cat, setCat] = useState<Category | null>(null)
 
@@ -46,7 +47,7 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
   const list = useMemo(() => {
     const q = norm(query.trim())
     return TERMS.filter((t) => (!cat || t.cat === cat)
-      && (!q || norm(`${t.term} ${t.aka ?? ''} ${t.def[lang]}`).includes(q)))
+      && (!q || norm(`${t.term} ${t.aka ?? ''} ${t.def[cl(lang)]}`).includes(q)))
   }, [query, cat, lang])
 
   const groups = (Object.keys(CATEGORIES) as Category[])
@@ -72,7 +73,7 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
           <button type="button" class="chip" aria-pressed={cat === null} onClick={() => setCat(null)}>{c.all}</button>
           {(Object.keys(CATEGORIES) as Category[]).map((k) => (
             <button key={k} type="button" class="chip" aria-pressed={cat === k} onClick={() => setCat(cat === k ? null : k)}>
-              {CATEGORIES[k][lang]}
+              {CATEGORIES[k][cl(lang)]}
             </button>
           ))}
         </div>
@@ -81,7 +82,7 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
       {groups.length === 0 && <p class="empty">{c.empty}</p>}
       {groups.map((g) => (
         <section key={g.k} class="term-group">
-          {embedded ? <h2>{CATEGORIES[g.k][lang]}</h2> : <h3>{CATEGORIES[g.k][lang]}</h3>}
+          {embedded ? <h2>{CATEGORIES[g.k][cl(lang)]}</h2> : <h3>{CATEGORIES[g.k][cl(lang)]}</h3>}
           <dl class="terms">
             {g.terms.map((t) => {
               const fact = t.count?.(data, lang)
@@ -92,8 +93,8 @@ export function GlossaryView({ lang, data, focus, embedded = false }: { lang: La
                     {t.aka && <span class="term-aka">{t.aka}</span>}
                   </dt>
                   <dd>
-                    <p>{t.def[lang]}</p>
-                    {t.where && <p class="term-where"><Icon name="search" size={14} /><span><strong>{c.where}:</strong> {t.where[lang]}</span></p>}
+                    <p>{t.def[cl(lang)]}</p>
+                    {t.where && <p class="term-where"><Icon name="search" size={14} /><span><strong>{c.where}:</strong> {t.where[cl(lang)]}</span></p>}
                     {fact && <p class="term-fact">{fact}</p>}
                     {t.related && (
                       <p class="term-related">

@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 import dataclasses
+import os
 from dataclasses import dataclass, field
 from typing import Any
 
 KIT_BASE = "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/"
-TERM_GUID = "0xD25DBD9C86874091993315DA11571AAF"
-TERM = "WS 26/27"
+# The term to crawl. KIT_TERM_GUID / KIT_TERM pick another one (the next term's preview, see scrape.yml).
+TERM_GUID = os.environ.get("KIT_TERM_GUID") or "0xD25DBD9C86874091993315DA11571AAF"
+TERM = os.environ.get("KIT_TERM") or "WS 26/27"
 SPO = "88-979-H-2025"
 # The degree program's structure page: areas, elective studies and the minors with their modules.
 PROGRAM_PAGE = "abstractProductView.asp?gguid=0x145ED90B945B4646A4F1A0D692CFB1EF&capvguid=0xFA9C7D68ABBF47A49D089550A75E7E71"
