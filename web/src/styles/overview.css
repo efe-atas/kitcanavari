@@ -244,3 +244,10 @@
   .today-item { grid-template-columns: 50px 4px minmax(0, 1fr); padding-right: 4px; }
   .today-phase { grid-column: 3; justify-self: start; }
 }
+
+.data-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: var(--fs-xs); font-weight: 600; text-decoration: none; }
+.data-chip .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--positive); }
+.data-chip.is-stale { border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); color: var(--warn); }
+.data-chip.is-stale .status-dot { background: var(--warn); }
+.data-chip.is-old { border-color: var(--danger); background: var(--danger-soft); color: var(--danger); }
+.data-chip.is-old .status-dot { background: var(--danger); }

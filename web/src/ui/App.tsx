@@ -6,7 +6,6 @@ import { pendingAlerts } from '../logic/alerts'
 import { buildIcs } from '../logic/ics'
 import { addTerm, defaultState, exportState, setLang, setTheme, useAppState } from '../store'
 import type { CareerData, ChangesFile, CoursesFile, HandbookFile, Lang, StatusFile, UserState } from '../types'
-import { CareerView } from './career/CareerView'
 import { ChangesView } from './changes/ChangesView'
 import { download } from './download'
 import { ErrorBoundary } from './ErrorBoundary'
@@ -15,7 +14,6 @@ import { Icon, type IconName } from './Icon'
 import { CommandPalette, ShortcutsDialog, type PaletteCommand, type Shortcut } from './palette/CommandPalette'
 import { CourseDetail, courseTitle } from './panels/CourseDetail'
 import { Courses } from './pages/Courses'
-import { Help } from './pages/Help'
 import { More } from './pages/More'
 import { Overview } from './pages/Overview'
 import { PageHead } from './pages/PageHead'
@@ -29,6 +27,11 @@ import { Sheet } from './Sheet'
 import { SyncStatus } from './sync/SyncStatus'
 import { applyUpdate, UPDATE_EVENT } from '../pwa'
 import { ToastProvider, useToast } from './toast'
+import { lazyComponent } from './lazy'
+
+// Career and help are the heaviest pages and most visits never open them: their code loads on first use.
+const CareerView = lazyComponent(() => import('./career/CareerView').then((m) => m.CareerView), () => <PageSkeleton label="…" />)
+const Help = lazyComponent(() => import('./pages/Help').then((m) => m.Help), () => <PageSkeleton label="…" />)
 
 const STALE_DAYS = 3
 
@@ -218,7 +221,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
     if (load.status !== 'ready') return null
     const { courses: data, handbook, career, changes } = load
     switch (page.kind) {
-      case 'overview': return <Overview data={data} handbook={handbook} career={career} state={state} update={update} />
+      case 'overview': return <Overview data={data} handbook={handbook} career={career} state={state} update={update} checkedAt={load.checkedAt} />
       case 'plan': return <PlanBoard data={data} handbook={handbook} career={career} state={state} update={update} />
       case 'courses': return <Courses key={`${page.term}/${page.row}/${page.filter}`} data={data} handbook={handbook} career={career} state={state}
         update={update} term={page.term} row={page.row} filter={page.filter} starred={page.starred} />

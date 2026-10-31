@@ -29,6 +29,8 @@ interface Props {
   career: CareerData | null
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
+  /** When the scraper last checked the catalog. */
+  checkedAt?: string
 }
 
 const fmtNum = (lang: Lang, n: number) => String(n).replace('.', lang === 'en' ? '.' : ',')
@@ -125,7 +127,7 @@ function AreaSelect({ lang, state, slot, update, label }: { lang: Lang; state: U
   )
 }
 
-export function Overview({ data, handbook, career, state, update }: Props) {
+export function Overview({ data, handbook, career, state, update, checkedAt }: Props) {
   const { lang } = state
   const now = useNow()
   const report = useMemo(() => roadmapReport(state, data, handbook), [state, data, handbook])
@@ -178,6 +180,7 @@ export function Overview({ data, handbook, career, state, update }: Props) {
   return (
     <div class="overview">
       <PageHead title={t(lang, now.minutes < 11 * 60 ? 'ov.hello.morning' : now.minutes < 18 * 60 ? 'ov.hello.day' : 'ov.hello.evening')} lead={t(lang, 'ov.lead', { date: longDate(lang, now.date), term: termName(lang, CURRENT_TERM) })}>
+        {checkedAt && <DataHealth lang={lang} checkedAt={checkedAt} />}
         <a class="button-quiet" href={pageHref({ kind: 'week' })}><Icon name="calendar" size={16} />{t(lang, 'nav.week')}</a>
         <a class="button" href={pageHref({ kind: 'courses', term: CURRENT_TERM, row: null, filter: null })}><Icon name="plus" size={16} />{t(lang, 'pl.add')}</a>
       </PageHead>
@@ -321,5 +324,17 @@ export function Overview({ data, handbook, career, state, update }: Props) {
         </div>
       </div>
     </div>
+  )
+}
+
+/** How fresh the catalog data is: checked daily; after 3 days something is wrong with the scraper. */
+function DataHealth({ lang, checkedAt }: { lang: Lang; checkedAt: string }) {
+  const hours = Math.max(0, Math.round((Date.now() - Date.parse(checkedAt)) / 3600_000))
+  const level = hours > 7 * 24 ? 'old' : hours > 3 * 24 ? 'stale' : 'fresh'
+  const ago = hours < 1 ? t(lang, 'hl.justNow') : hours < 48 ? t(lang, 'hl.hours', { n: hours }) : t(lang, 'hl.days', { n: Math.floor(hours / 24) })
+  return (
+    <a class={`data-chip is-${level}`} href={pageHref({ kind: 'settings' })} title={t(lang, `hl.${level}`)}>
+      <span class="status-dot" aria-hidden="true" />{t(lang, 'hl.label', { ago })}<span class="sr-only"> · {t(lang, `hl.${level}`)}</span>
+    </a>
   )
 }

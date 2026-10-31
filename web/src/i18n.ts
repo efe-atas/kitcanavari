@@ -842,6 +842,13 @@ const tr = {
   'nx.lead': 'KIT bu dönemin kataloğunu yayımladı. Bu döneme planladığın derslerin tüm grupları gösteriliyor; çakışmaları grup seçmeden önce gör.',
   'nx.none': '{term} için planında ders yok.',
   'nx.missing': 'Planladığın {n} dersin bu dönem katalogda dersi yok.',
+  'hl.label': 'Katalog: {ago}',
+  'hl.justNow': 'az önce kontrol edildi',
+  'hl.hours': '{n} sa önce kontrol edildi',
+  'hl.days': '{n} gün önce kontrol edildi',
+  'hl.fresh': 'Veriler güncel; katalog her gün kontrol ediliyor.',
+  'hl.stale': 'Veriler birkaç gündür güncellenmedi; değişiklikler eksik olabilir.',
+  'hl.old': 'Veriler bir haftadan eski; saat ve derslikleri KIT sayfasından doğrula.',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -1686,10 +1693,24 @@ const en: Record<keyof typeof tr, string> = {
   'nx.lead': 'KIT has published this term\'s catalog. All groups of the courses you planned for it are shown, so you see clashes before choosing groups.',
   'nx.none': 'No courses planned for {term}.',
   'nx.missing': '{n} of your planned modules have no course in this term\'s catalog.',
+  'hl.label': 'Catalog: {ago}',
+  'hl.justNow': 'checked just now',
+  'hl.hours': 'checked {n} h ago',
+  'hl.days': 'checked {n} days ago',
+  'hl.fresh': 'Data is current; the catalog is checked daily.',
+  'hl.stale': 'Data has not been updated for a few days; changes may be missing.',
+  'hl.old': 'Data is over a week old; check times and rooms on the KIT page.',
 }
 
 /** German: every string the interface shows; a missing one falls back to English. */
 const de: Partial<Record<keyof typeof tr, string>> = {
+  'hl.label': 'Katalog: {ago}',
+  'hl.justNow': 'gerade geprüft',
+  'hl.hours': 'vor {n} Std. geprüft',
+  'hl.days': 'vor {n} Tagen geprüft',
+  'hl.fresh': 'Die Daten sind aktuell; der Katalog wird täglich geprüft.',
+  'hl.stale': 'Die Daten wurden seit einigen Tagen nicht aktualisiert; Änderungen können fehlen.',
+  'hl.old': 'Die Daten sind über eine Woche alt; prüfe Zeiten und Räume auf der KIT-Seite.',
   'nx.title': 'Vorschau nächstes Semester: {term}',
   'nx.lead': 'KIT hat den Katalog dieses Semesters veröffentlicht. Alle Gruppen deiner dafür geplanten Kurse werden gezeigt, damit du Überschneidungen vor der Gruppenwahl siehst.',
   'nx.none': 'Für {term} sind keine Kurse geplant.',
