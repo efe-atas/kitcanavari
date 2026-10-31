@@ -271,3 +271,34 @@ describe('changes', () => {
     expect(within(feed).getByRole('link', { name: 'IT Security' }).getAttribute('href')).toBe('#/changes?c=M3')
   })
 })
+
+describe('career tools', () => {
+  test('ranks environments, closes a gap with a course, lists lecturers, reads a job ad and writes CV lines', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'prior', status: 'passed', countAs: null, grade: 1.3 } }) })
+    location.hash = '#/career/security:bigtech'
+    render(<App />)
+    await screen.findByRole('heading', { name: 'security · Big Tech', level: 2 })
+    // Every environment shows the plan's fit.
+    const picker = screen.getByRole('navigation', { name: 'Where do you want to work?' })
+    expect(within(picker).getAllByRole('link')).toHaveLength(6)
+    expect(within(picker).getByRole('link', { name: 'Big Tech' }).textContent).toMatch(/\d+%/)
+    // A gap lists courses that close it; adding one puts it in the plan.
+    const gaps = screen.getByRole('list', { name: 'Courses that close the Security gap' })
+    fireEvent.click(within(gaps).getByRole('button', { name: /^Add: / }))
+    // M3 is offered this term: it lands in the weekly timetable as well.
+    await waitFor(() => expect(Object.values(saved().selected as Record<string, { moduleId: string }>).some((e) => e.moduleId === 'M3')).toBe(true))
+    // Lecturers.
+    expect(screen.getByRole('region', { name: 'Who to write to in this field' }).textContent).toContain('Prof. Coordinator')
+    // Job ad.
+    fireEvent.input(screen.getByLabelText('Job ad text'), { target: { value: 'Penetration testing and cryptography for our cloud.' } })
+    const ad = screen.getByRole('region', { name: 'Compare a job ad with your plan' })
+    expect(within(ad).getByText('Security')).toBeTruthy()
+    expect(within(ad).getByText('penetration')).toBeTruthy()
+    // CV lines in English, grades only when asked.
+    const cv = screen.getByRole('region', { name: 'Coursework for your CV and LinkedIn' })
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).toContain('Reinforcement Learning')
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).not.toContain('(1.3)')
+    fireEvent.click(within(cv).getByRole('checkbox', { name: 'Include grades' }))
+    expect(within(cv).getByLabelText('Coursework for your CV and LinkedIn').textContent).toContain('Reinforcement Learning (1.3)')
+  })
+})

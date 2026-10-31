@@ -1,6 +1,7 @@
 import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
-import { environmentRole, fit } from '../../logic/career'
+import { fit } from '../../logic/career'
+import { pathRole } from '../../logic/careerPlus'
 import { AREAS, moduleKind, RULES, roadmapReport, type Kind, type RoadmapReport } from '../../logic/degree'
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { forecast, gradeOutlook } from '../../logic/insights'
@@ -10,7 +11,7 @@ import { roadmapEntries } from '../../logic/roadmap'
 import { CURRENT_TERM } from '../../logic/terms'
 import { setArea, setStar } from '../../store'
 import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../../types'
-import { pointsOf } from '../career/model'
+import { pathTitle, pointsOf } from '../career/model'
 import { TermLink } from '../glossary/GlossaryView'
 import { Icon } from '../Icon'
 import { Outlook } from '../overview/Outlook'
@@ -148,8 +149,9 @@ export function Overview({ data, handbook, career, state, update }: Props) {
     const f = (state.followed ?? []).find((x) => career.lenses.lenses.some((l) => l.id === x.lens))
     if (!f) return { title: null, n: 0, href: pageHref({ kind: 'career', focus: null }) }
     const lens = career.lenses.lenses.find((l) => l.id === f.lens)!
-    const n = fit(pointsOf(state, career, rows).all, environmentRole(lens), lens)
-    return { title: lens.title[lang], n, href: pageHref({ kind: 'career', focus: f.lens }) }
+    const n = fit(pointsOf(state, career, rows).all, pathRole(career, f.role, lens), lens)
+    const hasRole = career.roles.roles.some((r) => r.id === f.role)
+    return { title: pathTitle(career, hasRole ? f.role : 'environment', f.lens, lang), n, href: pageHref({ kind: 'career', focus: hasRole ? `${f.role}:${f.lens}` : f.lens }) }
   }, [career, state, rows, lang])
   const starred = (state.starred ?? []).map((id) => rows.find((r) => r.id === id)).filter((r): r is (typeof rows)[number] => !!r)
 

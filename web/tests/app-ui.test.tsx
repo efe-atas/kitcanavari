@@ -50,13 +50,13 @@ describe('overview', () => {
   test('following a career path shows it as the goal', async () => {
     location.hash = '#/career/security:bigtech'
     render(<App />)
-    await screen.findByRole('heading', { name: 'Big Tech', level: 2 })
+    await screen.findByRole('heading', { name: 'security · Big Tech', level: 2 })
     expect(screen.getByRole('link', { name: 'Big Tech' }).getAttribute('aria-current')).toBe('true')
     fireEvent.click(screen.getByRole('button', { name: 'Make it my goal' }))
     await screen.findByRole('button', { name: 'Your goal' })
-    expect(saved().followed).toEqual([{ role: 'environment', lens: 'bigtech' }])
+    expect(saved().followed).toEqual([{ role: 'security', lens: 'bigtech' }])
     location.hash = '#/'
-    await screen.findByRole('link', { name: /Big Tech\s*\d+% fit/ })
+    await screen.findByRole('link', { name: /^security, Big Tech\s*\d+% fit/ })
   })
 
   test('without career data there is no goal', async () => {
@@ -68,17 +68,20 @@ describe('overview', () => {
 })
 
 describe('career', () => {
-  test('selects only an environment and accepts legacy role links', async () => {
-    location.hash = '#/career/security:bigtech'
+  test('an environment alone, or with a role; role:lens links keep both', async () => {
+    location.hash = '#/career/bigtech'
     render(<App />)
     await screen.findByRole('heading', { name: 'Big Tech', level: 2 })
-    expect(screen.queryByRole('combobox')).toBeNull()
-    expect(screen.queryByRole('region', { name: 'Jobs that fit you best' })).toBeNull()
+    expect((screen.getByRole('combobox', { name: 'Role (optional)' }) as HTMLSelectElement).value).toBe('')
+    fireEvent.change(screen.getByRole('combobox', { name: 'Role (optional)' }), { target: { value: 'security' } })
+    await waitFor(() => expect(location.hash).toBe('#/career/security:bigtech'))
+    await screen.findByRole('heading', { name: 'security · Big Tech', level: 2 })
     fireEvent.click(screen.getByRole('link', { name: 'startup', exact: true }))
-    await waitFor(() => expect(location.hash).toBe('#/career/startup'))
-    await screen.findByRole('heading', { name: 'startup', level: 2 })
+    await waitFor(() => expect(location.hash).toBe('#/career/security:startup'))
+    await screen.findByRole('heading', { name: 'security · startup', level: 2 })
     expect(screen.getByText('Skills emphasized in this environment')).toBeTruthy()
   })
+
 
 })
 
