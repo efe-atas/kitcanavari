@@ -838,6 +838,10 @@ const tr = {
   'sc.empty': 'Henüz kayıtlı senaryo yok.',
   'sug.add': 'Önerilen dersi ekle: {title}',
   'set.lang.de': 'Deutsch',
+  'nx.title': 'Sonraki dönem önizlemesi: {term}',
+  'nx.lead': 'KIT bu dönemin kataloğunu yayımladı. Bu döneme planladığın derslerin tüm grupları gösteriliyor; çakışmaları grup seçmeden önce gör.',
+  'nx.none': '{term} için planında ders yok.',
+  'nx.missing': 'Planladığın {n} dersin bu dönem katalogda dersi yok.',
 }
 
 const en: Record<keyof typeof tr, string> = {
@@ -1678,10 +1682,18 @@ const en: Record<keyof typeof tr, string> = {
   'sc.empty': 'No saved scenarios yet.',
   'sug.add': 'Add suggested course: {title}',
   'set.lang.de': 'Deutsch',
+  'nx.title': 'Next term preview: {term}',
+  'nx.lead': 'KIT has published this term\'s catalog. All groups of the courses you planned for it are shown, so you see clashes before choosing groups.',
+  'nx.none': 'No courses planned for {term}.',
+  'nx.missing': '{n} of your planned modules have no course in this term\'s catalog.',
 }
 
 /** German: every string the interface shows; a missing one falls back to English. */
 const de: Partial<Record<keyof typeof tr, string>> = {
+  'nx.title': 'Vorschau nächstes Semester: {term}',
+  'nx.lead': 'KIT hat den Katalog dieses Semesters veröffentlicht. Alle Gruppen deiner dafür geplanten Kurse werden gezeigt, damit du Überschneidungen vor der Gruppenwahl siehst.',
+  'nx.none': 'Für {term} sind keine Kurse geplant.',
+  'nx.missing': '{n} deiner geplanten Module haben in diesem Katalog keine Veranstaltung.',
   'add.add': 'Hinzufügen',
   'add.goalFit': 'Passung zu deinem Ziel {n}/3',
   'add.inPlan': 'Im Plan: {term}',

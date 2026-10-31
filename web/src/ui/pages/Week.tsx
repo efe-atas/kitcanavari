@@ -15,10 +15,12 @@ import { termName } from '../roadmap/format'
 import { courseHref, pageHref } from '../route'
 import { CalendarAgenda, CalendarGrid } from '../schedule/Calendar'
 import { UnscheduledList } from '../schedule/UnscheduledList'
+import { NextTermPreview } from '../schedule/NextTerm'
 import { PageHead } from './PageHead'
 
 interface Props {
   data: CoursesFile
+  next?: CoursesFile | null
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
 }
@@ -33,7 +35,7 @@ function weekLabel(lang: Lang, monday: string): string {
 }
 
 /** This term's week in real dates: sessions, cancellations and clashes, week by week, and the calendar file. */
-export function Week({ data, state }: Props) {
+export function Week({ data, next = null, state }: Props) {
   const { lang } = state
   const now = useNow()
   const [view, setView] = useState<'grid' | 'agenda'>(() => typeof matchMedia === 'function' && matchMedia('(max-width: 640px)').matches ? 'agenda' : 'grid')
@@ -119,6 +121,7 @@ export function Week({ data, state }: Props) {
         </section>
       )}
       <UnscheduledList lang={lang} data={data} state={state} onOpen={open} />
+      {next && <NextTermPreview next={next} state={state} />}
     </div>
   )
 }

@@ -89,3 +89,6 @@
   .agenda-event { grid-template-columns: 52px 4px minmax(0, 1fr); gap: 12px; padding: 14px 16px; }
   .cal { --hour: 52px; grid-template-columns: 44px repeat(var(--days), minmax(96px, 1fr)); min-width: 560px; }
 }
+
+.next-term { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 12px; }
+.next-term h2 { font-size: var(--fs-xl); }

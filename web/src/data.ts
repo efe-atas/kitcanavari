@@ -3,13 +3,15 @@ import type { CareerData, ChangesFile, CoursesFile, HandbookFile, LensesFile, Ro
 
 export async function loadData(): Promise<{
   courses: CoursesFile; changes: ChangesFile; status: StatusFile | null; handbook: HandbookFile | null; career: CareerData | null
+  /** The next term's catalog, when it is already published (see scrape.yml). */
+  next: CoursesFile | null
 }> {
   const get = async <T,>(name: string): Promise<T> => {
     const res = await fetch(`./data/${name}`, { cache: 'no-cache' })
     if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`)
     return res.json() as Promise<T>
   }
-  const [courses, changes, status, handbook, career] = await Promise.all([
+  const [courses, changes, status, handbook, career, next] = await Promise.all([
     get<CoursesFile>('courses.json'),
     get<ChangesFile>('changes.json'),
     get<StatusFile>('status.json').catch(() => null),
@@ -23,6 +25,7 @@ export async function loadData(): Promise<{
         return null
       })
       .catch(() => null),
+    get<CoursesFile>('next/courses.json').catch(() => null),
   ])
-  return { courses, changes, status, handbook, career }
+  return { courses, changes, status, handbook, career, next }
 }

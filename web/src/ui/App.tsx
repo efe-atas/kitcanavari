@@ -35,7 +35,7 @@ const STALE_DAYS = 3
 type Load =
   | { status: 'loading' }
   | { status: 'error'; error: string }
-  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; career: CareerData | null; checkedAt: string }
+  | { status: 'ready'; courses: CoursesFile; changes: ChangesFile; handbook: HandbookFile | null; career: CareerData | null; next: CoursesFile | null; checkedAt: string }
 
 type NavKind = 'overview' | 'plan' | 'courses' | 'week' | 'career' | 'changes' | 'help' | 'settings'
 
@@ -115,10 +115,10 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
 
   useEffect(() => {
     loadData()
-      .then(({ courses, changes, status, handbook, career }: {
-        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null; career?: CareerData | null
+      .then(({ courses, changes, status, handbook, career, next }: {
+        courses: CoursesFile; changes: ChangesFile; status?: StatusFile | null; handbook?: HandbookFile | null; career?: CareerData | null; next?: CoursesFile | null
       }) => setLoad({
-        status: 'ready', courses, changes, handbook: handbook ?? null, career: career ?? null,
+        status: 'ready', courses, changes, handbook: handbook ?? null, career: career ?? null, next: next ?? null,
         checkedAt: status?.checkedAt ?? courses.meta.scrapedAt,
       }))
       .catch((e: unknown) => setLoad({ status: 'error', error: e instanceof Error ? e.message : String(e) }))
@@ -222,7 +222,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
       case 'plan': return <PlanBoard data={data} handbook={handbook} career={career} state={state} update={update} />
       case 'courses': return <Courses key={`${page.term}/${page.row}/${page.filter}`} data={data} handbook={handbook} career={career} state={state}
         update={update} term={page.term} row={page.row} filter={page.filter} starred={page.starred} />
-      case 'week': return <Week data={data} state={state} update={update} />
+      case 'week': return <Week data={data} next={load.next} state={state} update={update} />
       case 'career': return <><PageHead title={t(lang, 'nav.career')} lead={t(lang, 'page.career.lead')} /><CareerView data={data} handbook={handbook} career={career} focus={page.focus} state={state} update={update} /></>
       case 'changes': return <><PageHead title={t(lang, 'nav.changes')} lead={t(lang, 'page.changes.lead')} /><ChangesView data={data} changes={changes} state={state} alerts={alerts} update={update} /></>
       case 'help': return <Help lang={lang} data={data} id={page.id} />

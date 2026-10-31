@@ -372,3 +372,19 @@ describe('scenarios and suggestions', () => {
     expect(sug.textContent).toContain('seminar missing')
   })
 })
+
+describe('next term preview', () => {
+  test('the week page shows the next term when its catalog is published', async () => {
+    const { termIdOf } = await import('../src/ui/schedule/NextTerm')
+    expect(termIdOf('SS 27')).toBe('SS27')
+    expect(termIdOf('WS 27/28')).toBe('WS27')
+    const next = makeCourses()
+    next.meta.term = 'SS 27'
+    loadData.mockResolvedValue({ courses: makeCourses(), changes: makeChanges(), handbook: makeHandbook(), career: makeCareer(), next })
+    setState({ areas: AREAS, selected: gpuSelected, ...roadmap({ M2: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/week'
+    render(<App />)
+    const preview = await screen.findByRole('region', { name: 'Next term preview: SS 27' })
+    expect(within(preview).getAllByRole('button', { name: /Practical Course Machine Learning/ }).length).toBeGreaterThan(0)
+  })
+})

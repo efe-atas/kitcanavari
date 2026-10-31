@@ -38,6 +38,16 @@ jobs:
       - name: Scrape
         run: python -m kit_scraper.run --out data
 
+      # Preview of the next term once KIT publishes it: set the repository variables NEXT_TERM_GUID (the catalog's
+      # tguid for that term) and NEXT_TERM (e.g. "SS 27"). A failure here never blocks the current term's data.
+      - name: Scrape next term (preview)
+        if: ${{ vars.NEXT_TERM_GUID != '' }}
+        continue-on-error: true
+        env:
+          KIT_TERM_GUID: ${{ vars.NEXT_TERM_GUID }}
+          KIT_TERM: ${{ vars.NEXT_TERM }}
+        run: python -m kit_scraper.run --out data/next
+
       - name: Commit data
         id: commit
         run: |
