@@ -2,7 +2,8 @@
 // stay out of it; the in-memory shape is still UserState, converted both ways here.
 import { roadmapEntries } from '../logic/roadmap'
 import { CURRENT_TERM, DEFAULT_TERMS } from '../logic/terms'
-import type { ModuleStatus, RoadmapEntry, SelectedEntry, UserState } from '../types'
+import { validExtras } from '../logic/extras'
+import type { Deadline, ModuleStatus, Review, Roadmap, RoadmapEntry, Scenario, SelectedEntry, UserState } from '../types'
 
 /** 'WS26', 'SS27', … or 'prior' (passed or recognised before the first term). */
 export type TermId = string
@@ -22,6 +23,11 @@ export interface Profile {
   notes: Record<string, string>
   /** Shortlisted modules; profiles written before 2026-10-30 have none. */
   starred?: string[]
+  /** Added 2026-10-31; older profiles have none. */
+  deadlines?: Deadline[]
+  scenarios?: Scenario[]
+  expected?: Record<string, number>
+  reviews?: Record<string, Review>
 }
 
 export { CURRENT_TERM, DEFAULT_TERMS }
@@ -50,6 +56,15 @@ export function isProfile(x: unknown): x is Profile {
     && Array.isArray(p.followed) && p.followed.every((f) => isObj(f) && typeof f.role === 'string' && typeof f.lens === 'string')
     && isObj(p.notes) && Object.values(p.notes).every((n) => typeof n === 'string')
     && (p.starred === undefined || isStrings(p.starred))
+    && validExtras(p as Record<string, unknown>, isProfileRoadmap)
+}
+
+/** A scenario's roadmap inside a profile, checked like the state's. */
+function isProfileRoadmap(r: unknown): r is Roadmap {
+  if (!isObj(r)) return false
+  const m = r as Partial<Roadmap>
+  return isStrings(m.terms) && isObj(m.modules) && Object.values(m.modules).every((e) => isObj(e) && typeof e.term === 'string'
+    && STATUSES.includes(e.status as ModuleStatus)) && isObj(m.notes)
 }
 
 export function profileFromState(s: UserState, prev: Profile | null): Profile {
@@ -67,6 +82,7 @@ export function profileFromState(s: UserState, prev: Profile | null): Profile {
     // Older code never set followed in the state; keep what the profile already had then.
     followed: s.followed ? s.followed.map((f) => ({ ...f })) : base.followed,
     ...(s.starred ? { starred: [...s.starred] } : base.starred ? { starred: [...base.starred] } : {}),
+    ...extras(s, base),
   }
 }
 
@@ -88,5 +104,23 @@ export function stateFromProfile(p: Profile, device: Pick<UserState, 'lang' | 't
     ...(isDefault ? {} : { roadmap: { terms: [...p.terms], modules, notes: { ...p.notes } } }),
     ...(p.followed.length ? { followed: p.followed.map((f) => ({ ...f })) } : {}),
     ...(p.starred?.length ? { starred: [...p.starred] } : {}),
+    ...(p.deadlines?.length ? { deadlines: p.deadlines.map((d) => ({ ...d })) } : {}),
+    ...(p.scenarios?.length ? { scenarios: structuredClone(p.scenarios) } : {}),
+    ...(p.expected && Object.keys(p.expected).length ? { expected: { ...p.expected } } : {}),
+    ...(p.reviews && Object.keys(p.reviews).length ? { reviews: structuredClone(p.reviews) } : {}),
   }
+}
+
+/** The extra fields: the state's when it has them, else what the profile already had (older code never set them). */
+function extras(s: UserState, base: Profile): Pick<Profile, 'deadlines' | 'scenarios' | 'expected' | 'reviews'> {
+  const out: Pick<Profile, 'deadlines' | 'scenarios' | 'expected' | 'reviews'> = {}
+  const deadlines = s.deadlines ?? base.deadlines
+  const scenarios = s.scenarios ?? base.scenarios
+  const expected = s.expected ?? base.expected
+  const reviews = s.reviews ?? base.reviews
+  if (deadlines) out.deadlines = deadlines.map((d) => ({ ...d }))
+  if (scenarios) out.scenarios = structuredClone(scenarios)
+  if (expected) out.expected = { ...expected }
+  if (reviews) out.reviews = structuredClone(reviews)
+  return out
 }

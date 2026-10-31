@@ -5,7 +5,8 @@ import { emptyRoadmap, roadmapEntries } from './logic/roadmap'
 import { CURRENT_TERM, nextTerm, PRIOR, termOrder } from './logic/terms'
 import { defaultBucket } from './logic/degree'
 import { rowBucket, type RowId } from './logic/matrix'
-import type { CoursesFile, Event, HandbookFile, Lang, ModuleStatus, Roadmap, RoadmapEntry, SelectedEntry, UserState } from './types'
+import { newId, validExtras } from './logic/extras'
+import type { CoursesFile, Deadline, Event, HandbookFile, Lang, ModuleStatus, Review, Roadmap, RoadmapEntry, SelectedEntry, UserState } from './types'
 
 export { roadmapEntries }
 
@@ -41,6 +42,7 @@ function isState(x: unknown): x is UserState {
     && (s.followed === undefined || (Array.isArray(s.followed)
       && s.followed.every((f) => !!f && typeof f.role === 'string' && typeof f.lens === 'string')))
     && (s.starred === undefined || (Array.isArray(s.starred) && s.starred.every((id) => typeof id === 'string')))
+    && validExtras(s as Record<string, unknown>, isRoadmap)
     && Object.values(s.selected).every((e) => !!e && typeof e === 'object'
       && Array.isArray(e.enabledSlots) && e.enabledSlots.every((i) => Number.isInteger(i))
       && typeof e.ackFingerprint === 'string'
@@ -424,6 +426,39 @@ export function adoptPlan(s: UserState, courses: CoursesFile, plan: { areas: str
   }
   return next
 }
+
+/** Add a date, or replace the one with the same id. */
+export function putDeadline(s: UserState, d: Omit<Deadline, 'id'> & { id?: string }): UserState {
+  const id = d.id ?? newId()
+  const list = (s.deadlines ?? []).filter((x) => x.id !== id)
+  return { ...s, deadlines: [...list, { ...d, id }].sort((a, b) => a.date.localeCompare(b.date) || (a.time ?? '').localeCompare(b.time ?? '')) }
+}
+
+export const removeDeadline = (s: UserState, id: string): UserState => ({ ...s, deadlines: (s.deadlines ?? []).filter((x) => x.id !== id) })
+
+/** The grade the user expects in a module; null clears it. Real grades always win over expected ones. */
+export function setExpected(s: UserState, id: string, grade: number | null): UserState {
+  const { [id]: _old, ...rest } = s.expected ?? {}
+  if (grade !== null && !(grade >= 1 && grade <= 4)) return s
+  return { ...s, expected: grade === null ? rest : { ...rest, [id]: grade } }
+}
+
+/** The user's review of a module; an empty review is removed. */
+export function setReview(s: UserState, id: string, r: Review): UserState {
+  const { [id]: _old, ...rest } = s.reviews ?? {}
+  const empty = r.difficulty === null && r.workload === null && r.recommend === null && !r.text.trim()
+  return { ...s, reviews: empty ? rest : { ...rest, [id]: r } }
+}
+
+/** Save the current plan (areas and roadmap, the weekly plan's modules included) as a named scenario. */
+export function saveScenario(s: UserState, name: string): UserState {
+  const roadmap = roadmapOf(s)
+  const scenario = { id: newId(), name: name.trim() || 'Plan', areas: [...(s.areas ?? [])],
+    roadmap: { terms: [...roadmap.terms], modules: { ...roadmapEntries(s) }, notes: {} } }
+  return { ...s, scenarios: [...(s.scenarios ?? []), scenario] }
+}
+
+export const removeScenario = (s: UserState, id: string): UserState => ({ ...s, scenarios: (s.scenarios ?? []).filter((x) => x.id !== id) })
 
 export const exportState = (s: UserState): string => JSON.stringify(s, null, 1)
 
