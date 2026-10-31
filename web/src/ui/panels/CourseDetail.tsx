@@ -8,6 +8,8 @@ import { AREAS, bucketOptions, defaultBucket, moduleKind } from '../../logic/deg
 import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
 import { similarModules } from '../../logic/search'
+import { prereqLinks } from '../../logic/advisor'
+import { termOrder } from '../../logic/terms'
 import { CURRENT_TERM, DEFAULT_TERMS, offeringIssue, PRIOR } from '../../logic/terms'
 import {
   addModuleToTerm, moveModule, removeFromRoadmap, restoreModule, setEntryCountAs, setExpected, setGrade, setNote, setReview, setStar, setStatus,
@@ -207,6 +209,31 @@ export function CourseDetail({ data, handbook, career, state, update, id }: Prop
         )}
         <details class="detail-add-date"><summary>{t(lang, 'dl.addFor')}</summary><DeadlineForm lang={lang} update={update} moduleId={id} /></details>
       </section>
+
+      {(() => {
+        const l = prereqLinks(rows).get(id)
+        if (!l) return null
+        const all = roadmapEntries(state)
+        const state_ = (o: string) => {
+          const e = all[o]
+          if (!e || !(e.status === 'planned' || e.status === 'passed')) return 'missing'
+          if (e.status === 'passed') return 'passed'
+          return entry && termOrder(e.term) >= termOrder(entry.term) ? 'late' : 'planned'
+        }
+        return (
+          <section class="detail-section">
+            <h3>{t(lang, 'pre.title')}</h3>
+            <ul class="plain prereq-list">
+              {l.before.map((o) => (
+                <li key={o} class={`is-${state_(o)}`}><a href={courseHref(o)}>{rows.find((r) => r.id === o)?.title ?? o}</a><span>{t(lang, `pre.state.${state_(o)}`)}</span></li>
+              ))}
+              {l.excludes.map((o) => (
+                <li key={o} class={all[o] ? 'is-late' : 'is-passed'}><a href={courseHref(o)}>{rows.find((r) => r.id === o)?.title ?? o}</a><span>{t(lang, all[o] ? 'pre.state.excluded' : 'pre.state.notCombined')}</span></li>
+              ))}
+            </ul>
+          </section>
+        )
+      })()}
 
       {places.length > 0 && (
         <section class="detail-section">

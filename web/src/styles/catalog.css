@@ -87,3 +87,13 @@
   .result-placed { max-width: none; }
   .sort-control > span { display: none; }
 }
+
+/* Suggestions for the chosen term */
+.suggest { margin-bottom: 16px; padding: 16px 18px; border-radius: var(--r-lg); background: var(--accent-soft); }
+.suggest h2 { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--accent-strong); font-size: var(--fs-md); }
+.suggest-list { display: grid; }
+.suggest-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; padding: 8px 0; border-top: 1px solid color-mix(in srgb, var(--accent) 18%, transparent); }
+.suggest-list li:first-child { border-top: 0; }
+.suggest-list a { color: var(--ink); font-size: var(--fs-sm); font-weight: 650; text-decoration: none; }
+.suggest-why { color: var(--ink-2); font-size: var(--fs-xs); }
+.suggest-list .button-ghost { margin-left: auto; }

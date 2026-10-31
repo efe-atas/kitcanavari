@@ -82,7 +82,7 @@ describe('shortlist', () => {
     await waitFor(() => expect(saved().starred).toEqual(['H1']))
     expect(screen.getByRole('button', { name: 'Remove from shortlist: Reinforcement Learning' }).getAttribute('aria-pressed')).toBe('true')
     fireEvent.click(screen.getByRole('checkbox', { name: /Only my shortlist/ }))
-    await waitFor(() => expect(screen.getAllByRole('link', { name: /Reinforcement Learning|Post-Quantum|Module M/ }).map((a) => a.textContent)).toEqual(['Reinforcement Learning']))
+    await waitFor(() => expect([...document.querySelectorAll('.results .result-title')].map((a) => a.textContent)).toEqual(['Reinforcement Learning']))
     location.hash = '#/'
     const card = await screen.findByRole('region', { name: 'Shortlist' })
     expect(within(card).getByRole('link', { name: /Reinforcement Learning/ })).toBeTruthy()
@@ -343,5 +343,32 @@ describe('dates, expected grades, reviews and comparing plans', () => {
     const cmp = await screen.findByRole('region', { name: 'Compared with your plan' })
     expect(within(cmp).getByRole('link', { name: 'Seminar: Post-Quantum Cryptography' })).toBeTruthy()
     expect(within(cmp).getByRole('link', { name: 'Reinforcement Learning' })).toBeTruthy()
+  })
+})
+
+describe('scenarios and suggestions', () => {
+  test('save a scenario, change the plan, compare, and load it back', async () => {
+    setState({ areas: AREAS, ...roadmap({ H1: { term: 'SS27', status: 'planned', countAs: null, grade: null } }) })
+    location.hash = '#/plan'
+    render(<App />)
+    const panel = await screen.findByRole('region', { name: 'Scenarios: what if' })
+    fireEvent.input(within(panel).getByLabelText('Scenario name'), { target: { value: 'RL first' } })
+    fireEvent.click(within(panel).getByRole('button', { name: 'Save current plan' }))
+    await waitFor(() => expect(saved().scenarios).toHaveLength(1))
+    location.hash = '#/plan?c=H1'
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Remove from plan' }))
+    await waitFor(() => expect(saved().roadmap.modules.H1).toBeUndefined())
+    const table = within(screen.getByRole('region', { name: 'Scenarios: what if' })).getByRole('table')
+    expect(within(table).getByRole('rowheader', { name: 'RL first' })).toBeTruthy()
+    fireEvent.click(within(table).getByRole('button', { name: 'Load scenario: RL first' }))
+    await waitFor(() => expect(saved().roadmap.modules.H1).toMatchObject({ term: 'SS27' }))
+  })
+
+  test('the catalog suggests courses for the chosen term', async () => {
+    location.hash = '#/courses/SS27'
+    render(<App />)
+    const sug = await screen.findByRole('region', { name: 'Suggested for SS 27' })
+    expect(within(sug).getByRole('link', { name: 'Seminar: Post-Quantum Cryptography' })).toBeTruthy()
+    expect(sug.textContent).toContain('seminar missing')
   })
 })

@@ -215,7 +215,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
     const { courses: data, handbook, career, changes } = load
     switch (page.kind) {
       case 'overview': return <Overview data={data} handbook={handbook} career={career} state={state} update={update} />
-      case 'plan': return <PlanBoard data={data} handbook={handbook} state={state} update={update} />
+      case 'plan': return <PlanBoard data={data} handbook={handbook} career={career} state={state} update={update} />
       case 'courses': return <Courses key={`${page.term}/${page.row}/${page.filter}`} data={data} handbook={handbook} career={career} state={state}
         update={update} term={page.term} row={page.row} filter={page.filter} starred={page.starred} />
       case 'week': return <Week data={data} state={state} update={update} />

@@ -7,6 +7,7 @@ import { EMPTY_HANDBOOK, moduleRows, type ModuleRow } from '../../logic/handbook
 import { rowBucket, type RowId } from '../../logic/matrix'
 import { roadmapEntries } from '../../logic/roadmap'
 import { highlight, matchScore } from '../../logic/search'
+import { suggestModules } from '../../logic/advisor'
 import { CURRENT_TERM, DEFAULT_TERMS, offeringIssue, PRIOR } from '../../logic/terms'
 import { addModuleToTerm, restoreModule, setStar, snapshotModule } from '../../store'
 import type { CareerData, CoursesFile, Day, HandbookFile, SkillId, UserState } from '../../types'
@@ -258,6 +259,23 @@ export function Courses({ data, handbook, career, state, update, term: presetTer
               </select>
             </label>
           </div>
+          {!query.trim() && term !== PRIOR && (() => {
+            const sug = suggestModules({ state, courses: data, handbook, career, rows, term })
+            return sug.length > 0 && (
+              <section class="suggest" aria-labelledby="sug-title">
+                <h2 id="sug-title"><Icon name="sparkle" size={16} />{t(lang, 'sug.title', { term: termName(lang, term) })}</h2>
+                <ul class="plain suggest-list">
+                  {sug.map(({ row: r, reasons }) => (
+                    <li key={r.id}>
+                      <a href={courseHref(r.id)}>{r.title}</a>
+                      <span class="suggest-why">{r.ects} ECTS · {reasons.map((x) => t(lang, `sug.${x}`)).join(' · ')}</span>
+                      <button type="button" class="button-ghost is-small" aria-label={t(lang, 'sug.add', { title: r.title })} onClick={() => add(r)}><Icon name="plus" size={14} />{t(lang, 'add.add')}</button>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          })()}
           {activeCount > 0 && (
             <div class="active-filters">
               {active.map((f) => (

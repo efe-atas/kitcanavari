@@ -92,3 +92,14 @@ body.is-dragging-course .lane:not(.is-over) .lane-content { opacity: .92; }
   .plan-hint { display: none; }
 }
 @media (pointer: coarse) { .course-card { cursor: default; } .course-grip { display: none; } .course-card { padding-left: 12px; } .move-menu > summary { width: 40px; height: 40px; } }
+
+/* Scenarios */
+.scenarios { margin-top: 28px; }
+.sc-save { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin-bottom: 16px; }
+.sc-save .field { flex: 1 1 240px; }
+.sc-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.sc-table th, .sc-table td { padding: 10px 8px; border-top: 1px solid var(--line); text-align: left; }
+.sc-table thead th { border-top: 0; color: var(--muted); font-size: var(--fs-xs); font-weight: 600; }
+.sc-table tr.is-current th { color: var(--accent); }
+.sc-table td.is-best { color: var(--positive); font-weight: 700; }
+.sc-actions { display: flex; justify-content: flex-end; gap: 4px; }

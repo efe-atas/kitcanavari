@@ -5,8 +5,11 @@ import { matrixCells, type CellItem, type RowId } from '../../logic/matrix'
 import { roadmapEntries } from '../../logic/roadmap'
 import { CURRENT_TERM, PRIOR } from '../../logic/terms'
 import { addTerm, moveModule, restoreModule, snapshotModule } from '../../store'
-import type { CoursesFile, HandbookFile, Lang, UserState } from '../../types'
+import type { CareerData, CoursesFile, HandbookFile, Lang, UserState } from '../../types'
+import { prereqIssues, prereqLinks, type PrereqIssue } from '../../logic/advisor'
+import { EMPTY_HANDBOOK, moduleRows } from '../../logic/handbook'
 import { Icon } from '../Icon'
+import { Scenarios } from '../plan/Scenarios'
 import { ShareDialog } from '../ShareDialog'
 import { rowLabel } from '../plan/labels'
 import { termName } from '../roadmap/format'
@@ -17,6 +20,7 @@ import { PageHead } from './PageHead'
 interface Props {
   data: CoursesFile
   handbook: HandbookFile | null
+  career?: CareerData | null
   state: UserState
   update: (fn: (s: UserState) => UserState) => void
 }
@@ -43,9 +47,11 @@ interface CardProps {
   term: string
   terms: string[]
   onMove: (id: string, term: string) => void
+  issues: PrereqIssue[]
+  titleOf: (id: string) => string
 }
 
-function CourseCard({ lang, state, item, term, terms, onMove }: CardProps) {
+function CourseCard({ lang, state, item, term, terms, onMove, issues, titleOf }: CardProps) {
   const title = item.title ?? item.id
   const grade = item.grade !== null ? String(item.grade).replace('.', lang === 'tr' ? ',' : '.') : null
   const kind = item.kind !== 'lecture' ? t(lang, `kind.${item.kind}`) : null
@@ -76,6 +82,9 @@ function CourseCard({ lang, state, item, term, terms, onMove }: CardProps) {
         </span>
         <span class="course-where">{rowLabel(lang, state, item.row)}</span>
         {item.issue && <span class="course-warn"><Icon name="alert" size={12} />{t(lang, `road.warn.${item.issue}`)}</span>}
+        {issues.filter((x) => x.kind !== 'missing').map((x) => (
+          <span key={x.other} class="course-warn"><Icon name="alert" size={12} />{t(lang, `pre.${x.kind}`, { other: titleOf(x.other) })}</span>
+        ))}
       </a>
       <details class="move-menu" ref={menu}>
         <summary class="icon-button" aria-label={t(lang, 'pl.moveLabel', { title })}><Icon name="swap" size={16} /></summary>
@@ -93,13 +102,17 @@ function CourseCard({ lang, state, item, term, terms, onMove }: CardProps) {
 }
 
 /** The plan term by term: drag a course to another term, or use its move menu. */
-export function PlanBoard({ data, handbook, state, update }: Props) {
+export function PlanBoard({ data, handbook, career = null, state, update }: Props) {
   const { lang } = state
   const toast = useToast()
   const [view, setView] = useState<View>(savedView)
   const [over, setOver] = useState<string | null>(null)
   const [sharing, setSharing] = useState(false)
   const matrix = useMemo(() => matrixCells(state, data, handbook), [state, data, handbook])
+  const rows = useMemo(() => moduleRows(data, handbook ?? EMPTY_HANDBOOK), [data, handbook])
+  const links = useMemo(() => prereqLinks(rows), [rows])
+  const issues = useMemo(() => prereqIssues(state, links), [state, links])
+  const titleOf = (id: string) => rows.find((r) => r.id === id)?.title ?? id
   const items = (term: string) => ROW_ORDER.flatMap((row) => (matrix.cells[row][term] ?? []).map((it) => ({ ...it, row })))
   const columns = [...matrix.columns.filter((term) => term !== PRIOR), PRIOR]
   const total = Object.values(matrix.colTotals).reduce((n, x) => n + x, 0)
@@ -188,7 +201,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
               </header>
               <div class="lane-content">
                 {list.length > 0
-                  ? <ul class="plain lane-list">{list.map((it) => <CourseCard key={it.id} lang={lang} state={state} item={it} term={term} terms={columns} onMove={move} />)}</ul>
+                  ? <ul class="plain lane-list">{list.map((it) => <CourseCard key={it.id} lang={lang} state={state} item={it} term={term} terms={columns} onMove={move} issues={issues.filter((x) => x.id === it.id)} titleOf={titleOf} />)}</ul>
                   : <p class="lane-empty">{t(lang, term === PRIOR ? 'pl.priorEmpty' : 'pl.empty')}</p>}
                 <div class="lane-foot">
                   <a class="lane-add" href={pageHref({ kind: 'courses', term, row: null, filter: null })}
@@ -203,6 +216,7 @@ export function PlanBoard({ data, handbook, state, update }: Props) {
         })}
       </div>
       <p class="plan-note">{t(lang, 'plan.thesis')}</p>
+      <Scenarios data={data} handbook={handbook} career={career} state={state} update={update} />
       {sharing && <ShareDialog lang={lang} state={state} onClose={() => setSharing(false)} />}
     </div>
   )
