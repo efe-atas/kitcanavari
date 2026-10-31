@@ -53,7 +53,7 @@ interface CardProps {
 
 function CourseCard({ lang, state, item, term, terms, onMove, issues, titleOf }: CardProps) {
   const title = item.title ?? item.id
-  const grade = item.grade !== null ? String(item.grade).replace('.', lang === 'tr' ? ',' : '.') : null
+  const grade = item.grade !== null ? String(item.grade).replace('.', lang === 'en' ? '.' : ',') : null
   const kind = item.kind !== 'lecture' ? t(lang, `kind.${item.kind}`) : null
   const menu = useRef<HTMLDetailsElement>(null)
   return (

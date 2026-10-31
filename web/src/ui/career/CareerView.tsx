@@ -1,3 +1,4 @@
+import { cl } from '../../locale'
 import { useMemo } from 'preact/hooks'
 import { t } from '../../i18n'
 import { berlinNow } from '../../logic/calendar'
@@ -42,7 +43,7 @@ function LensInfo({ lang, career, lens, role }: { lang: Lang; career: CareerData
   const bands = [...lens.salary].sort((a, b) => Number(b.role === role) - Number(a.role === role))
   return (
     <div class="lens-card">
-      <h3 id="lens-title">{lens.title[lang]}</h3>
+      <h3 id="lens-title">{lens.title[cl(lang)]}</h3>
       <dl class="lens-facts">
         <div><dt>{t(lang, 'career.cities')}</dt><dd>{lens.cities.join(', ')}</dd></div>
         <div>
@@ -61,14 +62,14 @@ function LensInfo({ lang, career, lens, role }: { lang: Lang; career: CareerData
             ) : <span class="muted">{t(lang, 'career.noSalary')}</span>}
           </dd>
         </div>
-        <div><dt>{t(lang, 'career.interview')}</dt><dd>{lens.interview[lang]}</dd></div>
+        <div><dt>{t(lang, 'career.interview')}</dt><dd>{lens.interview[cl(lang)]}</dd></div>
       </dl>
       <details class="lens-more">
         <summary>{t(lang, 'cr.lensMore')}</summary>
         <h4>{t(lang, 'career.offCourse')}</h4>
-        <ul>{lens.offCourse[lang].map((x) => <li key={x}>{x}</li>)}</ul>
+        <ul>{lens.offCourse[cl(lang)].map((x) => <li key={x}>{x}</li>)}</ul>
         <h4>{t(lang, 'career.downsides')}</h4>
-        <ul>{lens.downsides[lang].map((x) => <li key={x}>{x}</li>)}</ul>
+        <ul>{lens.downsides[cl(lang)].map((x) => <li key={x}>{x}</li>)}</ul>
       </details>
     </div>
   )
@@ -160,7 +161,7 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
               {t(lang, 'cp.role')}
               <select value={roleId ?? ''} onChange={(e) => { location.hash = href(lensId, (e.target as HTMLSelectElement).value || null) }}>
                 <option value="">{t(lang, 'cp.noRole')}</option>
-                {career.roles.roles.map((r) => <option key={r.id} value={r.id}>{r.title[lang]}</option>)}
+                {career.roles.roles.map((r) => <option key={r.id} value={r.id}>{r.title[cl(lang)]}</option>)}
               </select>
             </label>
           </div>
@@ -169,8 +170,8 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
               const f = ranked.find((x) => x.lens.id === l.id)!.fit
               const best = ranked[0].lens.id === l.id && f > 0
               return (
-                <a key={l.id} class="env-card" href={href(l.id)} aria-current={l.id === lensId ? 'true' : undefined} aria-label={l.title[lang]}>
-                  <span class="env-title">{l.title[lang]}</span>
+                <a key={l.id} class="env-card" href={href(l.id)} aria-current={l.id === lensId ? 'true' : undefined} aria-label={l.title[cl(lang)]}>
+                  <span class="env-title">{l.title[cl(lang)]}</span>
                   <span class="env-fit"><strong>{f}%</strong>{best && <span class="tag tag-accent">{t(lang, 'cp.best')}</span>}</span>
                   <span class="meter" aria-hidden="true"><span style={{ width: `${f}%` }} /></span>
                 </a>
@@ -184,8 +185,8 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
             <header class="job-head">
               <div class="job-head-text">
                 <p class="career-eyebrow">{t(lang, isFollowed ? 'cr.isGoal' : roleId ? 'cp.pathLabel' : 'cx.environmentLabel')}</p>
-                <h2 id="job-title">{roleId ? `${role.title[lang]} · ${lens.title[lang]}` : lens.title[lang]}</h2>
-                <p class="job-summary">{role.summary[lang]}</p>
+                <h2 id="job-title">{roleId ? `${role.title[cl(lang)]} · ${lens.title[cl(lang)]}` : lens.title[cl(lang)]}</h2>
+                <p class="job-summary">{role.summary[cl(lang)]}</p>
                 <p class="career-browse-note">{t(lang, 'cx.browsing')}</p>
               </div>
               <button type="button" class={isFollowed ? 'button-quiet' : 'button'} disabled={full} aria-pressed={isFollowed}
@@ -265,9 +266,9 @@ export function CareerView({ data, handbook, career, focus, state, update }: Pro
             </div>
             <div class="career-context">
               <p class="career-eyebrow">{t(lang, 'cr.employer')}</p>
-              <h3>{lens.title[lang]}</h3>
+              <h3>{lens.title[cl(lang)]}</h3>
               <p class="lens-effect">
-                {more.length > 0 && <span>{t(lang, 'cr.lensMore2', { lens: lens.title[lang], skills: more.join(', ') })}</span>}
+                {more.length > 0 && <span>{t(lang, 'cr.lensMore2', { lens: lens.title[cl(lang)], skills: more.join(', ') })}</span>}
                 {less.length > 0 && <span>{t(lang, 'cr.lensLess', { skills: less.join(', ') })}</span>}
               </p>
               <details class="career-market" open>

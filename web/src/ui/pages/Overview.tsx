@@ -31,7 +31,7 @@ interface Props {
   update: (fn: (s: UserState) => UserState) => void
 }
 
-const fmtNum = (lang: Lang, n: number) => String(n).replace('.', lang === 'tr' ? ',' : '.')
+const fmtNum = (lang: Lang, n: number) => String(n).replace('.', lang === 'en' ? '.' : ',')
 
 /** 120 marks, one per ECTS: passed, planned, still open, and the thesis at the end. */
 function CreditRuler({ lang, passed, planned }: { lang: Lang; passed: number; planned: number }) {

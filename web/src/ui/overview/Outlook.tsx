@@ -6,7 +6,7 @@ import type { Lang } from '../../types'
 import { Icon } from '../Icon'
 import { termName } from '../roadmap/format'
 
-const grade = (lang: Lang, n: number) => n.toFixed(1).replace('.', lang === 'tr' ? ',' : '.')
+const grade = (lang: Lang, n: number) => n.toFixed(1).replace('.', lang === 'en' ? '.' : ',')
 const TARGETS = Array.from({ length: 31 }, (_, i) => Math.round((1 + i * 0.1) * 10) / 10)
 
 /** When the degree is likely done, and what the remaining grades need to be for a target average. */

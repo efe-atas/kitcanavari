@@ -12,15 +12,15 @@ export interface Term {
   term: string
   /** Original German and/or English names. */
   aka?: string
-  def: Record<Lang, string>
+  def: Record<"tr" | "en", string>
   /** Where the term shows up on this site or in the catalog. */
-  where?: Record<Lang, string>
+  where?: Record<"tr" | "en", string>
   related?: string[]
   /** A live fact from this term's catalog data. */
   count?: (data: CoursesFile, lang: Lang) => string | null
 }
 
-export const CATEGORIES: Record<Category, Record<Lang, string>> = {
+export const CATEGORIES: Record<Category, Record<"tr" | "en", string>> = {
   structure: { tr: 'Programın yapısı', en: 'Degree structure' },
   types: { tr: 'Ders türleri', en: 'Course types' },
   time: { tr: 'Zaman ve yük', en: 'Time and workload' },

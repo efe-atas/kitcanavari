@@ -1,3 +1,4 @@
+import { locale } from '../../locale'
 import { useMemo, useState } from 'preact/hooks'
 import { t } from '../../i18n'
 import { addDays, berlinNow, clashes, defaultWeek, mondayOf, occKey, occurrences, weekDates } from '../../logic/calendar'
@@ -26,7 +27,7 @@ function weekLabel(lang: Lang, monday: string): string {
   const sunday = addDays(monday, 6)
   const f = (iso: string, opts: Intl.DateTimeFormatOptions) => {
     const [y, m, d] = iso.split('-').map(Number)
-    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', { ...opts, timeZone: 'UTC' })
+    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString(locale(lang), { ...opts, timeZone: 'UTC' })
   }
   return `${f(monday, { day: 'numeric', month: 'short' })} – ${f(sunday, { day: 'numeric', month: 'short', year: 'numeric' })}`
 }

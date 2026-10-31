@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import { loadData } from '../data'
+import { LANGS } from '../locale'
 import { t } from '../i18n'
 import { pendingAlerts } from '../logic/alerts'
 import { buildIcs } from '../logic/ics'
@@ -184,14 +185,17 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
   const navKind: NavKind | 'more' = page.kind === 'more' ? 'more' : page.kind === 'shared' ? 'plan' : page.kind
   const openSettings = () => go('settings')
   const switchTheme = () => update((s) => setTheme(s, theme === 'dark' ? 'light' : 'dark'))
-  const switchLang = () => update((s) => setLang(s, lang === 'tr' ? 'en' : 'tr'))
+  // The header button steps through the languages: TR → EN → DE → TR.
+  const nextLang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length]
+  const switchLang = () => update((s) => setLang(s, nextLang))
+  const langName = (l: Lang) => ({ tr: 'Türkçe', en: 'English', de: 'Deutsch' })[l]
 
   const pages: PaletteCommand[] = (Object.keys(NAV) as NavKind[]).map((k) => ({
     id: k, label: t(lang, `nav.${k}`), icon: NAV[k].icon, hint: `G ${NAV[k].key.toUpperCase()}`, keywords: t(lang, `page.${k}.lead`), run: () => go(k),
   }))
   const actions: PaletteCommand[] = load.status !== 'ready' ? [] : [
     { id: 'theme', label: t(lang, theme === 'dark' ? 'theme.toLight' : 'theme.toDark'), icon: theme === 'dark' ? 'sun' : 'moon', keywords: 'theme tema dark light', run: switchTheme },
-    { id: 'lang', label: lang === 'tr' ? 'Switch to English' : 'Türkçeye geç', icon: 'globe', keywords: 'language dil', run: switchLang },
+    ...LANGS.filter((l) => l !== lang).map((l) => ({ id: `lang-${l}`, label: langName(l), icon: 'globe' as IconName, keywords: 'language dil sprache', run: () => update((s) => setLang(s, l)) })),
     { id: 'term', label: t(lang, 'road.addTerm'), icon: 'plus', keywords: 'semester dönem term', run: () => { update(addTerm); toast({ message: t(lang, 'toast.termAdded'), link: { label: t(lang, 'journey.viewPlan'), href: pageHref({ kind: 'plan' }) } }) } },
     ...(Object.keys(state.selected).length ? [{
       id: 'ics', label: t(lang, 'schedule.ics'), icon: 'download' as IconName, keywords: 'ics calendar takvim',
@@ -246,7 +250,7 @@ function Shell({ app: [state, update, persistent, sync] }: { app: ReturnType<typ
               <Icon name="bell" size={19} />{alerts.length > 0 && <span class="count-badge" data-testid="changes-badge" aria-hidden="true">{alerts.length}</span>}
             </a>
             <a class="icon-button header-help" href={pageHref(NAV.help.page)} aria-label={t(lang, 'nav.help')} aria-current={navKind === 'help' ? 'page' : undefined}><Icon name="help" size={19} /></a>
-            <button class="locale-control" type="button" onClick={switchLang} aria-label={lang === 'tr' ? 'Switch to English' : 'Türkçeye geç'}>{lang === 'tr' ? 'EN' : 'TR'}</button>
+            <button class="locale-control" type="button" onClick={switchLang} aria-label={langName(nextLang)} title={langName(nextLang)}>{nextLang.toUpperCase()}</button>
             <button class="icon-button" type="button" onClick={switchTheme} aria-label={t(lang, theme === 'light' ? 'theme.toDark' : 'theme.toLight')}><Icon name={theme === 'light' ? 'moon' : 'sun'} size={19} /></button>
             <SyncStatus lang={lang} sync={sync} onOpen={openSettings} />
             <a class="icon-button profile-link" href={pageHref(NAV.settings.page)} aria-label={t(lang, 'nav.settings')} aria-current={navKind === 'settings' ? 'page' : undefined}><Icon name="settings" size={19} /></a>

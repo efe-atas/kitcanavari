@@ -14,8 +14,10 @@ export const STORAGE_KEY = 'kitcanavari:v1'
 /** ackFingerprint of an acknowledged event that is no longer in the catalog. */
 export const REMOVED_ACK = '__removed__'
 
-const browserLang = (): Lang =>
-  typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('tr') ? 'tr' : 'en'
+const browserLang = (): Lang => {
+  const l = typeof navigator !== 'undefined' ? navigator.language?.toLowerCase() ?? '' : ''
+  return l.startsWith('tr') ? 'tr' : l.startsWith('de') ? 'de' : 'en'
+}
 
 export const defaultState = (): UserState => ({ version: 1, selected: {}, lang: browserLang(), lastSeenScrapedAt: '' })
 
@@ -35,7 +37,7 @@ function isState(x: unknown): x is UserState {
   if (!x || typeof x !== 'object' || Array.isArray(x)) return false
   const s = x as Partial<UserState>
   return s.version === 1 && !!s.selected && typeof s.selected === 'object' && !Array.isArray(s.selected)
-    && (s.lang === 'tr' || s.lang === 'en') && typeof s.lastSeenScrapedAt === 'string'
+    && (s.lang === 'tr' || s.lang === 'en' || s.lang === 'de') && typeof s.lastSeenScrapedAt === 'string'
     && (s.theme === undefined || s.theme === 'light' || s.theme === 'dark')
     && (s.areas === undefined || (Array.isArray(s.areas) && s.areas.every((a) => typeof a === 'string')))
     && (s.roadmap === undefined || isRoadmap(s.roadmap))

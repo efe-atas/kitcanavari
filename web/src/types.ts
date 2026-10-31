@@ -184,7 +184,7 @@ export interface SelectedEntry {
   countAs?: string | null
 }
 
-export type Lang = 'tr' | 'en'
+export type Lang = 'tr' | 'en' | 'de'
 
 export type ModuleStatus = 'planned' | 'passed' | 'failed' | 'dropped'
 

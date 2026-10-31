@@ -67,7 +67,7 @@ export function Shared({ code, data, handbook, state, update }: Props) {
         <div><dt>{t(lang, 'share.areas')}</dt><dd>{plan.areas.join(' · ') || '—'}</dd></div>
         <div><dt>ECTS</dt><dd><strong>{report.all.total}</strong> / {RULES.total}</dd></div>
         <div><dt>{t(lang, 'chart.passed')}</dt><dd><strong>{report.done.total}</strong></dd></div>
-        {report.gpa !== null && <div><dt>{t(lang, 'gpa.short')}</dt><dd><strong>{String(report.gpa).replace('.', lang === 'tr' ? ',' : '.')}</strong></dd></div>}
+        {report.gpa !== null && <div><dt>{t(lang, 'gpa.short')}</dt><dd><strong>{String(report.gpa).replace('.', lang === 'en' ? '.' : ',')}</strong></dd></div>}
       </dl>
       <Compare lang={lang} theirs={plan.modules} mine={roadmapEntries(state)} titleOf={(id) => matrixTitle(id)} />
       <div class="shared-terms">
@@ -83,7 +83,7 @@ export function Shared({ code, data, handbook, state, update }: Props) {
                     <li key={it.id} class={`status-${it.status}`}>
                       <span class="shared-title">{it.title ?? it.id}</span>
                       <span class="shared-meta">{it.ects ?? '?'} ECTS · {rowLabel(lang, view, it.row)}{it.kind !== 'lecture' ? ` · ${t(lang, `kind.${it.kind}`)}` : ''}
-                        {it.status !== 'planned' ? ` · ${t(lang, `road.status.${it.status}`)}` : ''}{it.grade !== null ? ` ${String(it.grade).replace('.', lang === 'tr' ? ',' : '.')}` : ''}</span>
+                        {it.status !== 'planned' ? ` · ${t(lang, `road.status.${it.status}`)}` : ''}{it.grade !== null ? ` ${String(it.grade).replace('.', lang === 'en' ? '.' : ',')}` : ''}</span>
                       {plan.reviews?.[it.id] && <span class="shared-review">{reviewLine(lang, plan.reviews[it.id])}</span>}
                     </li>
                   ))}

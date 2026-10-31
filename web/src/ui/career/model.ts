@@ -1,3 +1,4 @@
+import { cl } from '../../locale'
 import { skillPoints, type SkillPoints } from '../../logic/career'
 import type { ModuleRow } from '../../logic/handbook'
 import { roadmapEntries } from '../../logic/roadmap'
@@ -11,7 +12,7 @@ export function pointsOf(state: UserState, career: CareerData, rows: ModuleRow[]
   return { all: skillPoints(entries, career, get, ['passed', 'planned']), now: skillPoints(entries, career, get, ['passed']) }
 }
 
-export const roleTitle = (career: CareerData, id: string, lang: Lang) => career.roles.roles.find((r) => r.id === id)?.title[lang] ?? id
-export const lensTitle = (career: CareerData, id: string, lang: Lang) => career.lenses.lenses.find((l) => l.id === id)?.title[lang] ?? id
+export const roleTitle = (career: CareerData, id: string, lang: Lang) => career.roles.roles.find((r) => r.id === id)?.title[cl(lang)] ?? id
+export const lensTitle = (career: CareerData, id: string, lang: Lang) => career.lenses.lenses.find((l) => l.id === id)?.title[cl(lang)] ?? id
 export const pathTitle = (career: CareerData, role: string, lens: string, lang: Lang) =>
   role === 'environment' ? lensTitle(career, lens, lang) : `${roleTitle(career, role, lang)}, ${lensTitle(career, lens, lang)}`

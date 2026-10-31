@@ -1,3 +1,4 @@
+import { cl } from '../../locale'
 import { useMemo } from 'preact/hooks'
 import { AREAS, moduleAreas, moduleKind, RULES } from '../../logic/degree'
 import type { CoursesFile, Lang } from '../../types'
@@ -134,7 +135,7 @@ function DegreeBar({ c }: { c: (typeof copy)['tr'] }) {
 }
 
 export function GuideView({ lang, data }: { lang: Lang; data: CoursesFile }) {
-  const c = copy[lang]
+  const c = copy[cl(lang)]
   const { stamm, byArea } = useMemo(() => {
     const mods = Object.values(data.modules)
     return {
