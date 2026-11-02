@@ -652,7 +652,7 @@
     ]
    ],
    "contentText": "",
-   "fingerprint": "a20ffc502336fbd2",
+   "fingerprint": "0598af15074f476e",
    "format": "On-Site",
    "id": "0x09CBAC2F5895467AAF286633E81AE5C9",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3038394&client_id=produktiv",
@@ -800,6 +800,14 @@
      "room": "50.34 Raum -119 (UG)",
      "slot": 0,
      "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-03-17",
+     "end": "13:00",
+     "room": "50.34 Raum 301",
+     "slot": 1,
+     "start": "09:45"
     }
    ],
    "slots": [
@@ -810,6 +818,15 @@
      "firstDate": "2026-10-28",
      "rhythm": "weekly",
      "room": "50.34 Raum -119 (UG)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Wed",
+     "end": "13:00",
+     "firstDate": "2027-03-17",
+     "rhythm": "single",
+     "room": "50.34 Raum 301",
      "start": "09:45"
     }
    ],
@@ -17979,7 +17996,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-10-30T10:43:22Z",
+  "scrapedAt": "2026-11-02T12:01:07Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",

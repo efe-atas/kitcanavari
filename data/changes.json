@@ -1,6 +1,13 @@
 {
  "entries": [
   {
+   "at": "2026-11-02T12:01:07Z",
+   "eventId": "0x09CBAC2F5895467AAF286633E81AE5C9",
+   "eventTitle": "Programming Language Design and Implementation",
+   "kind": "slot_changed",
+   "summary": "Wed 09:45–11:15 → Wed 09:45–11:15, Wed 09:45–13:00"
+  },
+  {
    "after": [
     "Hannes Greule",
     "Martijn Cornelis Ben Voorwinden",
