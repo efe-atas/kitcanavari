@@ -3334,7 +3334,7 @@
     ]
    ],
    "contentText": "This is an advanced course that provides students with both theoretical and practical insights into modern deep learning\n\nIn particular, we focus on a novel theoretical framework for understanding deep neural networks with tools from geometry and group theory\n\nThis enables a methodical approach to Deep Learning: starting from first principles of symmetry and invariance, we derive different network architectures for analyzing unstructured sets, grids, graphs, and manifolds\n\nTopics of the course include: group theory, graph neural networks, convolutional neural networks, applications of geometric deep learning in diverse fields such as geometry processing, molecular dynamics, social networks, game playing (computer Go), processing of text and speech, as well as applications in medicine\n\nRequirements: strong mathematical abstraction skills , foundations of machine learning, group theory, linear algebra",
-   "fingerprint": "398cf0baba4666b4",
+   "fingerprint": "6c10147ee6472ea1",
    "format": "On-Site",
    "id": "0x1C58A50EEE03461F8A0535F902846F52",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3069412&client_id=produktiv",
@@ -3359,7 +3359,7 @@
      "cancelled": false,
      "date": "2026-11-04",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3367,7 +3367,7 @@
      "cancelled": false,
      "date": "2026-11-11",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3375,7 +3375,7 @@
      "cancelled": false,
      "date": "2026-11-18",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3383,7 +3383,7 @@
      "cancelled": false,
      "date": "2026-11-25",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3391,7 +3391,7 @@
      "cancelled": false,
      "date": "2026-12-02",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3399,7 +3399,7 @@
      "cancelled": false,
      "date": "2026-12-09",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3407,7 +3407,7 @@
      "cancelled": false,
      "date": "2026-12-16",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3415,7 +3415,7 @@
      "cancelled": false,
      "date": "2026-12-23",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3423,7 +3423,7 @@
      "cancelled": false,
      "date": "2027-01-13",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3431,7 +3431,7 @@
      "cancelled": false,
      "date": "2027-01-20",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3439,7 +3439,7 @@
      "cancelled": false,
      "date": "2027-01-27",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3447,7 +3447,7 @@
      "cancelled": false,
      "date": "2027-02-03",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3455,7 +3455,7 @@
      "cancelled": false,
      "date": "2027-02-10",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3463,7 +3463,7 @@
      "cancelled": false,
      "date": "2027-02-17",
      "end": "13:00",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "slot": 0,
      "start": "11:30"
     },
@@ -3595,7 +3595,7 @@
      "end": "13:00",
      "firstDate": "2026-11-04",
      "rhythm": "weekly",
-     "room": "50.34 Raum 301",
+     "room": "50.34 Raum -102 (UG)",
      "start": "11:30"
     },
     {
@@ -6225,7 +6225,7 @@
    "fingerprint": "25eaa5baedf73a2f",
    "format": "On-Site",
    "id": "0x4421B01EFB2340EFA0E53AB306B170B5",
-   "iliasUrl": null,
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3076580&client_id=produktiv",
    "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x4421B01EFB2340EFA0E53AB306B170B5&tguid=0xD25DBD9C86874091993315DA11571AAF",
    "language": null,
    "lecturers": [
@@ -17996,7 +17996,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-02T12:01:07Z",
+  "scrapedAt": "2026-11-03T11:38:06Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
