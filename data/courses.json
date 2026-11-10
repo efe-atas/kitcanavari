@@ -11417,8 +11417,8 @@
    ],
    "sws": 3.0,
    "title": "Economic Decision Making",
-   "type": "Lecture / Practice (VÜ)",
-   "typeCode": "VÜ"
+   "type": "Others (sonst.)",
+   "typeCode": "sonst."
   },
   "0xA236AD9E9D9A4E3BA89110E45BA67956": {
    "catalogPaths": [
@@ -17996,7 +17996,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-06T11:49:40Z",
+  "scrapedAt": "2026-11-10T12:10:04Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
