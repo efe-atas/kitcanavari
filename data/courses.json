@@ -3101,7 +3101,7 @@
     ]
    ],
    "contentText": "Registrationlink to wiwi-Portal\n\nCompetency Goals:\n\nPlanning and conducting a study on a current research topic in the areas of Human–Computer Interaction, Ubiquitous Systems, and Context-Aware Systems. Upon successful completion of the seminar, students will be able to:\n\n- independently search for, identify, analyze, and critically evaluate relevant scientific literature;\n\n- derive the framework conditions and parameters for user studies and experiments from the literature;\n\n- design, conduct, and evaluate a study addressing a given research question;\n\n- present scientific findings in a structured manner and communicate them to a specialist audience in the form of a short presentation;\n\n- apply the principles and techniques of scientific writing to prepare a scientific paper describing the planning, execution, and results of the study.\n\n- Students are familiar with the German Research Foundation (DFG) Code of Conduct Guidelines for Safeguarding Good Research Practice and successfully apply these guidelines in the preparation of their scientific work.\n\nContent:\n\nThe practical course focuses on investigating specific research questions through the design and execution of a user study. Particular emphasis is placed on designing a user study to address a defined research question, followed by conducting the study and analyzing the collected data. Depending on the research question, the workload associated with the individual components may vary. The lecture part provides both theoretical and practical knowledge on the planning, execution, and evaluation of user studies. It is intended to serve as valuable preparation for the Master's thesis.\n\nWorkload\n\n· Contact hours: group presentations and discussions (15 × 45 min): 11 h 15 min\n\n· Common Lectures (4x1,5h): 6h\n\n· Individual review of feedback and project work (15 × 30 min): 7h 30 min\n\n· Practical group work on the assigned tasks (15 × 8 h): 120h\n\n· Documentation of results and preparation of presentations (15 × 45 min) 11h 15\n\n· Final report 24h\n\nTotal: 180h",
-   "fingerprint": "217477e269faa5c5",
+   "fingerprint": "1ca2d0eb846ffd6e",
    "format": "On-Site",
    "id": "0x1A162997EE8B404897063B24955701F9",
    "iliasUrl": "https://klausur.ilias.studium.kit.edu/goto.php?target=crs_3783&client_id=klausur",
@@ -3138,7 +3138,7 @@
      "cancelled": false,
      "date": "2026-10-29",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3146,7 +3146,7 @@
      "cancelled": false,
      "date": "2026-11-05",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3154,7 +3154,7 @@
      "cancelled": false,
      "date": "2026-11-12",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3162,7 +3162,7 @@
      "cancelled": false,
      "date": "2026-11-19",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3170,7 +3170,7 @@
      "cancelled": false,
      "date": "2026-11-26",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3178,7 +3178,7 @@
      "cancelled": false,
      "date": "2026-12-03",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3186,7 +3186,7 @@
      "cancelled": false,
      "date": "2026-12-10",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3194,7 +3194,7 @@
      "cancelled": false,
      "date": "2026-12-17",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3202,7 +3202,7 @@
      "cancelled": false,
      "date": "2027-01-07",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3210,7 +3210,7 @@
      "cancelled": false,
      "date": "2027-01-14",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3218,7 +3218,7 @@
      "cancelled": false,
      "date": "2027-01-21",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3226,7 +3226,7 @@
      "cancelled": false,
      "date": "2027-01-28",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3234,7 +3234,7 @@
      "cancelled": false,
      "date": "2027-02-04",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3242,7 +3242,7 @@
      "cancelled": false,
      "date": "2027-02-11",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     },
@@ -3250,7 +3250,7 @@
      "cancelled": false,
      "date": "2027-02-18",
      "end": "13:00",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "slot": 0,
      "start": "11:30"
     }
@@ -3262,7 +3262,7 @@
      "end": "13:00",
      "firstDate": "2026-10-29",
      "rhythm": "weekly",
-     "room": "07.07 SR 222",
+     "room": "07.07 SR 203",
      "start": "11:30"
     }
    ],
@@ -6419,7 +6419,7 @@
     ]
    ],
    "contentText": "The module introduces algorithmic and computational foundations for the analysis and learning of large-scale graph-structured data. A central theme is the interpretation of graph computations as sparse operators and the resulting interplay between graph algorithms, sparse linear algebra, and modern parallel architectures.\n\nThe course revisits classical graph algorithms from the perspective of propagation processes and sparse computations. It covers sparse matrix representations and kernels, graph algorithms based on sparse linear algebra, iterative methods, and spectral techniques. Advanced algorithmic topics include sparse matrix-matrix multiplication, graph coarsening, multilevel methods, and sparsification.\n\nBuilding on these foundations, the course investigates the design and implementation of scalable graph and sparse matrix algorithms. Topics include parallel graph algorithms, performance engineering for sparse computations, graph partitioning, and communication-efficient computation.\n\nFinally, the course introduces graph learning methods and relates them to the concepts developed throughout the module. Graph neural networks are studied as parameterized sparse propagation operators, with a particular focus on their computational characteristics.",
-   "fingerprint": "1b3f4b7c37a6b3db",
+   "fingerprint": "43346b1ba9ca1680",
    "format": "On-Site",
    "id": "0x4A110AF46A0B4EDEA2FB064CFA000AE1",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3047931&client_id=produktiv",
@@ -6555,246 +6555,6 @@
      "room": "50.34 Raum 301",
      "slot": 0,
      "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-10-29",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-05",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-12",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-19",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-26",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-03",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-10",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-17",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-07",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-14",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-21",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-28",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-04",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-11",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-18",
-     "end": "11:15",
-     "room": "50.34 Raum 131",
-     "slot": 1,
-     "start": "09:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-10-30",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-06",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-13",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-20",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-27",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-04",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-11",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-18",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-08",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-15",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-22",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-29",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-05",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-12",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-19",
-     "end": "13:00",
-     "room": "50.34 Raum 236",
-     "slot": 2,
-     "start": "11:30"
     }
    ],
    "slots": [
@@ -6806,24 +6566,6 @@
      "rhythm": "weekly",
      "room": "50.34 Raum 301",
      "start": "14:00"
-    },
-    {
-     "count": 15,
-     "day": "Thu",
-     "end": "11:15",
-     "firstDate": "2026-10-29",
-     "rhythm": "weekly",
-     "room": "50.34 Raum 131",
-     "start": "09:45"
-    },
-    {
-     "count": 15,
-     "day": "Fri",
-     "end": "13:00",
-     "firstDate": "2026-10-30",
-     "rhythm": "weekly",
-     "room": "50.34 Raum 236",
-     "start": "11:30"
     }
    ],
    "sws": 3.0,
@@ -9873,6 +9615,172 @@
    "title": "AI for climate and weather predictions",
    "type": "Practical course (P)",
    "typeCode": "P"
+  },
+  "0x8847A00C7BA44273ABF1B559080EBCD7": {
+   "catalogPaths": [
+    [
+     "1. Informatik Lehrveranstaltungen",
+     "1.9 Elective Studies in Computer Science"
+    ]
+   ],
+   "contentText": "An embedded system is an electronic computing system integrated into a surrounding system, such as a driver assistance system in a car or the regulation of a controlled variable (refrigerator temperature, pressure in a power plant, motor of a robot, etc.). The cost-effective and reliable development of embedded systems presents a considerable challenge, increasingly influencing the overall system's value. Particularly in Europe, the design of embedded systems plays an important economic role in many industries, such as the automotive and automation sectors, leading numerous renowned companies to engage in this field. The lecture comprehensively addresses all aspects of embedded systems development at the hardware, software, and system levels. This includes various areas such as modeling, optimization, and synthesis of embedded systems. In addition to providing an overview of all these relevant aspects and possibilities, the course focuses on different synthesis steps, which automatically generate and optimize hardware circuits from a description language (e.g., VHDL or C). Another emphasis is on introducing the different potential target technologies that can ultimately be used to realize a design. These range from custom-developed chips (e.g., ASICs) to FPGAs and microcontrollers for software components. Exams: Exam number: 7500085 For exam dates, please fill out the form on our homepage: https://ces.itec.kit.edu/972.php Certificate: The assessment is conducted as an oral exam lasting typically 25-30 minutes according to § 4 Abs. 2 Nr. 2 SPO. Course Content: 1. Introduction 2. Overview of System Design 3. Hardware Description and Simulation 4. High-Level Synthesis 5. Logic Synthesis 6. Target Technologies 7. Layout Synthesis 8. Field Programmable Gate Arrays (FPGAs) 9. Microcontrollers and DSPs Workload: 90 hours Target Audience: Master's students or Bachelor's students in advanced stage (basic knowledge of Digital Logic Design (TI-1) is assumed). Learning Objectives: Students can develop embedded systems and are familiar with the specific constraints of the design process. They understand how to specify, synthesize, and optimize their own hardware using hardware description languages. They are familiar with the possible target technologies for both hardware and software components of the design, along with their respective advantages and disadvantages.",
+   "fingerprint": "aebeb7af04876e69",
+   "format": "On-Site",
+   "id": "0x8847A00C7BA44273ABF1B559080EBCD7",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3035905&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0x8847A00C7BA44273ABF1B559080EBCD7&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Prof. Dr.-Ing. Jörg Henkel",
+     "unit": "KIT Department of Informatics (INFORMATIK) , ITEC Henkel (ITEC)"
+    },
+    {
+     "name": "Dr.-Ing. Hassan Amr Adel Nassar",
+     "unit": "KIT Department of Informatics (INFORMATIK) , ITEC Henkel (ITEC)"
+    }
+   ],
+   "moduleIds": [
+    "M-INFO-107229"
+   ],
+   "number": "2424143",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "17:15",
+     "room": "50.34 Raum -101 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Wed",
+     "end": "17:15",
+     "firstDate": "2026-10-28",
+     "rhythm": "weekly",
+     "room": "50.34 Raum -101 (UG)",
+     "start": "15:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Optimisation and synthesis of embedded systems (ES1)",
+   "type": "Lecture (V)",
+   "typeCode": "V"
   },
   "0x8F5E2EA08ECD4EF083979F6498DBBF67": {
    "catalogPaths": [
@@ -14651,6 +14559,176 @@
    "type": "Lecture (V)",
    "typeCode": "V"
   },
+  "0xC696AC3C0C5F45FBB52EF371E988F89E": {
+   "catalogPaths": [
+    [
+     "1. Informatik Lehrveranstaltungen",
+     "1.9 Elective Studies in Computer Science"
+    ]
+   ],
+   "contentText": "Erfolgskontrolle(n) The assessment is carried out as an examination of another type (§ 4 Abs. 2 No. 3 SPO). Several written assignments throughout the semester and one presentation are required. Withdrawal is possible until the submission of the first written assignment.\n\nVoraussetzungen None.\n\nAnmerkungen Content: Ipe is a customizable vector drawing tool with LaTeX support, used for creating scientific figures and presentations. Being a powerful tool, it has a steep learning curve. This course gives an in-depth introduction for efficiently creating high-quality figures and presentations with Ipe.\n\nCompetency Goals: After completing the course, students should be · able to efficiently work with Ipe, which entails being familiar with the drawing tools, keyboard shortcus, snapping, and alignment, · know of Ipe's more advanced capabilities like stylesheets, its XML format, configuration options, and plugins called Ipelets, · able to write simple Ipelets in Lua, · and have a basic understanding of fundamental design principles.",
+   "fingerprint": "cb7eee83aa04aef4",
+   "format": "On-Site",
+   "id": "0xC696AC3C0C5F45FBB52EF371E988F89E",
+   "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3057984&client_id=produktiv",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/event.asp?gguid=0xC696AC3C0C5F45FBB52EF371E988F89E&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "lecturers": [
+    {
+     "name": "Elly Schmidt",
+     "unit": "ITI Bläsius"
+    },
+    {
+     "name": "Samuel Schneider",
+     "unit": "ITI Bläsius , KASTEL Mirandola"
+    },
+    {
+     "name": "Prof. Dr. Thomas Bläsius",
+     "unit": "KIT Department of Informatics (INFORMATIK) , ITI Bläsius , ITI Bläsius"
+    }
+   ],
+   "moduleIds": [
+    "M-INFO-107254"
+   ],
+   "number": "2400162",
+   "sessions": [
+    {
+     "cancelled": false,
+     "date": "2026-10-27",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-03",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-10",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-17",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-24",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-01",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-08",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-15",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-22",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "17:15",
+     "room": "50.34 Raum -118 (UG)",
+     "slot": 0,
+     "start": "15:45"
+    }
+   ],
+   "slots": [
+    {
+     "count": 15,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-10-27",
+     "rhythm": "weekly",
+     "room": "50.34 Raum -118 (UG)",
+     "start": "15:45"
+    }
+   ],
+   "sws": 2.0,
+   "title": "Scientific Figures and Presentations in Ipe",
+   "type": "Lecture (V)",
+   "typeCode": "V"
+  },
   "0xC96F7C15CD934165B7902FFAD456DE0A": {
    "catalogPaths": [
     [
@@ -15092,7 +15170,7 @@
     ]
    ],
    "contentText": "This lecture provides the basics for the automated processing of natural language texts. Language processing is becoming increasingly important.\n\nLinguistic input plays a critical role in interactive systems, such as voice commands, assistance systems, and query interfaces. Additionally, the analysis and processing of text-based software artifacts represents an important field of research. Computational linguistics is therefore not only of great importance for software applications, but also for software engineering itself.\n\nThe aim of this lecture is to provide basic knowledge of natural language processing (NLP) and its potential applications in the development of software systems. Key topics include the automated analysis of texts, the challenges posed by the inherent ambiguity of natural language, the translation of natural language texts into software models, and the use of large language models (LLMs) in software engineering. The lecture will also explore current research developments and trends in the field.\n\nCompetency Goals:\n\nStudents know basic concepts of linguistics such as syntax, semantics and pragmatics, and can explain and compare them. They are familiar with lexical relations such as polysemy, homonymy, and troponymy and can identify relevant examples. Furthermore, they can identify and compare connections between the relations.\n\nStudents are familiar with basic concepts of computational linguistics. Basic techniques such as part-of-speech tagging, lemmatization, word similarities and disambiguation can be explained. Associated methods (lexical, rule-based, or probabilistic) can be described and their respective strengths and weaknesses assessed. Different parsing methods can be named, explained and conceptually reproduced.\n\nStudents can describe and compare the structure, content and benefits of different knowledge bases. In addition to the overarching concepts of ontology, lexical databases and other knowledge representations, they are also familiar with specific representatives, such as WordNet, DBpedia and similar, and can use them.\n\nStudents understand the connection between the functionality of basic computational linguistics techniques and their applicability in software engineering. In addition, they can break down tool chains into individual components and evaluate them. In particular, students will be able to analyze and evaluate different applications. These include automated modeling, improving requirements specifications, and traceability link recovery. In addition, students can explain the concept of large language models (LLMs) and their application and use in the field of language processing. Students can identify application scenarios in software engineering for text analysis systems and design their own solutions.\n\nWorkload:\n\n3 ECTS correspond to approximately 90 hours of work, including:\n\napprox. 30 hours of attending lectures\n\napprox. 45 hours of preparation and follow-up work\n\napprox. 15 hours of exam preparation",
-   "fingerprint": "2c1a156de6a3e3cf",
+   "fingerprint": "db37071211e28dfa",
    "format": "On-Site",
    "id": "0xD2F5B233ECBA474D962B72E09D9BA5F9",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037055&client_id=produktiv",
@@ -15236,6 +15314,102 @@
      "room": "50.34 Raum -118 (UG)",
      "slot": 0,
      "start": "14:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-17",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 1,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-24",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 2,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-01",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 3,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-08",
+     "end": "17:15",
+     "room": "10.50 Raum 604",
+     "slot": 4,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-15",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 5,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-22",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 6,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "17:15",
+     "room": "10.50 Raum 604",
+     "slot": 7,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 8,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 9,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 10,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 11,
+     "start": "15:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "17:15",
+     "room": "50.31 Seminarraum 012",
+     "slot": 12,
+     "start": "15:45"
     }
    ],
    "slots": [
@@ -15247,6 +15421,114 @@
      "rhythm": "weekly",
      "room": "50.34 Raum -118 (UG)",
      "start": "14:00"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-11-17",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-11-24",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-12-01",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-12-08",
+     "rhythm": "single",
+     "room": "10.50 Raum 604",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-12-15",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2026-12-22",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-01-12",
+     "rhythm": "single",
+     "room": "10.50 Raum 604",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-01-19",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-01-26",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-02-02",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-02-09",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "17:15",
+     "firstDate": "2027-02-16",
+     "rhythm": "single",
+     "room": "50.31 Seminarraum 012",
+     "start": "15:45"
     }
    ],
    "sws": 2.0,
@@ -17996,7 +18278,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-10T12:10:04Z",
+  "scrapedAt": "2026-11-11T11:41:21Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
@@ -19890,6 +20172,35 @@
    "recurrence": "Irregular",
    "title": "Computational Geometry"
   },
+  "M-INFO-107229": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 3.0,
+     "id": "T-INFO-114253",
+     "title": "Optimization and Synthesis of Embedded Systems (ESI)"
+    }
+   ],
+   "description": {
+    "content": "The cost-effective and error-free development of embedded systems represents a challenge that should not be underestimated and which is having an ever greater influence on the added value of the overall system. In Europe in particular, the design of embedded systems is playing an increasingly important economic role in many sectors of the economy, such as the automotive industry, so that a number of well-known companies are already involved in the development of embedded systems.\n\nThe lecture deals comprehensively with all aspects of the development of embedded systems at hardware, software and system level. This includes diverse areas such as modelling, optimization and synthesis of systems.",
+    "exam": "See partial achievements (Teilleistung)",
+    "objectives": "The student can develop embedded systems. They can specify, synthesize and optimize their own hardware. They learn the hardware description language and are familiar with the special boundary conditions of the design of embedded systems.",
+    "prerequisites": "Module \" M-INFO-100830 – Optimization and Synthesis of Embedded Systems (ES1) \" must be not started yet .",
+    "workload": "90 hours: 30 hours of lectures (15 weeks*2 hours) 30 hours of self study (15 weeks*2 hours) 15 hours of deepening (coding RTL) to grasp the theory with practical 15 hours exam preparation"
+   },
+   "ects": 3.0,
+   "fields": [
+    "Area of Specialization: Design of Embedded Systems and Computer Architectures",
+    "Elective Studies in Informatics"
+   ],
+   "id": "M-INFO-107229",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0xFEACF55A6B254B55904C0037CEFE6124&camvguid=0xDC6A4ADE9433445D95D9370368D56704&camvceid=CMPEL_C959C5CA&cafiguid=0xDC3B7B9BB83D441580EED89563176AC8&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Elective Modules: Design of Embedded Systems and Computer Architectures",
+   "recurrence": "Each winter term",
+   "title": "Optimization and Synthesis of Embedded Systems (ESI)"
+  },
   "M-INFO-107230": {
    "assignment": "Compulsory elective",
    "bricks": [
@@ -20150,6 +20461,104 @@
    "part": "Elective Modules: Telematics",
    "recurrence": "Each winter term",
    "title": "Mobile Communication"
+  },
+  "M-INFO-107254": {
+   "assignment": "Compulsory elective",
+   "bricks": [
+    {
+     "ects": 1.0,
+     "id": "T-INFO-111839",
+     "title": "Information, Science and Responsibility - Current Ethical Challenges of IT"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-112148",
+     "title": "Information, Science and Responsibility - Current Ethical Challenges in IT"
+    },
+    {
+     "ects": 1.0,
+     "id": "T-INFO-102051",
+     "title": "Reading Group"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-115228",
+     "title": "Scientific Figures and Presentations in Ipe"
+    },
+    {
+     "ects": 1.0,
+     "id": "T-INFO-111474",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Graded"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-111475",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Graded"
+    },
+    {
+     "ects": 3.0,
+     "id": "T-INFO-111476",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Graded"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-115027",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Graded"
+    },
+    {
+     "ects": 1.0,
+     "id": "T-INFO-115028",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Graded"
+    },
+    {
+     "ects": 1.0,
+     "id": "T-INFO-111477",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Ungraded"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-111478",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-Ungraded"
+    },
+    {
+     "ects": 3.0,
+     "id": "T-INFO-111479",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-ungraded"
+    },
+    {
+     "ects": 2.0,
+     "id": "T-INFO-115029",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-ungraded"
+    },
+    {
+     "ects": 1.0,
+     "id": "T-INFO-115030",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-ungraded"
+    },
+    {
+     "ects": 4.0,
+     "id": "T-INFO-115077",
+     "title": "Self-Booking-HOC-SPZ-FORUM-PEBA-ungraded"
+    }
+   ],
+   "description": {
+    "content": "The House of Competence (HoC) is the central, research-based institution in the field of interdisciplinary competence development at KIT and offers students of all disciplines a broad learning portfolio. The HoC seminar program is divided into focus areas that aim to develop interdisciplinary skills for studies and careers. The three HoC laboratories are mainly responsible for the focus areas: the Methods LAB, Learning LAB and Writing LAB. The courses in the HoC program can be credited in the areas of \"Key Qualifications\" (SQ), \"Additional Professional Qualifications\" (BOZ) and in the \"Personal Competence Module\" for student teachers (MPK). The requirements for the respective degree programs can be found in the applicable examination and study regulations. The current seminar program, which is published each semester, can be found on the HoC homepage at www.hoc.kit.edu.",
+    "exam": "See partial achievements (Teilleistung)",
+    "objectives": "Learning objectives can be divided into three main categories, which complement each other: 1. Orientation knowledge\n\nStudents become aware of the cultural imprint of their position and are able to consider the views and interests of others (across disciplinary, cultural and linguistic boundaries).\n\nThey expand their ability to participate in academic or public discussions in an appropriate and relevant manner.\n\n2. practical orientation\n\nStudents gain insight into the routines of professional action.\n\nThey further develop their learning skills.\n\nThey expand their ability to act by improving their foreign language skills.\n\nThey can link basic business and legal issues to their field of experience.\n\n3. basic skills\n\nStudents can acquire new knowledge independently in a planned, targeted and methodologically sound manner and apply this knowledge to solve tasks and problems.\n\nThey can evaluate their own work.\n\nThey have efficient working techniques, can set priorities, make decisions and take responsibility.",
+    "prerequisites": "See partial achievements (Teilleistung)",
+    "workload": "Each credit point corresponds to approx. 25-30 hours of work (by the student). This is based on the average student who achieves an average performance. The workload includes (for a lecture) 1. Attendance time in lectures, exercises 2. Preparation and follow-up of the same 3. Exam preparation and attendance in the same."
+   },
+   "ects": 6.0,
+   "fields": [
+    "Interdisciplinary Qualifications"
+   ],
+   "id": "M-INFO-107254",
+   "kitUrl": "https://campus.studium.kit.edu/english/events/catalog.php#!campus/all/abstractModuleView.asp?gguid=0x7614DC22D85E44F9AEE21765A873F10B&camvguid=0x28EC3BEA96734A4A86A1BB0C2E568DA2&camvceid=CMPEL_96E37116&cafiguid=0xCDA7E0E41DCA42A79FB69CBC68B37725&tguid=0xD25DBD9C86874091993315DA11571AAF",
+   "language": "English",
+   "level": "4",
+   "part": "Interdisciplinary Qualifications",
+   "recurrence": "Each term",
+   "title": "Interdisciplinary Qualifications"
   },
   "M-INFO-107353": {
    "assignment": "Compulsory elective",
@@ -21480,6 +21889,7 @@
       "0xE94B51161A6F433FB957268ECF3B31C1",
       "0xF71D8E7C962F4E1697DDF78E7F335380",
       "0xEF2EAB68815049319197CA39D723ACC2",
+      "0x8847A00C7BA44273ABF1B559080EBCD7",
       "0x36350F1460C04ED4A115DE44BFB88A94",
       "0xA9D7DB3D9C2E4151B015DF4A914D5B8F",
       "0xAAA3B9D852B34D398A44D506BE62DE93",
@@ -21511,6 +21921,7 @@
       "0x194760AF1EF245E9B6B02EDDB821C174",
       "0x0DF888119B0B47DC8B86E8A2CE12FB8C",
       "0x5CF1F73ADB964E629847AB2076260093",
+      "0xC696AC3C0C5F45FBB52EF371E988F89E",
       "0x2DF1A55BB85D47349D3DD926DAB13F31",
       "0xFE73D782E69A4F0AA2F9C964BDC4B243",
       "0x4A110AF46A0B4EDEA2FB064CFA000AE1"

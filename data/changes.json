@@ -1,6 +1,41 @@
 {
  "entries": [
   {
+   "at": "2026-11-11T11:41:21Z",
+   "eventId": "0x1A162997EE8B404897063B24955701F9",
+   "eventTitle": "Praktical Course: Designing and Conducting Experimental Studies",
+   "kind": "room_changed",
+   "summary": "Room 07.07 SR 222 → 07.07 SR 203"
+  },
+  {
+   "at": "2026-11-11T11:41:21Z",
+   "eventId": "0x4A110AF46A0B4EDEA2FB064CFA000AE1",
+   "eventTitle": "Scalable Graph and Sparse Matrix Algorithms for Learning",
+   "kind": "slot_changed",
+   "summary": "Fri 11:30–13:00, Mon 14:00–17:30, Thu 09:45–11:15 → Mon 14:00–17:30"
+  },
+  {
+   "at": "2026-11-11T11:41:21Z",
+   "eventId": "0x8847A00C7BA44273ABF1B559080EBCD7",
+   "eventTitle": "Optimisation and synthesis of embedded systems (ES1)",
+   "kind": "added",
+   "summary": "Added: 2424143 Optimisation and synthesis of embedded systems (ES1)"
+  },
+  {
+   "at": "2026-11-11T11:41:21Z",
+   "eventId": "0xC696AC3C0C5F45FBB52EF371E988F89E",
+   "eventTitle": "Scientific Figures and Presentations in Ipe",
+   "kind": "added",
+   "summary": "Added: 2400162 Scientific Figures and Presentations in Ipe"
+  },
+  {
+   "at": "2026-11-11T11:41:21Z",
+   "eventId": "0xD2F5B233ECBA474D962B72E09D9BA5F9",
+   "eventTitle": "Natural Language Processing and Software Engineering",
+   "kind": "slot_changed",
+   "summary": "Tue 14:00–15:30 → Tue 14:00–15:30, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15, Tue 15:45–17:15"
+  },
+  {
    "at": "2026-11-03T11:38:06Z",
    "eventId": "0x1C58A50EEE03461F8A0535F902846F52",
    "eventTitle": "Geometric Deep Learning",
