@@ -12885,7 +12885,7 @@
     ]
    ],
    "contentText": "Topic :\n\nSince the ubiquitously used public-key schemes such as RSA are threatened by quantum computers, IT security is currently undergoing a transition from these classical cryptographic schemes to post-quantum schemes, which aim to provide security even against adversaries equipped with quantum computers. In this seminar, we will study the currently most relevant post-quantum cryptographic schemes . These are schemes that have already been chosen for standardization by NIST, are currently being analyzed by NIST, or have been recommended by the German BSI. The goal is to get an overview of these schemes and to understand their advantages and disadvantages in comparison to one another. Moreover, the goal is to read and comprehend scientific literature and be able to present complex results in a clear, compact form.\n\nEach student will be assigned a post-quantum scheme and has to prepare a comprehensive presentation to share with the class. The presentation should cover the scheme and its mathematical foundations in detail. Moreover, it has to be shown what is known regarding its physical security, what its advantages and disadvantages are in comparison to the other schemes, and which main application scenarios exist. It has to be explained why the scheme has been chosen for standardization or how the potential for standardization is assessed.\n\nEach student must prepare a presentation (45 - 60 minutes) of the assigned cryptographic scheme followed by 15 - 30 minutes of discussion. Also, at the end of the semester, a 10-page paper on the scheme must be submitted.\n\nIn your email, you can already let me know now which three schemes you’d most like to present (first come, first served). The schemes to be presented are:\n\nDilithium (signature, lattice, std.) FAEST (signature, symmetric, R3) Falcon (signature, lattice, std.) UOV/QR-UOV (signature, multivariate, R3) Kyber (KEM, lattice, std.) SNOVA (signature, multivariate, R3) FrodoKEM (KEM, lattice, BSI) MAYO (signature, multivariate, R3) HQC (KEM, code, std.) SDitH (signature, MPCitH, R3) ClassicMcEliece (KEM, code, BSI) MQOM (signature, MPCitH, R3) SPHINCS+ (signature, hash, std.) SQIsign (signature, isogeny, R3)\n\nstd. = standardized/ chosen for standardization, BSI = BSI favorite, R3 = currently studied in round 3",
-   "fingerprint": "c15f1dfde6080cb5",
+   "fingerprint": "d4d13f65d69d5ff9",
    "format": "On-Site",
    "id": "0xAC884B1E3B8C4ED0B9BFBEFE7162DEDD",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3041607&client_id=produktiv",
@@ -12902,70 +12902,6 @@
    ],
    "number": "2400254",
    "sessions": [
-    {
-     "cancelled": false,
-     "date": "2026-10-29",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-05",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-12",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-19",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-26",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-03",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-10",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-17",
-     "end": "15:30",
-     "room": "50.34 Raum 131",
-     "slot": 0,
-     "start": "14:00"
-    },
     {
      "cancelled": false,
      "date": "2027-01-07",
@@ -13025,10 +12961,10 @@
    ],
    "slots": [
     {
-     "count": 15,
+     "count": 7,
      "day": "Thu",
      "end": "15:30",
-     "firstDate": "2026-10-29",
+     "firstDate": "2027-01-07",
      "rhythm": "weekly",
      "room": "50.34 Raum 131",
      "start": "14:00"
@@ -15170,7 +15106,7 @@
     ]
    ],
    "contentText": "This lecture provides the basics for the automated processing of natural language texts. Language processing is becoming increasingly important.\n\nLinguistic input plays a critical role in interactive systems, such as voice commands, assistance systems, and query interfaces. Additionally, the analysis and processing of text-based software artifacts represents an important field of research. Computational linguistics is therefore not only of great importance for software applications, but also for software engineering itself.\n\nThe aim of this lecture is to provide basic knowledge of natural language processing (NLP) and its potential applications in the development of software systems. Key topics include the automated analysis of texts, the challenges posed by the inherent ambiguity of natural language, the translation of natural language texts into software models, and the use of large language models (LLMs) in software engineering. The lecture will also explore current research developments and trends in the field.\n\nCompetency Goals:\n\nStudents know basic concepts of linguistics such as syntax, semantics and pragmatics, and can explain and compare them. They are familiar with lexical relations such as polysemy, homonymy, and troponymy and can identify relevant examples. Furthermore, they can identify and compare connections between the relations.\n\nStudents are familiar with basic concepts of computational linguistics. Basic techniques such as part-of-speech tagging, lemmatization, word similarities and disambiguation can be explained. Associated methods (lexical, rule-based, or probabilistic) can be described and their respective strengths and weaknesses assessed. Different parsing methods can be named, explained and conceptually reproduced.\n\nStudents can describe and compare the structure, content and benefits of different knowledge bases. In addition to the overarching concepts of ontology, lexical databases and other knowledge representations, they are also familiar with specific representatives, such as WordNet, DBpedia and similar, and can use them.\n\nStudents understand the connection between the functionality of basic computational linguistics techniques and their applicability in software engineering. In addition, they can break down tool chains into individual components and evaluate them. In particular, students will be able to analyze and evaluate different applications. These include automated modeling, improving requirements specifications, and traceability link recovery. In addition, students can explain the concept of large language models (LLMs) and their application and use in the field of language processing. Students can identify application scenarios in software engineering for text analysis systems and design their own solutions.\n\nWorkload:\n\n3 ECTS correspond to approximately 90 hours of work, including:\n\napprox. 30 hours of attending lectures\n\napprox. 45 hours of preparation and follow-up work\n\napprox. 15 hours of exam preparation",
-   "fingerprint": "db37071211e28dfa",
+   "fingerprint": "2c1a156de6a3e3cf",
    "format": "On-Site",
    "id": "0xD2F5B233ECBA474D962B72E09D9BA5F9",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037055&client_id=produktiv",
@@ -15314,102 +15250,6 @@
      "room": "50.34 Raum -118 (UG)",
      "slot": 0,
      "start": "14:00"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-17",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 1,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-11-24",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 2,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-01",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 3,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-08",
-     "end": "17:15",
-     "room": "10.50 Raum 604",
-     "slot": 4,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-15",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 5,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2026-12-22",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 6,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-12",
-     "end": "17:15",
-     "room": "10.50 Raum 604",
-     "slot": 7,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-19",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 8,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-26",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 9,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-02",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 10,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-09",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 11,
-     "start": "15:45"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-16",
-     "end": "17:15",
-     "room": "50.31 Seminarraum 012",
-     "slot": 12,
-     "start": "15:45"
     }
    ],
    "slots": [
@@ -15421,114 +15261,6 @@
      "rhythm": "weekly",
      "room": "50.34 Raum -118 (UG)",
      "start": "14:00"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-11-17",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-11-24",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-12-01",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-12-08",
-     "rhythm": "single",
-     "room": "10.50 Raum 604",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-12-15",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2026-12-22",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-01-12",
-     "rhythm": "single",
-     "room": "10.50 Raum 604",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-01-19",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-01-26",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-02-02",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-02-09",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
-    },
-    {
-     "count": null,
-     "day": "Tue",
-     "end": "17:15",
-     "firstDate": "2027-02-16",
-     "rhythm": "single",
-     "room": "50.31 Seminarraum 012",
-     "start": "15:45"
     }
    ],
    "sws": 2.0,
@@ -18278,7 +18010,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-11T11:41:21Z",
+  "scrapedAt": "2026-11-12T12:11:59Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
