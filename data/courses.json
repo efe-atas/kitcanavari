@@ -14673,7 +14673,7 @@
     ]
    ],
    "contentText": "The lecture Robotic Intelligence: Perception and Scene Understanding combines modern AI-based perception methods with the engineering skills needed to apply them in robotics. It covers the full perception chain, from acquiring and calibrating sensor data to interpreting scenes and integrating perception modules into robotic systems, like mobile walking robots. Students will first build a foundation in machine learning and computer vision, covering image classification, object detection, tracking, and segmentation in both 2D and 3D. The course then explores advanced deep learning architectures, including Vision Transformers, multimodal perception systems, and end-to-end multimodal machine learning pipelines. Special emphasis is placed on techniques for integrating vision, depth, and other sensing modalities, enabling robust perception in challenging real-world environments.\n\nA key part of the course is practical group work in the Machine Intelligence and Robotics Lab (MaiRo) , where students solve hands-on tasks using real sensors and robots, building both technical competence and teamwork skills.\n\nTopics include:\n\nFundamentals of machine learning and computer vision for robotics\n\nVision Transformers and advanced deep learning architectures\n\nObject detection, tracking, and segmentation (2D and 3D)\n\nInstance, semantic, and panoptic segmentation\n\nMultimodal sensing, fusion, and end-to-end multimodal ML\n\nWorld models and their role in robotics\n\nSensor modeling, calibration, and perception system integration\n\nBy the end of the course, students will be able to design, implement, and integrate intelligent robotic perception systems that enable mobile robots to understand and act within complex, dynamic environments.",
-   "fingerprint": "e23120334848351e",
+   "fingerprint": "90ddbe59cd9f23f0",
    "format": "On-Site",
    "id": "0xC96F7C15CD934165B7902FFAD456DE0A",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3031078&client_id=produktiv",
@@ -14718,107 +14718,215 @@
      "cancelled": false,
      "date": "2026-11-17",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 1,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2026-11-24",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 2,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2026-12-01",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 3,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2026-12-08",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 4,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2026-12-15",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 5,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2026-12-22",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 6,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-01-12",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 7,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-01-19",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 8,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-01-26",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 9,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-02-02",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 10,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-02-09",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 11,
      "start": "09:45"
     },
     {
      "cancelled": false,
      "date": "2027-02-16",
      "end": "11:15",
-     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
-     "slot": 0,
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "slot": 12,
      "start": "09:45"
     }
    ],
    "slots": [
     {
-     "count": 15,
+     "count": 3,
      "day": "Tue",
      "end": "11:15",
      "firstDate": "2026-10-27",
      "rhythm": "weekly",
      "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-11-17",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-11-24",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-12-01",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-12-08",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-12-15",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2026-12-22",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-01-12",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-01-19",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-01-26",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-02-02",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-02-09",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
+     "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "11:15",
+     "firstDate": "2027-02-16",
+     "rhythm": "single",
+     "room": "11.10 Engelbert-Arnold-Hörsaal (EAS)",
      "start": "09:45"
     }
    ],
@@ -18010,7 +18118,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-12T12:11:59Z",
+  "scrapedAt": "2026-11-16T12:26:37Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",

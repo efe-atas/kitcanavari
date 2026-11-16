@@ -1,6 +1,13 @@
 {
  "entries": [
   {
+   "at": "2026-11-16T12:26:37Z",
+   "eventId": "0xC96F7C15CD934165B7902FFAD456DE0A",
+   "eventTitle": "Robotic Intelligence: Perception and Scene Understanding",
+   "kind": "slot_changed",
+   "summary": "Tue 09:45–11:15 → Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15, Tue 09:45–11:15"
+  },
+  {
    "at": "2026-11-12T12:11:59Z",
    "eventId": "0xAC884B1E3B8C4ED0B9BFBEFE7162DEDD",
    "eventTitle": "Seminar Post-Quantum Cryptography (Information Security)",
