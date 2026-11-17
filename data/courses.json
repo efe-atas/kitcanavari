@@ -3097,7 +3097,7 @@
    "catalogPaths": [
     [
      "1. Informatik Lehrveranstaltungen",
-     "1.5. Proseminars and Basic Practical Courses Computer Science Bachelor"
+     "1.7 Practical Courses"
     ]
    ],
    "contentText": "Registrationlink to wiwi-Portal\n\nCompetency Goals:\n\nPlanning and conducting a study on a current research topic in the areas of Human–Computer Interaction, Ubiquitous Systems, and Context-Aware Systems. Upon successful completion of the seminar, students will be able to:\n\n- independently search for, identify, analyze, and critically evaluate relevant scientific literature;\n\n- derive the framework conditions and parameters for user studies and experiments from the literature;\n\n- design, conduct, and evaluate a study addressing a given research question;\n\n- present scientific findings in a structured manner and communicate them to a specialist audience in the form of a short presentation;\n\n- apply the principles and techniques of scientific writing to prepare a scientific paper describing the planning, execution, and results of the study.\n\n- Students are familiar with the German Research Foundation (DFG) Code of Conduct Guidelines for Safeguarding Good Research Practice and successfully apply these guidelines in the preparation of their scientific work.\n\nContent:\n\nThe practical course focuses on investigating specific research questions through the design and execution of a user study. Particular emphasis is placed on designing a user study to address a defined research question, followed by conducting the study and analyzing the collected data. Depending on the research question, the workload associated with the individual components may vary. The lecture part provides both theoretical and practical knowledge on the planning, execution, and evaluation of user studies. It is intended to serve as valuable preparation for the Master's thesis.\n\nWorkload\n\n· Contact hours: group presentations and discussions (15 × 45 min): 11 h 15 min\n\n· Common Lectures (4x1,5h): 6h\n\n· Individual review of feedback and project work (15 × 30 min): 7h 30 min\n\n· Practical group work on the assigned tasks (15 × 8 h): 120h\n\n· Documentation of results and preparation of presentations (15 × 45 min) 11h 15\n\n· Final report 24h\n\nTotal: 180h",
@@ -18118,7 +18118,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-16T12:26:37Z",
+  "scrapedAt": "2026-11-17T12:46:55Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
@@ -21643,7 +21643,6 @@
     {
      "children": [],
      "eventIds": [
-      "0x1A162997EE8B404897063B24955701F9",
       "0xAC884B1E3B8C4ED0B9BFBEFE7162DEDD"
      ],
      "id": "0xA7D0F205C8614D7D8C489FE3FC8DB919",
@@ -21705,7 +21704,8 @@
       "0x0EA3F9582CBB4891A00EA15867B387BF",
       "0x4421B01EFB2340EFA0E53AB306B170B5",
       "0x09CBAC2F5895467AAF286633E81AE5C9",
-      "0x1D41227BB8EF4EE79C82C0B433829F58"
+      "0x1D41227BB8EF4EE79C82C0B433829F58",
+      "0x1A162997EE8B404897063B24955701F9"
      ],
      "id": "0x51515308AECE499594589506DFA75784",
      "title": "1.7 Practical Courses"
