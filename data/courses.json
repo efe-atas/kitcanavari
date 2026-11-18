@@ -220,7 +220,7 @@
     ]
    ],
    "contentText": "In the practical part of the lecture, students deepen their understanding of ubiquitous systems through the practical application of the knowledge base of the lecture. To this end, students design and develop their own appliance and test it. The aim is to have gone through the steps towards a prototypical and possibly marketable appliance.\n\nDescription:\n\nThe lecture provides an overview of concepts, theories, and methods of ubiquitous information technology (ubiquitous computing).\n\nBased on the appliance concept, students then develop their own appliance in the exercise. The necessary technical and methodological basics such as hardware for ubiquitous systems, software for ubiquitous systems, principles of context recognition for ubiquitous systems, networking of ubiquitous systems, and design principles such as design thinking are discussed. Methods of design and testing for human-machine interaction and human-machine interfaces developed in ubiquitous computing are explained in detail. An introduction to the economic aspects of a ubiquitous system is also provided.\n\nIn the practical part of the lecture, students deepen their understanding of ubiquitous systems by applying the knowledge gained in the lecture. Students design and develop their own appliance and test it. The aim is to go through the steps towards a prototypical and potentially marketable appliance.\n\nCourse content:\n\nThe lecture provides an overview of concepts, theories, and methods of ubiquitous information technology (ubiquitous computing). Based on the appliance concept, students then design their own appliances in the exercise, plan the construction, and then develop them. The necessary technical and methodological basics such as hardware for ubiquitous systems, software for ubiquitous systems, principles of context recognition for ubiquitous systems, networking of ubiquitous systems, and design of ubiquitous systems (e.g., design thinking) and topics related to the development of miniature electronics and 3D printing are discussed. Methods of design and testing for human-machine interaction and human-machine interfaces developed in ubiquitous computing are also explained. There is also an introduction to the economic aspects of a ubiquitous system.\n\nIn the practical part of the lecture, understanding of ubiquitous systems is deepened through practical application of the knowledge base of the lecture. Students design and develop their own devices, including electronics and programming, and test them. The goal is to go through the steps toward a prototypical and potentially marketable appliance.\n\nWorkload:\n\nThe total workload for this learning unit is approximately 150 hours (5.0 credits).\n\nActivity\n\nWorkload\n\nAttendance time: Attendance at lectures\n\n15 x 90 min\n\n22 h 30 min\n\nAttendance time: Attendance at exercises\n\n15 x 45 min\n\n11 h 15 min\n\nPreparation/follow-up for lectures and exercises\n\n15 x 90 min\n\n22 h 30 min\n\nDevelop a self-developed concept for an information appliance.\n\n33 hours 45 min\n\nGo through the slide set twice.\n\n2 x 12 hours\n\n24 hours\n\nPrepare for the exam.\n\n36 hours\n\nTOTAL\n\n150 hours\n\nWorkload for the learning unit “Ubiquitous Information Technologies”\n\nLearning objectives:\n\nThe aim of the lecture is to impart knowledge about the fundamentals and advanced methods and techniques of ubiquitous computing. After completing the lecture, students will be able to\n\nReproduce and discuss the knowledge they have acquired about existing ubiquitous computing systems.\n\nEvaluate general knowledge about ubiquitous systems and apply statements and principles to special cases.\n\nevaluate and assess different methods for design processes and user studies, and select suitable methods for developing new solutions.\n\ninvent, plan, design, build (electronics, software, 3D printing) and evaluate new ubiquitous systems for use in everyday or industrial process environments, and assess the costs and technical implications.",
-   "fingerprint": "a08607886dfc2f42",
+   "fingerprint": "a909d50ab004e575",
    "format": null,
    "id": "0x066D053413A34C368741946F2902B963",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3059217&client_id=produktiv",
@@ -361,7 +361,7 @@
      "cancelled": false,
      "date": "2026-10-28",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -369,7 +369,7 @@
      "cancelled": false,
      "date": "2026-11-04",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -377,7 +377,7 @@
      "cancelled": false,
      "date": "2026-11-11",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -385,7 +385,7 @@
      "cancelled": false,
      "date": "2026-11-18",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -393,7 +393,7 @@
      "cancelled": false,
      "date": "2026-11-25",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -401,7 +401,7 @@
      "cancelled": false,
      "date": "2026-12-02",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -409,7 +409,7 @@
      "cancelled": false,
      "date": "2026-12-09",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -417,7 +417,7 @@
      "cancelled": false,
      "date": "2026-12-16",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -425,7 +425,7 @@
      "cancelled": false,
      "date": "2026-12-23",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -433,7 +433,7 @@
      "cancelled": false,
      "date": "2027-01-13",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -441,7 +441,7 @@
      "cancelled": false,
      "date": "2027-01-20",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -449,7 +449,7 @@
      "cancelled": false,
      "date": "2027-01-27",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -457,7 +457,7 @@
      "cancelled": false,
      "date": "2027-02-03",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -465,7 +465,7 @@
      "cancelled": false,
      "date": "2027-02-10",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
      "start": "08:00"
     },
@@ -473,8 +473,128 @@
      "cancelled": false,
      "date": "2027-02-17",
      "end": "09:30",
-     "room": "50.34 Raum -102 (UG)",
+     "room": "07.07 SR 222",
      "slot": 1,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-10-28",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-04",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-11",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-18",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-25",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-02",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-09",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-16",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-12-23",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-13",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-20",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-27",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-03",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-10",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "08:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-17",
+     "end": "09:30",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
      "start": "08:00"
     }
    ],
@@ -487,6 +607,15 @@
      "rhythm": "weekly",
      "room": "50.34 Raum -102 (UG)",
      "start": "11:30"
+    },
+    {
+     "count": 15,
+     "day": "Wed",
+     "end": "09:30",
+     "firstDate": "2026-10-28",
+     "rhythm": "weekly",
+     "room": "07.07 SR 222",
+     "start": "08:00"
     },
     {
      "count": 15,
@@ -5585,7 +5714,7 @@
     ]
    ],
    "contentText": "This course provides an in-depth exploration of computational approaches to understanding and generating human language. The curriculum progresses from foundational concepts to state-of-the-art techniques, equipping students with both theoretical knowledge and practical implementation skills.\n\nThe course begins with fundamental linguistic concepts, including tokenization, morphology, and word representations, before advancing to neural approaches such as word embeddings. Core sequence processing techniques form a substantial portion of the curriculum, covering both traditional methods (e.g., Hidden Markov Models) and modern neural approaches (e.g., attention mechanisms). The course places significant emphasis on Transformer-based models, examining pretrained encoder models like BERT, sequence-to-sequence architectures, and large language models from the GPT family and beyond. Advanced topics include instruction following and model alignment, task adaptation, decoding strategies for text generation, and evaluation methodologies. Students will gain insights into cutting-edge techniques including in-context learning, prompting strategies, and retrieval-augmented generation (RAG) systems that combine neural models with external knowledge bases. The latter portion of the course expands into specialized domains: multilingual NLP for cross-lingual applications, conversational AI and dialogue systems, speech technologies (both recognition and synthesis), and multimodal models that integrate vision, speech, and language.\n\nFive practical sessions provide opportunities to implement and experiment with the techniques discussed in lectures.",
-   "fingerprint": "ac7538bab444f3a0",
+   "fingerprint": "47e3a24b6eba0ede",
    "format": "On-Site",
    "id": "0x42A3A6F14C6944A79622F0B49F7DB496",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3037274&client_id=produktiv",
@@ -5677,54 +5806,6 @@
     {
      "cancelled": false,
      "date": "2026-12-22",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-12",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-19",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-01-26",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-02",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-09",
-     "end": "13:00",
-     "room": "50.20 Raum 148",
-     "slot": 0,
-     "start": "11:30"
-    },
-    {
-     "cancelled": false,
-     "date": "2027-02-16",
      "end": "13:00",
      "room": "50.20 Raum 148",
      "slot": 0,
@@ -5849,11 +5930,59 @@
      "room": "50.20 Raum 148",
      "slot": 1,
      "start": "09:45"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-12",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 2,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-19",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 3,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-26",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 4,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-02",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 5,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-09",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 6,
+     "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-02-16",
+     "end": "13:00",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "slot": 7,
+     "start": "11:30"
     }
    ],
    "slots": [
     {
-     "count": 15,
+     "count": 9,
      "day": "Tue",
      "end": "13:00",
      "firstDate": "2026-10-27",
@@ -5869,6 +5998,60 @@
      "rhythm": "weekly",
      "room": "50.20 Raum 148",
      "start": "09:45"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-01-12",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-01-19",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-01-26",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-02-02",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-02-09",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Tue",
+     "end": "13:00",
+     "firstDate": "2027-02-16",
+     "rhythm": "single",
+     "room": "30.33 Messtechnik-Hörsaal (MTI)",
+     "start": "11:30"
     }
    ],
    "sws": 4.0,
@@ -18118,7 +18301,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-17T12:46:55Z",
+  "scrapedAt": "2026-11-18T12:40:02Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",

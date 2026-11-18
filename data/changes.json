@@ -1,6 +1,20 @@
 {
  "entries": [
   {
+   "at": "2026-11-18T12:40:02Z",
+   "eventId": "0x066D053413A34C368741946F2902B963",
+   "eventTitle": "Ubiquitous Computing",
+   "kind": "slot_changed",
+   "summary": "Tue 11:30–13:00, Wed 08:00–09:30 → Tue 11:30–13:00, Wed 08:00–09:30, Wed 08:00–09:30"
+  },
+  {
+   "at": "2026-11-18T12:40:02Z",
+   "eventId": "0x42A3A6F14C6944A79622F0B49F7DB496",
+   "eventTitle": "Natural Language Processing",
+   "kind": "slot_changed",
+   "summary": "Thu 09:45–11:15, Tue 11:30–13:00 → Thu 09:45–11:15, Tue 11:30–13:00, Tue 11:30–13:00, Tue 11:30–13:00, Tue 11:30–13:00, Tue 11:30–13:00, Tue 11:30–13:00, Tue 11:30–13:00"
+  },
+  {
    "at": "2026-11-16T12:26:37Z",
    "eventId": "0xC96F7C15CD934165B7902FFAD456DE0A",
    "eventTitle": "Robotic Intelligence: Perception and Scene Understanding",
