@@ -1,6 +1,13 @@
 {
  "entries": [
   {
+   "at": "2026-11-19T12:31:10Z",
+   "eventId": "0xF07455B98A774829ADA0AA4152AF6DA7",
+   "eventTitle": "IT Security",
+   "kind": "slot_changed",
+   "summary": "Fri 09:00–17:00, Fri 09:45–11:15, Tue 14:00–15:30 → Fri 09:00–17:00, Fri 09:45–11:15, Fri 09:45–11:15, Tue 14:00–15:30"
+  },
+  {
    "at": "2026-11-18T12:40:02Z",
    "eventId": "0x066D053413A34C368741946F2902B963",
    "eventTitle": "Ubiquitous Computing",

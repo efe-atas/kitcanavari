@@ -17265,7 +17265,7 @@
     ]
    ],
    "contentText": "",
-   "fingerprint": "5a5f0735cb554be1",
+   "fingerprint": "031a98446bc81ba0",
    "format": "On-Site",
    "id": "0xF07455B98A774829ADA0AA4152AF6DA7",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3023867&client_id=produktiv",
@@ -17541,6 +17541,14 @@
      "room": "50.34 Raum 252",
      "slot": 2,
      "start": "09:00"
+    },
+    {
+     "cancelled": false,
+     "date": "2027-01-15",
+     "end": "11:15",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "slot": 3,
+     "start": "09:45"
     }
    ],
    "slots": [
@@ -17570,6 +17578,15 @@
      "rhythm": "single",
      "room": "50.34 Raum 252",
      "start": "09:00"
+    },
+    {
+     "count": null,
+     "day": "Fri",
+     "end": "11:15",
+     "firstDate": "2027-01-15",
+     "rhythm": "single",
+     "room": "30.34 Lichttechnik-Hörsaal (LTI)",
+     "start": "09:45"
     }
    ],
    "sws": 4.0,
@@ -18301,7 +18318,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-18T12:40:02Z",
+  "scrapedAt": "2026-11-19T12:31:10Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
