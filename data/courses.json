@@ -9261,7 +9261,7 @@
     ]
    ],
    "contentText": "This lecture conveys the main principles of Intelligent Robot Perception, where the major focus is on machine learning techniques that are particularly useful for robot vision applications. The most important design criteria for these methods are run-time and data efficiency, safety, and autonomy, where the latter refers to independence of human interactions and the ability to take decisions during learning (aka. active learning). In the lecture, we will analyse modern learning techniques that meet these criteria, and we will show concrete applications of these in robotic perception tasks such as object detection and pose estimation, grasp detection and semantic mapping.\n\nTopics of the lecture include:\n\nML Basics:\n\n- Regression and Classification\n\n- Kernel Methods and Gaussian Processes\n\n- Bayesian Reasoning\n\nAlgorithms:\n\n- Active Learning\n\n- Bayesian Deep Learning (deep ensembles, Laplace Approximation)\n\n- Generative Models (Normalizing Flow)\n\nApplications:\n\n- Object classification\n\n- Grasp detection and segmentation of unknown objects",
-   "fingerprint": "8da7a69331f2d464",
+   "fingerprint": "ebe100f5129cdd67",
    "format": "On-Site",
    "id": "0x75A53F6A28104CF0B5FC60E0D8D93FDE",
    "iliasUrl": "https://ilias.studium.kit.edu/goto.php?target=crs_3049620&client_id=produktiv",
@@ -9389,6 +9389,14 @@
      "room": "50.34 Raum -102 (UG)",
      "slot": 1,
      "start": "11:30"
+    },
+    {
+     "cancelled": false,
+     "date": "2026-11-26",
+     "end": "17:15",
+     "room": "50.34 Raum -102 (UG)",
+     "slot": 2,
+     "start": "15:45"
     }
    ],
    "slots": [
@@ -9409,6 +9417,15 @@
      "rhythm": "fortnightly",
      "room": "50.34 Raum -102 (UG)",
      "start": "11:30"
+    },
+    {
+     "count": null,
+     "day": "Thu",
+     "end": "17:15",
+     "firstDate": "2026-11-26",
+     "rhythm": "single",
+     "room": "50.34 Raum -102 (UG)",
+     "start": "15:45"
     }
    ],
    "sws": 2.0,
@@ -18318,7 +18335,7 @@
   }
  },
  "meta": {
-  "scrapedAt": "2026-11-19T12:31:10Z",
+  "scrapedAt": "2026-11-20T12:31:07Z",
   "spo": "88-979-H-2025",
   "term": "WS 26/27",
   "termGuid": "0xD25DBD9C86874091993315DA11571AAF",
